@@ -2,11 +2,10 @@
 
 #' Simulate the window of spatial data
 #'
-#' This is aa
+#' This function esimates window using spatial location data of existing cells.
 #' @param PointLoc PointLoc
 #' @param method method=c("convex", "rectangle", "network")
 #' @import spatstat
-#' @return
 #' @export
 # window=simu.window(PointLoc=NULL)
 # window=simu.window(PointLoc=PointLoc, method="network")
@@ -21,8 +20,8 @@ simu.window=function(PointLoc=NULL, method="network") {
 
     # generate random perturbation
     n=nrow(PointLoc)
-    
-    
+
+
     dx=max(PointLoc[,1])-min(PointLoc[,1])
     dy=max(PointLoc[,2])-min(PointLoc[,2])
     dmax=max(dx, dy)
@@ -99,7 +98,7 @@ cell.loc.model.fc=function(n,
     b=superimpose(a)
     marks(b)=marks(b)[,1]
   } else{b=rmh(model=fit, nsim=nsim)}
-  
+
   # get rid of cells on the same location
   while(b$n-n>10) {
     delete.n=(b$n-n)
@@ -110,7 +109,7 @@ cell.loc.model.fc=function(n,
     same.loc.idx=which(dis2 == T, arr.ind = TRUE)
     b=b[setdiff(1:b$n, same.loc.idx[,1]), ]
   }
-  
+
   return(b)
 }
 
