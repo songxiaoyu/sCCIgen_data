@@ -10,6 +10,6 @@ then
     exit
 fi
 
-docker run --mount type=bind,source="${WORKDIR}",target=/workdir -it "${BASE_DOCKER_IMAGE}"
+docker run --mount type=bind,source="${WORKDIR}",target=/working_directory -it "${BASE_DOCKER_IMAGE}"
 
 # from within docker image, write prompts
