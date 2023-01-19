@@ -78,7 +78,10 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
 
 
 #' get.n.vec.raw
-
+#'
+#' This function generates cell pools allowing selection due
+#' to cell overlaps, inhibitions and attractions.
+#'
 get.n.vec.raw=function(n, cell.prop,
                        cell.inh.attr.input=NULL,
                        same.dis.cutoff=0.05) {

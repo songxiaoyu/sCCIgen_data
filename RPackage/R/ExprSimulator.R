@@ -1,58 +1,20 @@
 
-# Link scDesign2 simulated expr to ST cells ----------------------------------------------
-
-
-
-#' Est_GeneCopula
+#' Use_scDesign2_1region
 #'
-#' Est_GeneCopula
+#' Use_scDesign2_1region
+#' @param ppp.obj1 PointLoc
 #' @param expr PointLoc
-#' @param anno PointLoc
-#' @param min.cell.type.num PointLoc
-#' @param input.cell.type PointLoc
-#' @param total_count_new PointLoc
-#'  @import scDesign2
-#' @return
-#' \item{ppp.obj.update:}{Update the cell type annotation}
-#' \item{sim.count:}{a N * G single cell expression matrix for N cells and G genes}
-#' \item{cell.type.match:}{a matrix to tell how simulated cell type annotation are matched to the
-#' annotation.}
-#' @export
-
-Est_GeneCopula=function(expr, anno=NULL) {
-  expr=as.matrix(expr)
-  if (is.null(anno)==F) {colnames(expr)=anno}
-  cell_type_sel=names(table(anno))
-  # simulate scRNAseq
-  copula_result <- fit_model_scDesign2(data_mat=expr, cell_type_sel=cell_type_sel, sim_method = 'copula',
-                                       ncores = length(cell_type_sel))
-  return(copula_result=copula_result)
-}
-
-
-
-
-
-
-#' Use_scDesign2
+#' @param Copula PointLoc
+#' @param depth_simu_ref_ratio PointLoc
+#' @param cell_type_sel PointLoc
+#' @param seed PointLoc
+#' @param sim_method PointLoc
+#' @return Simulated count data for a region.
 #'
-#' Use_scDesign2
-#' @param ppp.obj PointLoc
-#' @param expr PointLoc
-#' @param anno PointLoc
-#' @param min.cell.type.num PointLoc
-#' @param input.cell.type PointLoc
-#' @param total_count_new PointLoc
-#'  @import scDesign2
-#' @return
-#' \item{ppp.obj.update:}{Update the cell type annotation}
-#' \item{sim.count:}{a N * G single cell expression matrix for N cells and G genes}
-#' \item{cell.type.match:}{a matrix to tell how simulated cell type annotation are matched to the
-#' annotation.}
-#' @export
 
 Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
-                       depth_simu_ref_ratio=1, cell_type_sel, seed) {
+                       depth_simu_ref_ratio=1, cell_type_sel, seed,
+                       sim_method = c('copula', 'ind')) {
 
 
 
@@ -65,7 +27,8 @@ Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
   sim_count <- scDesign2.revised(model_params=Copula,
                                  n_cell_new=ppp.obj1$n,
                                  cell_type_prop = cell_type_prop,
-                                 depth_simu_ref_ratio=depth_simu_ref_ratio)
+                                 depth_simu_ref_ratio=depth_simu_ref_ratio,
+                                 sim_method =sim_method )
 
 
   # Update the order of sim_count to match the cell type of ppp.obj1
@@ -85,35 +48,43 @@ Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
 #' @param ppp.obj PointLoc
 #' @param expr PointLoc
 #' @param anno PointLoc
-#' @param min.cell.type.num PointLoc
-#' @param input.cell.type PointLoc
-#' @param total_count_new PointLoc
-#'  @import scDesign2
-#' @return
-#' \item{ppp.obj.update:}{Update the cell type annotation}
-#' \item{sim.count:}{a N * G single cell expression matrix for N cells and G genes}
-#' \item{cell.type.match:}{a matrix to tell how simulated cell type annotation are matched to the
-#' annotation.}
+#' @param Copula PointLoc
+#' @param depth_simu_ref_ratio PointLoc
+#' @param sim_method PointLoc
+#' @param SaveCopulaName PointLoc
+#' @param seed PointLoc
+#' @return Simulated count data for all regions.
 #' @export
 
 Use_scDesign2=function(ppp.obj, expr, anno=NULL, Copula=NULL,
-                       depth_simu_ref_ratio=1, seed) {
+                       depth_simu_ref_ratio=1,
+                       sim_method = c('copula', 'ind'),
+                       seed, SaveCopulaName=NULL) {
   R=length(ppp.obj)
 
   expr=as.matrix(expr)
   if (is.null(anno)==F) {colnames(expr)=anno}
   cell_type_sel=names(table(anno))
   # estimate Copula
-  if (is.null(Copula)) {
+  if (sim_method=="copula" & is.null(Copula)) {
     Copula=  fit_model_scDesign2(expr, cell_type_sel, sim_method = 'copula',
                                  ncores = length(cell_type_sel))
+    if (is.null(SaveCopulaName)) {
+      SaveCopulaName=paste0(expression_data_file, "_Copula")
+    }
+    save(Copula, file=paste0(SaveCopulaName, ".RData"))
   }
+
 
 
   sim.count=vector("list", R);
   for(r in 1:R) {
-  sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]], expr=expr, Copula=Copula,
-                                 depth_simu_ref_ratio=1, cell_type_sel=cell_type_sel, seed=seed*31+r*931)
+  sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                       expr=expr, Copula=Copula,
+                                 depth_simu_ref_ratio=1,
+                                 cell_type_sel=cell_type_sel,
+                                 seed=seed*31+r*931,
+                                 sim_method = sim_method)
   }
   return(sim.count)
 }
@@ -160,8 +131,6 @@ Add.Spatial.Expr.Pattern= function(sim.count,
 
 
 
-
-# Cell-cell interactions ---------
 #' Find.Neighbor.Pairs
 #'
 #' Find.Neighbor.Pairs
@@ -184,22 +153,28 @@ Find.Neighbor.Pairs=function(ppp.obj,
   return(neighbor.idx=nbr.idx)
 }
 
-#' Add.Interactions.to.Pairs
+#' Add.Distance.Asso.Pattern
 #'
-#' This function add cell-cell interaction to a pair of cell types (e.g. neuron-microglia).
+#' This function add cell-cell interactions to a pair of cell types (e.g.
+#' neuron-microglia) for expression in a cell type associated with the
+#' proximity of the other cell type.
 #' One can repeat this function for multiple times to add cell-cell interactions for many cell types.
-#' @param pts1 Spatial info for cell type 1 (e.g. neuron)
-#' @param pts2 Spatial info for cell type 2 (e.g. microglia)
-#' @param sim.count1 Expression info for cell type 1 (e.g. neuron)
-#' @param sim.count2 Expression info for cell type 1 (e.g. microglia)
-#' @param Int.Cell.Pair.Idx Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
-#' @param Gaussian.effect.size.parameter effect.size
+#' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
+#' @param sim.count Spatial info for cell type 2 (e.g. microglia)
+#' @param r Expression info for cell type 1 (e.g. neuron)
+#' @param perturbed.cell.type Expression info for cell type 1 (e.g. microglia)
+#' @param adjacent.cell.type Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
+#' @param int.dist.threshold effect.size
+#' @param delta.mean effect.size
+#' @param delta.sd effect.size
+#' @param GeneID effect.size
+#' @param PropOfGenes effect.size
+#' @param seed effect.size
 #' @return
-#' \item{log.sim.change1:}{ppp.obj.update}
-#' \item{log.sim.change2:}{sim.count}
-#' \item{pair.parameter:}{cell.type.match}
+#' \item{SignalSummary:}{SignalSummary}
+#' \item{beta.matrix:}{beta.matrix}
+
 #' @export
-# One cell-type pair cell-cell interaction -----
 
 Add.Distance.Asso.Pattern = function(ppp.obj,
                                    sim.count, r,
@@ -247,7 +222,27 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-
+#' Add.Expr.Asso.Pattern
+#'
+#' This function add cell-cell interactions to a pair of cell types (e.g.
+#' neuron-microglia) for  expression in a cell type associated with expression of
+#' the neighboring other cell type.
+#' One can repeat this function for multiple times to add cell-cell interactions for many cell types.
+#' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
+#' @param sim.count Spatial info for cell type 2 (e.g. microglia)
+#' @param r Expression info for cell type 1 (e.g. neuron)
+#' @param perturbed.cell.type Expression info for cell type 1 (e.g. microglia)
+#' @param adjacent.cell.type Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
+#' @param int.dist.threshold effect.size
+#' @param delta.mean effect.size
+#' @param delta.sd effect.size
+#' @param GenePairIDMatrix effect.size
+#' @param PropOfGenes effect.size
+#' @param Bidirectional effect.size
+#' @param seed effect.size
+#' @return
+#' \item{SignalSummary:}{SignalSummary}
+#' \item{beta.matrix:}{beta.matrix}
 
 Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
                            perturbed.cell.type,
@@ -321,13 +316,17 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
 
 
 
-#
-
-#' scST.Expr
+#' Pattern.adj.1region
 #'
-#' input scRNAseq simulated counts and a list of beta matrices, output revised counts
+#' Adjust the count data for one region based on all input spatial patterns
+#' @param sim.count1 Spatial info for cell type 1 (e.g. neuron)
+#' @param combined.beta.matrix Spatial info for cell type 2 (e.g. microglia)
+#' @param bond.extreme Expression info for cell type 1 (e.g. neuron)
+#' @param keep.total.count Expression info for cell type 1 (e.g. microglia)
+#' @param integer Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
+#' @return sim.count.update
 #' @export
-Pattern.Adj.1region= function(sim.count1, combined.beta.matrix,
+Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
                     bond.extreme=T, keep.total.count=T,
                     integer=T) {
   G=nrow(sim.count1)
@@ -353,6 +352,17 @@ Pattern.Adj.1region= function(sim.count1, combined.beta.matrix,
 }
 
 
+#' Pattern.Adj
+#'
+#' Adjust the count data for all regions based on all input spatial patterns
+#' @param sim.count Spatial info for cell type 1 (e.g. neuron)
+#' @param pattern.list Spatial info for cell type 2 (e.g. microglia)
+#' @param bond.extreme Expression info for cell type 1 (e.g. neuron)
+#' @param keep.total.count Expression info for cell type 1 (e.g. microglia)
+#' @param integer Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
+#' @return sim.count.update
+#' @export
+
 Pattern.Adj= function(sim.count, pattern.list=NULL,
                             bond.extreme=T, keep.total.count=T,
                             integer=T) {
@@ -364,7 +374,7 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
       beta.matrix.list=lapply(1:K, function(k) pattern.list[[k]]$beta.matrix[[i]])
       combined.beta.matrix=Reduce("+", beta.matrix.list)
 
-      sim.count.update[[i]]=Pattern.Adj.1region(sim.count1=sim.count[[i]],
+      sim.count.update[[i]]=Pattern.adj.1region(sim.count1=sim.count[[i]],
                                                 combined.beta.matrix=combined.beta.matrix,
                                                 bond.extreme=bond.extreme, keep.total.count=keep.total.count,
                                                 integer=integer)
@@ -385,23 +395,14 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 #' @import spatstat
 #' @param points.list: points.list a list of points from multiple regions
 #' @param expr.list: points.list a list of expressions from multiple regions
+#' @export
+#' @return
+#' \item{meta:}{meta}
+#' \item{count:}{count}
+
 
 MergeRegion=function(points.list, expr.list) {
   K=length(points.list)
-  # # window
-  # win.list=lapply(1:K, function(f) points.list[[f]]$window)
-  # union.owin2=function(a, b, decimals=3){
-  #   temp=union.owin(a,b)
-  #   if (temp$type=="polygonal") {
-  #     R=length(temp$bdry)
-  #     for ( r in 1:R) {
-  #       temp$bdry[[r]]$x=round(temp$bdry[[r]]$x,decimals)
-  #       temp$bdry[[r]]$y=round(temp$bdry[[r]]$y,decimals)
-  #     }
-  #   }
-  #   return(temp)
-  # }
-  # win.combine=Reduce(union.owin2, win.list)
   # points
   x.combine=unlist(lapply(1:K, function(f) points.list[[f]]$x))
   y.combine=unlist(lapply(1:K, function(f) points.list[[f]]$y))
