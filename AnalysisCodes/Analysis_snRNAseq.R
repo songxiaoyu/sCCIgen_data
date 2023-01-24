@@ -6,13 +6,13 @@ library(rlist)
 library(data.table)
 #library(scDesign2)
 library(parallel, MASS, pscl)
-
+setwd("/Users/songxiaoyu152/Library/CloudStorage/OneDrive-TheMountSinaiHospital/SpatialTranscriptomics/Paper_Simulator/Github/")
 # (1.3.1) --> No spatial data
 # We need expression data
 
 # PointSimulator Functions for 2 regions---------
   # input scRNAseq  data:
-  load("../Data/scRNAseq_GTEx_breast.RData")
+  load("Data/scRNAseq_GTEx_breast.RData")
 
   # expr --> gene by cell  matrix of counts --> from datasets
   # anno --> colnames of expr

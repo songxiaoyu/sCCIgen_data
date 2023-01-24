@@ -15,14 +15,10 @@ setwd("/Users/songxiaoyu152/Library/CloudStorage/OneDrive-TheMountSinaiHospital/
 # expr=MERFISH_s260_exprs 
 # expr=round(expr)
 ## ----- SeqFISH ------
-load("Paper_Simulator/DataToShare/SeqFishPlus.RData")
-loc=SeqFishPlus_loc
-anno=SeqFishPlus_anno
-# ct=apply(SeqFishPlus_exprs, 1, sum)
-# expr=SeqFishPlus_exprs[which(ct>1000)[1:20],]
-loc=loc[which(anno!="Ependymal"),]  
-anno=anno[which(anno!="Ependymal")]
-expr=SeqFishPlus_exprs[,which(anno!="Ependymal")]
+load("Github/Data/SeqFishPlusCortexFilter_expr.Rdata")
+dim(expr)
+load("Github/Data/SeqFishPlusCortexFilter_loc.Rdata")
+dim(loc)
 
 # spatial
 ft=cell.loc.model.fc(n=1000, PointLoc=loc, PointAnno=anno)
