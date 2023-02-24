@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[11]:
+# In[9]:
 
 
 import glob
@@ -22,7 +22,7 @@ rpy2_logger.setLevel(logging.ERROR)
 base = importr('base')
 
 
-# In[8]:
+# In[10]:
 
 
 valid_yes_no = ['y', 'n']
@@ -31,7 +31,7 @@ workdir_files = [f for f in glob.glob('working_directory' + '/**', recursive=Tru
 
 # # Helper functions
 
-# In[9]:
+# In[11]:
 
 
 def print_workdir_files():
@@ -65,7 +65,7 @@ def isfloat(num):
 # # question0_1
 # - determines workflow
 
-# In[ ]:
+# In[12]:
 
 
 print("\n")
@@ -213,7 +213,7 @@ else:
 
 print('\n')
 print(f'\tUnique cell types detected in expression data: {len(expression_data_cell_types)}')
-
+expression_data_cell_types.sort()
 parameters['expression_data_cell_types'] = expression_data_cell_types
 
 
@@ -225,8 +225,8 @@ parameters['expression_data_cell_types'] = expression_data_cell_types
 
 question2_2_filepaths = {
     '1': 'NULL',
-    '2': 'MERFISH_spatial_map',
-    '3': 'SeqFISH_spatial_map',
+    '2': 'MERFISH_spatial_map.Rdata',
+    '3': 'spatial_data/SeqFishPlusCortexFilter_loc.Rdata',
     '4': 'user_input',
 }
 
@@ -236,7 +236,7 @@ print("\t-----------------------------------")
 print("\n")
 print("\t1) No data (use parameters to simulate)")
 print("\t2) Matched spatial map of MERFISH data")
-print("\t3) Matched spatial map of SeqFISH+ data (allow download)")
+print("\t3) Matched spatial map of SeqFISH+ data")
 print("\t4) User input")
 print('\n')
 question2_2 = input("\tWhat spatial data do you want to use for simulation? ")
@@ -391,6 +391,7 @@ if question2_2 != '1':
         raise ValueError("Please enter y/n.")
     
     if question2_5 == 'y':
+        parameters['simulate_spatial_data'] = 'TRUE'
         print('\n')
         question2_5_1 = input("\tNumber of simulated cells [default =10,000]: \t").lower()
         
@@ -402,6 +403,19 @@ if question2_2 != '1':
             raise ValueError(f'Please enter an integer for the number of simulated cells. You entered {question2_4_1}')
         
         parameters['num_simulated_cells'] = question2_5_1
+
+        print('\n')
+        question2_5_3 = input("\tCells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:\t")
+    
+        if question2_5_3 == '':
+            print('\tUsing default 0.02')
+            print('\n')
+            question2_5_3 = '0.02'
+
+        if not isfloat(question2_5_3):
+            raise ValueError('Please enter a value between 0 and 0.1')
+            
+        parameters['cell_overlap_cutoff'] = question2_5_3
 
         print("\n")
         print("\tAvailable methods for determining window on existing ST data")
@@ -429,9 +443,10 @@ if question2_2 != '1':
         parameters['window_method'] = valid_question2_5_2[question2_5_2]
 
 
+
 # ### Question2_6
 
-# In[5]:
+# In[13]:
 
 
 print("\n")
@@ -463,23 +478,269 @@ if question2_6_2 == 'n':
 else:
     parameters['gene_cor'] = 'TRUE'
     print('\n')
-    print_workdir_files()
-    print('\n')
-    question2_6_3 = input("\tUse file for the estimated Gaussian Copula for gene-gene correlation of your expression data [default = NULL]\t").lower()
-    if question2_6_3 == '':
-        question2_6_3 = 'NULL'
-        print('\n\tUsing default: ', question2_6_2)
-    elif not question2_6_3.isnumeric():
-        raise ValueError('Please select a file.')
+    copula_input_files = {
+        '1': 'NA',
+        '2': 'NA',
+        '3': 'expression_data/snRNAseq_breast_CopulaEst.Rdaa',
+    }
+    # if file is local expression, we have copula file also
+    if question2_1 not in copula_input_files:
+        print('\n')
+        print_workdir_files()
+        question2_6_3 = input("\tUse file for the estimated Gaussian Copula for gene-gene correlation of your expression data [default = NULL]\t").lower()
+        if question2_6_3 == '':
+            question2_6_3 = 'NULL'
+            print('\n\tUsing default: ', question2_6_3)
+            parameters['copula_input'] = question2_6_3
+        elif not question2_6_3.isnumeric():
+            raise ValueError('Please select a file.')
+        else:
+            question2_6_3 = workdir_files[int(question2_6_3)-1]
+            parameters['copula_input'] = ''.join(question2_6_3.split('working_directory/')[1:])
     else:
-        question2_6_3 = workdir_files[int(question2_6_3)-1]
+        question2_6_3 = copula_input_files[question2_1]
+        parameters['copula_input'] = question2_6_3
 
-    parameters['copula_input'] = ''.join(question2_6_3.split('working_directory/')[1:])
+
+# In[ ]:
+
+
+question2_6_4 = input("\tAdd spatial patterns? (y/n)\t").lower()
+
+if question2_6_4 == 'y':
+    spatial_patterns = []
+    finished_question2_6_4 = False
+    while not finished_question2_6_4:
+        spatial_pattern = {}
+        
+        print('\n')
+        print('\tPrompts for adding spatial pattern: ')
+        question2_6_4a = input(f"\tWhich region? [1-{parameters['num_regions']}]\t").lower()
+
+        if not question2_6_4a.isnumeric():
+            raise ValueError(f"Please specify a region that is an integer between 1 and {parameters['num_regions']}")
+        
+        spatial_pattern['region'] = question2_6_4a
+        
+        print('\n')
+        print(f'\tChoose from cell types')
+        print('\t--------------')
+        cell_types = parameters['expression_data_cell_types']
+        for i, cell_type in enumerate(cell_types):
+            print(f'\t{i+1}: {cell_type}')
+
+        question2_6_4b = int(input(f"\tSelect cell type:\t"))
+        spatial_pattern['cell_type'] = cell_types[question2_6_4b - 1]
+
+        question2_6_4c = input(f"\tGene ID (default = NULL):\t")
+        if question2_6_4c == '':
+            question2_6_4c = 'NULL'
+            print('\tUsing default NULL. The proportion of genes with the pattern should be specified, and genes will be randomly selected.')
+        
+        spatial_pattern['gene_id'] = question2_6_4c
+        
+        question2_6_4d = input(f"\tGene proportion (default = NULL):\t")
+
+        if question2_6_4d == '':
+            question2_6_4d = 'NULL'
+            print('\tUsing default NULL.')
+        spatial_pattern['gene_prop'] = question2_6_4d
+
+        question2_6_4e = input(f"\tMean effect at log(count) scale (default = 0.5):")
+
+        if question2_6_4e == '':
+            question2_6_4e = '0.5'
+            print('\tUsing default 0.5.')
+    
+        spatial_pattern['mean'] = question2_6_4e
+
+        question2_6_4f = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+
+        if question2_6_4f == '':
+            question2_6_4f = '1'
+            print('\tUsing default 1.')
+        spatial_pattern['sd'] = question2_6_4f
+
+        spatial_patterns.append(spatial_pattern)
+        print('\n')
+        question2_6_4exit = input(f"\tSpecify another spatial pattern? (y/n)\t").lower()
+        if question2_6_4exit == 'n':
+            finished_question2_6_4 = True
+
+    for i, spatial_patten in enumerate(spatial_patterns):
+        for k in spatial_patten.keys():
+            parameters[f'spatial_pattern_{i+1}_{k}'] = spatial_patten[k]
+
+
+# In[ ]:
+
+
+print('\n')
+question2_6_5 = input("\tAdd cell-cell interactions - expression associated with cell-cell distance? (y/n)\t").lower()
+
+if question2_6_5 == 'y':
+    cell_cell_interactions = []
+    finished_question2_6_5 = False
+    while not finished_question2_6_5:
+        cell_cell_interaction = {}
+        
+        print('\n')
+        print('\tPrompts for adding cell-cell interaction: ')
+        question2_6_5a = input(f"\tWhich region? [1-{parameters['num_regions']}]\t").lower()
+
+        if not question2_6_5a.isnumeric():
+            raise ValueError(f"Please specify a region that is an integer between 1 and {parameters['num_regions']}")
+        
+        cell_cell_interaction['region'] = question2_6_5a
+        
+        print('\n')
+        print(f'\tChoose from cell types')
+        print('\t--------------')
+        cell_types = parameters['expression_data_cell_types']
+        for i, cell_type in enumerate(cell_types):
+            print(f'\t{i+1}: {cell_type}')
+
+        question2_6_5b = int(input(f"\tPeturbed cell type:\t"))
+        cell_cell_interaction['cell_type_perturbed'] = cell_types[question2_6_5b - 1]
+        question2_6_5c = int(input(f"\tAdjacent cell type:\t"))
+        cell_cell_interaction['cell_type_adj'] = cell_types[question2_6_5c - 1]
+
+        question2_6_5d = input(f"\tInteraction distance threshold (default = 0.1):\t")
+        if question2_6_5d == '':
+            question2_6_5d = '0.1'
+            print('\tUsing default 0.1.')
+        cell_cell_interaction['dist_cutoff'] = question2_6_5d
+
+        question2_6_5e = input(f"\tGene ID (default = NULL):\t")
+        if question2_6_5e == '':
+            question2_6_5e = 'NULL'
+            print('\tUsing default NULL. The proportion of genes with the pattern should be specified, and genes will be randomly selected.')
+        cell_cell_interaction['gene_id1'] = question2_6_5e
+        
+        question2_6_5f = input(f"\tGene proportion (default = NULL):\t")
+        if question2_6_5f == '':
+            question2_6_5f = 'NULL'
+            print('\tUsing default NULL.')
+        cell_cell_interaction['gene_prop'] = question2_6_5f
+
+        question2_6_5g = input(f"\tMean effect at log(count) scale (default = 0.5):")
+        if question2_6_5g == '':
+            question2_6_5g = '0.5'
+            print('\tUsing default 0.5.')
+    
+        cell_cell_interaction['mean'] = question2_6_5g
+
+        question2_6_5h = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+
+        if question2_6_5h == '':
+            question2_6_5h = '1'
+            print('\tUsing default 1.')
+        cell_cell_interaction['sd'] = question2_6_5h
+
+        cell_cell_interactions.append(cell_cell_interaction)
+        print('\n')
+        question2_6_5exit = input(f"\tSpecify another cell-cell interaction - expression associated with cell-cell distance? (y/n)\t").lower()
+        if question2_6_5exit == 'n':
+            finished_question2_6_5 = True
+
+    for i, cell_cell_interaction in enumerate(cell_cell_interactions):
+        for k in cell_cell_interaction.keys():
+            parameters[f'spatial_int_dist_{i+1}_{k}'] = cell_cell_interaction[k]
+
+
+# In[ ]:
+
+
+print('\n')
+question2_6_6 = input("\tAdd cell-cell interactions -  expression associated with expression of neighboring cells? (y/n)\t").lower()
+
+if question2_6_6 == 'y':
+    cell_cell_interactions = []
+    finished_question2_6_6 = False
+    while not finished_question2_6_6:
+        cell_cell_interaction = {}
+        
+        print('\n')
+        print('\tPrompts for adding cell-cell interaction: ')
+        question2_6_6a = input(f"\tWhich region? [1-{parameters['num_regions']}]\t").lower()
+
+        if not question2_6_6a.isnumeric():
+            raise ValueError(f"Please specify a region that is an integer between 1 and {parameters['num_regions']}")
+        
+        cell_cell_interaction['region'] = question2_6_6a
+        
+        print('\n')
+        print(f'\tChoose from cell types')
+        print('\t--------------')
+        cell_types = parameters['expression_data_cell_types']
+        for i, cell_type in enumerate(cell_types):
+            print(f'\t{i+1}: {cell_type}')
+
+        question2_6_6b = int(input(f"\tPeturbed cell type:\t"))
+        cell_cell_interaction['cell_type_perturbed'] = cell_types[question2_6_6b - 1]
+        question2_6_6c = int(input(f"\tAdjacent cell type:\t"))
+        cell_cell_interaction['cell_type_adj'] = cell_types[question2_6_6c - 1]
+
+        question2_6_6d = input(f"\tInteraction distance threshold (default = 0.1):\t")
+        if question2_6_6d == '':
+            question2_6_6d = '0.1'
+            print('\tUsing default 0.1.')
+        cell_cell_interaction['dist_cutoff'] = question2_6_6d
+
+        question2_6_6e = input(f"\tGene ID pair 1 (default = NULL):\t")
+        if question2_6_6e == '':
+            question2_6_6e = 'NULL'
+            print('\tUsing default NULL. The proportion of genes with the pattern should be specified, and genes will be randomly selected.')
+        cell_cell_interaction['gene_id1'] = question2_6_6e
+        
+        question2_6_6e2 = input(f"\tGene ID pair 2 (default = NULL):\t")
+        if question2_6_6e2 == '':
+            question2_6_6e2 = 'NULL'
+            print('\tUsing default NULL. The proportion of genes with the pattern should be specified, and genes will be randomly selected.')
+        cell_cell_interaction['gene_id2'] = question2_6_6e2
+        
+
+        question2_6_6f = input(f"\tGene proportion (default = NULL):\t")
+        if question2_6_6f == '':
+            question2_6_6f = 'NULL'
+            print('\tUsing default NULL.')
+        cell_cell_interaction['gene_prop'] = question2_6_6f
+
+        question2_6_6g = input(f"\tIs the association bidirectional (y/n): [default = y]")
+        if question2_6_6g == '':
+            question2_6_6g = 'TRUE'
+            print('\tUsing default TRUE')
+    
+        cell_cell_interaction['bidirectional'] = question2_6_6g
+
+        question2_6_6h = input(f"\tMean effect at log(count) scale (default = 0.5):")
+        if question2_6_6h == '':
+            question2_6_6h = '0.5'
+            print('\tUsing default 0.5.')
+    
+        cell_cell_interaction['mean'] = question2_6_6h
+
+        question2_6_6i = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+
+        if question2_6_6i == '':
+            question2_6_6i = '1'
+            print('\tUsing default 1.')
+        cell_cell_interaction['sd'] = question2_6_6i
+
+        cell_cell_interactions.append(cell_cell_interaction)
+        print('\n')
+        question2_6_6exit = input(f"\tSpecify another cell-cell interaction - expression associated with cell-cell distance? (y/n)\t").lower()
+        if question2_6_6exit == 'n':
+            finished_question2_6_6 = True
+
+    for i, cell_cell_interaction in enumerate(cell_cell_interactions):
+        for k in cell_cell_interaction.keys():
+            parameters[f'spatial_int_expr_{i+1}_{k}'] = cell_cell_interaction[k]
 
 
 # ### Question2_7
 
-# In[6]:
+# In[ ]:
 
 
 # question2_7
@@ -520,7 +781,7 @@ parameters['simulation_seed_for_each_dataset'] = ','.join(simulation_seeds)
 
 # # Save parameter file
 
-# In[7]:
+# In[ ]:
 
 
 print('\n')
@@ -549,7 +810,7 @@ if save_param_file == 'y':
 
 
 
-# In[1]:
+# In[11]:
 
 
 try:
