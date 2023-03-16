@@ -1,14 +1,4 @@
-FROM rocker/tidyverse
-
-RUN apt-get update && apt-get install -y vim 
-
-# Install python
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get update 
-RUN apt-get install -y python3.9
-RUN apt-get install -y python3-pip
-RUN pip install pandas
+FROM rpy2/rpy2
 
 # install R packages
 # RUN R -e "install.packages('raster',dependencies=TRUE, repos='http://cran.rstudio.com/')"
@@ -19,14 +9,12 @@ RUN pip install pandas
 # RUN R -e "install.packages('gridExtra',dependencies=TRUE, repos='http://cran.rstudio.com/')" 
 
 
-# # copy local files to image
-# COPY TryoutForAnna.R /bin/TryoutForAnna.R
-# COPY TryoutForAnna.R /bin/TryoutForAnna.R
+# copy local files to image
 RUN mkdir /working_directory
 COPY simulated_data simulated_data
 COPY expression_data expression_data
 COPY docker_prompts.py docker_prompts.py
 COPY scripts scripts
 
-# ENTRYPOINT [ "/bin/bash", "-l", "-c" ]
+# ENTRYPOINT 
 CMD [ "python3", "docker_prompts.py" ]
