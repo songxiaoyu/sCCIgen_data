@@ -1,5 +1,5 @@
 #!/bin/bash
-BASE_DOCKER_IMAGE="st_simulator_test"
+BASE_DOCKER_IMAGE="annapamela/st_simulator_test"
 
 # get absolute path to working directory
 read -p "Enter the absolute path to your working directory. Outputs will be saved to this directory, and all inputs must come from this directory: " -e WORKDIR
