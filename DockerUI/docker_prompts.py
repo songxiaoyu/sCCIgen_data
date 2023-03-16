@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[9]:
-
-
 import glob
 import itertools
 from math import isclose
@@ -21,18 +15,8 @@ from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
 rpy2_logger.setLevel(logging.ERROR)
 base = importr('base')
 
-
-# In[10]:
-
-
 valid_yes_no = ['y', 'n']
 workdir_files = [f for f in glob.glob('working_directory' + '/**', recursive=True) if os.path.isfile(f)]
-
-
-# # Helper functions
-
-# In[11]:
-
 
 def print_workdir_files():
     if len(workdir_files) == 0:
