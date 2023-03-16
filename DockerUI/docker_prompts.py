@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Imports
+
+# In[ ]:
+
+
 import glob
 import itertools
 from math import isclose
@@ -12,11 +20,23 @@ import rpy2.robjects as robjects
 from rpy2.robjects.packages import importr
 from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
 
+
+# # Setup
+
+# In[ ]:
+
+
 rpy2_logger.setLevel(logging.ERROR)
 base = importr('base')
 
 valid_yes_no = ['y', 'n']
 workdir_files = [f for f in glob.glob('working_directory' + '/**', recursive=True) if os.path.isfile(f)]
+
+
+# # Helper functions
+
+# In[ ]:
+
 
 def print_workdir_files():
     if len(workdir_files) == 0:
@@ -49,7 +69,7 @@ def isfloat(num):
 # # question0_1
 # - determines workflow
 
-# In[12]:
+# In[ ]:
 
 
 print("\n")
@@ -97,17 +117,6 @@ if question0_1 == '1':
     sys.exit()
 
 
-# # Workflow3
-# - Use premade config file
-
-# In[ ]:
-
-
-# this is first because question2 is much longer
-if question0_1 == '3':
-    sys.exit()
-
-
 # # Workflow2
 # - Generate a simulation parameter file.
 
@@ -149,8 +158,9 @@ if question2_1_filepaths[question2_1] != 'user_input':
     if question2_1_download in valid_yes_no:
         if question2_1_download == 'y':
             #TODO: update with real data
-            shutil.copyfile(f'{question2_1_filepaths[question2_1]}', f'/working_directory/{question2_1_filepaths[question2_1]}')
-            print(f'\n\tSaved expression data: {question2_1_filepaths[question2_1]} to your working directory.')
+            filepath_slim = question2_1_filepaths[question2_1].split('/')[-1]
+            shutil.copyfile(f'{question2_1_filepaths[question2_1]}', f'/working_directory/{filepath_slim}')
+            print(f'\n\tSaved expression data: {filepath_slim} to your working directory.')
 else:
     print_workdir_files()
     print('\n')
@@ -430,7 +440,7 @@ if question2_2 != '1':
 
 # ### Question2_6
 
-# In[13]:
+# In[ ]:
 
 
 print("\n")
@@ -489,6 +499,7 @@ else:
 # In[ ]:
 
 
+print("\n")
 question2_6_4 = input("\tAdd spatial patterns? (y/n)\t").lower()
 
 if question2_6_4 == 'y':
@@ -763,7 +774,9 @@ simulation_seeds = [str(int(parameters['parent_simulation_seed']) + i) for i in 
 parameters['simulation_seed_for_each_dataset'] = ','.join(simulation_seeds)
 
 
-# # Save parameter file
+# * Use existing parameter file
+
+# ### Save parameter file
 
 # In[ ]:
 
@@ -777,7 +790,7 @@ if save_param_file == 'y':
     parameter_series.reset_index()
 
     os.makedirs(f'working_directory/parameter_files', exist_ok=True) 
-    parameter_file_name = input("\n\tName this parameter file [default='parameter_file.tsv']: ").lower()
+    parameter_file_name = input("\n\tName this parameter file [default='parameter_file']: ").lower()
 
     if parameter_file_name == '':
         parameter_file_name = 'parameter_file'
@@ -788,13 +801,20 @@ if save_param_file == 'y':
     print(f'\n\tSaved parameter file for future use in your working directory: parameter_files/{parameter_file_name}.tsv')
 
 
+# # Workflow3
 
-# if question0_1 == '3':
-    # Use a parameter file for simulation.
+# In[ ]:
 
 
+if question0_1 == '3':
+    #TODO: ask for existing parameter file
+    sys.exit()
 
-# In[11]:
+
+# # Run ST pipeline with parameter file
+# - TODO: use os.system to kick off R code with parameter file
+
+# In[2]:
 
 
 try:
