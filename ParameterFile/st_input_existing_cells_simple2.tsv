@@ -1,0 +1,15 @@
+parameters	value
+path_to_input_dir	/Users/songxiaoyu152/Library/CloudStorage/OneDrive-TheMountSinaiHospital/SpatialTranscriptomics/Paper_Simulator/Github/InputData/
+expression_data_file	expression_data/SeqFishPlusCortex_expr_030323.Rdata
+expression_data_file_type	Rdata
+expression_data_cell_types	"['Interneuron', 'Endothelial', 'Microglia', 'Astrocyte', 'ExcitatoryNeuron', 'Neuroblast', 'Oligodendrocyte', 'NeuralStem']"
+simulate_spatial_data	FALSE
+spatial_data_file	spatial_data/SeqFishPlusCortex_loc_030323.Rdata
+expr_depth_ratio	1
+gene_cor	FALSE
+copula_input	copula_data/SeqFishPlusCortex_CopulaEst_030323.Rdata
+num_simulated_datasets	1
+parent_simulation_seed	123
+simulation_seed_for_each_dataset	123
+path_to_output_dir	/Users/songxiaoyu152/Library/CloudStorage/OneDrive-TheMountSinaiHospital/SpatialTranscriptomics/Paper_Simulator/Github/OutputData/
+output_name	ST_input_existing_cells_simple

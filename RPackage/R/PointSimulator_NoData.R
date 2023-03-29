@@ -136,10 +136,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
 
 
   K=length(n.vec.target)
-  KP=names(n.vec.target)
+  KP=colnames(n.vec.target)
 
 
-  gen1=rmpoint(n.vec.raw, win=window1)
+  gen1=rmpoint(n.vec.raw, win=window1, types=KP)
 
   # calculate cell-cell distance for deletion of same loc
   dis=pairdist(gen1)
@@ -168,8 +168,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   mean.delete.prop=(n2.vec-n.vec.target)/n2.vec # average deletion prop.
   mean.delete.logit=mean.delete.prop/(1-mean.delete.prop) # logit
   # two resolutions
-  r1 <- raster(ncols=grid.size.small, nrows=grid.size.small,xmn=0, xmx=1, ymn=0, ymx=1)
-  r2 <- raster(ncols=grid.size.large, nrows=grid.size.large,xmn=0, xmx=1, ymn=0, ymx=1)
+  r1 <- raster(ncols=grid.size.small, nrows=grid.size.small,
+               xmn=0, xmx=1, ymn=0, ymx=1)
+  r2 <- raster(ncols=grid.size.large, nrows=grid.size.large,
+               xmn=0, xmx=1, ymn=0, ymx=1)
   # in total - for even distribution
   pt.den=rasterize(cbind(gen2$x, gen2$y), r2, fun=function(x,...)length(x))
   value=raster::values(pt.den)
@@ -183,8 +185,9 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   # by cell  - for inhibitory/attraction cells
   if (is.null(cell.inh.attr.input1)) {cell.inh.attr.input1=cbind(Cell1=1, Cell2=1, Strength= 0)}
   # local density by cell type 1
-  pt.cell.den1=lapply(KP, function(k) rasterize(cbind(gen2[which(gen2$marks==k),]$x,
-                      gen2[which(gen2$marks==k),]$y), r1, fun=function(x,...) length(x)))
+  pt.cell.den1=lapply(KP, function(k)
+    rasterize(cbind(gen2[which(gen2$marks==k),]$x,gen2[which(gen2$marks==k),]$y),
+              r1, fun=function(x,...) length(x)))
   value.cell.r1=lapply(1:K, function(f) raster::values(pt.cell.den1[[f]]))
   for (k in 1:K) {value.cell.r1[[k]][is.na(value.cell.r1[[k]])]=0}
   pixel.density.cell1=lapply(1:K, function(f) value.cell.r1[[f]]/mean(value.cell.r1[[f]]))
@@ -284,14 +287,23 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
   cell.loc=vector("list", R);
 
   for(r in 1:R) {
-    print(c("Simulate Cells for Region", r))
-    cell.loc[[r]]=cell.loc.1region.fc(n1=round(win$area[r]*N), window1=win$window[[r]],
+    print(paste("Simulate Cells for Region", r))
+    cell.loc[[r]]=cell.loc.1region.fc(n1=round(win$area[r]*N),
+                                      window1=win$window[[r]],
                                      cell.prop1=cell.prop[[r]],
                                      cell.inh.attr.input1=cell.inh.attr.input[[r]],
                                      same.dis.cutoff =same.dis.cutoff,
                                      even.distribution.coef=even.distribution.coef,
                                      grid.size.small=grid.size.small, grid.size.large=grid.size.large,
                                      seed=seed*11+r*141)
+
+   #  debug
+    # n1=round(win$area[r]*N)
+    # window1=win$window[[r]]
+    # cell.prop1=cell.prop[[r]]
+    # cell.inh.attr.input1=cell.inh.attr.input[[r]]
+    # grid.size.small=19; grid.size.large=45;
+
 
   }
 

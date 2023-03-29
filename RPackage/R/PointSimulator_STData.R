@@ -21,12 +21,11 @@ simu.window=function(PointLoc=NULL, method="network") {
     # generate random perturbation
     n=nrow(PointLoc)
 
-
     dx=max(PointLoc[,1])-min(PointLoc[,1])
     dy=max(PointLoc[,2])-min(PointLoc[,2])
     dmax=max(dx, dy)
-    x= rnorm(n*10, mean=PointLoc[,1], sd=0.001*dmax)
-    y= rnorm(n*10, mean=PointLoc[,2], sd=0.001*dmax)
+    x=PointLoc[,1]+0.001*dmax*cos(seq(0, 2*pi, length=n*10))
+    y=PointLoc[,2]+0.001*dmax*sin(seq(0, 2*pi, length=n*10))
     PointLoc_noise=cbind(x,y)
 
     delaunay_triangle = geometry::delaunayn(PointLoc_noise)
@@ -72,22 +71,25 @@ simu.window=function(PointLoc=NULL, method="network") {
                          y=PointLoc_noise[points_ordered2,2]))
     } else {res=a}
 
-
   }
   return(res)
 }
+
+
 
 #' simulate ST data location based on parametric model
 #' @import spatstat
 #' @export
 cell.loc.model.fc=function(n,
                            PointLoc,
-                           PointAnno, window=NULL,
-                           window.method="network") {
+                           PointAnno,
+                           window_method,
+                           seed=NULL) {
 
   #
-  if (is.null(window)) {window=simu.window(PointLoc, method=window.method)}
-  p=as.ppp(PointLoc, W=window)
+  if(is.null(seed)==F) {set.seed(seed)}
+  cell_win=simu.window(PointLoc=PointLoc, method=window_method)
+  p=as.ppp(PointLoc, W=cell_win)
   marks(p)=as.factor(PointAnno)
   x=PointLoc[,1]
   y=PointLoc[,2]
@@ -110,7 +112,25 @@ cell.loc.model.fc=function(n,
     b=b[setdiff(1:b$n, same.loc.idx[,1]), ]
   }
 
-  return(b)
+  return(list(b))
 }
 
+
+
+
+
+#' simulate ST data location based on parametric model
+#' @import spatstat
+#' @export
+cell.loc.existing.fc=function(PointLoc,
+                           PointAnno,
+                           window_method="rectangle") {
+
+
+  cell_win=simu.window(PointLoc=PointLoc, method=window_method)
+  p=as.ppp(PointLoc, W=cell_win)
+  marks(p)=as.factor(PointAnno)
+
+  return(list(p))
+}
 
