@@ -173,9 +173,10 @@ ParaExistingCellsST=function(m, feature) {
 }
 
 # ----------------- ParaExpr ---------------
-ParaExpr=function(para, cell_loc_list, expr, anno,
+ParaExpr=function(para, cell_loc_list, expr, feature,
                   CopulaEst, all_seeds, parallel=F){
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
+  anno=feature[,1]
   colnames(expr)=anno
   # check No. of adding spatial patterns
   t1=length(grep("spatial_pattern_", colnames(para)))/6
@@ -184,23 +185,23 @@ ParaExpr=function(para, cell_loc_list, expr, anno,
 
   for (i in 1:num_simulated_datasets) {
     sim_count=Use_scDesign2(ppp.obj=cell_loc_list[[i]],
-                            expr=expr, anno=anno,
+                            expr=expr, feature=feature,
                             Copula=CopulaEst,
                             depth_simu_ref_ratio=expr_depth_ratio,
                             seed=all_seeds[[i]], sim_method=sim_method)
-
-    for (tt1 in 1:t1) {
-      # paste0("spatial_pattern_", tt1, "_region")
-      Add.Spatial.Expr.Pattern(sim.count = sim_count,
-                               r,
-                               CellType,
-                               GeneID=NULL,
-                               PropOfGenes=0.1,
-                               delta.mean=1,
-                               delta.sd=0.01,
-                               seed)
+    # add spatial
+    if (t1>0) {
+      for (tt1 in 1:t1) {
+        temp=Add.Spatial.Expr.Pattern(sim.count = sim_count,
+                                 r,
+                                 CellType,
+                                 GeneID=NULL,
+                                 PropOfGenes=0.1,
+                                 delta.mean=1,
+                                 delta.sd=0.01,
+                                 seed)
+      }
     }
-
 
 
 
@@ -210,7 +211,8 @@ ParaExpr=function(para, cell_loc_list, expr, anno,
                                  bond.extreme=T, keep.total.count=T,
                                  integer=T)
     output=MergeRegion(points.list=cell_loc_list[[i]], expr.list=sim_count_update)
-    return(output)
+    print(paste("Finish simulating expression data", i))
+
 
     write_tsv(output$meta, file=paste0(path_to_output_dir, output_name, "_meta_", i, ".tsv"))
     write_tsv(as.data.frame(output$count)%>% rownames_to_column("GeneName"),
@@ -233,8 +235,7 @@ ParaSimulation=function(input, parallel=F) {
     CopulaEst=CopulaLoad(para)
   } else {CopulaEst=NULL}
 
-  # Key variables
-  anno=feature[,1]
+
 
   # parallel parameters
   if (num_simulated_datasets>1) {
@@ -258,7 +259,7 @@ ParaSimulation=function(input, parallel=F) {
 
   # Simulate Expr for these cells
   cell_expr=ParaExpr(para=para, cell_loc_list=cell_loc_list,
-           expr=expr, anno=anno, CopulaEst=CopulaEst, all_seeds=all_seeds,
+           expr=expr, feature=feature, CopulaEst=CopulaEst, all_seeds=all_seeds,
            parallel=parallel)
 
   detach(para)

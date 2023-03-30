@@ -58,36 +58,40 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
 
 Use_scDesign2=function(ppp.obj,
                        expr,
-                       anno,
+                       feature,
                        Copula=NULL,
                        depth_simu_ref_ratio=1,
                        sim_method = c('copula', 'ind'),
                        seed) {
-  R=length(ppp.obj)
 
   expr=as.matrix(expr)
-  cell_type_sel=names(table(anno))
-
-  if (sim_method=="ind") {
-    model_params=  fit_model_scDesign2(data_mat=expr,
-                                       cell_type_sel=cell_type_sel,
-                                       sim_method = 'ind',
-                                       marginal='auto_choose',
-                                       ncores = length(cell_type_sel))
-  } else{
-    model_params=Copula
-  }
+  if (ncol(feature)==4) {PointRegion=feature[,4]} else{
+    PointRegion=rep(1, nrow(feature))}
+  Rcat=unique(PointRegion)
+  R=length(ppp.obj)
 
   sim.count=vector("list", R);
   for(r in 1:R) {
-  sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+    idx=which(PointRegion == Rcat[r])
+    anno=as.matrix(feature)[idx, 1]
+    cell_type_sel=names(table(anno))
+    if (sim_method=="ind") {
+      model_params=  fit_model_scDesign2(data_mat=expr[,idx],
+                                         cell_type_sel=cell_type_sel,
+                                         sim_method = 'ind',
+                                         marginal='auto_choose',
+                                         ncores = length(cell_type_sel))
+    } else{model_params=Copula[[r]]}
+
+    sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
                                        expr=expr, model_params=model_params,
                                  depth_simu_ref_ratio=depth_simu_ref_ratio,
                                  cell_type_sel=cell_type_sel,
                                  seed=seed*31+r*931,
                                  sim_method = sim_method)
-  print(paste("Finish simulating express in region", r))
+
   }
+
   return(sim.count)
 }
 

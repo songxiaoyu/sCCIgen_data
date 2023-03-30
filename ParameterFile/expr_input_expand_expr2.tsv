@@ -3,7 +3,7 @@ path_to_input_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simu
 expression_data_file	expression_data/snRNAseq_breast_expr_030123.RData
 expression_data_file_type	Rdata
 expression_data_cell_types	"['Adipocyte', 'Endothelial cell', 'Epithelial cell', 'Fibroblast', 'Immune (myeloid)', 'Muscle']"
-spatial_data_file	NULL
+cell_feature_data_file	XIAOYU TO ADD
 simulate_spatial_data	TRUE
 num_simulated_cells	10000
 num_regions	2
