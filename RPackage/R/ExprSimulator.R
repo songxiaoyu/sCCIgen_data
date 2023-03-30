@@ -69,7 +69,10 @@ Use_scDesign2=function(ppp.obj,
   cell_type_sel=names(table(anno))
 
   if (sim_method=="ind") {
-    model_params=  fit_model_scDesign2(expr, cell_type_sel, sim_method = 'ind',
+    model_params=  fit_model_scDesign2(data_mat=expr,
+                                       cell_type_sel=cell_type_sel,
+                                       sim_method = 'ind',
+                                       marginal='auto_choose',
                                        ncores = length(cell_type_sel))
   } else{
     model_params=Copula

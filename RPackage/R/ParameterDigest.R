@@ -20,62 +20,57 @@ source("RPackage/R/scDesign2_simulate_revised.R")
 # No ST simple
 input="ParameterFile/expr_input_simple2.tsv"
 # ST simple existing cells
-input="ParameterFile/st_input_existing_cells_simple2.tsv"
+input="ParameterFile/MERFISH_input_existing_cells_simple.tsv"
 # ST simple new cells
 input="ParameterFile/ST_input_new_cells_simple2.tsv"
 # No ST  - expanding expr patterns
 input="ParameterFile/expr_input_expand_expr2.tsv"
+
 
 # ----------------- ParaDigest ---------------
 ParaDigest=function(input) {
   # digest parameters
   para1=para=read_tsv(input) %>% column_to_rownames("parameters") %>%
     t() %>% as.data.frame()
-  class(para1)="numeric"
+  suppressWarnings(class(para1) <-"numeric")
   para[,is.na(para1)==F]=para1[is.na(para1)==F]
   attach(para)
 
   # Path1: No ST data;
   # Path2: ST data - new cells
   # Path3: ST data - existing cells
+  feature=CellFeatureLoad(para)
   para$path=ifelse(
-    spatial_data_file=="NULL", 1,
+    ncol(feature)==1, 1,
     ifelse(simulate_spatial_data=="TRUE", 2, 3)
   )
 
   # estimate copula
   if (gene_cor==T & copula_input=="NULL") {
     #  copula_name
-    out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
-    ParameterCopula(para=para, out_path_name=out_path_name)
-    para$copula_input=out_path_name
-    para$copula_update="TRUE"
-    temp=t(para) %>% as.data.frame() %>% rownames_to_column("parameters")
-    write_tsv(temp, paste0(path_to_output_dir, output_name, "parameter_updated.tsv"))
-  } else {para$copula_update="FALSE"}
+    if (save_copula) {
+      out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
+      ParameterCopula(para=para, feature=feature, out_path_name=out_path_name)
+    }
+  }
 
   detach(para)
   return(para)
 }
 
-ParameterCopula=function(para, out_path_name=NULL){
+ParameterCopula=function(para, feature, out_path_name=NULL){
 
-  # read expr data
-  if(expression_data_file_type=="Rdata") {
-    expr=as.data.frame(loadRData(paste0(path_to_input_dir, expression_data_file)))
-  }
-  if (expression_data_file_type=="tsv") {
-    expr=fread(paste0(path_to_input_dir, expression_data_file))
-  }
+  # read  data
+  expr=ExprLoad(para)
   # anno
-  anno=colnames(expr)
+  anno=feature[,1]
+  colnames(expr)=anno
 
   # estimate copula
-
   expr=as.matrix(expr)
   Copula=Est_GeneCopula(expr=expr, anno=anno, zp_cutoff=0.8, ncores=10)
   save(Copula, file=out_path_name)
-  return(NULL)
+  return(Copula)
 }
 
 # ----------- expr load ---------------
@@ -93,23 +88,24 @@ ExprLoad=function(para){
   }
   return(expr)
 }
-SpatialLoad=function(para){
-  type=tail(unlist(strsplit(spatial_data_file, "[.]")), 1)
+CellFeatureLoad=function(para){
+  type=tail(unlist(strsplit(cell_feature_data_file, "[.]")), 1)
   if(type=="Rdata") {
-    spatial=as.data.frame(loadRData(paste0(path_to_input_dir, spatial_data_file)))
+    feature=as.data.frame(loadRData(paste0(path_to_input_dir, cell_feature_data_file)))
   }
   if (type=="tsv") {
-    spatial=as.data.frame(fread(paste0(path_to_input_dir, spatial_data_file)))
+    feature=as.data.frame(fread(paste0(path_to_input_dir, cell_feature_data_file)))
   }
-  return(spatial)
+  return(feature)
 }
 CopulaLoad=function(para){
   # Copula
-  if (copula_update=="TRUE") {
+  if (copula_input!="NULL") {
     CopulaEst=loadRData(copula_input)
   }
-  if (copula_update=="FALSE" & gene_cor=='TRUE'){
-    CopulaEst=loadRData(paste0(path_to_input_dir, copula_input))
+  if (copula_input=="NULL" & gene_cor=='TRUE'){
+    out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
+    CopulaEst=loadRData(out_path_name)
   }
   return(CopulaEst)
 }
@@ -151,25 +147,26 @@ ParaCellsNoST=function(para, all_seeds, parallel=F){
 
 
 # ----------------- ParaSTNewCells ---------------
-ParaCellsST=function(para, anno, all_seeds, parallel=F) {
-  loc=SpatialLoad(para)
-
+ParaCellsST=function(para, feature, all_seeds, parallel=F) {
   cell_loc=vector("list", num_simulated_datasets)
+  if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
+
   for (i in 1:num_simulated_datasets) {
-    cell_loc[[i]]=cell.loc.model.fc(n=num_simulated_cells,
-                                               PointLoc=loc,
-                                               PointAnno=anno,
+    cell_loc[[i]]=cell.region.loc.model.fc(n=num_simulated_cells,
+                                    PointLoc=feature[,c(2:3)],
+                                    PointAnno=feature[,1],
+                                    PointRegion=R,
                                     window_method=window_method,
-                                               seed=all_seeds[[i]])
+                                    seed=all_seeds[[i]])
   }
   return(cell_loc)
 }
 # ----------------- ParaSTExistingCells ---------------
-ParaExistingCellsST=function(para, anno) {
-  loc=SpatialLoad(para)
-
-  cell_loc1=cell.region.loc.existing.fc(PointLoc=loc,
-                                       PointAnno=anno,
+ParaExistingCellsST=function(m, feature) {
+  if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
+  cell_loc1=cell.region.loc.existing.fc(PointLoc=feature[,c(2:3)],
+                                       PointAnno=feature[,1],
+                                       PointRegion=R,
                                        window_method="rectangle")
   cell_loc=rep(list(cell_loc1), times=num_simulated_datasets)
   return(cell_loc)
@@ -179,7 +176,7 @@ ParaExistingCellsST=function(para, anno) {
 ParaExpr=function(para, cell_loc_list, expr, anno,
                   CopulaEst, all_seeds, parallel=F){
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
-
+  colnames(expr)=anno
   # check No. of adding spatial patterns
   t1=length(grep("spatial_pattern_", colnames(para)))/6
   t2=length(grep("spatial_int_dist_", colnames(para)))/8
@@ -229,12 +226,15 @@ ParaSimulation=function(input, parallel=F) {
   para=ParaDigest(input)
   attach(para)
 
-  # Load expr related data
+  # Load  data
   expr=ExprLoad(para)
-  anno=colnames(expr)
+  feature=CellFeatureLoad(para)
   if (gene_cor=="TRUE") {
     CopulaEst=CopulaLoad(para)
   } else {CopulaEst=NULL}
+
+  # Key variables
+  anno=feature[,1]
 
   # parallel parameters
   if (num_simulated_datasets>1) {
@@ -248,11 +248,12 @@ ParaSimulation=function(input, parallel=F) {
                                 all_seeds=all_seeds, parallel=parallel)
   }
   if (path==2) {
-    cell_loc_list=ParaCellsST(para=para, anno=anno,
+    cell_loc_list=ParaCellsST(para=para, feature=feature,
                               all_seeds=all_seeds, parallel=parallel)
   }
   if (path==3) {
-    cell_loc_list=ParaExistingCellsST(para=para, anno=anno)
+    cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
+                                      feature=feature)
   }
 
   # Simulate Expr for these cells
