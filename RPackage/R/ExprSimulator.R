@@ -20,7 +20,6 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
   exist.cell.type=names(n.ordered)
   cell_type_prop=n.ordered/ppp.obj1$n
   model_params_exist=model_params[exist.cell.type]
-
   sim_count <- scDesign2.revised(model_params=model_params_exist,
                                  n_cell_new=ppp.obj1$n,
                                  cell_type_prop = cell_type_prop,
@@ -65,26 +64,31 @@ Use_scDesign2=function(ppp.obj,
                        seed) {
 
   expr=as.matrix(expr)
-  if (ncol(feature)==4) {PointRegion=feature[,4]} else{
-    PointRegion=rep(1, nrow(feature))}
-  Rcat=unique(PointRegion)
   R=length(ppp.obj)
+  cell_type_sel=names(table(colnames(expr)))
+  # PointRegion=unlist(sapply(1:R, function(f)
+  #   rep(names(ppp.obj)[f], ppp.obj[[f]]$n)))
+  # Rcat=unique(PointRegion)
+
 
   sim.count=vector("list", R);
   for(r in 1:R) {
-    idx=which(PointRegion == Rcat[r])
-    anno=as.matrix(feature)[idx, 1]
-    cell_type_sel=names(table(anno))
+    # idx=which(PointRegion == Rcat[r])
+    # anno=as.matrix(feature)[idx, 1]
+    # cell_type_sel=names(table(anno))
+
     if (sim_method=="ind") {
-      model_params=  fit_model_scDesign2(data_mat=expr[,idx],
+      model_params=  fit_model_scDesign2(data_mat=expr,
                                          cell_type_sel=cell_type_sel,
                                          sim_method = 'ind',
                                          marginal='auto_choose',
                                          ncores = length(cell_type_sel))
     } else{model_params=Copula[[r]]}
 
+
     sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
-                                       expr=expr, model_params=model_params,
+                                       expr=expr,
+                                       model_params=model_params,
                                  depth_simu_ref_ratio=depth_simu_ref_ratio,
                                  cell_type_sel=cell_type_sel,
                                  seed=seed*31+r*931,

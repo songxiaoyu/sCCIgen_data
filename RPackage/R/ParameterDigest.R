@@ -18,13 +18,13 @@ source("RPackage/R/scDesign2_fit_revised.R")
 source("RPackage/R/scDesign2_simulate_revised.R")
 
 # No ST simple
-input="ParameterFile/expr_input_simple2.tsv"
+input="ParameterFile/fake1_input_simple.tsv"
 # ST simple existing cells
-input="ParameterFile/MERFISH_input_existing_cells_simple.tsv"
-# ST simple new cells
-input="ParameterFile/ST_input_new_cells_simple2.tsv"
-# No ST  - expanding expr patterns
-input="ParameterFile/expr_input_expand_expr2.tsv"
+# input="ParameterFile/MERFISH_input_existing_cells_simple.tsv"
+# # ST simple new cells
+# input="ParameterFile/ST_input_new_cells_simple2.tsv"
+# # No ST  - expanding expr patterns
+# input="ParameterFile/expr_input_expand_expr2.tsv"
 
 
 # ----------------- ParaDigest ---------------
@@ -124,6 +124,7 @@ ParaCellsNoST=function(para, all_seeds, parallel=F){
       column_to_rownames("X2") %>% dplyr::select(X3) %>%
       transform(X3=as.numeric(X3)) %>% t()
   }
+  cell_type_proportion2=lapply(cell_type_proportion, function(f) f/sum(f))
 
   # determine cell cell location interactions in each region
    cell_location_interactions=vector("list", num_regions);
@@ -135,7 +136,7 @@ ParaCellsNoST=function(para, all_seeds, parallel=F){
     win=RandomRegionWindow(nRegion=num_regions, seed=seed)
     cell_loc[[m]]=cell.loc.fc(N=num_simulated_cells,
                            win=win,
-                           cell.prop=cell_type_proportion,
+                           cell.prop=cell_type_proportion2,
                            cell.inh.attr.input=cell_location_interactions,
                            same.dis.cutoff =cell_overlap_cutoff,
                            even.distribution.coef=cell_even_distribution,
@@ -258,8 +259,10 @@ ParaSimulation=function(input, parallel=F) {
   }
 
   # Simulate Expr for these cells
-  cell_expr=ParaExpr(para=para, cell_loc_list=cell_loc_list,
-           expr=expr, feature=feature, CopulaEst=CopulaEst, all_seeds=all_seeds,
+  cell_expr=ParaExpr(para=para,
+                     cell_loc_list=cell_loc_list,
+           expr=expr, feature=feature,
+           CopulaEst=CopulaEst, all_seeds=all_seeds,
            parallel=parallel)
 
   detach(para)
