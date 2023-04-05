@@ -19,6 +19,7 @@ import pandas as pd
 import rpy2.robjects as robjects
 from rpy2.robjects.packages import importr
 from rpy2.rinterface_lib.callbacks import logger as rpy2_logger
+from rpy2.robjects import pandas2ri
 
 
 # # Setup
@@ -88,6 +89,17 @@ if question0_1 not in valid_question0_1:
 print("\n")
 
 
+# # Workflow3
+
+# In[ ]:
+
+
+if question0_1 == '3':
+    #TODO: ask for existing parameter file
+    os.system('Rscript ./scripts/FakeR.R')
+    sys.exit()
+
+
 # # Workflow1
 # - Download pre-simulated data set
 
@@ -96,16 +108,16 @@ print("\n")
 
 if question0_1 == '1':
     question1_1_filepaths = {
-        '1': 'sim_fake1.tsv',
-        '2': 'sim_fake2.tsv',
-        '3': 'sim_fake3.tsv',
+        '1': 'sim_fake3.tsv',
+        '2': 'sim_fake1.tsv',
+        '3': 'sim_fake2.tsv'
     }
     print("\tAvailable data sets ")
     print("\t-----------------------------------")
     print("\n")
-    print("\t1) Simulated data for 10,000 genes in 10,000 cells of X cell types, using mouse brain data profiled by SeqFISH+ as reference.")
-    print("\t2) Simulated data for XX genes in 10,000 cells of X cell types, using human ovarian cancer data profiled by MERFISH as reference.")
-    print("\t3) Simulated data for 4,751 genes in 10,000 cells of 6 cell types on a unit square, using normal breast data profiled by snRNAseq as reference.")
+    print("\t1) Simulated data for 4,751 genes in 10,000 cells of 6 cell types on a unit square, using normal breast data profiled by snRNAseq as reference.")
+    print("\t2) Simulated data for 10,000 genes in 10,000 cells of X cell types, using mouse brain data profiled by SeqFISH+ as reference.")
+    print("\t3) Simulated data for 550 genes in 10,000 cells of 6 cell types, using human ovarian cancer data profiled by MERFISH as reference.")
     print('\n')
     question1_1 = input("\tWhich dataset do you want to download (1/2/3)?  \t").lower()
     if question1_1 not in question1_1_filepaths:
@@ -133,18 +145,18 @@ parameters = {
 
 # QUESTION2_1
 question2_1_filepaths = {
-    '1': 'expression_data/SeqFishPlusCortexFilter_expr.Rdata',
-    '2': 'expression_data/ovariancancer.Rdata',
-    '3': 'expression_data/snRNAseq_breast_expr_matrix.RData',
+    '1': 'expression_data/snRNAseq_breast_expr_matrix.RData',
+    '2': 'expression_data/SeqFishPlusCortexFilter_expr.Rdata',
+    '3': 'expression_data/ovariancancer.Rdata',
     '4': 'user_input',
 }
 
 print("\tAvailable expression data for simulation")
 print("\t-----------------------------------")
 print("\n")
-print("\t1) Normal mouse brain SeqFISH+ data")
-print("\t2) Ovarian cancer MERFISH data")
-print("\t3) Normal human breast snRNAseq data")
+print("\t1) Normal human breast snRNAseq data")
+print("\t2) Normal mouse brain SeqFISH+ data")
+print("\t3) Ovarian cancer MERFISH data")
 print("\t4) User input")
 print('\n')
 question2_1 = input("\tWhat expression data do you want to use for simulation? ")
@@ -193,15 +205,21 @@ parameters['expression_data_file_type'] = file_type_dict[expression_data_file_ex
 
 # Question2_1 continued
 # Read expression data and identify cell types
+pandas2ri.activate()
 if parameters['expression_data_file_type'] == 'Rdata': 
     loaded_r_obj = robjects.r['load'](parameters['expression_data_file'])
-    r_obj_key = print_r_objects(loaded_r_obj)
-    expression_data_r = robjects.globalenv[r_obj_key]
-    expression_data_r_names = expression_data_r.names
-    if expression_data_r_names == robjects.rinterface.NULL:
-        expression_data_r = base.as_matrix(expression_data_r)
-        expression_data_r_names = expression_data_r.names
-    expression_data_cell_types = list(set(expression_data_r_names[1]))
+    #r_obj_key = print_r_objects(loaded_r_obj)
+    #expression_data_r = robjects.globalenv[r_obj_key]
+    expression_data_r = robjects.globalenv["expr"]
+    #expression_data_r_names = expression_data_r.names
+    #if expression_data_r_names == robjects.rinterface.NULL:
+     #   expression_data_r = base.as_matrix(expression_data_r)
+      #  expression_data_r_names = expression_data_r.names
+    expression_data_r = robjects.conversion.rpy2py(expression_data_r)
+    print(expression_data_r.shape)
+    expression_data_r_names = expression_data_r.columns
+    expression_data_cell_types = list(set(expression_data_r_names))
+    #expression_data_cell_types = list(set(expression_data_r_names[1]))
 else:
     expression_data_cell_types = pd.read_csv(parameters['expression_data_file'], sep=parameters['expression_data_file_type'], index_col=0).columns
 
@@ -219,8 +237,8 @@ parameters['expression_data_cell_types'] = expression_data_cell_types
 
 question2_2_filepaths = {
     '1': 'NULL',
-    '2': 'MERFISH_spatial_map.Rdata',
-    '3': 'spatial_data/SeqFishPlusCortexFilter_loc.Rdata',
+    '2': 'SeqFishPlusCortexFilter_loc.Rdata',
+    '3': 'MERFISH_spatial_map.Rdata', 
     '4': 'user_input',
 }
 
@@ -229,9 +247,12 @@ print("\tAvailable spatial data for simulation")
 print("\t-----------------------------------")
 print("\n")
 print("\t1) No data (use parameters to simulate)")
-print("\t2) Matched spatial map of MERFISH data")
-print("\t3) Matched spatial map of SeqFISH+ data")
-print("\t4) User input")
+if question2_1 == '2': 
+    print("\t2) Matched spatial map of SeqFISH+ data")   
+if question2_1 == '3':
+    print("\t3) Matched spatial map of MERFISH data")
+if question2_1 == '4':
+    print("\t4) User input")
 print('\n')
 question2_2 = input("\tWhat spatial data do you want to use for simulation? ")
 print('\n')
@@ -301,6 +322,15 @@ if question2_2 == '1':
         print('\tUsing default cell-type proportions.')
         print('\n')
         parameters['custom_cell_type_proportions'] = 'FALSE'
+        # ADD cell_type_proportion to parameter file
+        num_regions = int(question2_4_2)
+        cell_freq = dict((x,round(list(expression_data_r_names).count(x)/expression_data_r.shape[1], 2)) for x in expression_data_cell_types)
+        n = 1
+        for i in range(1, num_regions + 1):
+            for cell_type in expression_data_cell_types:
+                parameters[f'cell_type_proportion_{n}'] = f'{i},{cell_type},{cell_freq[cell_type]}'
+                n += 1
+   
     else:
         parameters['custom_cell_type_proportions'] = 'TRUE'
         question2_4_3 = []
@@ -801,20 +831,10 @@ if save_param_file == 'y':
     print(f'\n\tSaved parameter file for future use in your working directory: parameter_files/{parameter_file_name}.tsv')
 
 
-# # Workflow3
-
-# In[ ]:
-
-
-if question0_1 == '3':
-    #TODO: ask for existing parameter file
-    sys.exit()
-
-
 # # Run ST pipeline with parameter file
 # - TODO: use os.system to kick off R code with parameter file
 
-# In[2]:
+# In[14]:
 
 
 try:
@@ -822,10 +842,4 @@ try:
 except NameError:
     print('\n')
     print('\tFinished')
-
-
-# In[ ]:
-
-
-
 
