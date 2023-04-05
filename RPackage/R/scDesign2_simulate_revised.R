@@ -159,7 +159,9 @@ simulate_count_ind <- function(model_params, n = 100,
 #'
 #' @export
 
-scDesign2.revised <- function(model_params, n_cell_new, cell_type_prop,
+scDesign2.revised <- function(model_params,
+                              n_cell_new,
+                              cell_type_prop,
                               depth_simu_ref_ratio = NULL,
                               sim_method = c('copula', 'ind')){
 
@@ -198,10 +200,12 @@ scDesign2.revised <- function(model_params, n_cell_new, cell_type_prop,
       params_new$marginal_param2[, 3] <- params_new$marginal_param2[, 3] * r[iter]
       if(sim_method == 'copula'){
         new_count[, llim:ulim] <- simulate_count_copula(model_params[[iter]],
-                                                        n = n_cell_each[iter], marginal = 'Gamma')
+                                                        n = n_cell_each[iter],
+                                                        marginal = 'Gamma')
       }else if(sim_method == 'ind'){
         new_count[, llim:ulim] <- simulate_count_ind(model_params[[iter]],
-                                                     n = n_cell_each[iter], marginal = 'Gamma')
+                                                     n = n_cell_each[iter],
+                                                     marginal = 'Gamma')
       }
 
     }

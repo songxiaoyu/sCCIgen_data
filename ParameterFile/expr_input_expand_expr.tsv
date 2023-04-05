@@ -1,0 +1,49 @@
+parameters	value
+path_to_input_dir	working_directory/
+expression_data_file	expression_data/snRNAseq_breast_expr_matrix.RData
+expression_data_file_type	Rdata
+expression_data_cell_types	"['Adipocyte', 'Endothelial cell', 'Epithelial cell', 'Fibroblast', 'Immune (myeloid)', 'Muscle']"
+simulate_spatial_data	TRUE
+spatial_data_file	NULL
+num_simulated_cells	10000
+num_regions	2
+custom_cell_type_proportions	FALSE
+custom_cell_location_interactions	FALSE
+cell_even_distribution	0
+cell_overlap_cutoff	0.02
+expr_depth_ratio	1
+gene_cor	TRUE
+copula_input	expression_data/snRNAseq_breast_CopulaEst.Rdaa
+spatial_pattern_1_region	1
+spatial_pattern_1_cell_type	Adipocyte
+spatial_pattern_1_gene_id	"NOC2L,KLHL17,ISG15  "
+spatial_pattern_1_gene_prop	NULL
+spatial_pattern_1_mean	0.5
+spatial_pattern_1_sd	1
+spatial_pattern_2_region	2
+spatial_pattern_2_cell_type	Epithelial cell
+spatial_pattern_2_gene_id	NULL
+spatial_pattern_2_gene_prop	0.1
+spatial_pattern_2_mean	-0.5
+spatial_pattern_2_sd	1
+spatial_int_dist_1_region	1
+spatial_int_dist_1_cell_type_perturbed	Epithelial cell
+spatial_int_dist_1_cell_type_adj	Immune (myeloid)
+spatial_int_dist_1_dist_cutoff	0.1
+spatial_int_dist_1_gene_id1	"TNFRSF18,SCNN1D,PUSL1,ANKRD65"
+spatial_int_dist_1_gene_prop	NULL
+spatial_int_dist_1_mean	1
+spatial_int_dist_1_sd	1
+spatial_int_expr_1_region	2
+spatial_int_expr_1_cell_type_perturbed	Epithelial cell
+spatial_int_expr_1_cell_type_adj	Immune (myeloid)
+spatial_int_expr_1_dist_cutoff	0.1
+spatial_int_expr_1_gene_id1	"FAAP20,TTC34"
+spatial_int_expr_1_gene_id2	"MEGF6,WRAP73"
+spatial_int_expr_1_gene_prop	NULL
+spatial_int_expr_1_bidirectional	TRUE
+spatial_int_expr_1_mean	2
+spatial_int_expr_1_sd	1
+num_simulated_datasets	2
+parent_simulation_seed	123
+simulation_seed_for_each_dataset	"123,124"

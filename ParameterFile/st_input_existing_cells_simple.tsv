@@ -1,0 +1,13 @@
+parameters	value
+path_to_input_dir	working_directory/
+expression_data_file	expression_data/SeqFishPlusCortexFilter_expr.Rdata
+expression_data_file_type	Rdata
+expression_data_cell_types	['Interneuron', 'Endothelial', 'Microglia', 'Astrocyte', 'ExcitatoryNeuron', 'Neuroblast', 'Oligodendrocyte', 'NeuralStem']
+simulate_spatial_data	FALSE
+spatial_data_file	spatial_data/SeqFishPlusCortexFilter_loc.Rdata
+expr_depth_ratio	1
+gene_cor	TRUE
+copula_input	NULL
+num_simulated_datasets	1
+parent_simulation_seed	123
+simulation_seed_for_each_dataset	123

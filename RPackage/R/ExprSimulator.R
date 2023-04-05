@@ -12,23 +12,21 @@
 #' @return Simulated count data for a region.
 #'
 
-Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
+Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
                        depth_simu_ref_ratio=1, cell_type_sel, seed,
                        sim_method = c('copula', 'ind')) {
-
-
-
   # cell types in simulated and reference data
-  n.unordered=table(ppp.obj1$marks)
-  n.ordered=n.unordered[match(cell_type_sel, names(n.unordered))]
+  n.ordered=table(ppp.obj1$marks)
+  exist.cell.type=names(n.ordered)
   cell_type_prop=n.ordered/ppp.obj1$n
-  # Simulate data
+  model_params_exist=model_params[exist.cell.type]
 
-  sim_count <- scDesign2.revised(model_params=Copula,
+  sim_count <- scDesign2.revised(model_params=model_params_exist,
                                  n_cell_new=ppp.obj1$n,
                                  cell_type_prop = cell_type_prop,
                                  depth_simu_ref_ratio=depth_simu_ref_ratio,
-                                 sim_method =sim_method )
+                                 sim_method =sim_method)
+
 
 
   # Update the order of sim_count to match the cell type of ppp.obj1
@@ -36,8 +34,10 @@ Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
   colnames(sim_count2)=ppp.obj1$marks
   rownames(sim_count2) = rownames(expr)
   for (f in levels(ppp.obj1$marks)) {
-    sim_count2[, which(colnames(sim_count2)==f)]= sim_count[,which(colnames(sim_count)==f)]
+    sim_count2[, which(colnames(sim_count2)==f)]=
+      sim_count[,which(colnames(sim_count)==f)]
   }
+
   return(sim.count=sim_count2)
 }
 
@@ -56,36 +56,42 @@ Use_scDesign2_1region=function(ppp.obj1, expr, Copula=NULL,
 #' @return Simulated count data for all regions.
 #' @export
 
-Use_scDesign2=function(ppp.obj, expr, anno=NULL, Copula=NULL,
+Use_scDesign2=function(ppp.obj,
+                       expr,
+                       feature,
+                       Copula=NULL,
                        depth_simu_ref_ratio=1,
                        sim_method = c('copula', 'ind'),
-                       seed, SaveCopulaName=NULL) {
-  R=length(ppp.obj)
+                       seed) {
 
   expr=as.matrix(expr)
-  if (is.null(anno)==F) {colnames(expr)=anno}
-  cell_type_sel=names(table(anno))
-  # estimate Copula
-  if (sim_method=="copula" & is.null(Copula)) {
-    Copula=  fit_model_scDesign2(expr, cell_type_sel, sim_method = 'copula',
-                                 ncores = length(cell_type_sel))
-    if (is.null(SaveCopulaName)) {
-      SaveCopulaName=paste0(expression_data_file, "_Copula")
-    }
-    save(Copula, file=paste0(SaveCopulaName, ".RData"))
-  }
-
-
+  if (ncol(feature)==4) {PointRegion=feature[,4]} else{
+    PointRegion=rep(1, nrow(feature))}
+  Rcat=unique(PointRegion)
+  R=length(ppp.obj)
 
   sim.count=vector("list", R);
   for(r in 1:R) {
-  sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
-                                       expr=expr, Copula=Copula,
-                                 depth_simu_ref_ratio=1,
+    idx=which(PointRegion == Rcat[r])
+    anno=as.matrix(feature)[idx, 1]
+    cell_type_sel=names(table(anno))
+    if (sim_method=="ind") {
+      model_params=  fit_model_scDesign2(data_mat=expr[,idx],
+                                         cell_type_sel=cell_type_sel,
+                                         sim_method = 'ind',
+                                         marginal='auto_choose',
+                                         ncores = length(cell_type_sel))
+    } else{model_params=Copula[[r]]}
+
+    sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                       expr=expr, model_params=model_params,
+                                 depth_simu_ref_ratio=depth_simu_ref_ratio,
                                  cell_type_sel=cell_type_sel,
                                  seed=seed*31+r*931,
                                  sim_method = sim_method)
+
   }
+
   return(sim.count)
 }
 
@@ -329,25 +335,35 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
 Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
                     bond.extreme=T, keep.total.count=T,
                     integer=T) {
-  G=nrow(sim.count1)
-  N=ncol(sim.count1)
-  sim.count1.update= exp(log(sim.count1+1) +combined.beta.matrix)-1
+  if (is.null(combined.beta.matrix)) {
+    # integer
+    if (integer==T) {
+      sim.count1.update=round(sim.count1)
+    } else {
+      sim.count1.update=sim.count1
+    }
+  } else {
+    sim.count1.update= exp(log(sim.count1+1) +combined.beta.matrix)-1
 
-  # bond extreme values bonds at 10% reads
-  if (bond.extreme==T) {
-     TenPerReads=apply(sim.count1.update, 2, sum)/10
-     for (i in 1:ncol(sim.count1.update)) {
-       sim.count1.update[,i][which(sim.count1.update[,i]>TenPerReads[i])]=TenPerReads[i]
-     }
+    # bond extreme values bonds at 10% reads
+    if (bond.extreme==T) {
+      TenPerReads=apply(sim.count1.update, 2, sum)/10
+      for (i in 1:ncol(sim.count1.update)) {
+        sim.count1.update[,i][which(sim.count1.update[,i]>TenPerReads[i])]=TenPerReads[i]
+      }
+    }
+    # scale by total count
+    if (keep.total.count==T) {
+      ratio=sum(sim.count1)/sum(sim.count1.update)
+      sim.count1.update=sim.count1.update*ratio
+    }
+    # integer
+    if (integer==T) {
+      sim.count1.update=round(sim.count1.update)
+    }
+
   }
-  # scale by total count
-  if (keep.total.count==T) {
-    ratio=sum(sim.count1)/sum(sim.count1.update)
-    sim.count1.update=sim.count1.update*ratio
-  }
-  if (integer==T) {
-    sim.count1.update=round(sim.count1.update)
-  }
+
   return(sim.count1.update)
 }
 
@@ -367,18 +383,22 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
                             bond.extreme=T, keep.total.count=T,
                             integer=T) {
   R=length(sim.count)
-  K=length(pattern.list)
-  if (K==0) {sim.count.update=sim.count} else {
-    sim.count.update=vector("list", length=R)
-    for (i in 1:R) {
-      beta.matrix.list=lapply(1:K, function(k) pattern.list[[k]]$beta.matrix[[i]])
-      combined.beta.matrix=Reduce("+", beta.matrix.list)
 
-      sim.count.update[[i]]=Pattern.adj.1region(sim.count1=sim.count[[i]],
+  sim.count.update=vector("list", length=R)
+  for (i in 1:R) {
+     if (is.null(pattern.list)) {
+       combined.beta.matrix=NULL
+     } else {
+       K=length(pattern.list)
+       beta.matrix.list=lapply(1:K, function(k) pattern.list[[k]]$beta.matrix[[i]])
+       combined.beta.matrix=Reduce("+", beta.matrix.list)
+     }
+
+     sim.count.update[[i]]=Pattern.adj.1region(sim.count1=sim.count[[i]],
                                                 combined.beta.matrix=combined.beta.matrix,
                                                 bond.extreme=bond.extreme, keep.total.count=keep.total.count,
                                                 integer=integer)
-    }
+
   }
 
   return(sim.count.update=sim.count.update)
@@ -408,15 +428,22 @@ MergeRegion=function(points.list, expr.list) {
   y.combine=unlist(lapply(1:K, function(f) points.list[[f]]$y))
   annotation=unlist(sapply(1:K, function(f) points.list[[f]]$marks))
   n=sapply(1:K, function(f) points.list[[f]]$n)
-  region=rep(1:K, times=n)
   Cell=paste0("Cell", seq(1, length(x.combine)))
-  meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine, region=region,
-                  annotation=annotation)
+
+  if (K>1) {
+    region=rep(1:K, times=n)
+    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
+                    annotation=annotation, region=region)
+  } else {
+    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
+                    annotation=annotation)
+  }
 
   # expr
   expr.combine=Reduce(cbind, expr.list)
   colnames(expr.combine)=Cell
-  return(list(meta=meta, count=expr.combine))
+
+  return(list(meta=meta, count=as.data.frame(expr.combine)))
 }
 
 
