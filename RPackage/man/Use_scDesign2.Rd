@@ -7,34 +7,32 @@
 Use_scDesign2(
   ppp.obj,
   expr,
-  anno = NULL,
+  feature,
   Copula = NULL,
   depth_simu_ref_ratio = 1,
   sim_method = c("copula", "ind"),
-  seed,
-  SaveCopulaName = NULL
+  region_specific_model = F,
+  seed
 )
 }
 \arguments{
-\item{ppp.obj}{PointLoc}
+\item{ppp.obj}{Cells as points on a spatial map for all regions.}
 
-\item{expr}{PointLoc}
+\item{expr}{Gene expression (count) in reference data.}
 
-\item{anno}{PointLoc}
+\item{feature}{Cell features (e.g. cell type, spatial coordinates, regions) of reference data.}
 
-\item{Copula}{PointLoc}
+\item{Copula}{Default is NULL. If 'copula' method is used, a estimated gene-gene correlation copula should be provided.}
 
-\item{depth_simu_ref_ratio}{PointLoc}
+\item{depth_simu_ref_ratio}{Relative sequencing depth in comparison of reference data.}
 
-\item{sim_method}{PointLoc}
+\item{sim_method}{Simulate independent genes using'ind' or correlated genes using 'copula'.}
 
-\item{seed}{PointLoc}
-
-\item{SaveCopulaName}{PointLoc}
+\item{seed}{Seed}
 }
 \value{
-Simulated count data for all regions.
+Simulated expression count data for all regions.
 }
 \description{
-Use_scDesign2
+This function uses input parameters to simulate expression for all region.
 }

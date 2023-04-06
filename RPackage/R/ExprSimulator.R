@@ -1,18 +1,18 @@
 
 #' Use_scDesign2_1region
 #'
-#' Use_scDesign2_1region
-#' @param ppp.obj1 PointLoc
-#' @param expr PointLoc
-#' @param Copula PointLoc
-#' @param depth_simu_ref_ratio PointLoc
-#' @param cell_type_sel PointLoc
-#' @param seed PointLoc
-#' @param sim_method PointLoc
+#' This function uses input parameters to simulate expression for one region.
+#' @param ppp.obj1 Cells as points on a spatial map.
+#' @param Genes Gene names of input expression data
+#' @param model_params Estimated model parameters from reference data.
+#' @param depth_simu_ref_ratio Relative sequencing depth in comparison of reference data.
+#' @param cell_type_sel Cell types in reference data.
+#' @param seed Seed
+#' @param sim_method Simulate independent genes using 'ind' or correlated genes using 'copula'.
 #' @return Simulated count data for a region.
 #'
 
-Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
+Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
                        depth_simu_ref_ratio=1, cell_type_sel, seed,
                        sim_method = c('copula', 'ind')) {
   # cell types in simulated and reference data
@@ -20,19 +20,16 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
   exist.cell.type=names(n.ordered)
   cell_type_prop=n.ordered/ppp.obj1$n
   model_params_exist=model_params[exist.cell.type]
-
   sim_count <- scDesign2.revised(model_params=model_params_exist,
                                  n_cell_new=ppp.obj1$n,
                                  cell_type_prop = cell_type_prop,
                                  depth_simu_ref_ratio=depth_simu_ref_ratio,
                                  sim_method =sim_method)
 
-
-
   # Update the order of sim_count to match the cell type of ppp.obj1
   sim_count2=matrix(NA, ncol=ncol(sim_count), nrow=nrow(sim_count))
   colnames(sim_count2)=ppp.obj1$marks
-  rownames(sim_count2) = rownames(expr)
+  rownames(sim_count2) = Genes
   for (f in levels(ppp.obj1$marks)) {
     sim_count2[, which(colnames(sim_count2)==f)]=
       sim_count[,which(colnames(sim_count)==f)]
@@ -44,17 +41,18 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
 
 #' Use_scDesign2
 #'
-#' Use_scDesign2
-#' @param ppp.obj PointLoc
-#' @param expr PointLoc
-#' @param anno PointLoc
-#' @param Copula PointLoc
-#' @param depth_simu_ref_ratio PointLoc
-#' @param sim_method PointLoc
-#' @param SaveCopulaName PointLoc
-#' @param seed PointLoc
-#' @return Simulated count data for all regions.
+#' This function uses input parameters to simulate expression for all region.
+#' @param ppp.obj Cells as points on a spatial map for all regions.
+#' @param expr Gene expression (count) in reference data.
+#' @param feature Cell features (e.g. cell type, spatial coordinates, regions) of reference data.
+#' @param Copula Default is NULL. If 'copula' method is used, a estimated gene-gene correlation copula should be provided.
+#' @param depth_simu_ref_ratio Relative sequencing depth in comparison of reference data.
+#' @param sim_method Simulate independent genes using'ind' or correlated genes using 'copula'.
+#' @param seed Seed
+#' @return Simulated expression count data for all regions.
 #' @export
+
+
 
 Use_scDesign2=function(ppp.obj,
                        expr,
@@ -62,33 +60,70 @@ Use_scDesign2=function(ppp.obj,
                        Copula=NULL,
                        depth_simu_ref_ratio=1,
                        sim_method = c('copula', 'ind'),
+                       region_specific_model=F,
                        seed) {
 
   expr=as.matrix(expr)
-  if (ncol(feature)==4) {PointRegion=feature[,4]} else{
-    PointRegion=rep(1, nrow(feature))}
-  Rcat=unique(PointRegion)
   R=length(ppp.obj)
+  cell_type_sel=names(table(colnames(expr)))
+  Genes=rownames(expr)
 
-  sim.count=vector("list", R);
-  for(r in 1:R) {
-    idx=which(PointRegion == Rcat[r])
-    anno=as.matrix(feature)[idx, 1]
-    cell_type_sel=names(table(anno))
-    if (sim_method=="ind") {
+  if (region_specific_model!="TRUE") { # not region specific
+    model_params=  fit_model_scDesign2(data_mat=expr,
+                                       cell_type_sel=cell_type_sel,
+                                       sim_method = 'ind',
+                                       marginal='auto_choose',
+                                       ncores = length(cell_type_sel))
+    if (sim_method=="copula") {
+      CellType=names(model_params)
+      for (i in 1:length(CellType)){
+        model_params[[CellType[i]]]$cov_mat=Copula[[1]][[i]]
+      }
+    }
+
+    sim.count=vector("list", R);
+    for(r in 1:R) {
+      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                           Genes=Genes,
+                                           model_params=model_params,
+                                           depth_simu_ref_ratio=depth_simu_ref_ratio,
+                                           cell_type_sel=cell_type_sel,
+                                           seed=seed*31+r*931,
+                                           sim_method = sim_method)
+    }
+  }
+
+  #  region specific model
+  if (region_specific_model=="TRUE") { #  region specific
+    # Region=unlist(sapply(1:R, function(f)
+    #   rep(names(ppp.obj)[f], ppp.obj[[f]]$n)))
+    Region=feature[,4]
+    Runiq=unique(Region)
+
+    sim.count=vector("list", R);
+    for (r in 1:R) {
+      idx=which(Region==Runiq[r])
+
       model_params=  fit_model_scDesign2(data_mat=expr[,idx],
                                          cell_type_sel=cell_type_sel,
                                          sim_method = 'ind',
                                          marginal='auto_choose',
                                          ncores = length(cell_type_sel))
-    } else{model_params=Copula[[r]]}
+      if (sim_method=="copula") {
+        CellType=names(model_params)
+        for (i in 1:length(CellType)){
+          model_params[[CellType[i]]]$cov_mat=Copula[[r]][[i]]
+        }
+      }
+      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                           Genes=Genes,
+                                           model_params=model_params,
+                                           depth_simu_ref_ratio=depth_simu_ref_ratio,
+                                           cell_type_sel=cell_type_sel,
+                                           seed=seed*31+r*931,
+                                           sim_method = sim_method)
 
-    sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
-                                       expr=expr, model_params=model_params,
-                                 depth_simu_ref_ratio=depth_simu_ref_ratio,
-                                 cell_type_sel=cell_type_sel,
-                                 seed=seed*31+r*931,
-                                 sim_method = sim_method)
+    }
 
   }
 
@@ -100,8 +135,18 @@ Use_scDesign2=function(ppp.obj,
 
 #' Add.Spatial.Expr.Pattern
 #'
-#' Add.Spatial.Expr.Pattern for one cell type
+#' This function adds spatial differential expressed patterns for one cell type in one region.
+#' @param sim.count Cells as points on a spatial map.
+#' @param r Region index.
+#' @param CellType Cell type index.
+#' @param GeneID Gene(s) index.
+#' @param PropOfGenes Proportion of genes with this pattern if GeneID is not provided.
+#' @param delta.mean Mean effect
+#' @param delta.sd SD of effect.
+#' @param seed Seed
+#' @return Adding spatial differential expressed patterns for one cell type in one region.
 #' @export
+#'
 Add.Spatial.Expr.Pattern= function(sim.count,
                                    r,
                                    CellType,
@@ -161,10 +206,10 @@ Find.Neighbor.Pairs=function(ppp.obj,
 
 #' Add.Distance.Asso.Pattern
 #'
-#' This function add cell-cell interactions to a pair of cell types (e.g.
-#' neuron-microglia) for expression in a cell type associated with the
-#' proximity of the other cell type.
-#' One can repeat this function for multiple times to add cell-cell interactions for many cell types.
+#' This function add a type of cell-cell interactions to a pair of cell types in
+#' a region. The expression in a cell type associated with the proximity of
+#' the other cell type. One can repeat this function for multiple times to
+#' add cell-cell interactions for many cell type pairs and regions.
 #' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
 #' @param sim.count Spatial info for cell type 2 (e.g. microglia)
 #' @param r Expression info for cell type 1 (e.g. neuron)
@@ -179,7 +224,6 @@ Find.Neighbor.Pairs=function(ppp.obj,
 #' @return
 #' \item{SignalSummary:}{SignalSummary}
 #' \item{beta.matrix:}{beta.matrix}
-
 #' @export
 
 Add.Distance.Asso.Pattern = function(ppp.obj,
@@ -406,6 +450,14 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 
 
 
+ExprPattern=function(pattern.list.i){
+  L=length(pattern.list.i)
+  res=NULL
+  for (l in 1:L) {
+    res=rbind(res, pattern.list.i[[l]]$SignalSummary)
+  }
+  return(res)
+}
 
 
 
@@ -420,30 +472,32 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 #' \item{meta:}{meta}
 #' \item{count:}{count}
 
-
 MergeRegion=function(points.list, expr.list) {
   K=length(points.list)
   # points
   x.combine=unlist(lapply(1:K, function(f) points.list[[f]]$x))
+  x.combine2=round(x.combine, digits=4)
   y.combine=unlist(lapply(1:K, function(f) points.list[[f]]$y))
+  y.combine2=round(y.combine, digits=4)
   annotation=unlist(sapply(1:K, function(f) points.list[[f]]$marks))
   n=sapply(1:K, function(f) points.list[[f]]$n)
   Cell=paste0("Cell", seq(1, length(x.combine)))
 
   if (K>1) {
     region=rep(1:K, times=n)
-    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
-                    annotation=annotation, region=region)
+    meta=data.frame(Cell=Cell, annotation=annotation,  x.loc=x.combine2,
+                    y.loc=y.combine2,
+                    region=region)
   } else {
-    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
-                    annotation=annotation)
+    meta=data.frame(Cell=Cell, annotation=annotation,
+                    x.loc=x.combine2, y.loc=y.combine2)
   }
 
   # expr
   expr.combine=Reduce(cbind, expr.list)
   colnames(expr.combine)=Cell
 
-  return(list(meta=meta, count=as.data.frame(expr.combine)))
+  return(list(meta=meta,count=as.data.frame(expr.combine)))
 }
 
 

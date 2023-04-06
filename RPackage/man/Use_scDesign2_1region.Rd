@@ -6,8 +6,8 @@
 \usage{
 Use_scDesign2_1region(
   ppp.obj1,
-  expr,
-  Copula = NULL,
+  Genes,
+  model_params,
   depth_simu_ref_ratio = 1,
   cell_type_sel,
   seed,
@@ -15,23 +15,23 @@ Use_scDesign2_1region(
 )
 }
 \arguments{
-\item{ppp.obj1}{PointLoc}
+\item{ppp.obj1}{Cells as points on a spatial map.}
 
-\item{expr}{PointLoc}
+\item{Genes}{Gene names of input expression data}
 
-\item{Copula}{PointLoc}
+\item{model_params}{Estimated model parameters from reference data.}
 
-\item{depth_simu_ref_ratio}{PointLoc}
+\item{depth_simu_ref_ratio}{Relative sequencing depth in comparison of reference data.}
 
-\item{cell_type_sel}{PointLoc}
+\item{cell_type_sel}{Cell types in reference data.}
 
-\item{seed}{PointLoc}
+\item{seed}{Seed}
 
-\item{sim_method}{PointLoc}
+\item{sim_method}{Simulate independent genes using 'ind' or correlated genes using 'copula'.}
 }
 \value{
 Simulated count data for a region.
 }
 \description{
-Use_scDesign2_1region
+This function uses input parameters to simulate expression for one region.
 }

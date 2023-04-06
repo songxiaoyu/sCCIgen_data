@@ -126,13 +126,13 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
                      grid.size.small=19, grid.size.large=45,
                      seed) {
   set.seed(seed)
-
   n.inflation=get.n.vec.raw(n=n1,
                           cell.prop=cell.prop1,
                           cell.inh.attr.input=cell.inh.attr.input1,
                           same.dis.cutoff =same.dis.cutoff)
   n.vec.raw=n.inflation$n.vec.raw;
   n.vec.target=n.inflation$n.vec.target
+  n.vec.target.nonzero=n.vec.target
 
 
   K=length(n.vec.target)
@@ -183,10 +183,13 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
 
 
   # by cell  - for inhibitory/attraction cells
-  if (is.null(cell.inh.attr.input1)) {cell.inh.attr.input1=cbind(Cell1=1, Cell2=1, Strength= 0)}
+  if (is.null(cell.inh.attr.input1)) {
+    cell.inh.attr.input1=cbind(Cell1=1, Cell2=1, Strength= 0)
+    }
   # local density by cell type 1
   pt.cell.den1=lapply(KP, function(k)
-    rasterize(cbind(gen2[which(gen2$marks==k),]$x,gen2[which(gen2$marks==k),]$y),
+    rasterize(cbind(gen2[which(gen2$marks==k),]$x,
+                    gen2[which(gen2$marks==k),]$y),
               r1, fun=function(x,...) length(x)))
   value.cell.r1=lapply(1:K, function(f) raster::values(pt.cell.den1[[f]]))
   for (k in 1:K) {value.cell.r1[[k]][is.na(value.cell.r1[[k]])]=0}
@@ -287,7 +290,7 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
   cell.loc=vector("list", R);
 
   for(r in 1:R) {
-    print(paste("Simulate Cells for Region", r))
+    # print(paste("Simulate Cells for Region", r))
     cell.loc[[r]]=cell.loc.1region.fc(n1=round(win$area[r]*N),
                                       window1=win$window[[r]],
                                      cell.prop1=cell.prop[[r]],
@@ -306,6 +309,7 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
 
 
   }
+  names(cell.loc)=paste0("Region", 1:R)
 
   return(cell.loc)
 }

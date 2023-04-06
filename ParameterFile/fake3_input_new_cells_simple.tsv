@@ -1,0 +1,19 @@
+parameters	value
+path_to_input_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/InputData/
+expression_data_file	expression_data/fake3_expr.Rdata
+expression_data_file_type	Rdata
+expression_data_cell_types	WEIJIA TO ADD
+simulate_spatial_data	TRUE
+cell_feature_data_file	cell_feature_data/fake3_cellfeature.Rdata
+num_simulated_cells	1000
+cell_overlap_cutoff	0.02
+window_method	network
+expr_depth_ratio	1.2
+gene_cor	TRUE
+copula_input	NULL
+region_specific_model	TRUE
+num_simulated_datasets	1
+parent_simulation_seed	123
+simulation_seed_for_each_dataset	123
+path_to_output_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/OutputData/
+output_name	fake3_input_new_cells_simple
