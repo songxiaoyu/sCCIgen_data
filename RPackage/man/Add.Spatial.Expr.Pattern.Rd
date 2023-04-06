@@ -15,6 +15,26 @@ Add.Spatial.Expr.Pattern(
   seed
 )
 }
+\arguments{
+\item{sim.count}{Cells as points on a spatial map.}
+
+\item{r}{Region index.}
+
+\item{CellType}{Cell type index.}
+
+\item{GeneID}{Gene(s) index.}
+
+\item{PropOfGenes}{Proportion of genes with this pattern if GeneID is not provided.}
+
+\item{delta.mean}{Mean effect}
+
+\item{delta.sd}{SD of effect.}
+
+\item{seed}{Seed}
+}
+\value{
+Adding spatial differential expressed patterns for one cell type in one region.
+}
 \description{
-Add.Spatial.Expr.Pattern for one cell type
+This function adds spatial differential expressed patterns for one cell type in one region.
 }

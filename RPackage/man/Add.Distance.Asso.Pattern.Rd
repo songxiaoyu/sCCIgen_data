@@ -46,8 +46,8 @@ Add.Distance.Asso.Pattern(
 \item{beta.matrix:}{beta.matrix}
 }
 \description{
-This function add cell-cell interactions to a pair of cell types (e.g.
-neuron-microglia) for expression in a cell type associated with the
-proximity of the other cell type.
-One can repeat this function for multiple times to add cell-cell interactions for many cell types.
+This function add a type of cell-cell interactions to a pair of cell types in
+a region. The expression in a cell type associated with the proximity of
+the other cell type. One can repeat this function for multiple times to
+add cell-cell interactions for many cell type pairs and regions.
 }
