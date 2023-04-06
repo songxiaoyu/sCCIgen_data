@@ -45,7 +45,8 @@ def print_workdir_files():
     print('\tAvailable files in working directory')
     print('\t--------------------------------')
     for i, file in enumerate(workdir_files):
-        print(f"\t{i+1}: {''.join(file.split('working_directory/')[1:])}")
+        backslash_char = "\\"
+        print(f"\t{i+1}: {file.split(backslash_char)[1]}")
 
 def print_r_objects(rdata):
     if len(rdata) == 0:
@@ -151,28 +152,58 @@ question2_1_filepaths = {
     '4': 'user_input',
 }
 
+question2_1_filepaths_expression = {
+    '1': 'fake1_expr.Rdata',
+    '2': 'fake2_expr.Rdata',
+    '3': 'fake3_expr.Rdata',
+    '7': 'user_input'
+}
+
+question2_1_filepaths_cellfeature = {
+    '1': 'fake1_cellfeature.Rdata',
+    '2': 'fake2_cellfeature.Rdata',
+    '3': 'fake3_cellfeature.Rdata',
+    '4': 'snRNAseq_breast_cellfeature_033023.Rdata',
+    '5': 'SeqFishPlusCortex_cellfeature_033023',
+    '7': 'user_input'
+}
+
 print("\tAvailable expression data for simulation")
 print("\t-----------------------------------")
 print("\n")
-print("\t1) Normal human breast snRNAseq data")
-print("\t2) Normal mouse brain SeqFISH+ data")
-print("\t3) Ovarian cancer MERFISH data")
-print("\t4) User input")
+print("\t1) Fake small tryout data1")
+print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type.")
+print("\t2) Fake small tryout data2")
+print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type and spatial coordinate.")
+print("\t3) Fake small tryout data3")
+print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type, spatial coordinate, and region.")
+print("\t4) Normal human breast snRNAseq data")
+print("\tDetails: It includes (1) count matrix for 4751 genes by 5990 cells of 6 cell types (epithelial cell, adipocyte, fibroblast, endothelial cell, immune (myeloid) and muscle), and (2) cell feature matrix for annotated cell type. PMID: 35549429")
+print("\t5) Normal mouse brain SeqFISH+ data")
+print("\tDetails: It includes (1) count matrix for 10,000 genes by 511 cells of 6 cell types (excitatory neuron, interneuron, astrocyte, microglia, oligodendrocyte and endothelial cells), and (2)cell feature matrix including cell type annotation and spatial coordinate on 2D (x, y). PMID: 35549429")
+print("\t6) Ovarian cancer MERFISH data")
+print("\tDetails: It includes (1) count matrix for 550 genes by 355,633 cells of 6 cell types (tumor, adipose, endo-immune, macro-immune, macrophage, and others), and (2) cell feature matrix including cell type annotation and spatial coordinate on 2D. Data source: vizgen")
+print("\t7) User input")
 print('\n')
-question2_1 = input("\tWhat expression data do you want to use for simulation? ")
+question2_1 = input("\tWhat data do you want to use for simulation? ")
 print('\n')
-if question2_1 not in question2_1_filepaths:
+if question2_1 not in question2_1_filepaths_expression:
     # this probably should ultimately be a while loop
-    raise ValueError(f'Please enter 1, 2, 3, or 4 to select an expression data set. You entered {question2_1}') 
+    raise ValueError(f'Please enter 1, 2, 3, 4, 5, 6 or 7 to select an expression data set. You entered {question2_1}') 
 
-if question2_1_filepaths[question2_1] != 'user_input':
+if question2_1_filepaths_expression[question2_1] != 'user_input':
     question2_1_download = input("\tWould you like to download this data table locally (y/n)?  ").lower()
     if question2_1_download in valid_yes_no:
         if question2_1_download == 'y':
             #TODO: update with real data
-            filepath_slim = question2_1_filepaths[question2_1].split('/')[-1]
-            shutil.copyfile(f'{question2_1_filepaths[question2_1]}', f'/working_directory/{filepath_slim}')
-            print(f'\n\tSaved expression data: {filepath_slim} to your working directory.')
+            #filepath_slim = question2_1_filepaths[question2_1].split('/')[-1]
+            #shutil.copyfile(f'{question2_1_filepaths_expression[question2_1]}', f'/working_directory/{filepath_slim}')
+            shutil.copyfile(f'InputData/expression_data/{question2_1_filepaths_expression[question2_1]}', f'working_directory/{question2_1_filepaths_expression[question2_1]}')
+            print(f'\n\tSaved expression data: {question2_1_filepaths_expression[question2_1]} to your working directory.')
+            shutil.copyfile(f'InputData/cell_feature_data/{question2_1_filepaths_cellfeature[question2_1]}', f'working_directory/{question2_1_filepaths_cellfeature[question2_1]}')
+            print(f'\n\tSaved cell feature data: {question2_1_filepaths_cellfeature[question2_1]} to your working directory.')
+            #print(f'\n\tSaved expression data: {filepath_slim} to your working directory.')
+            
 else:
     print_workdir_files()
     print('\n')
@@ -216,7 +247,6 @@ if parameters['expression_data_file_type'] == 'Rdata':
      #   expression_data_r = base.as_matrix(expression_data_r)
       #  expression_data_r_names = expression_data_r.names
     expression_data_r = robjects.conversion.rpy2py(expression_data_r)
-    print(expression_data_r.shape)
     expression_data_r_names = expression_data_r.columns
     expression_data_cell_types = list(set(expression_data_r_names))
     #expression_data_cell_types = list(set(expression_data_r_names[1]))
@@ -834,7 +864,7 @@ if save_param_file == 'y':
 # # Run ST pipeline with parameter file
 # - TODO: use os.system to kick off R code with parameter file
 
-# In[14]:
+# In[10]:
 
 
 try:
