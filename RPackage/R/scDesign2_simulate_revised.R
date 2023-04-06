@@ -201,11 +201,11 @@ scDesign2.revised <- function(model_params,
       if(sim_method == 'copula'){
         new_count[, llim:ulim] <- simulate_count_copula(model_params[[iter]],
                                                         n = n_cell_each[iter],
-                                                        marginal = 'Gamma')
+                                                        marginal = 'nb')
       }else if(sim_method == 'ind'){
         new_count[, llim:ulim] <- simulate_count_ind(model_params[[iter]],
                                                      n = n_cell_each[iter],
-                                                     marginal = 'Gamma')
+                                                     marginal = 'nb')
       }
 
     }

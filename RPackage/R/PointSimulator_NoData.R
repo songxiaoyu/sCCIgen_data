@@ -290,7 +290,7 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
   cell.loc=vector("list", R);
 
   for(r in 1:R) {
-    print(paste("Simulate Cells for Region", r))
+    # print(paste("Simulate Cells for Region", r))
     cell.loc[[r]]=cell.loc.1region.fc(n1=round(win$area[r]*N),
                                       window1=win$window[[r]],
                                      cell.prop1=cell.prop[[r]],

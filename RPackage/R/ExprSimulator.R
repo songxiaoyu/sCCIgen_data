@@ -12,7 +12,7 @@
 #' @return Simulated count data for a region.
 #'
 
-Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
+Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
                        depth_simu_ref_ratio=1, cell_type_sel, seed,
                        sim_method = c('copula', 'ind')) {
   # cell types in simulated and reference data
@@ -31,7 +31,7 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
   # Update the order of sim_count to match the cell type of ppp.obj1
   sim_count2=matrix(NA, ncol=ncol(sim_count), nrow=nrow(sim_count))
   colnames(sim_count2)=ppp.obj1$marks
-  rownames(sim_count2) = rownames(expr)
+  rownames(sim_count2) = Genes
   for (f in levels(ppp.obj1$marks)) {
     sim_count2[, which(colnames(sim_count2)==f)]=
       sim_count[,which(colnames(sim_count)==f)]
@@ -55,44 +55,78 @@ Use_scDesign2_1region=function(ppp.obj1, expr, model_params,
 #' @return Simulated count data for all regions.
 #' @export
 
+
+
 Use_scDesign2=function(ppp.obj,
                        expr,
                        feature,
                        Copula=NULL,
                        depth_simu_ref_ratio=1,
                        sim_method = c('copula', 'ind'),
+                       region_specific_model=F,
                        seed) {
 
   expr=as.matrix(expr)
   R=length(ppp.obj)
   cell_type_sel=names(table(colnames(expr)))
-  # PointRegion=unlist(sapply(1:R, function(f)
-  #   rep(names(ppp.obj)[f], ppp.obj[[f]]$n)))
-  # Rcat=unique(PointRegion)
+  Genes=rownames(expr)
 
+  if (region_specific_model!="TRUE") { # not region specific
+    model_params=  fit_model_scDesign2(data_mat=expr,
+                                       cell_type_sel=cell_type_sel,
+                                       sim_method = 'ind',
+                                       marginal='auto_choose',
+                                       ncores = length(cell_type_sel))
+    if (sim_method=="copula") {
+      CellType=names(model_params)
+      for (i in 1:length(CellType)){
+        model_params[[CellType[i]]]$cov_mat=Copula[[1]][[i]]
+      }
+    }
 
-  sim.count=vector("list", R);
-  for(r in 1:R) {
-    # idx=which(PointRegion == Rcat[r])
-    # anno=as.matrix(feature)[idx, 1]
-    # cell_type_sel=names(table(anno))
+    sim.count=vector("list", R);
+    for(r in 1:R) {
+      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                           Genes=Genes,
+                                           model_params=model_params,
+                                           depth_simu_ref_ratio=depth_simu_ref_ratio,
+                                           cell_type_sel=cell_type_sel,
+                                           seed=seed*31+r*931,
+                                           sim_method = sim_method)
+    }
+  }
 
-    if (sim_method=="ind") {
-      model_params=  fit_model_scDesign2(data_mat=expr,
+  #  region specific model
+  if (region_specific_model=="TRUE") { #  region specific
+    # Region=unlist(sapply(1:R, function(f)
+    #   rep(names(ppp.obj)[f], ppp.obj[[f]]$n)))
+    Region=feature[,4]
+    Runiq=unique(Region)
+
+    sim.count=vector("list", R);
+    for (r in 1:R) {
+      idx=which(Region==Runiq[r])
+
+      model_params=  fit_model_scDesign2(data_mat=expr[,idx],
                                          cell_type_sel=cell_type_sel,
                                          sim_method = 'ind',
                                          marginal='auto_choose',
                                          ncores = length(cell_type_sel))
-    } else{model_params=Copula[[r]]}
+      if (sim_method=="copula") {
+        CellType=names(model_params)
+        for (i in 1:length(CellType)){
+          model_params[[CellType[i]]]$cov_mat=Copula[[r]][[i]]
+        }
+      }
+      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+                                           Genes=Genes,
+                                           model_params=model_params,
+                                           depth_simu_ref_ratio=depth_simu_ref_ratio,
+                                           cell_type_sel=cell_type_sel,
+                                           seed=seed*31+r*931,
+                                           sim_method = sim_method)
 
-
-    sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
-                                       expr=expr,
-                                       model_params=model_params,
-                                 depth_simu_ref_ratio=depth_simu_ref_ratio,
-                                 cell_type_sel=cell_type_sel,
-                                 seed=seed*31+r*931,
-                                 sim_method = sim_method)
+    }
 
   }
 
@@ -410,6 +444,14 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 
 
 
+ExprPattern=function(pattern.list.i){
+  L=length(pattern.list.i)
+  res=NULL
+  for (l in 1:L) {
+    res=rbind(res, pattern.list.i[[l]]$SignalSummary)
+  }
+  return(res)
+}
 
 
 
@@ -424,7 +466,6 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 #' \item{meta:}{meta}
 #' \item{count:}{count}
 
-
 MergeRegion=function(points.list, expr.list) {
   K=length(points.list)
   # points
@@ -436,18 +477,18 @@ MergeRegion=function(points.list, expr.list) {
 
   if (K>1) {
     region=rep(1:K, times=n)
-    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
-                    annotation=annotation, region=region)
+    meta=data.frame(Cell=Cell, annotation=annotation,  x.loc=x.combine, y.loc=y.combine,
+                    region=region)
   } else {
-    meta=data.frame(Cell=Cell,  x.loc=x.combine, y.loc=y.combine,
-                    annotation=annotation)
+    meta=data.frame(Cell=Cell, annotation=annotation,
+                    x.loc=x.combine, y.loc=y.combine)
   }
 
   # expr
   expr.combine=Reduce(cbind, expr.list)
   colnames(expr.combine)=Cell
 
-  return(list(meta=meta, count=as.data.frame(expr.combine)))
+  return(list(meta=meta,count=as.data.frame(expr.combine)))
 }
 
 

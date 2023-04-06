@@ -340,10 +340,12 @@ Est_GeneCopula <- function(expr, anno,  zp_cutoff = 0.8, min_nonzero_num =
   ct=unique(anno)
   copula=fit_model_scDesign2(data_mat=expr,
                       cell_type_sel=ct, sim_method = 'copula',
-                                  marginal = 'zinb',
+                                  marginal = 'auto_choose',
                                   jitter = TRUE, zp_cutoff = zp_cutoff,
                                   min_nonzero_num = min_nonzero_num,
                       ncores = ncores)
+  CopulaEst=lapply(1:length(copula), function(f1) copula[[f1]]$cov_mat)
+  return(CopulaEst)
 
 }
 

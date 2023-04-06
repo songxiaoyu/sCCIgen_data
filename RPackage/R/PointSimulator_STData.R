@@ -24,8 +24,8 @@ simu.window=function(PointLoc=NULL, method="network") {
     dx=max(PointLoc[,1])-min(PointLoc[,1])
     dy=max(PointLoc[,2])-min(PointLoc[,2])
     dmax=max(dx, dy)
-    x=PointLoc[,1]+0.001*dmax*cos(seq(0, 2*pi, length=n*10))
-    y=PointLoc[,2]+0.001*dmax*sin(seq(0, 2*pi, length=n*10))
+    x=PointLoc[,1]+0.005*dmax*cos(seq(0, 2*pi, length=n*4))
+    y=PointLoc[,2]+0.005*dmax*sin(seq(0, 2*pi, length=n*4))
     PointLoc_noise=cbind(x,y)
 
     delaunay_triangle = geometry::delaunayn(PointLoc_noise)
@@ -138,10 +138,10 @@ cell.region.loc.model.fc=function(n,
   bb=vector("list", length(Rcat))
   for ( i in 1:length(Rcat)) {
     idx= which(PointRegion %in% Rcat[i])
-    bb[[i]]=cell.loc.model.fc(n,
-                             PointLoc[idx,],
-                             PointAnno[idx],
-                             window_method,
+    bb[[i]]=cell.loc.model.fc(n=length(idx),
+                              PointLoc=PointLoc[idx,],
+                              PointAnno=PointAnno[idx],
+                             window_method=window_method,
                              seed=seed)
   }
   return(bb)
