@@ -348,6 +348,8 @@ Est_GeneCopula <- function(expr, anno,  zp_cutoff = 0.8, min_nonzero_num =
                              min_nonzero_num = min_nonzero_num,
                              ncores = ncores)
   CopulaEst=lapply(1:length(copula), function(f1) copula[[f1]]$cov_mat)
+  # CopulaEst2=lapply(CopulaEst, function(f)
+  #   round(f, digits=2)) # do not guarantee positive definite
   return(CopulaEst)
 
 }
