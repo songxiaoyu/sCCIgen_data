@@ -20,6 +20,7 @@ COPY spatial_data spatial_data
 COPY docker_prompts.py docker_prompts.py
 COPY scripts scripts
 COPY requirements.txt requirements.txt
+COPY InputData InputData
 RUN pip install -r requirements.txt
 
 # ENTRYPOINT 
