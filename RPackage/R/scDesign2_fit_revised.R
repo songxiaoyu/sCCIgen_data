@@ -337,13 +337,16 @@ fit_model_scDesign2 <- function(data_mat, cell_type_sel,
 
 Est_GeneCopula <- function(expr, anno,  zp_cutoff = 0.8, min_nonzero_num =
                              3, ncores = 1) {
+  expr=as.matrix(expr)
+  colnames(expr)=anno
   ct=unique(anno)
   copula=fit_model_scDesign2(data_mat=expr,
-                      cell_type_sel=ct, sim_method = 'copula',
-                                  marginal = 'auto_choose',
-                                  jitter = TRUE, zp_cutoff = zp_cutoff,
-                                  min_nonzero_num = min_nonzero_num,
-                      ncores = ncores)
+                             cell_type_sel=ct, sim_method = 'copula',
+                             marginal = 'auto_choose',
+                             jitter = TRUE,
+                             zp_cutoff = zp_cutoff,
+                             min_nonzero_num = min_nonzero_num,
+                             ncores = ncores)
   CopulaEst=lapply(1:length(copula), function(f1) copula[[f1]]$cov_mat)
   return(CopulaEst)
 
