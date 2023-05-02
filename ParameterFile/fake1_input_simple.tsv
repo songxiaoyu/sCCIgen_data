@@ -1,10 +1,10 @@
 parameters	value
 path_to_input_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/InputData/
 expression_data_file	expression_data/fake1_expr.Rdata
+cell_feature_data_file	cell_feature_data/fake1_cellfeature.Rdata
 expression_data_file_type	Rdata
 expression_data_cell_types	WEIJIA TO ADD
 simulate_spatial_data	TRUE
-cell_feature_data_file	cell_feature_data/fake1_cellfeature.Rdata
 num_simulated_cells	10000
 num_regions	2
 custom_cell_type_proportions	TRUE
