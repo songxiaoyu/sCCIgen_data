@@ -1,9 +1,25 @@
-# STsimulator
 
-Anna,
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Codes for analyzing the snRNAseq data is at "AnalysisCodes/Analysis_ExprSimulator_snRNAseq.R"
+# `STsimulator`
 
-Functions that will be in R package to simulate spatial map for cells is at "RPackage/R/PointSimulator_NoData.R"
+## ST simulator for ‘de novo’ spatial patterns
 
-snRNAseq data to use is at "Data/scRNAseq_GTEx_breast.RData"
+Spatially resolved transcriptomics (SRT) data are providing limited
+spatial patterns and cell-cell interactions. STsimulator generates de
+novel spatial patterns using snRNAseq or single-cell SRT as reference.
+
+### Installation and load R package
+
+You can install the latest version directly from GitHub with
+[devtools](https://github.com/hadley/devtools):
+
+``` r
+install.packages("devtools")
+devtools::install_github("songxiaoyu/RPackage/STsimulator")
+library(STsimulator)
+```
+
+### Installation and load docker to guided simulation
+
+### Example 1: Correlation between one gene X and one gene Y in a cell type.

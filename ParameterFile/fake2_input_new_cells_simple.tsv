@@ -12,6 +12,7 @@ expr_depth_ratio	1.2
 gene_cor	TRUE
 copula_input	NULL
 region_specific_model	NULL
+save_copula	TRUE
 num_simulated_datasets	1
 parent_simulation_seed	123
 simulation_seed_for_each_dataset	123

@@ -17,7 +17,8 @@ expr_depth_ratio	1
 gene_cor	TRUE
 copula_input	NULL
 region_specific_model	FALSE
-spatial_int_dist_1_region	1
+save_copula	TRUE
+spatial_int_dist_1_region	NULL
 spatial_int_dist_1_cell_type_perturbed	CellType1
 spatial_int_dist_1_cell_type_adj	CellType2
 spatial_int_dist_1_dist_cutoff	0.1
@@ -25,7 +26,7 @@ spatial_int_dist_1_gene_id1	Gene3
 spatial_int_dist_1_gene_prop	NULL
 spatial_int_dist_1_mean	1
 spatial_int_dist_1_sd	0.1
-spatial_int_expr_1_region	1
+spatial_int_expr_1_region	NULL
 spatial_int_expr_1_cell_type_perturbed	CellType1
 spatial_int_expr_1_cell_type_adj	CellType2
 spatial_int_expr_1_dist_cutoff	0.1

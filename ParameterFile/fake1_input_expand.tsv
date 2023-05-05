@@ -19,6 +19,7 @@ expr_depth_ratio	1
 gene_cor	FALSE 
 copula_input	NULL
 region_specific_model	NULL
+save_copula	NULL
 spatial_pattern_1_region	1
 spatial_pattern_1_cell_type	CellType1
 spatial_pattern_1_gene_id	"Gene1,Gene2"

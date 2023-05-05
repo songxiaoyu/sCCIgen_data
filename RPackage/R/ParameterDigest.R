@@ -23,6 +23,12 @@ ParaDigest=function(input) {
 }
 
 # ----------- expr load ---------------
+#' Load RData regardless of the name
+#'
+#' @param fileName  File name
+#' @return Data
+#' @export
+#'
 loadRData <- function(fileName){
   #loads an RData file, and returns it
   load(fileName)
