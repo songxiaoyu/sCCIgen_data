@@ -250,7 +250,7 @@ else:
 print('\n')
 print(f'\tUnique cell types detected in expression data: {len(cellfeature_data_cell_types)}')
 cellfeature_data_cell_types.sort()
-parameters['expression_data_cell_types'] = cellfeature_data_cell_types
+parameters['expression_data_cell_types'] = ','.join(cellfeature_data_cell_types)
 
 
 # ### Question2_2 (deleted)
@@ -520,7 +520,7 @@ else:
     cellfeature_num_regions = 1
     
 print("\n")
-question2_6_2 = input("\tDo you want to mimic gene-gene correlation of the reference data (y/n)? [default: n, simulates independent genes]\nInstruction: Estimating gene-gene correlation from real data can be time consuming. If Users use the reference data from STsimulator, gene-gene correlations using Gaussian copula approach have been pre-estimated for fast simulation. If Users use their own reference data and want to mimic gene-gene correlation, it is highly recommended to save this estimation for future use.\t").lower()
+question2_6_2 = input("\tDo you want to mimic gene-gene correlation of the reference data (y/n)? [default: n, simulates independent genes]\nNote: Select “y” only if the gene-gene correlation is pre-estimated for each cell type. STsimulator provides functions/pipelines for estimating and saving gene-gene correlation, which can be served as input here.\t").lower()
 
 if question2_6_2 == '':
     question2_6_2 = 'n'
@@ -557,7 +557,7 @@ else:
 if cellfeature_num_regions > 1 or sim_num_regions > 1:
     
     print("\n")
-    question2_6_4 = input("\tAdd spatial patterns? (y/n) [defulat: n]\t").lower()
+    question2_6_4 = input("\tAdd spatial patterns? (y/n) [default: n]\t").lower()
 
     if question2_6_4 == 'y':
         spatial_patterns = []
@@ -586,7 +586,7 @@ if cellfeature_num_regions > 1 or sim_num_regions > 1:
             print('\n')
             print(f'\tChoose from cell types')
             print('\t--------------')
-            cell_types = parameters['expression_data_cell_types']
+            cell_types = cellfeature_data_cell_types
             for i, cell_type in enumerate(cell_types):
                 print(f'\t{i+1}: {cell_type}')
 
@@ -602,16 +602,16 @@ if cellfeature_num_regions > 1 or sim_num_regions > 1:
                 print_workdir_files()
                 print('\n')
                 question2_6_4c_userinput = input(f"\tWhich file are you using as gene ID (1-{len(workdir_files)}): ")
-                spatial_pattern['gene_id'] = workdir_files[int(question2_6_4c_userinput)-1]
+                geneid = pd.read_csv(workdir_files[int(question2_6_4c_userinput)-1], sep="\t", header=None)
+                spatial_pattern['gene_id'] = ','.join(list(geneid[0]))
+                spatial_pattern['gene_prop'] = 'NULL'
             else:
                 spatial_pattern['gene_id'] = "NULL"
-            
-            question2_6_4d = input(f"\tGene proportion (default = NULL):\t")
-
-            if question2_6_4d == '':
-                question2_6_4d = 'NULL'
-                print('\tUsing default NULL.')
-            spatial_pattern['gene_prop'] = question2_6_4d
+                question2_6_4d = input(f"\tGene proportion (default = 0.1):\t")
+                if question2_6_4d == '':
+                    question2_6_4d = '0.1'
+                    print('\tUsing default 0.1.')
+                spatial_pattern['gene_prop'] = question2_6_4d
 
             question2_6_4e = input(f"\tMean effect at log(count) scale (default = 0.5):")
 
@@ -621,17 +621,17 @@ if cellfeature_num_regions > 1 or sim_num_regions > 1:
         
             spatial_pattern['mean'] = question2_6_4e
 
-            question2_6_4f = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+            question2_6_4f = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
 
             if question2_6_4f == '':
-                question2_6_4f = '1'
-                print('\tUsing default 1.')
+                question2_6_4f = '0.1'
+                print('\tUsing default 0.1.')
             spatial_pattern['sd'] = question2_6_4f
 
             spatial_patterns.append(spatial_pattern)
             print('\n')
-            question2_6_4exit = input(f"\tSpecify another spatial pattern? (y/n)\t").lower()
-            if question2_6_4exit == 'n':
+            question2_6_4exit = input(f"\tSpecify another spatial pattern? (y/n) [default: n]\t").lower()
+            if question2_6_4exit == 'n' or question2_6_4exit == '':
                 finished_question2_6_4 = True
 
         for i, spatial_patten in enumerate(spatial_patterns):
@@ -672,7 +672,7 @@ if question2_6_5 == 'y':
         print('\n')
         print(f'\tChoose from cell types')
         print('\t--------------')
-        cell_types = parameters['expression_data_cell_types']
+        cell_types = cellfeature_data_cell_types
         for i, cell_type in enumerate(cell_types):
             print(f'\t{i+1}: {cell_type}')
 
@@ -696,15 +696,16 @@ if question2_6_5 == 'y':
             print_workdir_files()
             print('\n')
             question2_6_5e_userinput = input(f"\tWhich file are you using as gene ID (1-{len(workdir_files)}): ")
-            cell_cell_interaction['gene_id1'] = workdir_files[int(question2_6_5e_userinput)-1]
+            geneid = pd.read_csv(workdir_files[int(question2_6_5e_userinput)-1], sep="\t", header=None)
+            cell_cell_interaction['gene_id1'] = ','.join(list(geneid[0]))
+            cell_cell_interaction['gene_prop'] = 'NULL'
         else:
             cell_cell_interaction['gene_id1'] = "NULL"
-        
-        question2_6_5f = input(f"\tGene proportion (default = NULL):\t")
-        if question2_6_5f == '':
-            question2_6_5f = 'NULL'
-            print('\tUsing default NULL.')
-        cell_cell_interaction['gene_prop'] = question2_6_5f
+            question2_6_5f = input(f"\tGene proportion (default = 0.1):\t")
+            if question2_6_5f == '':
+                question2_6_5f = '0.1'
+                print('\tUsing default 0.1.')
+            cell_cell_interaction['gene_prop'] = question2_6_5f
 
         question2_6_5g = input(f"\tMean effect at log(count) scale (default = 0.5):")
         if question2_6_5g == '':
@@ -713,17 +714,17 @@ if question2_6_5 == 'y':
     
         cell_cell_interaction['mean'] = question2_6_5g
 
-        question2_6_5h = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+        question2_6_5h = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
 
         if question2_6_5h == '':
-            question2_6_5h = '1'
-            print('\tUsing default 1.')
+            question2_6_5h = '0.1'
+            print('\tUsing default 0.1.')
         cell_cell_interaction['sd'] = question2_6_5h
 
         cell_cell_interactions.append(cell_cell_interaction)
         print('\n')
-        question2_6_5exit = input(f"\tSpecify another cell-cell interaction - expression associated with cell-cell distance? (y/n)\t").lower()
-        if question2_6_5exit == 'n':
+        question2_6_5exit = input(f"\tSpecify another cell-cell interaction - expression associated with cell-cell distance? (y/n) [default: n]\t").lower()
+        if question2_6_5exit == 'n' or question2_6_5exit == '':
             finished_question2_6_5 = True
 
     for i, cell_cell_interaction in enumerate(cell_cell_interactions):
@@ -765,7 +766,7 @@ if question2_6_6 == 'y':
         print('\n')
         print(f'\tChoose from cell types')
         print('\t--------------')
-        cell_types = parameters['expression_data_cell_types']
+        cell_types = cellfeature_data_cell_types
         for i, cell_type in enumerate(cell_types):
             print(f'\t{i+1}: {cell_type}')
 
@@ -789,15 +790,18 @@ if question2_6_6 == 'y':
             print_workdir_files()
             print('\n')
             question2_6_6e_userinput = input(f"\tWhich file are you using as gene pair ID (1-{len(workdir_files)}): ")
-            cell_cell_interaction['gene_pair_id'] = workdir_files[int(question2_6_6e_userinput)-1]
+            genepair = pd.read_csv(workdir_files[int(question2_6_6e_userinput)-1], sep="\t", header=None)
+            cell_cell_interaction['gene_id1'] = ','.join(list(genepair[0]))
+            cell_cell_interaction['gene_id2'] = ','.join(list(genepair[1]))
+            cell_cell_interaction['gene_prop'] = 'NULL'
         else:
-            cell_cell_interaction['gene_pair_id'] = "NULL"     
-
-        question2_6_6f = input(f"\tGene proportion (default = NULL):\t")
-        if question2_6_6f == '':
-            question2_6_6f = 'NULL'
-            print('\tUsing default NULL.')
-        cell_cell_interaction['gene_prop'] = question2_6_6f
+            cell_cell_interaction['gene_id1'] = 'NULL'
+            cell_cell_interaction['gene_id2'] = 'NULL'    
+            question2_6_6f = input(f"\tGene proportion (default = 0.1):\t")
+            if question2_6_6f == '':
+                question2_6_6f = '0.1'
+                print('\tUsing default 0.1.')
+            cell_cell_interaction['gene_prop'] = question2_6_6f
 
         question2_6_6g = input(f"\tIs the association bidirectional (y/n): [default = y]")
         if question2_6_6g == '':
@@ -813,17 +817,17 @@ if question2_6_6 == 'y':
     
         cell_cell_interaction['mean'] = question2_6_6h
 
-        question2_6_6i = input(f"\tSD of effect at log(count) scale (default = 1):\t")
+        question2_6_6i = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
 
         if question2_6_6i == '':
-            question2_6_6i = '1'
-            print('\tUsing default 1.')
+            question2_6_6i = '0.1'
+            print('\tUsing default 0.1.')
         cell_cell_interaction['sd'] = question2_6_6i
 
         cell_cell_interactions.append(cell_cell_interaction)
         print('\n')
-        question2_6_6exit = input(f"\tSpecify another cell-cell interaction - expression associated with cell-cell distance? (y/n)\t").lower()
-        if question2_6_6exit == 'n':
+        question2_6_6exit = input(f"\tSpecify another cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n]\t").lower()
+        if question2_6_6exit == 'n' or question2_6_6exit == '':
             finished_question2_6_6 = True
 
     for i, cell_cell_interaction in enumerate(cell_cell_interactions):
@@ -930,7 +934,7 @@ if save_param_file == 'y':
 # # Run ST pipeline with parameter file
 # - TODO: use os.system to kick off R code with parameter file
 
-# In[10]:
+# In[5]:
 
 
 try:
