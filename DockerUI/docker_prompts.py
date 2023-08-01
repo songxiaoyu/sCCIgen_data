@@ -118,7 +118,7 @@ if question0_1 == '1':
     print("\t-----------------------------------")
     print("\n")
     print("\t1) Simulated data for 4,751 genes in 10,000 cells of 6 cell types on a unit square, using normal breast data profiled by snRNAseq as reference.")
-    print("\t2) Simulated data for 10,000 genes in 10,000 cells of X cell types, using mouse brain data profiled by SeqFISH+ as reference.")
+    print("\t2) Simulated data for 10,000 genes in 10,000 cells of 6 cell types, using mouse brain data profiled by SeqFISH+ as reference.")
     print("\t3) Simulated data for 550 genes in 10,000 cells of 6 cell types, using human ovarian cancer data profiled by MERFISH as reference.")
     print('\n')
     question1_1 = input("\tWhich dataset do you want to download (1/2/3)?  \t").lower()
@@ -150,7 +150,7 @@ question2_1_filepaths_expression = {
     '1': 'InputData/expression_data/fake1_expr.Rdata',
     '2': 'InputData/expression_data/fake2_expr.Rdata',
     '3': 'InputData/expression_data/fake3_expr.Rdata',
-    '4': 'InputData/expression_data/snRNAseq_breast_expr_033023.Rdata',
+    '4': 'InputData/expression_data/snRNAseq_breast_expr_033023.RData',
     '5': 'InputData/expression_data/SeqFishPlusCortex_expr_033023.Rdata',
     '6': 'InputData/expression_data/MERFISH_OV_expr.RData',
     '7': 'user_input'
@@ -160,7 +160,7 @@ question2_1_filepaths_cellfeature = {
     '1': 'InputData/cell_feature_data/fake1_cellfeature.Rdata',
     '2': 'InputData/cell_feature_data/fake2_cellfeature.Rdata',
     '3': 'InputData/cell_feature_data/fake3_cellfeature.Rdata',
-    '4': 'InputData/cell_feature_data/snRNAseq_breast_cellfeature_033023.Rdata',
+    '4': 'InputData/cell_feature_data/snRNAseq_breast_cellfeature_033023.RData',
     '5': 'InputData/cell_feature_data/SeqFishPlusCortex_cellfeature_033023.Rdata',
     '6': 'InputData/cell_feature_data/MERFISH_OV_cellfeature.RData',
     '7': 'user_input'
@@ -169,14 +169,14 @@ question2_1_filepaths_cellfeature = {
 print("\tWhat data do you want to use for simulation?")
 print("\t-----------------------------------")
 print("\n")
-print("\t1) Fake small tryout data1")
+print("\t1) Decoy data 1")
 print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type.")
-print("\t2) Fake small tryout data2")
+print("\t2) Decoy data 2")
 print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type and spatial coordinate.")
-print("\t3) Fake small tryout data3")
+print("\t3) Decoy data 3")
 print("\tDetails: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type, spatial coordinate, and region.")
 print("\t4) Normal human breast snRNAseq data")
-print("\tDetails: It includes (1) count matrix for 4751 genes by 5990 cells of 6 cell types (epithelial cell, adipocyte, fibroblast, endothelial cell, immune (myeloid) and muscle), and (2) cell feature matrix for annotated cell type. PMID: 35549429")
+print("\tIt includes (1) count matrix for 4751 genes by 5990 cells of 6 cell types (epithelial cell, adipocyte, fibroblast, endothelial cell, immune (myeloid) and muscle), and (2) cell feature matrix for annotated cell type. PMID: 35549429")
 print("\t5) Normal mouse brain SeqFISH+ data")
 print("\tDetails: It includes (1) count matrix for 10,000 genes by 511 cells of 6 cell types (excitatory neuron, interneuron, astrocyte, microglia, oligodendrocyte and endothelial cells), and (2)cell feature matrix including cell type annotation and spatial coordinate on 2D (x, y). PMID: 35549429")
 print("\t6) Ovarian cancer MERFISH data")
@@ -190,7 +190,12 @@ if question2_1 not in question2_1_filepaths_expression:
     raise ValueError(f'Please enter 1, 2, 3, 4, 5, 6 or 7 to select an expression data set. You entered {question2_1}') 
 
 if question2_1_filepaths_expression[question2_1] != 'user_input':
-    question2_1_download = input("\tWould you like to download this data table locally (y/n)?  ").lower()
+    question2_1_download = input("\tWould you like to download this data table locally (y/n)? [default: n]").lower()
+    
+    if question2_1_download == '':
+        question2_1_download = 'n'
+        print(f"\tUsing default: {question2_1_download}")
+    
     if question2_1_download in valid_yes_no:
         if question2_1_download == 'y':
             #TODO: update with real data
@@ -206,7 +211,7 @@ else:
     print('\n')
     question2_1_userinput_expression = input(f"\tUpload a G gene by N cell matrix for expression count data. Instruction: Row names should be unique identifiers of genes (1-{len(workdir_files)}): ")
     question2_1_filepaths_expression['7'] = workdir_files[int(question2_1_userinput_expression)-1]
-    question2_1_userinput_cellfeature = input(f"\tUpload a N cell by K matrix for cell feature data. Instruction: Column and row names are not expected. Cells should be in the same order as the uploaded expression count data. The first column is required, which should be cell type annotation. Other columns are optional.  If spatial coordinates on x, y axes are provided, they should be the 2-3 columns of the input cell feature data. If a spatial region variable is provided, it should be the 4th column of the data. (1-{len(workdir_files)}): ")
+    question2_1_userinput_cellfeature = input(f"\tUpload a N by K matrix for cell feature data. Instruction: Column and row names are not expected. Cells should be in the same order as the uploaded expression count data. The first column is required, which should be cell type annotation. Other columns are optional.  If spatial coordinates on x, y axes are provided, they should be the 2-3 columns of the input cell feature data. If a spatial region variable is provided, it should be the 4th column of the data. (1-{len(workdir_files)}): ")
     question2_1_filepaths_cellfeature['7'] = workdir_files[int(question2_1_userinput_cellfeature)-1]
 
 parameters['expression_data_file'] = question2_1_filepaths_expression[question2_1]
@@ -419,8 +424,11 @@ if len(cellfeature_data_r.columns) == 1:
 
 if len(cellfeature_data_r.columns) > 1:
     print('\n')
-    #TODO: ADD DEFAULT?
-    question2_5 = input("\tDo you want to simulate new cells (y/n)? (The alternative is to simulate new expression data for existing cells).\t").lower()
+    question2_5 = input("\tDo you want to simulate new cells (y/n)? [default: n. The alternative is to simulate new expression data for existing cells].\t").lower()
+
+    if question2_5 == '':
+        question2_5 = 'n'
+        print('\n\tUsing default: n')
 
     if question2_5 not in valid_yes_no:
         raise ValueError("Please enter y/n.")
@@ -431,7 +439,7 @@ if len(cellfeature_data_r.columns) > 1:
     if question2_5 == 'y':
         parameters['simulate_spatial_data'] = 'TRUE'
         print('\n')
-        question2_5_1 = input("\tNumber of simulated cells [default =10,000]: \t").lower()
+        question2_5_1 = input("\tNumber of simulated cells [default = 10,000]: \t").lower()
         
         if question2_5_1 == '':
             question2_5_1 = '10000'
@@ -459,20 +467,26 @@ if len(cellfeature_data_r.columns) > 1:
         print("\tAvailable methods for determining window on existing ST data")
         print("\t-----------------------------------")
         print("\n")
-        print("\t1) network")
-        print("\t2) rectangle")
-        print("\t3) convex")
+        print("\t1) rectangle")
+        print("\t2) convex")
+        print("\t3) convex2")
+        print("\t4) convex3")
+        print("\t5) convex5")
+        print("\t6) network")
         print('\n')
 
-        question2_5_2 = input("\tMethod for determining window on existing ST data (1/2/3) [default = network]: \t").lower()
+        question2_5_2 = input("\tMethod for determining window on existing ST data [default = convex5]: \t").lower()
         valid_question2_5_2 = {
-            "1": "network", 
-            "2": "rectangle", 
-            "3": "convex"
+            "1": "rectangle", 
+            "2": "convex", 
+            "3": "convex2",
+            "4": "convex3",
+            "5": "convex5",
+            "6": "network"
         }
         
         if question2_5_2 == '':
-            question2_5_2 = '1'
+            question2_5_2 = '5'
             print(f"\tUsing default: {valid_question2_5_2[question2_5_2]}")
 
         if not question2_5_2.isnumeric():
@@ -535,7 +549,7 @@ else:
     parameters['gene_cor'] = 'TRUE'
     print('\n')
     print_workdir_files()
-    question2_6_3 = input("\tProvide a path for uploading a pre-estimated gene-gene correlation file (Default = NULL)\t").lower()
+    question2_6_3 = input("\tProvide a path for uploading a pre-estimated gene-gene correlation file (default = NULL)\t").lower()
     if question2_6_3 == '':
         question2_6_3 = 'NULL'
         print('\n\tUsing default: ', question2_6_3)
@@ -621,11 +635,11 @@ if cellfeature_num_regions > 1 or sim_num_regions > 1:
         
             spatial_pattern['mean'] = question2_6_4e
 
-            question2_6_4f = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
+            question2_6_4f = input(f"\tSD of effect at log(count) scale (default = 0):\t")
 
             if question2_6_4f == '':
-                question2_6_4f = '0.1'
-                print('\tUsing default 0.1.')
+                question2_6_4f = '0'
+                print('\tUsing default 0.')
             spatial_pattern['sd'] = question2_6_4f
 
             spatial_patterns.append(spatial_pattern)
@@ -643,7 +657,7 @@ if cellfeature_num_regions > 1 or sim_num_regions > 1:
 
 
 print('\n')
-question2_6_5 = input("\tAdd cell-cell interactions - expression associated with cell-cell distance? (y/n) [defulat: n]\t").lower()
+question2_6_5 = input("\tAdd cell-cell interactions - expression associated with cell-cell distance? (y/n) [default: n]\t").lower()
 
 if question2_6_5 == 'y':
     cell_cell_interactions = []
@@ -714,11 +728,11 @@ if question2_6_5 == 'y':
     
         cell_cell_interaction['mean'] = question2_6_5g
 
-        question2_6_5h = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
+        question2_6_5h = input(f"\tSD of effect at log(count) scale (default = 0):\t")
 
         if question2_6_5h == '':
-            question2_6_5h = '0.1'
-            print('\tUsing default 0.1.')
+            question2_6_5h = '0'
+            print('\tUsing default 0.')
         cell_cell_interaction['sd'] = question2_6_5h
 
         cell_cell_interactions.append(cell_cell_interaction)
@@ -736,7 +750,7 @@ if question2_6_5 == 'y':
 
 
 print('\n')
-question2_6_6 = input("\tAdd cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [defulat: n]\t").lower()
+question2_6_6 = input("\tAdd cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n]\t").lower()
 
 if question2_6_6 == 'y':
     cell_cell_interactions = []
@@ -817,11 +831,11 @@ if question2_6_6 == 'y':
     
         cell_cell_interaction['mean'] = question2_6_6h
 
-        question2_6_6i = input(f"\tSD of effect at log(count) scale (default = 0.1):\t")
+        question2_6_6i = input(f"\tSD of effect at log(count) scale (default = 0):\t")
 
         if question2_6_6i == '':
-            question2_6_6i = '0.1'
-            print('\tUsing default 0.1.')
+            question2_6_6i = '0'
+            print('\tUsing default 0.')
         cell_cell_interaction['sd'] = question2_6_6i
 
         cell_cell_interactions.append(cell_cell_interaction)
@@ -833,6 +847,22 @@ if question2_6_6 == 'y':
     for i, cell_cell_interaction in enumerate(cell_cell_interactions):
         for k in cell_cell_interaction.keys():
             parameters[f'spatial_int_expr_{i+1}_{k}'] = cell_cell_interaction[k]
+
+
+# ### Question2_12
+
+# In[ ]:
+
+
+# question2_12
+print("\n")
+question2_12 = input("\tIf multi-cell resolution data should be simulated, specify the No. of spots [default: NULL = single-cell resolution data is simulated]\t")
+
+if question2_12 == '':
+    question2_12 = 'NULL'
+    print(f"\tUsing default: {question2_12}")
+
+parameters['num_spots'] = question2_12
 
 
 # ### Question2_7
@@ -884,23 +914,12 @@ parameters['simulation_seed_for_each_dataset'] = ','.join(simulation_seeds)
 
 
 print('\n')
-path_to_output_dir = input("\tPath to save output: [default = working_directory/output_files]\t")
+path_to_output_dir = input("\tPath and name to save output: [default = working_directory/output_files/myfile]\t")
 if path_to_output_dir == '':
-    path_to_output_dir = 'working_directory/output_files'
+    path_to_output_dir = 'working_directory/output_files/myfile'
+    print('\tUsing default: ', path_to_output_dir)
     os.makedirs(f'working_directory/output_files', exist_ok=True)
 parameters['path_to_output_dir'] = path_to_output_dir
-
-
-# ### Question 2_10
-
-# In[ ]:
-
-
-print('\n')
-output_name = input("\tName of the output: [default = myfile]\t")
-if output_name == '':
-    output_name = 'myfile'
-parameters['output_name'] = output_name
 
 
 # ### Save parameter file
@@ -908,33 +927,26 @@ parameters['output_name'] = output_name
 # In[ ]:
 
 
-print('\n')
-save_param_file = input("\tSave parameters for future use (y/n)? [default: y]").lower()
+parameter_series = pd.Series(parameters, name='value')
+parameter_series.index.name = 'parameters'
+parameter_series.reset_index()
 
-if save_param_file == '':
-    save_param_file = 'y'
+os.makedirs(f'working_directory/parameter_files', exist_ok=True) 
+parameter_file_name = input("\n\tName this parameter file [default='parameter_file']: ").lower()
 
-if save_param_file == 'y':
-    parameter_series = pd.Series(parameters, name='value')
-    parameter_series.index.name = 'parameters'
-    parameter_series.reset_index()
+if parameter_file_name == '':
+    parameter_file_name = 'parameter_file'
+    print('\tUsing default: ', parameter_file_name)
 
-    os.makedirs(f'working_directory/parameter_files', exist_ok=True) 
-    parameter_file_name = input("\n\tName this parameter file [default='parameter_file']: ").lower()
+pd.DataFrame(parameter_series).to_csv(f'working_directory/parameter_files/{parameter_file_name}.tsv', sep='\t')
 
-    if parameter_file_name == '':
-        parameter_file_name = 'parameter_file'
-        print('\tUsing default: ', parameter_file_name)
-
-    pd.DataFrame(parameter_series).to_csv(f'working_directory/parameter_files/{parameter_file_name}.tsv', sep='\t')
-
-    print(f'\n\tSaved parameter file for future use in your working directory: parameter_files/{parameter_file_name}.tsv')
+print(f'\n\tSaved parameter file for future use in your working directory: parameter_files/{parameter_file_name}.tsv')
 
 
 # # Run ST pipeline with parameter file
 # - TODO: use os.system to kick off R code with parameter file
 
-# In[5]:
+# In[2]:
 
 
 try:
