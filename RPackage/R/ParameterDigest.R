@@ -35,7 +35,7 @@ loadRData <- function(fileName){
   get(ls()[ls() != "fileName"])
 }
 ExprLoad=function(para){
-  if(expression_data_file_type=="Rdata") {
+  if(expression_data_file_type=="Rdata" | expression_data_file_type=="RData") {
     expr=as.data.frame(loadRData(paste0(path_to_input_dir, expression_data_file)))
   }
   if (expression_data_file_type=="tsv") {
@@ -46,7 +46,7 @@ ExprLoad=function(para){
 }
 CellFeatureLoad=function(para){
   type=tail(unlist(strsplit(cell_feature_data_file, "[.]")), 1)
-  if(type=="Rdata") {
+  if(type=="Rdata" | type=="RData" ) {
     feature=as.data.frame(loadRData(paste0(path_to_input_dir, cell_feature_data_file)))
   }
   if (type=="tsv") {
@@ -58,7 +58,7 @@ CellFeatureLoad=function(para){
 # ----------- copula load/create ---------------
 ParameterCopula=function(para, expr, feature){
   # Copula -- add region info
-  if (gene_cor=="FALSE") {CopulaEst=NULL}
+  if (gene_cor=="FALSE") {copula_input="NULL"; CopulaEst=NULL}
   if (gene_cor=="TRUE" & copula_input!="NULL") {CopulaEst=loadRData(copula_input)}
   if (gene_cor=="TRUE" & copula_input=="NULL") {
 
@@ -84,6 +84,7 @@ ParameterCopula=function(para, expr, feature){
    # save
    out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
    save(CopulaEst, file=out_path_name)
+   print("Finish estimating gene-gene correlation in expression data")
   }
   return(CopulaEst)
 }
@@ -319,8 +320,10 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
     output=MergeRegion(points.list=cell_loc_list[[i]],
                        expr.list=sim_count_update)
-    print(paste("Finish simulating expression data", i))
+    print(paste("Finish simulating data", i))
+
     expr_pattern=ExprPattern(pattern.list.i=pattern_list[[i]])
+
     if (is.null(expr_pattern)==F) {
       write_tsv(as.data.frame(expr_pattern),
                 file=paste0(path_to_output_dir, output_name, "_expr_pattern_", i, ".tsv"))
@@ -330,6 +333,7 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
               file=paste0(path_to_output_dir, output_name, "_meta_", i, ".tsv"))
     write_tsv(as.data.frame(output$count)%>% rownames_to_column("GeneName"),
               file=paste0(path_to_output_dir, output_name, "_count_", i, ".tsv"))
+    print(paste("Finish saving simulated data", i))
 
   }
 }
@@ -337,14 +341,17 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
 # ----------------- ParaSimulation ---------------
 ParaSimulation=function(input, parallel=F) {
+  print("Start the simulation")
   # Digest parameters
   para=ParaDigest(input)
   attach(para)
 
   # Load  data
+
   expr=ExprLoad(para)
   feature=CellFeatureLoad(para)
   colnames(expr)=feature[,1]
+  print("Finish loading data")
   # Copula
   CopulaEst=ParameterCopula(para=para, expr=expr, feature=feature)
   # parallel parameters
@@ -366,13 +373,14 @@ ParaSimulation=function(input, parallel=F) {
     cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
                                       feature=feature)
   }
-
+  print("Finish simulating the cell spatial maps")
   # Simulate Expr for these cells
   ParaExpr(para=para,
            cell_loc_list=cell_loc_list,
            expr=expr, feature=feature,
            CopulaEst=CopulaEst, all_seeds=all_seeds,
            parallel=parallel)
+  print("Finish simulating the expression of cells")
 
   detach(para)
 

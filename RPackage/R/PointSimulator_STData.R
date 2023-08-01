@@ -4,30 +4,51 @@
 #'
 #' This function esimates window using spatial location data of existing cells.
 #' @param PointLoc PointLoc
-#' @param method method=c("convex", "rectangle", "network")
+#' @param method method=c("convex", "convex2", "convex3", "convex5", "rectangle", "network")
 #' @import spatstat
 #' @export
 # window=simu.window(PointLoc=NULL)
-# window=simu.window(PointLoc=PointLoc, method="network")
-simu.window=function(PointLoc=NULL, method="network") {
+# window=simu.window(PointLoc=PointLoc, method="convex5")
+simu.window=function(PointLoc,
+                     method=c("convex", "convex2", "convex3", "convex5", "rectangle", "network")) {
 
-  if (is.null(PointLoc)==F & (method=="convex" | method=="rectangle")) {
-    x0=PointLoc[,1]
-    y0=PointLoc[,2]
+  x0=PointLoc[,1]
+  y0=PointLoc[,2]
+  n=nrow(PointLoc)
+
+  if (is.null(PointLoc)==F &(method=="convex" | method=="rectangle")) {
     res=ripras(x0, y0, shape=method)
   }
+
+
+  if (is.null(PointLoc)==F & method %in% c("convex2", "convex3", "convex5") ) {
+    K=as.numeric(substr(method, 7,7))
+    xmin=min(x0);xmax=max(x0);ymin=min(y0);ymax=max(y0)
+    dx=xmax-xmin
+    dy=ymax-ymin
+    dmax=max(dx, dy)
+    res=list()
+    for (i in 1: K) {
+      idx= which(x0>=(xmin+ dx/K*(i-1)) & x0< (xmin + dx/K*i*1.05))
+      for (j in 1:K) {
+        idy= which(y0>=(ymin+ dy/K*(j-1)) & y0< (ymin + dy/K*j*1.05))
+        id=intersect(idx, idy)
+        res1=ripras(x0[id], y0[id], shape="convex")
+        res=suppressWarnings(union.owin(res, res1))
+      }
+    }
+  }
+
   if (is.null(PointLoc)==F & method=="network") {
 
-    # generate random perturbation
-    n=nrow(PointLoc)
+    # generate  perturbation
 
-    dx=max(PointLoc[,1])-min(PointLoc[,1])
-    dy=max(PointLoc[,2])-min(PointLoc[,2])
+    dx=max(x0)-min(x0)
+    dy=max(y0)-min(y0)
     dmax=max(dx, dy)
-    x=PointLoc[,1]+0.005*dmax*cos(seq(0, 2*pi, length=n*4))
-    y=PointLoc[,2]+0.005*dmax*sin(seq(0, 2*pi, length=n*4))
+    x=x0+0.005*dmax*cos(seq(0, 2*pi, length=n*4))
+    y=y0+0.005*dmax*sin(seq(0, 2*pi, length=n*4))
     PointLoc_noise=cbind(x,y)
-
     delaunay_triangle = geometry::delaunayn(PointLoc_noise)
     max_dist=sapply(1:nrow(delaunay_triangle), function(f)
       max(dist(PointLoc_noise[delaunay_triangle[f,],])))
@@ -138,7 +159,8 @@ cell.region.loc.model.fc=function(n,
   bb=vector("list", length(Rcat))
   for ( i in 1:length(Rcat)) {
     idx= which(PointRegion %in% Rcat[i])
-    bb[[i]]=cell.loc.model.fc(n=length(idx),
+    n.sim.region=round(n*length(idx)/length(PointAnno))
+    bb[[i]]=cell.loc.model.fc(n=n.sim.region,
                               PointLoc=PointLoc[idx,],
                               PointAnno=PointAnno[idx],
                              window_method=window_method,
