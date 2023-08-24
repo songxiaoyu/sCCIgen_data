@@ -1,0 +1,15 @@
+parameters	value
+path_to_input_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/
+expression_data_file	InputData/expression_data/SeqFishPlusCortex_expr_033023.Rdata
+cell_feature_data_file	InputData/cell_feature_data/SeqFishPlusCortex_cellfeature_033023.Rdata
+expression_data_file_type	Rdata
+expression_data_cell_types	"Astrocyte,Endothelial,ExcitatoryNeuron,Interneuron,Microglia,Oligodendrocyte"
+simulate_spatial_data	FALSE
+expr_depth_ratio	1
+region_specific_model	NULL
+gene_cor	FALSE
+num_simulated_datasets	1
+parent_simulation_seed	1234
+simulation_seed_for_each_dataset	1234
+path_to_output_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/
+output_name	fig2d_seqfish

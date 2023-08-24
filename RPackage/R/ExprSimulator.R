@@ -39,6 +39,61 @@ Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
 }
 
 
+#' Use_scDesign2_model_params
+#'
+
+
+Use_scDesign2_model_params=function(expr,
+                       feature,
+                       Copula=NULL,
+                       sim_method = c('copula', 'ind'),
+                       region_specific_model,
+                       ncores=1) {
+
+  expr=as.matrix(expr)
+  cell_type_sel=names(table(colnames(expr)))
+  Genes=rownames(expr)
+
+  if (region_specific_model!="TRUE") { # not region specific
+    model_params=  fit_model_scDesign2(data_mat=expr,
+                                       cell_type_sel=cell_type_sel,
+                                       sim_method = 'ind',
+                                       marginal='zinb',
+                                       ncores = ncores)
+    if (sim_method=="copula") {
+      CellType=names(model_params)
+      for (i in 1:length(CellType)){model_params[[CellType[i]]]$cov_mat=Copula[[1]][[i]]}
+    }
+  }
+
+  #  region specific model
+  if (region_specific_model=="TRUE") { #  region specific
+
+    Region=feature[,4]
+    Runiq=unique(Region)
+    R=length(Runiq)
+
+    model_params= foreach (r = 1:R) %dopar% {
+      idx=which(Region==Runiq[r])
+
+      model_params1=fit_model_scDesign2(data_mat=expr[,idx],
+                                         cell_type_sel=cell_type_sel,
+                                         sim_method = 'ind',
+                                         marginal='zinb',
+                                         ncores = ncores)
+      if (sim_method=="copula") {
+        CellType=names(model_params1)
+        for (i in 1:length(CellType)){model_params1[[CellType[i]]]$cov_mat=Copula[[r]][[i]]}
+      }
+      model_params1
+    }
+
+  }
+
+  return(model_params)
+}
+
+
 #' Use_scDesign2
 #'
 #' This function uses input parameters to simulate expression for all region.
@@ -52,15 +107,13 @@ Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
 #' @return Simulated expression count data for all regions.
 #' @export
 
-
-
 Use_scDesign2=function(ppp.obj,
+                       model_params,
                        expr,
                        feature,
-                       Copula=NULL,
                        depth_simu_ref_ratio=1,
                        sim_method = c('copula', 'ind'),
-                       region_specific_model=F,
+                       region_specific_model,
                        seed) {
 
   expr=as.matrix(expr)
@@ -69,21 +122,9 @@ Use_scDesign2=function(ppp.obj,
   Genes=rownames(expr)
 
   if (region_specific_model!="TRUE") { # not region specific
-    model_params=  fit_model_scDesign2(data_mat=expr,
-                                       cell_type_sel=cell_type_sel,
-                                       sim_method = 'ind',
-                                       marginal='auto_choose',
-                                       ncores = length(cell_type_sel))
-    if (sim_method=="copula") {
-      CellType=names(model_params)
-      for (i in 1:length(CellType)){
-        model_params[[CellType[i]]]$cov_mat=Copula[[1]][[i]]
-      }
-    }
 
-    sim.count=vector("list", R);
-    for(r in 1:R) {
-      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+    sim.count= foreach (r = 1:R) %dopar%{
+      Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
                                            Genes=Genes,
                                            model_params=model_params,
                                            depth_simu_ref_ratio=depth_simu_ref_ratio,
@@ -95,34 +136,19 @@ Use_scDesign2=function(ppp.obj,
 
   #  region specific model
   if (region_specific_model=="TRUE") { #  region specific
-    # Region=unlist(sapply(1:R, function(f)
-    #   rep(names(ppp.obj)[f], ppp.obj[[f]]$n)))
+
     Region=feature[,4]
     Runiq=unique(Region)
 
-    sim.count=vector("list", R);
-    for (r in 1:R) {
-      idx=which(Region==Runiq[r])
+    sim.count= foreach (r = 1:R) %in% {
 
-      model_params=  fit_model_scDesign2(data_mat=expr[,idx],
-                                         cell_type_sel=cell_type_sel,
-                                         sim_method = 'ind',
-                                         marginal='auto_choose',
-                                         ncores = length(cell_type_sel))
-      if (sim_method=="copula") {
-        CellType=names(model_params)
-        for (i in 1:length(CellType)){
-          model_params[[CellType[i]]]$cov_mat=Copula[[r]][[i]]
-        }
-      }
-      sim.count[[r]]=Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
+      Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
                                            Genes=Genes,
-                                           model_params=model_params,
+                                           model_params=model_params[[r]],
                                            depth_simu_ref_ratio=depth_simu_ref_ratio,
                                            cell_type_sel=cell_type_sel,
                                            seed=seed*31+r*931,
                                            sim_method = sim_method)
-
     }
 
   }
@@ -391,14 +417,14 @@ Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
 
     # bond extreme values bonds at 10% reads
     if (bond.extreme==T) {
-      TenPerReads=apply(sim.count1.update, 2, sum)/10
+      TenPerReads=apply(sim.count1.update, 2, sum, na.rm=T)/10
       for (i in 1:ncol(sim.count1.update)) {
         sim.count1.update[,i][which(sim.count1.update[,i]>TenPerReads[i])]=TenPerReads[i]
       }
     }
     # scale by total count
     if (keep.total.count==T) {
-      ratio=sum(sim.count1)/sum(sim.count1.update)
+      ratio=sum(sim.count1, na.rm=T)/sum(sim.count1.update, na.rm=T)
       sim.count1.update=sim.count1.update*ratio
     }
     # integer

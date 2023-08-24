@@ -7,7 +7,9 @@ ParaDigest=function(input) {
     t() %>% as.data.frame()
   suppressWarnings(class(para1) <-"numeric")
   para[,is.na(para1)==F]=para1[is.na(para1)==F]
+
   attach(para)
+
 
   # Path1: No ST data;
   # Path2: ST data - new cells
@@ -56,7 +58,7 @@ CellFeatureLoad=function(para){
 }
 
 # ----------- copula load/create ---------------
-ParameterCopula=function(para, expr, feature){
+ParameterCopula=function(para, expr, feature, ncores=1){
   # Copula -- add region info
   if (gene_cor=="FALSE") {copula_input="NULL"; CopulaEst=NULL}
   if (gene_cor=="TRUE" & copula_input!="NULL") {CopulaEst=loadRData(copula_input)}
@@ -65,24 +67,24 @@ ParameterCopula=function(para, expr, feature){
     expr=as.matrix(expr)
     anno=feature[,1]
     colnames(expr)=anno
-    L=length(unique(anno))
+    #L=length(unique(anno))
     if (region_specific_model=="FALSE") {
       CopulaEst=list(Est_GeneCopula(expr=expr,
-                                    anno=anno, zp_cutoff=0.8, ncores=L))
+                                    anno=anno, zp_cutoff=0.8, ncores=ncores))
     }
     if (region_specific_model=="TRUE") {
       Ridx=unique(feature[,4])
       R=length(Ridx)
       for (r in 1:R) {
         CopulaEst[[r]]=Est_GeneCopula(expr=expr,
-                                      anno=anno, zp_cutoff=0.8, ncores=L)
+                                      anno=anno, zp_cutoff=0.8, ncores=ncores)
         l=length( CopulaEst[[r]])
 
       }
       names(CopulaEst)=Ridx
     }
    # save
-   out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
+   out_path_name=paste0(path_to_output_dir, "_Copula.RData")
    save(CopulaEst, file=out_path_name)
    print("Finish estimating gene-gene correlation in expression data")
   }
@@ -90,7 +92,7 @@ ParameterCopula=function(para, expr, feature){
 }
 
 # ----------------- ParaNoSTCells ---------------
-ParaCellsNoST=function(para, all_seeds, parallel=F){
+ParaCellsNoST=function(para, all_seeds){
 
   # determine cell type proportion in each region
   cell_type_proportion=vector("list", num_regions);
@@ -108,29 +110,28 @@ ParaCellsNoST=function(para, all_seeds, parallel=F){
    cell_location_interactions=vector("list", num_regions);
 
   # parallel starts here:
-  cell_loc=vector("list", num_simulated_datasets)
-  for (m in 1: num_simulated_datasets) {
+   cell_loc=foreach (m = 1: num_simulated_datasets) %dopar% {
 
-    seed=all_seeds[m]
-    win=RandomRegionWindow(nRegion=num_regions, seed=seed)
-    cell_loc[[m]]=cell.loc.fc(N=num_simulated_cells,
-                           win=win,
-                           cell.prop=cell_type_proportion2,
-                           cell.inh.attr.input=cell_location_interactions,
-                           same.dis.cutoff =cell_overlap_cutoff,
-                           even.distribution.coef=cell_even_distribution,
-                           seed=seed)
-    print(paste("Finish simulating spatial data", m))
-  }
+     seed=all_seeds[m]
+     win=RandomRegionWindow(nRegion=num_regions, seed=seed)
+     cell.loc.fc(N=num_simulated_cells,
+                               win=win,
+                               cell.prop=cell_type_proportion2,
+                               cell.inh.attr.input=cell_location_interactions,
+                               same.dis.cutoff =cell_overlap_cutoff,
+                               even.distribution.coef=cell_even_distribution,
+                               seed=seed)
+
+   }
    return(cell_loc)
 }
 # ----------------- ParaSTNewCells ---------------
-ParaCellsST=function(para, feature, all_seeds, parallel=F) {
-  cell_loc=vector("list", num_simulated_datasets)
+ParaCellsST=function(para, feature, all_seeds) {
+
   if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
 
-  for (i in 1:num_simulated_datasets) {
-    cell_loc[[i]]=cell.region.loc.model.fc(n=num_simulated_cells,
+  cell_loc=foreach (i = 1:num_simulated_datasets) %dopar% {
+    cell.region.loc.model.fc(n=num_simulated_cells,
                                     PointLoc=feature[,c(2:3)],
                                     PointAnno=feature[,1],
                                     PointRegion=R,
@@ -298,16 +299,43 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
 
 
 # ----------------- ParaExpr ---------------
-ParaExpr=function(para, cell_loc_list, expr, feature,
-                  CopulaEst, all_seeds, parallel=F){
+ParaFitExpr=function(para, expr, feature, CopulaEst, ncores){
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
+  # fit by input data
+
+   model_params=Use_scDesign2_model_params(expr=expr,
+                                      feature=feature,
+                                      Copula=CopulaEst,
+                                      sim_method = sim_method,
+                                      region_specific_model=region_specific_model,
+                                      ncores=ncores)
+    return(model_params)
+}
+
+
+
+
+ParaExpr=function(para, cell_loc_list, expr, feature,
+                  CopulaEst, all_seeds, ncores=1){
+
+  sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
+  # fit by input data
+  model_params=ParaFitExpr(para, expr, feature, CopulaEst, ncores=ncores)
+
+  # simulate
 
   for (i in 1:num_simulated_datasets) {
+
     sim_count=Use_scDesign2(ppp.obj=cell_loc_list[[i]],
-                            expr=expr, feature=feature,
-                            Copula=CopulaEst,
-                            depth_simu_ref_ratio=expr_depth_ratio,
-                            seed=all_seeds[[i]], sim_method=sim_method)
+                            model_params=model_params,
+                            expr=expr, 
+                            feature=feature,
+                            depth_simu_ref_ratio=expr_depth_ratio, 
+                            sim_method=sim_method,
+                            region_specific_model=region_specific_model,
+                            seed=all_seeds[[i]])
+
+      
     pattern_list=ParaPattern(para=para, sim_count=sim_count,
                              cell_loc_list_i=cell_loc_list[[i]],
                          seed=all_seeds[[i]])
@@ -326,13 +354,13 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
     if (is.null(expr_pattern)==F) {
       write_tsv(as.data.frame(expr_pattern),
-                file=paste0(path_to_output_dir, output_name, "_expr_pattern_", i, ".tsv"))
+                file=paste0(path_to_output_dir, "_expr_pattern_", i, ".tsv"))
     }
 
-     write_tsv(output$meta,
-              file=paste0(path_to_output_dir, output_name, "_meta_", i, ".tsv"))
+    write_tsv(output$meta,
+              file=paste0(path_to_output_dir, "_meta_", i, ".tsv"))
     write_tsv(as.data.frame(output$count)%>% rownames_to_column("GeneName"),
-              file=paste0(path_to_output_dir, output_name, "_count_", i, ".tsv"))
+              file=paste0(path_to_output_dir, "_count_", i, ".tsv"))
     print(paste("Finish saving simulated data", i))
 
   }
@@ -340,7 +368,13 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
 
 # ----------------- ParaSimulation ---------------
-ParaSimulation=function(input, parallel=F) {
+ParaSimulation=function(input) {
+
+  # parallel
+  ncores=detectCores()-2; registerDoParallel(ncores)
+  print(paste("No. of Cores in Use", ncores))
+
+
   print("Start the simulation")
   # Digest parameters
   para=ParaDigest(input)
@@ -353,7 +387,7 @@ ParaSimulation=function(input, parallel=F) {
   colnames(expr)=feature[,1]
   print("Finish loading data")
   # Copula
-  CopulaEst=ParameterCopula(para=para, expr=expr, feature=feature)
+  CopulaEst=ParameterCopula(para=para, expr=expr, feature=feature, ncores=ncores)
   # parallel parameters
   if (num_simulated_datasets>1) {
     all_seeds=as.numeric(unlist(strsplit(simulation_seed_for_each_dataset, ",")))
@@ -363,11 +397,11 @@ ParaSimulation=function(input, parallel=F) {
   # Simulate cells
   if (path==1) {
     cell_loc_list=ParaCellsNoST(para=para,
-                                all_seeds=all_seeds, parallel=parallel)
+                                all_seeds=all_seeds)
   }
   if (path==2) {
     cell_loc_list=ParaCellsST(para=para, feature=feature,
-                              all_seeds=all_seeds, parallel=parallel)
+                              all_seeds=all_seeds)
   }
   if (path==3) {
     cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
@@ -379,7 +413,7 @@ ParaSimulation=function(input, parallel=F) {
            cell_loc_list=cell_loc_list,
            expr=expr, feature=feature,
            CopulaEst=CopulaEst, all_seeds=all_seeds,
-           parallel=parallel)
+           ncores=ncores)
   print("Finish simulating the expression of cells")
 
   detach(para)
