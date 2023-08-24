@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install -y r-base
 
 # copy local files to image
 RUN mkdir /working_directory
-COPY simulated_data simulated_data
-COPY expression_data expression_data
-COPY spatial_data spatial_data
+#COPY simulated_data simulated_data
+#COPY expression_data expression_data
+#COPY spatial_data spatial_data
 COPY docker_prompts.py docker_prompts.py
 COPY scripts scripts
 COPY requirements.txt requirements.txt

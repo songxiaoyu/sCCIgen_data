@@ -1,7 +1,5 @@
 #!/bin/bash
-#BASE_DOCKER_IMAGE="annapamela/st_simulator_test"
 BASE_DOCKER_IMAGE="songxiaoyu152/st_simulator_test"
-#BASE_DOCKER_IMAGE="fuweijia/st_simulator_test"
 
 printf "\t-----------Start ST simulator-----------\n"
 # get absolute path to working directory
