@@ -90,15 +90,16 @@ get.n.vec.raw=function(n, cell.prop,
   if (is.null(cell.inh.attr.input)==F) {
     for (i in 1:nrow(cell.inh.attr.input)) {
       if (cell.inh.attr.input[i,1] ==cell.inh.attr.input[i,2]) {
-        n.vec.use[cell.inh.attr.input[i,1]]=n.vec.use[cell.inh.attr.input[i,1]]*
+        n.vec.use[,cell.inh.attr.input[i,1]]=n.vec.use[,cell.inh.attr.input[i,1]]*
           (1+abs(cell.inh.attr.input[i,3]))
       }
+
       if (cell.inh.attr.input[i,1] !=cell.inh.attr.input[i,2]) {
         temp=ifelse(cell.inh.attr.input[i,3]>0, 1, 3) # more inflation for attraction
-        n.vec.use[cell.inh.attr.input[i,1]]=
-          n.vec.use[cell.inh.attr.input[i,1]]* (1+abs(cell.inh.attr.input[i,3]) * temp)
-        n.vec.use[cell.inh.attr.input[i,2]]=
-          n.vec.use[cell.inh.attr.input[i,2]]*(1+abs(cell.inh.attr.input[i,3]) * temp)
+        n.vec.use[,cell.inh.attr.input[i,1]]=
+          n.vec.use[,cell.inh.attr.input[i,1]]* (1+abs(cell.inh.attr.input[i,3]) * temp)
+        n.vec.use[,cell.inh.attr.input[i,2]]=
+          n.vec.use[,cell.inh.attr.input[i,2]]*(1+abs(cell.inh.attr.input[i,3]) * temp)
       }
     }
   }

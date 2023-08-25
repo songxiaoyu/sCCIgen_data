@@ -19,51 +19,97 @@ source("RPackage/R/ParameterDigest.R")
 source("RPackage/R/MultiCell.R")
 # detach(para)
 
-input="ParameterFile/fig2d_seqfish.tsv"
-ParaSimulation(input=input, parallel=F)
+input="ParameterFile/fig2c.tsv"
+ParaSimulation(input=input)
 
 
-
-
-FileName="fig2d_seqfish"
+FileName="fig2c"
 i=1
-expr=fread(paste0("OutputData/", FileName, "_count_", i, ".tsv")) %>% as.data.frame %>%
-  column_to_rownames("GeneName")
-cell_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv"))) 
-dat=multicell(expr, cell_feature, NoSpot=500)
 
-spot_expr=dat$count
-spot_feature=dat$spot_feature
-spot_feature[1:3,]
-spot_sum=apply(spot_feature[, -c(1:2)], 1, sum)
+spatial_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv"))) 
 
-spot_prop=spot_feature[, -c(1:2)]/spot_sum
+# -- How to quantify cell-cell attraction and inhibition -- 
+  # Kest, Fest, Gest, Jest
+  # Gcross, Gdoc, Gmulti, Kcross Kdot, Kmulti, Jross, Jdot, Jmulti
 
-# decomposition method -- CARD
-library(CARD)
+# 1 Kest: Ripley's K-function - a  statistic summarising aspects of inter-point 
+ # “dependence” and “clustering”. 
+# 2 Fest: Estimate the Empty Space Function or its Hazard Rate - a  statistic 
+ # summarising the sizes of gaps in the pattern.
+# 3 Gest: Nearest Neighbour Distance Function G.
 
-spot_expr=as(spot_expr, "dgCMatrix")
-spot_loc=spot_feature[, 1:2]
-expr=as(as.matrix(expr), "dgCMatrix")
-cell_meta=cell_feature %>% 
-  dplyr::select(c(1,2)) %>% 
-  mutate(sampleInfo="sample1")
-rownames(cell_meta)=cell_meta$Cell
-CARD_obj = createCARDObject(
-  sc_count = expr,
-  sc_meta = cell_meta,
-  spatial_count = spot_expr,
-  spatial_location = spot_loc,
-  ct.varname = "annotation",
-  ct.select = unique(cell_meta$annotation),
-  sample.varname = "sampleInfo",
-  minCountGene = 0,
-  minCountSpot = 0) 
+# 4 Jest: J = (1-Gest)/(1-Fest). J = 1 under randome point process. Deviations J(r) < 1J(r)<1 
+ # or J(r) > 1J(r)>1 typically indicate spatial clustering or spatial regularity, respectively. 
+ # Deviations between the empirical and theoretical KK curves may suggest spatial clustering 
+ # or spatial regularity.
 
-CARD_obj = CARD_deconvolution(CARD_object = CARD_obj)
-
-est_prop=CARD_obj@Proportion_CARD
-
-plot(spot_prop, est_prop)
+# Use `allstats` to estimates of all four functions F, G, J, K
 
 
+
+# ---- ppp
+W=simu.window(PointLoc=spatial_feature[,c("x.loc", "y.loc")], method="rectangle")
+p=as.ppp(spatial_feature[,c("x.loc", "y.loc")], W=W)
+marks(p)=as.factor(spatial_feature$annotation)
+
+# Kest
+K1=Kest(p[which(marks(p)=="Endothelial cell")], correction="isotropic")
+plot(K1)
+plot(K1, cbind(r, sqrt(iso/pi)) ~ r)
+
+K1=Kest(p[which(marks(p)=="Immune (myeloid)")], correction="isotropic")
+plot(K1)
+plot(K1, cbind(r, sqrt(iso/pi)) ~ r)
+
+K1=Kest(p[which(marks(p)=="Fibroblast")], correction="isotropic")
+plot(K1)
+plot(K1, cbind(r, sqrt(iso/pi)) ~ r)
+
+# Fest
+
+F1=Fest(p[which(marks(p)=="Endothelial cell")])
+plot(F1)
+plot(F1, cbind(km, trans, border) ~ theo)
+
+F1=Fest(p[which(marks(p)=="Fibroblast")], correction="rs")
+plot(F1)
+# Gest
+G1=Gest(p[which(marks(p)=="Endothelial cell")])
+plot(G1)
+
+#Jest
+J1=Jest(p[which(marks(p)=="Endothelial cell")])
+plot(J1)
+
+J1=Jest(p[which(marks(p)=="Muscle")])
+plot(J1)
+
+# Kmulti
+
+K <- Kmulti(p, marks(p) == "Epithelial cell", 
+            marks(p) =="Adipocyte", correction="isotropic")
+plot(K)
+K <- Kmulti(p, marks(p) == "Muscle", marks(p) =="Fibroblast", 
+            correction="isotropic")
+plot(K)
+
+# Jmulti
+J=Jmulti(p, marks(p) == "Epithelial cell", 
+         marks(p) =="Adipocyte", correction="rs")
+plot(J)
+
+J=Jmulti(p, marks(p) == "Muscle", marks(p) =="Fibroblast", correction="rs")
+plot(J)
+
+
+
+
+# Moran i 
+## <https://stats.oarc.ucla.edu/r/faq/how-can-i-calculate-morans-i-in-r/>
+## <https://mgimond.github.io/simple_moransI_example/>
+library(ape)
+# calculate inverse distance weights
+dists <- as.matrix(dist(cbind(spatial_feature$x, spatial_feature$y)))
+dists.inv <- 1/dists
+diag(dists.inv) <- 0
+Moran.I(, dists.inv)

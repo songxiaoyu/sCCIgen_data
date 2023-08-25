@@ -1,0 +1,40 @@
+parameters	value
+path_to_input_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/
+expression_data_file	InputData/expression_data/snRNAseq_breast_expr_033023.RData
+cell_feature_data_file	InputData/cell_feature_data/snRNAseq_breast_cellfeature_033023.RData
+expression_data_file_type	Rdata
+expression_data_cell_types	"Adipocyte,Endothelial cell,Epithelial cell,Fibroblast,Immune (myeloid),Muscle"
+simulate_spatial_data	TRUE
+num_simulated_cells	10000
+num_regions	2
+custom_cell_type_proportions	FALSE
+cell_type_proportion_1	"1,Adipocyte,0.29"
+cell_type_proportion_2	"1,Endothelial cell,0.12"
+cell_type_proportion_3	"1,Epithelial cell,0.38"
+cell_type_proportion_4	"1,Fibroblast,0.13"
+cell_type_proportion_5	"1,Immune (myeloid),0.05"
+cell_type_proportion_6	"1,Muscle,0.02"
+cell_type_proportion_7	"2,Adipocyte,0.29"
+cell_type_proportion_8	"2,Endothelial cell,0.12"
+cell_type_proportion_9	"2,Epithelial cell,0.38"
+cell_type_proportion_10	"2,Fibroblast,0.13"
+cell_type_proportion_11	"2,Immune (myeloid),0.05"
+cell_type_proportion_12	"2,Muscle,0.02"
+custom_cell_location_interactions	FALSE
+cell_even_distribution	0
+cell_overlap_cutoff	0.02
+expr_depth_ratio	1
+region_specific_model	NULL
+gene_cor	FALSE
+spatial_pattern_1_region	1
+spatial_pattern_1_cell_type	Epithelial cell
+spatial_pattern_1_gene_id	NULL
+spatial_pattern_1_gene_prop	0.1
+spatial_pattern_1_mean	0.5
+spatial_pattern_1_sd	0
+num_spots	NULL
+num_simulated_datasets	1
+parent_simulation_seed	123
+simulation_seed_for_each_dataset	123
+path_to_output_dir	/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/OutputData/
+output_name	Fig2a0

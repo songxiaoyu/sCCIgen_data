@@ -109,6 +109,12 @@ ParaCellsNoST=function(para, all_seeds){
   # determine cell cell location interactions in each region
    cell_location_interactions=vector("list", num_regions);
 
+   tmp1=unlist(strsplit(custom_cell_location_interactions, split=";"))
+   tmp2=strsplit(tmp1, split = ",")
+   tmp3=as.data.frame(matrix(unlist(tmp2),ncol=3,byrow=T))
+   class(tmp3$V3)="numeric"
+   for ( r in 1:num_regions) {cell_location_interactions[[r]]=tmp3}
+
   # parallel starts here:
    cell_loc=foreach (m = 1: num_simulated_datasets) %dopar% {
 
@@ -328,14 +334,14 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
     sim_count=Use_scDesign2(ppp.obj=cell_loc_list[[i]],
                             model_params=model_params,
-                            expr=expr, 
+                            expr=expr,
                             feature=feature,
-                            depth_simu_ref_ratio=expr_depth_ratio, 
+                            depth_simu_ref_ratio=expr_depth_ratio,
                             sim_method=sim_method,
                             region_specific_model=region_specific_model,
                             seed=all_seeds[[i]])
 
-      
+
     pattern_list=ParaPattern(para=para, sim_count=sim_count,
                              cell_loc_list_i=cell_loc_list[[i]],
                          seed=all_seeds[[i]])
@@ -348,20 +354,35 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
     output=MergeRegion(points.list=cell_loc_list[[i]],
                        expr.list=sim_count_update)
-    print(paste("Finish simulating data", i))
 
-    expr_pattern=ExprPattern(pattern.list.i=pattern_list[[i]])
+    expr_pattern=ExprPattern(pattern.list.i=pattern_list[[i]]) %>% as.data.frame()
 
+    print(paste("Finished simulating data", i))
+    # save
+
+    save_name=paste0(path_to_output_dir, output_name)
     if (is.null(expr_pattern)==F) {
-      write_tsv(as.data.frame(expr_pattern),
-                file=paste0(path_to_output_dir, "_expr_pattern_", i, ".tsv"))
+      write_tsv(expr_pattern, file=paste0(save_name, "_expr_pattern_", i, ".tsv"))
     }
 
-    write_tsv(output$meta,
-              file=paste0(path_to_output_dir, "_meta_", i, ".tsv"))
-    write_tsv(as.data.frame(output$count)%>% rownames_to_column("GeneName"),
-              file=paste0(path_to_output_dir, "_count_", i, ".tsv"))
-    print(paste("Finish saving simulated data", i))
+    # multicell?
+    if (num_spots=="NULL") {
+
+      write_tsv(output$meta,
+                file=paste0(save_name, "_meta_", i, ".tsv"))
+      write_tsv(as.data.frame(output$count)%>% rownames_to_column("GeneName"),
+                file=paste0(save_name, "_count_", i, ".tsv"))
+    } else{
+      output2=multicell(expr=output$count, cell_feature=output$meta, NoSpot=num_spots)
+
+      write_tsv(output2$spot_feature,
+                file=paste0(save_name, "_meta_", i, ".tsv"))
+      write_tsv(as.data.frame(output2$count)%>% rownames_to_column("GeneName"),
+                file=paste0(save_name, "_count_", i, ".tsv"))
+    }
+
+
+    print(paste("Finished saving data", i))
 
   }
 }
@@ -372,9 +393,7 @@ ParaSimulation=function(input) {
 
   # parallel
   ncores=detectCores()-2; registerDoParallel(ncores)
-  print(paste("No. of Cores in Use", ncores))
-
-
+  print(paste("No. of Cores in Use:", ncores))
   print("Start the simulation")
   # Digest parameters
   para=ParaDigest(input)
@@ -385,7 +404,7 @@ ParaSimulation=function(input) {
   expr=ExprLoad(para)
   feature=CellFeatureLoad(para)
   colnames(expr)=feature[,1]
-  print("Finish loading data")
+  print("Finished loading data")
   # Copula
   CopulaEst=ParameterCopula(para=para, expr=expr, feature=feature, ncores=ncores)
   # parallel parameters
@@ -407,16 +426,16 @@ ParaSimulation=function(input) {
     cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
                                       feature=feature)
   }
-  print("Finish simulating the cell spatial maps")
+  print("Finished simulating the cell spatial maps")
   # Simulate Expr for these cells
   ParaExpr(para=para,
            cell_loc_list=cell_loc_list,
            expr=expr, feature=feature,
            CopulaEst=CopulaEst, all_seeds=all_seeds,
            ncores=ncores)
-  print("Finish simulating the expression of cells")
-
+  print("Finished simulating the expression of cells")
   detach(para)
+  print("Finished the simulation")
 
 }
 

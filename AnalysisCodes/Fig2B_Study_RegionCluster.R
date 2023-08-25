@@ -20,12 +20,12 @@ source("RPackage/R/MultiCell.R")
 # detach(para)
 
 input="ParameterFile/fig2b.tsv"
-ParaSimulation(input=input, parallel=F)
+ParaSimulation(input=input)
 
 
 # Get true region
 para=ParaDigest(input)
-win=RandomRegionWindow(nRegion=para$num_regions, seed=567)
+win=RandomRegionWindow(nRegion=para$num_regions, seed=para$parent_simulation_seed)
 plot(win$window[[1]], col="pink")
 plot(win$window[[2]], col="blue", add=T)
 
@@ -36,19 +36,93 @@ FileName="fig2b"
 i=1
 expr=fread(paste0("OutputData/", FileName, "_count_", i, ".tsv")) %>% as.data.frame %>%
   column_to_rownames("GeneName")
-cell_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv"))) 
-dat=multicell(expr, cell_feature, NoSpot=500)
-
-spot_expr=dat$count
-spot_feature=dat$spot_feature
+spot_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv"))) 
 
 
-
-dp2=data.frame(dat$spot_feature, t(dat$count))
-
-ggplot(dp2, aes(x=x, y=y, col=log(Gene1+1))) + geom_point()
+dp2=data.frame(spot_feature, t(expr))
+ggplot(dp2, aes(x=x, y=y, col=log(NOC2L+1))) + geom_point()
 
 
+
+
+
+
+
+
+
+
+
+
+
+# BayesSpace ----------- 
+
+## ----setup--------------------------------------------------------------------
+library(SingleCellExperiment)
+library(ggplot2)
+library(BayesSpace)
+
+# NA remove
+n_gene_NA <- apply(expr, 1, function(x) sum(is.na(x)))
+expr <- expr[n_gene_NA == 0, ]
+dim(expr)
+
+
+spot_feature$Spot = factor(colnames(expr), levels = colnames(expr)) 
+
+SCE <- SingleCellExperiment(
+  assays = list(counts = as(as.matrix(expr), "dgCMatrix")), # wrap in a list
+  rowData = rownames(expr),
+  colData = spot_feature,
+  metadata = list(name = "SCE")
+)
+
+
+# colData(SCE)$col <- spot_feature %>% 
+#   arrange(Spot) %>% 
+#   pull(x)
+# # y coordinate
+# colData(SCE)$row <- spot_feature %>% 
+#   arrange(Spot) %>% 
+#   pull(y)
+
+SCE2 <- reducedDim(SCE, "PCA")
+
+SCE <- spatialPreprocess(sce=SCE, platform="ST", n.PCs = 15,
+                         n.HVGs=1000, skip.PCA=F,
+                         log.normalize=T, assay.type="counts")
+# Tuning the choice of q (number of clusters) before running spatialCluster
+# SCE <- qTune(SCE, qs=seq(2, 3), platform="ST")
+
+
+SCE <- spatialCluster(SCE, 
+                      q=3, # no of clusters
+                      d=15, # no of pc
+                      platform="ST",
+                      init.method="mclust", 
+                      model="normal", 
+                      gamma=2, # ST uses 2; Visium uses 3
+                      nrep=2000, burn.in=1000,
+                      save.chain=F)
+
+dat=as.matrix(sparseMatrix(i = spot_feature$col, 
+                           j= spot_feature$row, x= colData(SCE)$spatial.cluster))
+dat2=as.matrix(sparseMatrix(i = spot_feature$col, 
+                           j= spot_feature$row, x= spot_feature$region))
+heatmap(dat2, Rowv = NA, Colv =NA)
+heatmap(dat, Rowv = NA, Colv =NA)
+View(dat)
+
+#  plot ARI by effect size
+
+# ----- SpaceFlow -----------  python package
+#  Identifying multicellular spatiotemporal organization of cells with SpaceFlow
+
+
+
+
+
+
+## ----Seurat-----------------------------------------------------
 # Seurat
 library(Seurat)
 library(patchwork)
@@ -68,118 +142,6 @@ a=obj$seurat_clusters
 
 dp=data.frame(dat$spot_loc, a)
 ggplot(dp, aes(x=x, y=y, col=a)) + geom_point()
-
-
-
-
-
-
-# BayesSpace
-## ----setup--------------------------------------------------------------------
-library(SingleCellExperiment)
-library(ggplot2)
-library(BayesSpace)
-
-
-a=rbind(dat$count, dat$count, dat$count, dat$count)
-
-
-SCE <- SingleCellExperiment(
-  assays = list(counts = as(a, "dgCMatrix")), # wrap in a list
-  rowData = rownames(a),
-  colData = dat$spot_loc,
-  metadata = list(name = "SCE")
-)
-
-SCE <- spatialPreprocess(SCE, platform="ST", n.PCs = 3,
-                          n.HVGs=10, 
-                         log.normalize=T, assay.type="counts")
-SCE <- qTune(SCE, qs=seq(2, 3))
-
-
-SCE <- spatialCluster(SCE, q=2, platform="ST", d=3,
-                           init.method="mclust", model="t", gamma=2,
-                           nrep=1000, burn.in=100,
-                           save.chain=TRUE)
-clusterPlot(SCE)
-
-
-## ----readVisium, eval=FALSE---------------------------------------------------
-#  sce <- readVisium("path/to/spaceranger/outs/")
-
-## ----download-----------------------------------------------------------------
-melanoma <- getRDS(dataset="2018_thrane_melanoma", sample="ST_mel1_rep2")
-
-
-## ----preprocess---------------------------------------------------------------
-set.seed(102)
-melanoma <- spatialPreprocess(melanoma, platform="ST", 
-                              n.PCs=7, n.HVGs=2000, log.normalize=FALSE)
-
-## ----tuning_q-----------------------------------------------------------------
-melanoma <- qTune(melanoma, qs=seq(2, 10), platform="ST", d=7)
-qPlot(melanoma)
-
-## ----cluster------------------------------------------------------------------
-set.seed(149)
-melanoma <- spatialCluster(melanoma, q=4, platform="ST", d=7,
-                           init.method="mclust", model="t", gamma=2,
-                           nrep=1000, burn.in=100,
-                           save.chain=TRUE)
-
-## ----cluster.results----------------------------------------------------------
-head(colData(melanoma))
-
-## ----cluster.plot, fig.width=7, fig.height=5----------------------------------
-clusterPlot(melanoma)
-
-## ----cluster.plot.customize, fig.width=7, fig.height=5------------------------
-clusterPlot(melanoma, palette=c("purple", "red", "blue", "yellow"), color="black") +
-  theme_bw() +
-  xlab("Column") +
-  ylab("Row") +
-  labs(fill="BayesSpace\ncluster", title="Spatial clustering of ST_mel1_rep2")
-
-## ----enhance, eval=TRUE-------------------------------------------------------
-melanoma.enhanced <- spatialEnhance(melanoma, q=4, platform="ST", d=7,
-                                    model="t", gamma=2,
-                                    jitter_prior=0.3, jitter_scale=3.5,
-                                    nrep=1000, burn.in=100,
-                                    save.chain=TRUE)
-
-## ----enhance.results----------------------------------------------------------
-head(colData(melanoma.enhanced))
-
-## ----enhance.plot, eval=TRUE, fig.width=7, fig.height=5-----------------------
-clusterPlot(melanoma.enhanced)
-
-## ----enhanceFeatures----------------------------------------------------------
-markers <- c("PMEL", "CD2", "CD19", "COL1A1")
-melanoma.enhanced <- enhanceFeatures(melanoma.enhanced, melanoma,
-                                     feature_names=markers,
-                                     nrounds=0)
-
-## ----enhanced.logcount--------------------------------------------------------
-logcounts(melanoma.enhanced)[markers, 1:5]
-
-## ----enhanced.rmse------------------------------------------------------------
-rowData(melanoma.enhanced)[markers, ]
-
-## ----enhanced.featurePlot-----------------------------------------------------
-featurePlot(melanoma.enhanced, "PMEL")
-
-## ----enhanced.markers, fig.width=12, fig.height=8-----------------------------
-enhanced.plots <- purrr::map(markers, function(x) featurePlot(melanoma.enhanced, x))
-patchwork::wrap_plots(enhanced.plots, ncol=2)
-
-## ----compare.resolution, fig.width=16, fig.height=8---------------------------
-spot.plots <- purrr::map(markers, function(x) featurePlot(melanoma, x))
-patchwork::wrap_plots(c(enhanced.plots, spot.plots), ncol=4)
-
-## ----mcmcChain, eval=TRUE-----------------------------------------------------
-chain <- mcmcChain(melanoma)
-chain[1:5, 1:5]
-
 
 
 

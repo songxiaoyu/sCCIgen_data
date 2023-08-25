@@ -6,6 +6,7 @@ library(raster)
 library(spatstat)
 library(rlist)
 library(parallel)
+library(doParallel)
 
 # library(STsimulator)
 
@@ -16,59 +17,37 @@ source("RPackage/R/ExprSimulator.R")
 source("RPackage/R/scDesign2_fit_revised.R")
 source("RPackage/R/scDesign2_simulate_revised.R")
 source("RPackage/R/ParameterDigest.R")
+source("RPackage/R/MultiCell.R")
 
-# detach(para)
-input="ParameterFile/fig2a1.tsv"
-input="ParameterFile/fig2a2.tsv"
-input="ParameterFile/fig2a3.tsv"
-ParaSimulation(input=input, parallel=F)
+# use normal breast snRNAseq with two regions and different gene means in two regions. 
+input="ParameterFile/fig2a0.tsv" # ormal breast snRNAseq with two regions with random 10% gene with high means in region 1. 
+# input="ParameterFile/fig2a2.tsv"
+# input="ParameterFile/fig2a3.tsv"
+ParaSimulation(input=input)
 
 # Identify spatial variable genes on simulated data
-# binSpect
+## two sample t-test and FDR control
 
-
-library(boost)
-
-Parameter_binSpect=function(FileName="fig2a1", NoSim=20) {
-
-  pmatrix=NULL
-  for (i in 1:NoSim) {
-    # load data
-    expr=fread(paste0("OutputData/", FileName, "_count_", i, ".tsv"))
-    cell_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv"))) 
-    # clean
-    expr2=expr%>% column_to_rownames("GeneName") %>% t() 
-    PointLoc=cell_feature[, c("x.loc", "y.loc")] %>% as.matrix()
-    # binSpect
-    A <- get.neighbors(PointLoc, 4, method = "KNN")
-    
-    GeneID=expr$GeneName
-    pvector=NULL
-    for (j in 1:length(GeneID)) {
-      g <- binarize.st(expr2, GeneID[j], cluster.method = "GMC")
-      res <- binSpect(g, A, do.fisher.test = FALSE, gene.name =GeneID[j])
-      p=res$measures$p.val
-      pvector=cbind(pvector, p)
-    }
-    pmatrix=rbind(pmatrix, pvector)
-  }
-  colnames(pmatrix)=GeneID
-  return(pmatrix=pmatrix)
+Parameter_SVG=function(FileName="fig2a0"){
+  count=fread("OutputData/fig2a0_count_1.tsv") 
+  expr=count %>% column_to_rownames("GeneName")
+  meta=fread("OutputData/fig2a0_meta_1.tsv")
+  pattern=fread("OutputData/fig2a0_expr_pattern_1.tsv")
+  
+  gidx=which(count$GeneName %in% pattern$GeneID)
+  gidx2=setdiff(1:nrow(expr), gidx)
+  cidx=which(meta$region ==1)
+  p_in=unlist(mclapply(gidx[1:10], function(f) t.test(expr[f,cidx], expr[f,-cidx])$p.value))
+  p_out=unlist(mclapply(gidx2[1:10], function(f) t.test(expr[f,cidx], expr[f,-cidx])$p.value) ) 
+  power=mean(p_in<0.05)
+  type1=mean(p_out<0.05)
+  summary=data.frame(type1, power)
+  return(list(summary=summary, p_in=p_in,p_out= p_out))
 }
 
 
-pmatrix0=Parameter_binSpect(FileName="fig2a1", NoSim=20)
-mean(pmatrix0[,1:2]<0.05)
-mean(pmatrix0[,-c(1:2)]<0.05)
+pmatrix0=Parameter_SVG(FileName="fig2a0")$summary
 
-
-pmatrix1=Parameter_binSpect(FileName="fig2a2", NoSim=20)
-mean(pmatrix1[,1:2]<0.05)
-mean(pmatrix1[,-c(1:2)]<0.05)
-
-pmatrix2=Parameter_binSpect(FileName="fig2a3", NoSim=20)
-mean(pmatrix2[,1:2]<0.05)
-mean(pmatrix2[,-c(1:2)]<0.05)
 
 library(ggplot2)
 
