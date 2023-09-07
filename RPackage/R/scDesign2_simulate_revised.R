@@ -81,9 +81,9 @@ simulate_count_copula <- function(copula_result, n = 100,
 simulate_count_ind <- function(model_params, n = 100,
                                marginal = c('nb', 'Gamma')){
   marginal <- match.arg(marginal)
-  print(1)
+
   if(model_params$sim_method == 'copula' || 'gene_sel3' %in% names(model_params)){
-    print(2)
+
     p1 <- length(model_params$gene_sel1)
     p2 <- length(model_params$gene_sel2)
     if(marginal == 'nb'){
@@ -100,7 +100,7 @@ simulate_count_ind <- function(model_params, n = 100,
         }))
       }
     }else if(marginal == 'Gamma'){
-      print(3)
+
       if(p1 > 0){
         result31 <- t(sapply(1:p1, function(iter){
           param <- model_params$marginal_param1[iter, ]
@@ -122,13 +122,13 @@ simulate_count_ind <- function(model_params, n = 100,
       result[model_params$gene_sel2, ] <- result32
     }
   }else{
-    print(4)
+
     p1 <- length(model_params$gene_sel1)
     p2 <- length(model_params$gene_sel2)
     result <- matrix(0, nrow = p1 + p2, ncol = n)
     if(p1 > 0){
       if(marginal == 'nb'){
-        print(model_params$marginal_param1[1, ])
+
         result31 <- t(sapply(1:p1, function(iter){
           param <- model_params$marginal_param1[iter, ]
           rbinom(n, 1, 1-param[1]) * rnbinom(n, size = param[2], mu = param[3])

@@ -11,6 +11,12 @@ ParaDigest=function(input) {
   attach(para)
 
 
+  # clean seeds
+  if (num_simulated_datasets>1) {
+    para$all_seeds=as.numeric(unlist(strsplit(simulation_seed_for_each_dataset, ",")))
+  } else{para$all_seeds=simulation_seed_for_each_dataset}
+
+
   # Path1: No ST data;
   # Path2: ST data - new cells
   # Path3: ST data - existing cells
@@ -109,11 +115,15 @@ ParaCellsNoST=function(para, all_seeds){
   # determine cell cell location interactions in each region
    cell_location_interactions=vector("list", num_regions);
 
-   tmp1=unlist(strsplit(custom_cell_location_interactions, split=";"))
-   tmp2=strsplit(tmp1, split = ",")
-   tmp3=as.data.frame(matrix(unlist(tmp2),ncol=3,byrow=T))
-   class(tmp3$V3)="numeric"
-   for ( r in 1:num_regions) {cell_location_interactions[[r]]=tmp3}
+   if (custom_cell_location_interactions!="FALSE") {
+     tmp1=unlist(strsplit(custom_cell_location_interactions, split=";"))
+     tmp2=strsplit(tmp1, split = ",")
+     tmp3=as.data.frame(matrix(unlist(tmp2),ncol=3,byrow=T))
+     class(tmp3$V3)="numeric"
+     for ( r in 1:num_regions) {cell_location_interactions[[r]]=tmp3}
+   }
+
+
 
   # parallel starts here:
    cell_loc=foreach (m = 1: num_simulated_datasets) %dopar% {
@@ -210,6 +220,7 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
       #para[grep("spatial_int_dist_", colnames(para))]
       r=eval(parse(text=paste0("spatial_int_dist_",
                                tt1, "_region")))
+      if (r=="NULL") {r=1}
       perturbed.cell.type=eval(parse(text=paste0("spatial_int_dist_",
                                       tt1, "_cell_type_perturbed")))
       adjacent.cell.type=eval(parse(text=paste0("spatial_int_dist_",
@@ -395,42 +406,44 @@ ParaSimulation=function(input) {
   ncores=detectCores()-2; registerDoParallel(ncores)
   print(paste("No. of Cores in Use:", ncores))
   print("Start the simulation")
+
   # Digest parameters
   para=ParaDigest(input)
   attach(para)
 
   # Load  data
-
   expr=ExprLoad(para)
   feature=CellFeatureLoad(para)
   colnames(expr)=feature[,1]
   print("Finished loading data")
-  # Copula
-  CopulaEst=ParameterCopula(para=para, expr=expr, feature=feature, ncores=ncores)
-  # parallel parameters
-  if (num_simulated_datasets>1) {
-    all_seeds=as.numeric(unlist(strsplit(simulation_seed_for_each_dataset, ",")))
-  } else{all_seeds=simulation_seed_for_each_dataset}
-
 
   # Simulate cells
   if (path==1) {
-    cell_loc_list=ParaCellsNoST(para=para,
-                                all_seeds=all_seeds)
+    cell_loc_list=ParaCellsNoST(para=para, all_seeds=all_seeds)
   }
   if (path==2) {
-    cell_loc_list=ParaCellsST(para=para, feature=feature,
-                              all_seeds=all_seeds)
+    cell_loc_list=ParaCellsST(para=para, feature=feature, all_seeds=all_seeds)
   }
   if (path==3) {
-    cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
-                                      feature=feature)
+    cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets, feature=feature)
   }
   print("Finished simulating the cell spatial maps")
+
+
+  # Trim  data (no. of cells) in expr to make the expr estimation faster
+  ctype=table(feature[,1])
+  idxc=foreach (i = which(ctype>2000), .combine = "c") %dopar% {
+    sample(which(feature[,1]==names(ctype)[i]), 2000)
+  }
+  expr2=expr[,idxc]
+
+  # Copula
+  CopulaEst=ParameterCopula(para=para, expr=expr2, feature=feature, ncores=ncores)
+
   # Simulate Expr for these cells
   ParaExpr(para=para,
            cell_loc_list=cell_loc_list,
-           expr=expr, feature=feature,
+           expr=expr2, feature=feature,
            CopulaEst=CopulaEst, all_seeds=all_seeds,
            ncores=ncores)
   print("Finished simulating the expression of cells")

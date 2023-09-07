@@ -192,16 +192,21 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                     gen2[which(gen2$marks==k),]$y),
               r1, fun=function(x,...) length(x)))
+
   value.cell.r1=lapply(1:K, function(f) raster::values(pt.cell.den1[[f]]))
   for (k in 1:K) {value.cell.r1[[k]][is.na(value.cell.r1[[k]])]=0}
-  pixel.density.cell1=lapply(1:K, function(f) value.cell.r1[[f]]/mean(value.cell.r1[[f]]))
+  pixel.density.cell1=lapply(1:K, function(f)
+    value.cell.r1[[f]]/mean(value.cell.r1[[f]]))
 
   # local density by cell type 2
   pt.cell.den2=lapply(KP, function(k) rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                       gen2[which(gen2$marks==k),]$y), r2, fun=function(x,...)length(x)))
   value.cell.r2=lapply(1:K, function(f) raster::values(pt.cell.den2[[f]]))
+
   for (k in 1:K) {value.cell.r2[[k]][is.na(value.cell.r2[[k]])]=0}
   pixel.density.cell2=lapply(1:K, function(f) value.cell.r2[[f]]/mean(value.cell.r2[[f]]))
+  names(pt.cell.den1)=names(pixel.density.cell1)=
+    names(pt.cell.den2)=names(pixel.density.cell2)=KP
 
   # by cell type
   gen2.cell=split(gen2)
@@ -211,9 +216,9 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     n0.k=nrow(gen2.cell.loc)
 
     # find cell types that impact the deletion probability of cell type k
-    row.idx= apply(cell.inh.attr.input1, 1, function(f) k %in%f[1:2] ) # any
+    row.idx= apply(cell.inh.attr.input1, 1, function(f) KP[k] %in%f[1:2] ) # any
     # same cell type
-    row.same.idx= apply(cell.inh.attr.input1, 1, function(f) k %in%f[1] & k %in%f[2])
+    row.same.idx= apply(cell.inh.attr.input1, 1, function(f) KP[k] %in%f[1] & KP[k] %in%f[2])
     # different cell types
     row.diff.idx= row.idx ==T &  row.same.idx ==F
     # calculate mu2 the contribution of same cell inhibition/attraction
@@ -228,24 +233,24 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
        mu2=den.same* cell.inh.attr.input1[row.same.idx, 3]
      }
 
-
      # calculate mu3 the contribution of different cell inhibition/attraction
      if (sum(row.diff.idx)==0) {mu3=matrix(rep(0, n0.k))} else {
        diff.cell.density=NULL
-       pair.idx=unlist(apply(as.matrix(cell.inh.attr.input1[row.diff.idx, 1:2]),1, function(f) setdiff(f, k)))
-       for (i in pair.idx) {
-          pixel.idx.cell1=cellFromXY(pt.cell.den1[[i]], gen2.cell.loc)
-          den.diff1=pixel.density.cell1[[i]][pixel.idx.cell1]
+       pair.idx=unlist(apply(as.matrix(cell.inh.attr.input1[row.diff.idx, 1:2]),1,
+                             function(f) setdiff(f, KP[k])))
+       for (pk in pair.idx) {
+          pixel.idx.cell1=cellFromXY(pt.cell.den1[[pk]], gen2.cell.loc)
+          den.diff1=pixel.density.cell1[[pk]][pixel.idx.cell1]
 
-          pixel.idx.cell2=cellFromXY(pt.cell.den2[[i]], gen2.cell.loc)
-          den.diff2=pixel.density.cell2[[i]][pixel.idx.cell2]
+          pixel.idx.cell2=cellFromXY(pt.cell.den2[[pk]], gen2.cell.loc)
+          den.diff2=pixel.density.cell2[[pk]][pixel.idx.cell2]
 
           diff.cell.density=cbind(diff.cell.density,(den.diff1+den.diff2)/2)
        }
        mu3=diff.cell.density%*% matrix(cell.inh.attr.input1[row.diff.idx, 3])
      }
 
-    mu=  (mu1[which(gen2$marks==KP[k])]+mu2+mu3)
+    mu=  mu1[which(gen2$marks==KP[k])]-mu2-mu3
 
     est.mean.delete.prop=1
     c=10
@@ -256,14 +261,15 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
       est.mean.delete.prop=mean(delete.prop)
     }
 
+    # plot(den.same, delete.prop)
+    # plot(diff.cell.density, delete.prop)
+
     delete.idx.k=  rbinom(n0.k, 1, delete.prop)
 
     delete.idx[gen2$marks==KP[k]]=delete.idx.k
   }
 
-
   gen3=gen2[setdiff(1:gen2$n, which(delete.idx==1)), ]
-
 
   return(final.ppp=gen3)
 }

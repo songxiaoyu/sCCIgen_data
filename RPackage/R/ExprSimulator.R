@@ -215,12 +215,14 @@ Find.Neighbor.Pairs=function(ppp.obj,
                              interacting.cell.type.pair,
                              int.dist.threshold) {
   cell.loc=cbind(ppp.obj$x, ppp.obj$y)
+
   d=pairdist(cell.loc)
   cell1.idx=which(ppp.obj$marks==interacting.cell.type.pair[1])
   cell2.idx=which(ppp.obj$marks==interacting.cell.type.pair[2])
   m=d[cell1.idx, cell2.idx]
   # in neighbor or not?
-  m2=m<int.dist.threshold
+  dmax=max( max(ppp.obj$x)-min(ppp.obj$x), max(ppp.obj$y)-min(ppp.obj$y))
+  m2=m< (int.dist.threshold*dmax)
   neighbo.loc.idx=which(m2 == T, arr.ind = TRUE)
 
   # index in original data
@@ -281,7 +283,8 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
 
   # spatial info
   nbr.idx=Find.Neighbor.Pairs(ppp.obj=ppp.obj[[r]],
-                              interacting.cell.type.pair=c(perturbed.cell.type, adjacent.cell.type),
+                              interacting.cell.type.pair=c(perturbed.cell.type,
+                                                           adjacent.cell.type),
                               int.dist.threshold=int.dist.threshold)
 
   # GeneID

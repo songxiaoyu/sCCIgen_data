@@ -8,15 +8,14 @@ simulate_spatial_data	TRUE
 num_simulated_cells	500
 num_regions	1
 custom_cell_type_proportions	FALSE
-cell_type_proportion_1	"1,Adipocyte,0.29"
-cell_type_proportion_2	"1,Endothelial cell,0.12"
-cell_type_proportion_3	"1,Epithelial cell,0.38"
-cell_type_proportion_4	"1,Fibroblast,0.13"
-cell_type_proportion_5	"1,Immune (myeloid),0.05"
-cell_type_proportion_6	"1,Muscle,0.02"
-custom_cell_location_interactions	FALSE
-cell_even_distribution	0.02
-cell_overlap_cutoff	0.02
+cell_type_proportion_1	"1,Adipocyte,0.2"
+cell_type_proportion_2	"1,Endothelial cell,0.2"
+cell_type_proportion_3	"1,Epithelial cell,0.2"
+cell_type_proportion_4	"1,Fibroblast,0.2"
+cell_type_proportion_5	"1,Immune (myeloid),0.2"
+custom_cell_location_interactions	"Adipocyte,Epithelial cell,0;Endothelial cell,Endothelial cell,0;"
+cell_even_distribution	0
+cell_overlap_cutoff	0.01
 expr_depth_ratio	1
 region_specific_model	NULL
 gene_cor	FALSE

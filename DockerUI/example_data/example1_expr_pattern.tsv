@@ -1,0 +1,6 @@
+Type	Region	CellType	GeneID	AdjCellType	AdjGene	beta
+DistanceAssoGenes	1	CellType1	Gene6	CellType2	NA	0.5
+DistanceAssoGenes	1	CellType1	Gene4	CellType2	NA	0.5
+DistanceAssoGenes	1	CellType1	Gene7	CellType2	NA	0.5
+DistanceAssoGenes	1	CellType1	Gene8	CellType2	NA	0.5
+DistanceAssoGenes	1	CellType1	Gene10	CellType2	NA	0.5
