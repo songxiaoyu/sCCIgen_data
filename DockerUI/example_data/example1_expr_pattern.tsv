@@ -1,6 +1,1901 @@
 Type	Region	CellType	GeneID	AdjCellType	AdjGene	beta
-DistanceAssoGenes	1	CellType1	Gene6	CellType2	NA	0.5
-DistanceAssoGenes	1	CellType1	Gene4	CellType2	NA	0.5
-DistanceAssoGenes	1	CellType1	Gene7	CellType2	NA	0.5
-DistanceAssoGenes	1	CellType1	Gene8	CellType2	NA	0.5
-DistanceAssoGenes	1	CellType1	Gene10	CellType2	NA	0.5
+SpatialChange	1	Fibroblast	DOK3	NA	NA	0.5
+SpatialChange	1	Fibroblast	BIVM	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC9	NA	NA	0.5
+SpatialChange	1	Fibroblast	GAA	NA	NA	0.5
+SpatialChange	1	Fibroblast	DOC2A	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDX20	NA	NA	0.5
+SpatialChange	1	Fibroblast	SNX1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIB3	NA	NA	0.5
+SpatialChange	1	Fibroblast	HKDC1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NTPCR	NA	NA	0.5
+SpatialChange	1	Fibroblast	OXER1	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDR2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF396	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF763	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF257	NA	NA	0.5
+SpatialChange	1	Fibroblast	ENDOV	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF596	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC102A	NA	NA	0.5
+SpatialChange	1	Fibroblast	GTPBP3	NA	NA	0.5
+SpatialChange	1	Fibroblast	HNRNPAB	NA	NA	0.5
+SpatialChange	1	Fibroblast	NPIPB3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MYO1F	NA	NA	0.5
+SpatialChange	1	Fibroblast	UQCC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	AEBP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MPP7	NA	NA	0.5
+SpatialChange	1	Fibroblast	TSKS	NA	NA	0.5
+SpatialChange	1	Fibroblast	NMUR1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PPEF2	NA	NA	0.5
+SpatialChange	1	Fibroblast	UBN1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARHGEF25	NA	NA	0.5
+SpatialChange	1	Fibroblast	NAGPA	NA	NA	0.5
+SpatialChange	1	Fibroblast	SMARCAL1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LIPI	NA	NA	0.5
+SpatialChange	1	Fibroblast	SAMD12	NA	NA	0.5
+SpatialChange	1	Fibroblast	DRAM1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MPZL3	NA	NA	0.5
+SpatialChange	1	Fibroblast	PSMF1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PRKCB	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARMC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	B3GNT9	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF837	NA	NA	0.5
+SpatialChange	1	Fibroblast	SPCS3	NA	NA	0.5
+SpatialChange	1	Fibroblast	CBR1	NA	NA	0.5
+SpatialChange	1	Fibroblast	DNAH17	NA	NA	0.5
+SpatialChange	1	Fibroblast	ERI2	NA	NA	0.5
+SpatialChange	1	Fibroblast	GALNT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ABT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	UBA3	NA	NA	0.5
+SpatialChange	1	Fibroblast	NT5DC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MTFR1L	NA	NA	0.5
+SpatialChange	1	Fibroblast	YJEFN3	NA	NA	0.5
+SpatialChange	1	Fibroblast	HYDIN	NA	NA	0.5
+SpatialChange	1	Fibroblast	OAF	NA	NA	0.5
+SpatialChange	1	Fibroblast	MAP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	S100A12	NA	NA	0.5
+SpatialChange	1	Fibroblast	POLE3	NA	NA	0.5
+SpatialChange	1	Fibroblast	TAMM41	NA	NA	0.5
+SpatialChange	1	Fibroblast	THUMPD2	NA	NA	0.5
+SpatialChange	1	Fibroblast	USP45	NA	NA	0.5
+SpatialChange	1	Fibroblast	D2HGDH	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANAPC13	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF10	NA	NA	0.5
+SpatialChange	1	Fibroblast	AASDH	NA	NA	0.5
+SpatialChange	1	Fibroblast	CRIPT	NA	NA	0.5
+SpatialChange	1	Fibroblast	PARP10	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCZ1B	NA	NA	0.5
+SpatialChange	1	Fibroblast	RAB2A	NA	NA	0.5
+SpatialChange	1	Fibroblast	DNALI1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SFMBT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ERMAP	NA	NA	0.5
+SpatialChange	1	Fibroblast	PPID	NA	NA	0.5
+SpatialChange	1	Fibroblast	UHRF1BP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LYRM4	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADCK2	NA	NA	0.5
+SpatialChange	1	Fibroblast	RAMP3	NA	NA	0.5
+SpatialChange	1	Fibroblast	SIRT6	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRAF3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF24	NA	NA	0.5
+SpatialChange	1	Fibroblast	DYNLL2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CLDN20	NA	NA	0.5
+SpatialChange	1	Fibroblast	ACP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDX25	NA	NA	0.5
+SpatialChange	1	Fibroblast	SERPINF1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SPTLC1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRAPPC4	NA	NA	0.5
+SpatialChange	1	Fibroblast	GIN1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NOL6	NA	NA	0.5
+SpatialChange	1	Fibroblast	STEAP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	MAN1B1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LHB	NA	NA	0.5
+SpatialChange	1	Fibroblast	POLL	NA	NA	0.5
+SpatialChange	1	Fibroblast	CDCA7L	NA	NA	0.5
+SpatialChange	1	Fibroblast	MME	NA	NA	0.5
+SpatialChange	1	Fibroblast	HCLS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	WEE1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MSMO1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIP4	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC25A28	NA	NA	0.5
+SpatialChange	1	Fibroblast	GIMAP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SYNM	NA	NA	0.5
+SpatialChange	1	Fibroblast	LCN8	NA	NA	0.5
+SpatialChange	1	Fibroblast	CLDN3	NA	NA	0.5
+SpatialChange	1	Fibroblast	WNK1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SEC23B	NA	NA	0.5
+SpatialChange	1	Fibroblast	TNS2	NA	NA	0.5
+SpatialChange	1	Fibroblast	GALNT10	NA	NA	0.5
+SpatialChange	1	Fibroblast	LAMP5	NA	NA	0.5
+SpatialChange	1	Fibroblast	SCCPDH	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRDMT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LPCAT2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TIGD1	NA	NA	0.5
+SpatialChange	1	Fibroblast	UBE2Q2L	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF408	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC97	NA	NA	0.5
+SpatialChange	1	Fibroblast	FEZ1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PBLD	NA	NA	0.5
+SpatialChange	1	Fibroblast	PDCD11	NA	NA	0.5
+SpatialChange	1	Fibroblast	GTF2H5	NA	NA	0.5
+SpatialChange	1	Fibroblast	UBQLN1	NA	NA	0.5
+SpatialChange	1	Fibroblast	POU5F1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MST1R	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF664	NA	NA	0.5
+SpatialChange	1	Fibroblast	KANK2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CHD1L	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC20A2	NA	NA	0.5
+SpatialChange	1	Fibroblast	KRT6A	NA	NA	0.5
+SpatialChange	1	Fibroblast	RAB6A	NA	NA	0.5
+SpatialChange	1	Fibroblast	PRPSAP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TMTC4	NA	NA	0.5
+SpatialChange	1	Fibroblast	CTSO	NA	NA	0.5
+SpatialChange	1	Fibroblast	CYB561D2	NA	NA	0.5
+SpatialChange	1	Fibroblast	RNF182	NA	NA	0.5
+SpatialChange	1	Fibroblast	MAPRE2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CTPS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	HES2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TTC19	NA	NA	0.5
+SpatialChange	1	Fibroblast	NPAS3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADD3	NA	NA	0.5
+SpatialChange	1	Fibroblast	GABRB3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MRAS	NA	NA	0.5
+SpatialChange	1	Fibroblast	RCBTB1	NA	NA	0.5
+SpatialChange	1	Fibroblast	DOCK8	NA	NA	0.5
+SpatialChange	1	Fibroblast	MFSD14C	NA	NA	0.5
+SpatialChange	1	Fibroblast	PUSL1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NOA1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LRRFIP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	LYSMD4	NA	NA	0.5
+SpatialChange	1	Fibroblast	EXOSC10	NA	NA	0.5
+SpatialChange	1	Fibroblast	TOP3A	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIM4	NA	NA	0.5
+SpatialChange	1	Fibroblast	PRRT2	NA	NA	0.5
+SpatialChange	1	Fibroblast	IQCH	NA	NA	0.5
+SpatialChange	1	Fibroblast	DTD1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LPIN1	NA	NA	0.5
+SpatialChange	1	Fibroblast	RBBP9	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARMC1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CREBBP	NA	NA	0.5
+SpatialChange	1	Fibroblast	TSFM	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF518A	NA	NA	0.5
+SpatialChange	1	Fibroblast	RAB6C	NA	NA	0.5
+SpatialChange	1	Fibroblast	ABLIM3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ALG11	NA	NA	0.5
+SpatialChange	1	Fibroblast	CAMSAP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CIAO1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC38A11	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARPC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANKRD33B	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC1A7	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANKRD30A	NA	NA	0.5
+SpatialChange	1	Fibroblast	LRPPRC	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARHGAP15	NA	NA	0.5
+SpatialChange	1	Fibroblast	KIAA0391	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC157	NA	NA	0.5
+SpatialChange	1	Fibroblast	NPRL3	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC44A3	NA	NA	0.5
+SpatialChange	1	Fibroblast	SPPL2B	NA	NA	0.5
+SpatialChange	1	Fibroblast	ORC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MICA	NA	NA	0.5
+SpatialChange	1	Fibroblast	WRAP73	NA	NA	0.5
+SpatialChange	1	Fibroblast	KCTD12	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC37A4	NA	NA	0.5
+SpatialChange	1	Fibroblast	GRTP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TWSG1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIM38	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDX55	NA	NA	0.5
+SpatialChange	1	Fibroblast	C12orf65	NA	NA	0.5
+SpatialChange	1	Fibroblast	NKX6-1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIM73	NA	NA	0.5
+SpatialChange	1	Fibroblast	EEFSEC	NA	NA	0.5
+SpatialChange	1	Fibroblast	C1orf123	NA	NA	0.5
+SpatialChange	1	Fibroblast	KRT83	NA	NA	0.5
+SpatialChange	1	Fibroblast	OXGR1	NA	NA	0.5
+SpatialChange	1	Fibroblast	FBXO42	NA	NA	0.5
+SpatialChange	1	Fibroblast	BTN2A2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CAPS2	NA	NA	0.5
+SpatialChange	1	Fibroblast	HRNR	NA	NA	0.5
+SpatialChange	1	Fibroblast	RING1	NA	NA	0.5
+SpatialChange	1	Fibroblast	KLHDC4	NA	NA	0.5
+SpatialChange	1	Fibroblast	STEAP1B	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZBTB1	NA	NA	0.5
+SpatialChange	1	Fibroblast	VNN2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZCRB1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CAMTA1	NA	NA	0.5
+SpatialChange	1	Fibroblast	RNF32	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC86	NA	NA	0.5
+SpatialChange	1	Fibroblast	PTTG1IP	NA	NA	0.5
+SpatialChange	1	Fibroblast	DNPH1	NA	NA	0.5
+SpatialChange	1	Fibroblast	WDR3	NA	NA	0.5
+SpatialChange	1	Fibroblast	AMD1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CABLES2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARFIP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SFT2D1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SNCA	NA	NA	0.5
+SpatialChange	1	Fibroblast	GPR85	NA	NA	0.5
+SpatialChange	1	Fibroblast	BRD7	NA	NA	0.5
+SpatialChange	1	Fibroblast	KEL	NA	NA	0.5
+SpatialChange	1	Fibroblast	POLDIP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	EXOC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ST3GAL3	NA	NA	0.5
+SpatialChange	1	Fibroblast	OLFM2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TMEM9B	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF329	NA	NA	0.5
+SpatialChange	1	Fibroblast	RMND1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TCEANC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PCYT1A	NA	NA	0.5
+SpatialChange	1	Fibroblast	NFATC2IP	NA	NA	0.5
+SpatialChange	1	Fibroblast	PIGC	NA	NA	0.5
+SpatialChange	1	Fibroblast	SH2D2A	NA	NA	0.5
+SpatialChange	1	Fibroblast	NEK11	NA	NA	0.5
+SpatialChange	1	Fibroblast	NUCKS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CRTC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	UGGT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADGRF3	NA	NA	0.5
+SpatialChange	1	Fibroblast	AKTIP	NA	NA	0.5
+SpatialChange	1	Fibroblast	SCO2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PPAT	NA	NA	0.5
+SpatialChange	1	Fibroblast	NOL7	NA	NA	0.5
+SpatialChange	1	Fibroblast	DMPK	NA	NA	0.5
+SpatialChange	1	Fibroblast	SMAD5	NA	NA	0.5
+SpatialChange	1	Fibroblast	EIF3F	NA	NA	0.5
+SpatialChange	1	Fibroblast	NUS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PACS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PGS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	RPE	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF117	NA	NA	0.5
+SpatialChange	1	Fibroblast	EFCAB1	NA	NA	0.5
+SpatialChange	1	Fibroblast	HNRNPA1L2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CIB1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MRGBP	NA	NA	0.5
+SpatialChange	1	Fibroblast	HOMER2	NA	NA	0.5
+SpatialChange	1	Fibroblast	IQCD	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLFN12	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC40	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDX43	NA	NA	0.5
+SpatialChange	1	Fibroblast	COL11A2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TM7SF3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MX1	NA	NA	0.5
+SpatialChange	1	Fibroblast	EXO5	NA	NA	0.5
+SpatialChange	1	Fibroblast	CNPY4	NA	NA	0.5
+SpatialChange	1	Fibroblast	PICALM	NA	NA	0.5
+SpatialChange	1	Fibroblast	SDK1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SMIM7	NA	NA	0.5
+SpatialChange	1	Fibroblast	GFM1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NBN	NA	NA	0.5
+SpatialChange	1	Fibroblast	ATP1B2	NA	NA	0.5
+SpatialChange	1	Fibroblast	LMF1	NA	NA	0.5
+SpatialChange	1	Fibroblast	BOK	NA	NA	0.5
+SpatialChange	1	Fibroblast	TSEN34	NA	NA	0.5
+SpatialChange	1	Fibroblast	RNF14	NA	NA	0.5
+SpatialChange	1	Fibroblast	N6AMT1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADH4	NA	NA	0.5
+SpatialChange	1	Fibroblast	PDSS2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC12A7	NA	NA	0.5
+SpatialChange	1	Fibroblast	NCCRP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PPIP5K2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PAPLN	NA	NA	0.5
+SpatialChange	1	Fibroblast	DSG2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC26A11	NA	NA	0.5
+SpatialChange	1	Fibroblast	VPS11	NA	NA	0.5
+SpatialChange	1	Fibroblast	VAMP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	GATM	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF197	NA	NA	0.5
+SpatialChange	1	Fibroblast	PALM2	NA	NA	0.5
+SpatialChange	1	Fibroblast	GNB3	NA	NA	0.5
+SpatialChange	1	Fibroblast	C4A	NA	NA	0.5
+SpatialChange	1	Fibroblast	UBE2D1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ABCC8	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARL6IP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SSBP4	NA	NA	0.5
+SpatialChange	1	Fibroblast	COPG2	NA	NA	0.5
+SpatialChange	1	Fibroblast	GALNT3	NA	NA	0.5
+SpatialChange	1	Fibroblast	SPECC1	NA	NA	0.5
+SpatialChange	1	Fibroblast	FAM214A	NA	NA	0.5
+SpatialChange	1	Fibroblast	ELAC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRIM58	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF792	NA	NA	0.5
+SpatialChange	1	Fibroblast	RNF180	NA	NA	0.5
+SpatialChange	1	Fibroblast	DENND4C	NA	NA	0.5
+SpatialChange	1	Fibroblast	PIP5K1B	NA	NA	0.5
+SpatialChange	1	Fibroblast	G6PC3	NA	NA	0.5
+SpatialChange	1	Fibroblast	RHOBTB3	NA	NA	0.5
+SpatialChange	1	Fibroblast	HLA-DRA	NA	NA	0.5
+SpatialChange	1	Fibroblast	RNASEK	NA	NA	0.5
+SpatialChange	1	Fibroblast	NT5C3B	NA	NA	0.5
+SpatialChange	1	Fibroblast	MFAP3	NA	NA	0.5
+SpatialChange	1	Fibroblast	PLA2R1	NA	NA	0.5
+SpatialChange	1	Fibroblast	RARRES2	NA	NA	0.5
+SpatialChange	1	Fibroblast	THOC5	NA	NA	0.5
+SpatialChange	1	Fibroblast	B3GNT8	NA	NA	0.5
+SpatialChange	1	Fibroblast	EI24	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARL16	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZFYVE28	NA	NA	0.5
+SpatialChange	1	Fibroblast	AKAP7	NA	NA	0.5
+SpatialChange	1	Fibroblast	UQCC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC25A11	NA	NA	0.5
+SpatialChange	1	Fibroblast	USP6	NA	NA	0.5
+SpatialChange	1	Fibroblast	VPS8	NA	NA	0.5
+SpatialChange	1	Fibroblast	ERCC6	NA	NA	0.5
+SpatialChange	1	Fibroblast	TUBG2	NA	NA	0.5
+SpatialChange	1	Fibroblast	LMAN2L	NA	NA	0.5
+SpatialChange	1	Fibroblast	CARHSP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	FCHSD1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NUTM2E	NA	NA	0.5
+SpatialChange	1	Fibroblast	MCFD2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SCD	NA	NA	0.5
+SpatialChange	1	Fibroblast	CTTNBP2NL	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANKRD65	NA	NA	0.5
+SpatialChange	1	Fibroblast	NLRP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	FIGN	NA	NA	0.5
+SpatialChange	1	Fibroblast	UGT2B4	NA	NA	0.5
+SpatialChange	1	Fibroblast	NAPG	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCDC36	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRAPPC12	NA	NA	0.5
+SpatialChange	1	Fibroblast	MRO	NA	NA	0.5
+SpatialChange	1	Fibroblast	TTC37	NA	NA	0.5
+SpatialChange	1	Fibroblast	ERCC6L2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TAF1A	NA	NA	0.5
+SpatialChange	1	Fibroblast	NBPF11	NA	NA	0.5
+SpatialChange	1	Fibroblast	NUCB2	NA	NA	0.5
+SpatialChange	1	Fibroblast	VIPAS39	NA	NA	0.5
+SpatialChange	1	Fibroblast	CEP131	NA	NA	0.5
+SpatialChange	1	Fibroblast	C1QTNF9B	NA	NA	0.5
+SpatialChange	1	Fibroblast	CD22	NA	NA	0.5
+SpatialChange	1	Fibroblast	AKAP11	NA	NA	0.5
+SpatialChange	1	Fibroblast	RRAGA	NA	NA	0.5
+SpatialChange	1	Fibroblast	F10	NA	NA	0.5
+SpatialChange	1	Fibroblast	NDUFAF4	NA	NA	0.5
+SpatialChange	1	Fibroblast	NT5E	NA	NA	0.5
+SpatialChange	1	Fibroblast	CLEC3B	NA	NA	0.5
+SpatialChange	1	Fibroblast	BAG6	NA	NA	0.5
+SpatialChange	1	Fibroblast	FAM160A2	NA	NA	0.5
+SpatialChange	1	Fibroblast	LRRC37A	NA	NA	0.5
+SpatialChange	1	Fibroblast	CENPP	NA	NA	0.5
+SpatialChange	1	Fibroblast	SDR39U1	NA	NA	0.5
+SpatialChange	1	Fibroblast	FGGY	NA	NA	0.5
+SpatialChange	1	Fibroblast	LTBP3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MESP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	KIFC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PPP1R9A	NA	NA	0.5
+SpatialChange	1	Fibroblast	PIAS2	NA	NA	0.5
+SpatialChange	1	Fibroblast	GPER1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CYTH4	NA	NA	0.5
+SpatialChange	1	Fibroblast	DHX35	NA	NA	0.5
+SpatialChange	1	Fibroblast	SNTG2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PTN	NA	NA	0.5
+SpatialChange	1	Fibroblast	LATS1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CES1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MDM1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LSM7	NA	NA	0.5
+SpatialChange	1	Fibroblast	LYG1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MGMT	NA	NA	0.5
+SpatialChange	1	Fibroblast	VPS13A	NA	NA	0.5
+SpatialChange	1	Fibroblast	SYNDIG1	NA	NA	0.5
+SpatialChange	1	Fibroblast	EIF2AK4	NA	NA	0.5
+SpatialChange	1	Fibroblast	C9orf3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARIH2	NA	NA	0.5
+SpatialChange	1	Fibroblast	NBPF10	NA	NA	0.5
+SpatialChange	1	Fibroblast	NYAP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	ABCA8	NA	NA	0.5
+SpatialChange	1	Fibroblast	CAPZA1	NA	NA	0.5
+SpatialChange	1	Fibroblast	WASF3	NA	NA	0.5
+SpatialChange	1	Fibroblast	WDR93	NA	NA	0.5
+SpatialChange	1	Fibroblast	EP300	NA	NA	0.5
+SpatialChange	1	Fibroblast	TUBGCP2	NA	NA	0.5
+SpatialChange	1	Fibroblast	EIF4G2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADGRE2	NA	NA	0.5
+SpatialChange	1	Fibroblast	RND2	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF347	NA	NA	0.5
+SpatialChange	1	Fibroblast	TFB2M	NA	NA	0.5
+SpatialChange	1	Fibroblast	ACBD6	NA	NA	0.5
+SpatialChange	1	Fibroblast	LSR	NA	NA	0.5
+SpatialChange	1	Fibroblast	MAN2C1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SHANK3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANKRD20A4	NA	NA	0.5
+SpatialChange	1	Fibroblast	FBXW12	NA	NA	0.5
+SpatialChange	1	Fibroblast	FAM124B	NA	NA	0.5
+SpatialChange	1	Fibroblast	TMEM249	NA	NA	0.5
+SpatialChange	1	Fibroblast	ITM2B	NA	NA	0.5
+SpatialChange	1	Fibroblast	AMIGO1	NA	NA	0.5
+SpatialChange	1	Fibroblast	LVRN	NA	NA	0.5
+SpatialChange	1	Fibroblast	MCUR1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SOD3	NA	NA	0.5
+SpatialChange	1	Fibroblast	SRP68	NA	NA	0.5
+SpatialChange	1	Fibroblast	CYP4B1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TBPL1	NA	NA	0.5
+SpatialChange	1	Fibroblast	CCL4L2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TCP11L1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TLE1	NA	NA	0.5
+SpatialChange	1	Fibroblast	NDUFS5	NA	NA	0.5
+SpatialChange	1	Fibroblast	BIN1	NA	NA	0.5
+SpatialChange	1	Fibroblast	VPS37D	NA	NA	0.5
+SpatialChange	1	Fibroblast	MAF1	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC25A34	NA	NA	0.5
+SpatialChange	1	Fibroblast	ZNF525	NA	NA	0.5
+SpatialChange	1	Fibroblast	IFFO1	NA	NA	0.5
+SpatialChange	1	Fibroblast	BIN3	NA	NA	0.5
+SpatialChange	1	Fibroblast	EIF3B	NA	NA	0.5
+SpatialChange	1	Fibroblast	AMY2B	NA	NA	0.5
+SpatialChange	1	Fibroblast	ACTR3C	NA	NA	0.5
+SpatialChange	1	Fibroblast	MCM10	NA	NA	0.5
+SpatialChange	1	Fibroblast	MRGPRX3	NA	NA	0.5
+SpatialChange	1	Fibroblast	ARMC10	NA	NA	0.5
+SpatialChange	1	Fibroblast	DNAJC18	NA	NA	0.5
+SpatialChange	1	Fibroblast	C9orf72	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADSS	NA	NA	0.5
+SpatialChange	1	Fibroblast	BPI	NA	NA	0.5
+SpatialChange	1	Fibroblast	NUP85	NA	NA	0.5
+SpatialChange	1	Fibroblast	SV2A	NA	NA	0.5
+SpatialChange	1	Fibroblast	ANAPC4	NA	NA	0.5
+SpatialChange	1	Fibroblast	PCOLCE2	NA	NA	0.5
+SpatialChange	1	Fibroblast	PRSS23	NA	NA	0.5
+SpatialChange	1	Fibroblast	TIPIN	NA	NA	0.5
+SpatialChange	1	Fibroblast	ADD2	NA	NA	0.5
+SpatialChange	1	Fibroblast	LRWD1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PROSER3	NA	NA	0.5
+SpatialChange	1	Fibroblast	MED11	NA	NA	0.5
+SpatialChange	1	Fibroblast	FMOD	NA	NA	0.5
+SpatialChange	1	Fibroblast	GRID1	NA	NA	0.5
+SpatialChange	1	Fibroblast	DMWD	NA	NA	0.5
+SpatialChange	1	Fibroblast	CPE	NA	NA	0.5
+SpatialChange	1	Fibroblast	MARCH1	NA	NA	0.5
+SpatialChange	1	Fibroblast	MARCO	NA	NA	0.5
+SpatialChange	1	Fibroblast	C9orf43	NA	NA	0.5
+SpatialChange	1	Fibroblast	DOHH	NA	NA	0.5
+SpatialChange	1	Fibroblast	DDX11	NA	NA	0.5
+SpatialChange	1	Fibroblast	ST7L	NA	NA	0.5
+SpatialChange	1	Fibroblast	NT5M	NA	NA	0.5
+SpatialChange	1	Fibroblast	KCNIP4	NA	NA	0.5
+SpatialChange	1	Fibroblast	FAM155A	NA	NA	0.5
+SpatialChange	1	Fibroblast	TRAPPC6B	NA	NA	0.5
+SpatialChange	1	Fibroblast	JADE2	NA	NA	0.5
+SpatialChange	1	Fibroblast	TMBIM4	NA	NA	0.5
+SpatialChange	1	Fibroblast	R3HCC1L	NA	NA	0.5
+SpatialChange	1	Fibroblast	PAX8	NA	NA	0.5
+SpatialChange	1	Fibroblast	NPTX2	NA	NA	0.5
+SpatialChange	1	Fibroblast	UAP1L1	NA	NA	0.5
+SpatialChange	1	Fibroblast	GP1BA	NA	NA	0.5
+SpatialChange	1	Fibroblast	MRGPRX2	NA	NA	0.5
+SpatialChange	1	Fibroblast	SLC16A7	NA	NA	0.5
+SpatialChange	1	Fibroblast	SHC2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CD79B	NA	NA	0.5
+SpatialChange	1	Fibroblast	GABPB2	NA	NA	0.5
+SpatialChange	1	Fibroblast	CEP57	NA	NA	0.5
+SpatialChange	1	Fibroblast	C15orf65	NA	NA	0.5
+SpatialChange	1	Fibroblast	TMEM97	NA	NA	0.5
+SpatialChange	1	Fibroblast	PRDX1	NA	NA	0.5
+SpatialChange	1	Fibroblast	TCAF2	NA	NA	0.5
+SpatialChange	1	Fibroblast	MPND	NA	NA	0.5
+SpatialChange	1	Fibroblast	LY6K	NA	NA	0.5
+SpatialChange	1	Fibroblast	NCKIPSD	NA	NA	0.5
+SpatialChange	1	Fibroblast	CLUAP1	NA	NA	0.5
+SpatialChange	1	Fibroblast	PDIK1L	NA	NA	0.5
+SpatialChange	1	Fibroblast	KRCC1	NA	NA	0.5
+SpatialChange	1	Fibroblast	GPR88	NA	NA	0.5
+SpatialChange	1	Fibroblast	C1D	NA	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SPARCL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PRKAR1B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DOCK8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	EMX2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ROGDI	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CENPP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KLHL17	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TSKS	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GPR156	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCNB1IP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TMEM176A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CKMT2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	WWOX	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UVSSA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BCS1L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC5A6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MVD	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CDK7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FANCA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	IK	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DOK5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBXO38	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GSTA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NUDT7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SCFD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ELP4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATOH8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RPRD1B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TRIM16L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HHIPL2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CRELD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SYPL2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TMEM9	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GSTM4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FASTK	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RANBP17	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CSRNP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATP6V1D	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNF40	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GTF2I	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF251	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LY86	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	IL12RB1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MDH1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MT1M	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARV1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	IMPA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ISG15	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SAMD12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CYP2J2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PTPN12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NYAP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SMC1B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MME	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MCM3AP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CFAP97	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CPNE5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CNRIP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM193B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNF7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MUCL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CAPN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MPV17L2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AKIP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KLHL3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	INTS8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CNIH1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC15A5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BARD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LRRC34	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LURAP1L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PPFIBP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GIGYF1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	VPS28	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KCTD12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RHOBTB3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SURF1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CISD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LTN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	IVNS1ABP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CRYL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HSPA6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	USP45	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HAGH	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PCDHB8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TRAPPC13	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HEATR3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DAP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MXD3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CANX	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MSH6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LTB4R	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DNAJC15	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FANCE	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADCY4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RSRC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LRRC37A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UBA3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	C1GALT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PPP5C	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CPT2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MESP2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CEP72	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RRH	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GPR19	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBXO7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MAN2C1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SYNDIG1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATAD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FGF8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DNMBP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AGR3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SS18L2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZC3H8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CRMP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM228A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PEX11G	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SYCP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ABCA10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCL18	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UFSP2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SHMT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM19A2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SULT1B1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BEND6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CENPQ	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SEPT5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARSB	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	INO80E	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ACTR8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM111A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NMUR1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AKAP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NAGA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NMT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RWDD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SNCA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DECR2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	INPP5E	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF688	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	C1orf216	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	THAP5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SUOX	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNHIT6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RBM18	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF408	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCL24	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GNG10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCT6B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TTC4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NUDCD3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MTIF2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DOPEY2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FGD4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DHX32	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SUDS3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PIGL	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DCAF16	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UBE2F	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM19A3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RTN4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MUM1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GTF2H2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM53A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	QSOX2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NIPA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SPATA7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM160B2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TACR1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TMPRSS5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NT5C2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCDC144NL	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNPC3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SEPT2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TSN	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	APOBEC3D	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LGALS7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	WDR60	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF658	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM220A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	OSCP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SETDB1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MARCH8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ERICH6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF565	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UMPS	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NADSYN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NUP35	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	EXOC4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DDT	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC2A8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TEX14	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PRR25	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KDM2B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CDC16	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HYAL3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLFN5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF792	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TAF11	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TUSC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	EIF2D	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CPVL	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RRBP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NELL2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TWISTNB	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TPO	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBLN7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CRCP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC36A1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NKX6-1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ASNS	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PLEKHD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NBPF20	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MTHFSD	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATP7B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	P2RY6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADHFE1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CSNK2B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF337	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	USP30	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ENTPD5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	B3GNT3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RRAS2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PRDM6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF614	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MAEA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SNRNP25	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NMRK1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CEP164	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SPHK2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	STK10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ATF1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCDC25	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF229	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TCF7L1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADAT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LSM4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ECI2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MTX1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADAM11	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ABHD12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RABAC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	IRAK1BP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CASP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LNPEP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LDLRAP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	C18orf32	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HNRNPR	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TPSAB1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KIFC2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NDUFV3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARHGAP24	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MROH8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NDUFAF5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LSR	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CD79B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UNC45B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NOMO3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PRDX1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LRP5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CTSB	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HIBCH	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	POLDIP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MTF1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LYSMD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CA13	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RAP1A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NCAPD2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TRIM4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	REEP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNF182	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NEMP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SP110	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CENPA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZFP62	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF783	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ACYP2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NDUFB1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ANKRD30A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PNPLA8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CAMSAP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF33B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ELP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PBX3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ABCA7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KCNJ1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	KDELC2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GOLIM4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TTC12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	L3MBTL4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SF3B3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HSD17B14	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PQLC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SVIP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NRDE2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ASAP2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC39A10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC44A3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PSMB3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCDC186	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SH3TC2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HAPLN4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CLTCL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LUZP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SEH1L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MYO7A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DTX2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UAP1L1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARF4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DNAJC8	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF765	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CNPY4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ANKRD23	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BHMT2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LMF2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TSLP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DPP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBXW11	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PON1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PNMA2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NDUFS2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SUPT3H	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HSD17B4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GATAD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF607	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RAMP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ALAD	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PHF10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCDC167	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PFN4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM153B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ART5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MAG	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BTBD9	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBXO39	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TUBG2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DYSF	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MIS18BP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM174B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AHI1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TULP2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DYNC1I1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LYSMD4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAAP20	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MORN4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FOXD4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TRAF3IP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC7A9	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NLRC3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SAMD3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CTNNA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC14A1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF518A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNPEP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	LANCL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	STAT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ROR2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC25A12	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SMCHD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HLA-DOA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CIAPIN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADH1C	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADAD2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TGS1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBLIM1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DYNC1I2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNF224	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BRICD5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SFI1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DPH7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TEPP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GOLGA6L9	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PBX1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MTIF3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UBE2Q2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GDF6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	EARS2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PPP2R1B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AASDH	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	B3GNTL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FMO4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MCF2L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	OBSL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF197	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MFAP3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF334	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ASGR2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NCOA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RNF123	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AES	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GDI2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SENP6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FBXL20	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ENGASE	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADAMTS10	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DUSP23	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UCK1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PMS1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FUCA1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MVB12B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CERS3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TSC22D1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF597	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MCMBP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NINJ2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GALNT13	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF517	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MED19	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF260	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ACVRL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	METTL17	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARFGEF2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TSC22D4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ADD3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	OPN4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	GRIN3B	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UGGT1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CIITA	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	XAB2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	STIM2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	VPS9D1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DCTN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NRTN	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NUP54	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PLD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC9C1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PTAFR	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZBTB25	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ARHGDIB	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	EFCC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MT1A	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	C19orf47	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	USP37	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PIGZ	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CBX4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	DNLZ	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	RUFY2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PFKL	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FCER2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	METAP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MSANTD4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MESP1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CEP295	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FAM110D	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UBQLN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ALS2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLC1A7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MYL5	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PABPC4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FTCDNL1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	SLU7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	OR2L13	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	THOC3	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FKRP	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PPIL2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	FOXN2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	MBOAT7	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CHURC1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	VAMP4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	BTBD1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AQP6	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	PEMT	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CHD1L	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ELFN1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	STXBP4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	UGGT2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TRIM2	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	ZNF333	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	NNMT	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	WDR72	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	HRNR	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	AC009065.4	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	TIE1	Immune (myeloid)	NA	0.5
+DistanceAssoGenes	2	Adipocyte	CCDC137	Immune (myeloid)	NA	0.5
+ExprAssoGenes	2	Epithelial cell	TOX	Immune (myeloid)	PLGRKT	0.5
+ExprAssoGenes	2	Epithelial cell	MTERF4	Immune (myeloid)	SMIM1	0.5
+ExprAssoGenes	2	Epithelial cell	NLK	Immune (myeloid)	WDR11	0.5
+ExprAssoGenes	2	Epithelial cell	FZR1	Immune (myeloid)	PROCA1	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF749	Immune (myeloid)	SLC37A2	0.5
+ExprAssoGenes	2	Epithelial cell	MFAP3	Immune (myeloid)	CCHCR1	0.5
+ExprAssoGenes	2	Epithelial cell	RABGAP1L	Immune (myeloid)	CEACAM21	0.5
+ExprAssoGenes	2	Epithelial cell	MCUR1	Immune (myeloid)	HLA-DOB	0.5
+ExprAssoGenes	2	Epithelial cell	COG2	Immune (myeloid)	WHAMM	0.5
+ExprAssoGenes	2	Epithelial cell	TMC6	Immune (myeloid)	SYS1	0.5
+ExprAssoGenes	2	Epithelial cell	POLE3	Immune (myeloid)	NT5DC2	0.5
+ExprAssoGenes	2	Epithelial cell	SRP72	Immune (myeloid)	CMTM3	0.5
+ExprAssoGenes	2	Epithelial cell	UST	Immune (myeloid)	TTC19	0.5
+ExprAssoGenes	2	Epithelial cell	SLC22A3	Immune (myeloid)	SENP5	0.5
+ExprAssoGenes	2	Epithelial cell	CLHC1	Immune (myeloid)	GRK7	0.5
+ExprAssoGenes	2	Epithelial cell	CSRNP3	Immune (myeloid)	GDI2	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM65	Immune (myeloid)	ITGB6	0.5
+ExprAssoGenes	2	Epithelial cell	C11orf53	Immune (myeloid)	B3GAT2	0.5
+ExprAssoGenes	2	Epithelial cell	UTS2B	Immune (myeloid)	SLC24A4	0.5
+ExprAssoGenes	2	Epithelial cell	DZANK1	Immune (myeloid)	SLC36A4	0.5
+ExprAssoGenes	2	Epithelial cell	CX3CR1	Immune (myeloid)	HMGXB3	0.5
+ExprAssoGenes	2	Epithelial cell	BVES	Immune (myeloid)	SERTAD3	0.5
+ExprAssoGenes	2	Epithelial cell	ANKRD61	Immune (myeloid)	AP4B1	0.5
+ExprAssoGenes	2	Epithelial cell	NAAA	Immune (myeloid)	BIN3	0.5
+ExprAssoGenes	2	Epithelial cell	PIK3R4	Immune (myeloid)	KLHDC4	0.5
+ExprAssoGenes	2	Epithelial cell	TNNI3K	Immune (myeloid)	MTG1	0.5
+ExprAssoGenes	2	Epithelial cell	LYRM4	Immune (myeloid)	ZFYVE19	0.5
+ExprAssoGenes	2	Epithelial cell	INTS10	Immune (myeloid)	MYOC	0.5
+ExprAssoGenes	2	Epithelial cell	CYP21A2	Immune (myeloid)	FAM117B	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF213	Immune (myeloid)	ALDH8A1	0.5
+ExprAssoGenes	2	Epithelial cell	MTAP	Immune (myeloid)	TWISTNB	0.5
+ExprAssoGenes	2	Epithelial cell	TMC8	Immune (myeloid)	ZMYND12	0.5
+ExprAssoGenes	2	Epithelial cell	PUS3	Immune (myeloid)	HRCT1	0.5
+ExprAssoGenes	2	Epithelial cell	PTCHD3	Immune (myeloid)	ZFP64	0.5
+ExprAssoGenes	2	Epithelial cell	OOEP	Immune (myeloid)	PEX11A	0.5
+ExprAssoGenes	2	Epithelial cell	FAM47E	Immune (myeloid)	DLX6	0.5
+ExprAssoGenes	2	Epithelial cell	PICK1	Immune (myeloid)	TOMM7	0.5
+ExprAssoGenes	2	Epithelial cell	C2orf76	Immune (myeloid)	CAPN9	0.5
+ExprAssoGenes	2	Epithelial cell	TBL3	Immune (myeloid)	EED	0.5
+ExprAssoGenes	2	Epithelial cell	VPS13C	Immune (myeloid)	MICB	0.5
+ExprAssoGenes	2	Epithelial cell	CEP164	Immune (myeloid)	DNAJC3	0.5
+ExprAssoGenes	2	Epithelial cell	EMC1	Immune (myeloid)	VANGL1	0.5
+ExprAssoGenes	2	Epithelial cell	BTNL8	Immune (myeloid)	ATG10	0.5
+ExprAssoGenes	2	Epithelial cell	LRP5L	Immune (myeloid)	DOK2	0.5
+ExprAssoGenes	2	Epithelial cell	CCDC88C	Immune (myeloid)	ZNF566	0.5
+ExprAssoGenes	2	Epithelial cell	ENDOG	Immune (myeloid)	NUP54	0.5
+ExprAssoGenes	2	Epithelial cell	CCDC171	Immune (myeloid)	HOXB2	0.5
+ExprAssoGenes	2	Epithelial cell	HLA-DPA1	Immune (myeloid)	SFXN4	0.5
+ExprAssoGenes	2	Epithelial cell	IGF2R	Immune (myeloid)	CHORDC1	0.5
+ExprAssoGenes	2	Epithelial cell	CYBRD1	Immune (myeloid)	ITGB3BP	0.5
+ExprAssoGenes	2	Epithelial cell	SH2B1	Immune (myeloid)	NUDT2	0.5
+ExprAssoGenes	2	Epithelial cell	FAM76B	Immune (myeloid)	SLC22A18	0.5
+ExprAssoGenes	2	Epithelial cell	CASD1	Immune (myeloid)	PXK	0.5
+ExprAssoGenes	2	Epithelial cell	GSTA4	Immune (myeloid)	ATAD1	0.5
+ExprAssoGenes	2	Epithelial cell	TRAPPC10	Immune (myeloid)	TAGLN2	0.5
+ExprAssoGenes	2	Epithelial cell	PRRT2	Immune (myeloid)	SSC4D	0.5
+ExprAssoGenes	2	Epithelial cell	CCT6B	Immune (myeloid)	TMEM170A	0.5
+ExprAssoGenes	2	Epithelial cell	NSUN7	Immune (myeloid)	FHL3	0.5
+ExprAssoGenes	2	Epithelial cell	SLC5A11	Immune (myeloid)	RFX7	0.5
+ExprAssoGenes	2	Epithelial cell	PIK3CB	Immune (myeloid)	ODF2L	0.5
+ExprAssoGenes	2	Epithelial cell	FAAH	Immune (myeloid)	UBE2I	0.5
+ExprAssoGenes	2	Epithelial cell	DUSP11	Immune (myeloid)	GPATCH4	0.5
+ExprAssoGenes	2	Epithelial cell	DKKL1	Immune (myeloid)	MYO7B	0.5
+ExprAssoGenes	2	Epithelial cell	PITRM1	Immune (myeloid)	CEP68	0.5
+ExprAssoGenes	2	Epithelial cell	SEPT1	Immune (myeloid)	ZNF607	0.5
+ExprAssoGenes	2	Epithelial cell	FOXRED1	Immune (myeloid)	ELAC2	0.5
+ExprAssoGenes	2	Epithelial cell	TPD52L1	Immune (myeloid)	LEMD2	0.5
+ExprAssoGenes	2	Epithelial cell	PRR13	Immune (myeloid)	OPN1SW	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF554	Immune (myeloid)	SLC25A38	0.5
+ExprAssoGenes	2	Epithelial cell	BRICD5	Immune (myeloid)	SKOR1	0.5
+ExprAssoGenes	2	Epithelial cell	C12orf10	Immune (myeloid)	MAGEF1	0.5
+ExprAssoGenes	2	Epithelial cell	RBM18	Immune (myeloid)	RGS22	0.5
+ExprAssoGenes	2	Epithelial cell	XRRA1	Immune (myeloid)	SERF1B	0.5
+ExprAssoGenes	2	Epithelial cell	GEM	Immune (myeloid)	SLC34A3	0.5
+ExprAssoGenes	2	Epithelial cell	ZBTB7B	Immune (myeloid)	BTBD6	0.5
+ExprAssoGenes	2	Epithelial cell	EML3	Immune (myeloid)	GEMIN5	0.5
+ExprAssoGenes	2	Epithelial cell	LRRC19	Immune (myeloid)	UBXN6	0.5
+ExprAssoGenes	2	Epithelial cell	NLRP2	Immune (myeloid)	ZADH2	0.5
+ExprAssoGenes	2	Epithelial cell	PIP5KL1	Immune (myeloid)	SPHK2	0.5
+ExprAssoGenes	2	Epithelial cell	PSMG1	Immune (myeloid)	SNAPC5	0.5
+ExprAssoGenes	2	Epithelial cell	STEAP1B	Immune (myeloid)	KNSTRN	0.5
+ExprAssoGenes	2	Epithelial cell	VSIG2	Immune (myeloid)	PIBF1	0.5
+ExprAssoGenes	2	Epithelial cell	SCAPER	Immune (myeloid)	VSIG10	0.5
+ExprAssoGenes	2	Epithelial cell	TBX6	Immune (myeloid)	ZNF507	0.5
+ExprAssoGenes	2	Epithelial cell	HMOX2	Immune (myeloid)	SNX1	0.5
+ExprAssoGenes	2	Epithelial cell	DPM2	Immune (myeloid)	IL11RA	0.5
+ExprAssoGenes	2	Epithelial cell	GOLGA6L9	Immune (myeloid)	CLNS1A	0.5
+ExprAssoGenes	2	Epithelial cell	FAM219B	Immune (myeloid)	GTF2H2C	0.5
+ExprAssoGenes	2	Epithelial cell	IDO1	Immune (myeloid)	RBM23	0.5
+ExprAssoGenes	2	Epithelial cell	UGDH	Immune (myeloid)	PTN	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF28	Immune (myeloid)	CCDC97	0.5
+ExprAssoGenes	2	Epithelial cell	VPS37D	Immune (myeloid)	DHRS7	0.5
+ExprAssoGenes	2	Epithelial cell	CYP1A1	Immune (myeloid)	CTPS1	0.5
+ExprAssoGenes	2	Epithelial cell	PRR25	Immune (myeloid)	SMAD5	0.5
+ExprAssoGenes	2	Epithelial cell	FAM155A	Immune (myeloid)	CCL23	0.5
+ExprAssoGenes	2	Epithelial cell	ANTXR2	Immune (myeloid)	RALGPS2	0.5
+ExprAssoGenes	2	Epithelial cell	LIPI	Immune (myeloid)	EML4	0.5
+ExprAssoGenes	2	Epithelial cell	HINT1	Immune (myeloid)	XPC	0.5
+ExprAssoGenes	2	Epithelial cell	FAH	Immune (myeloid)	EPS15	0.5
+ExprAssoGenes	2	Epithelial cell	C19orf54	Immune (myeloid)	SOS2	0.5
+ExprAssoGenes	2	Epithelial cell	HLA-B	Immune (myeloid)	ARPC1B	0.5
+ExprAssoGenes	2	Epithelial cell	CUL7	Immune (myeloid)	MYCBPAP	0.5
+ExprAssoGenes	2	Epithelial cell	HLA-DQA1	Immune (myeloid)	RFX8	0.5
+ExprAssoGenes	2	Epithelial cell	TBC1D4	Immune (myeloid)	CAPZA1	0.5
+ExprAssoGenes	2	Epithelial cell	CAPN3	Immune (myeloid)	C2CD4C	0.5
+ExprAssoGenes	2	Epithelial cell	EYA3	Immune (myeloid)	SEC31B	0.5
+ExprAssoGenes	2	Epithelial cell	ELP4	Immune (myeloid)	NDUFAF4	0.5
+ExprAssoGenes	2	Epithelial cell	APBB1IP	Immune (myeloid)	ZSCAN31	0.5
+ExprAssoGenes	2	Epithelial cell	CA13	Immune (myeloid)	TBC1D10B	0.5
+ExprAssoGenes	2	Epithelial cell	PMS2	Immune (myeloid)	LRRC37A2	0.5
+ExprAssoGenes	2	Epithelial cell	VASH1	Immune (myeloid)	CIAPIN1	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF330	Immune (myeloid)	FGD4	0.5
+ExprAssoGenes	2	Epithelial cell	ITGAV	Immune (myeloid)	ZNF260	0.5
+ExprAssoGenes	2	Epithelial cell	TDRD12	Immune (myeloid)	FUT10	0.5
+ExprAssoGenes	2	Epithelial cell	GADD45A	Immune (myeloid)	FAM166A	0.5
+ExprAssoGenes	2	Epithelial cell	NNT	Immune (myeloid)	ZNF517	0.5
+ExprAssoGenes	2	Epithelial cell	CDKN2D	Immune (myeloid)	NDUFA11	0.5
+ExprAssoGenes	2	Epithelial cell	PI4K2B	Immune (myeloid)	MAVS	0.5
+ExprAssoGenes	2	Epithelial cell	DNALI1	Immune (myeloid)	MGRN1	0.5
+ExprAssoGenes	2	Epithelial cell	RNH1	Immune (myeloid)	ALKBH8	0.5
+ExprAssoGenes	2	Epithelial cell	CALML6	Immune (myeloid)	PSORS1C1	0.5
+ExprAssoGenes	2	Epithelial cell	TACC2	Immune (myeloid)	MUL1	0.5
+ExprAssoGenes	2	Epithelial cell	TAC1	Immune (myeloid)	GNA12	0.5
+ExprAssoGenes	2	Epithelial cell	CCDC66	Immune (myeloid)	SLC5A9	0.5
+ExprAssoGenes	2	Epithelial cell	DTYMK	Immune (myeloid)	EFCAB2	0.5
+ExprAssoGenes	2	Epithelial cell	FCER2	Immune (myeloid)	SMTNL1	0.5
+ExprAssoGenes	2	Epithelial cell	ULK4	Immune (myeloid)	PACRGL	0.5
+ExprAssoGenes	2	Epithelial cell	DHX36	Immune (myeloid)	CCT8	0.5
+ExprAssoGenes	2	Epithelial cell	SRD5A3	Immune (myeloid)	UPB1	0.5
+ExprAssoGenes	2	Epithelial cell	ETNK1	Immune (myeloid)	LACTB2	0.5
+ExprAssoGenes	2	Epithelial cell	MILR1	Immune (myeloid)	SYNDIG1	0.5
+ExprAssoGenes	2	Epithelial cell	CCDC174	Immune (myeloid)	HBP1	0.5
+ExprAssoGenes	2	Epithelial cell	BIN1	Immune (myeloid)	SF3B1	0.5
+ExprAssoGenes	2	Epithelial cell	PRPF4	Immune (myeloid)	ALDH5A1	0.5
+ExprAssoGenes	2	Epithelial cell	CD274	Immune (myeloid)	SNX16	0.5
+ExprAssoGenes	2	Epithelial cell	SRRT	Immune (myeloid)	GPRIN1	0.5
+ExprAssoGenes	2	Epithelial cell	AKR1E2	Immune (myeloid)	AASS	0.5
+ExprAssoGenes	2	Epithelial cell	GPSM1	Immune (myeloid)	MAP3K10	0.5
+ExprAssoGenes	2	Epithelial cell	PSG4	Immune (myeloid)	NRBP1	0.5
+ExprAssoGenes	2	Epithelial cell	TLN1	Immune (myeloid)	HSPG2	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF596	Immune (myeloid)	PIGBOS1	0.5
+ExprAssoGenes	2	Epithelial cell	FAM220A	Immune (myeloid)	RTP4	0.5
+ExprAssoGenes	2	Epithelial cell	IGSF9B	Immune (myeloid)	PARP1	0.5
+ExprAssoGenes	2	Epithelial cell	MLLT6	Immune (myeloid)	GLYATL2	0.5
+ExprAssoGenes	2	Epithelial cell	APTX	Immune (myeloid)	PROX2	0.5
+ExprAssoGenes	2	Epithelial cell	TRIM23	Immune (myeloid)	PIGO	0.5
+ExprAssoGenes	2	Epithelial cell	KHK	Immune (myeloid)	FGGY	0.5
+ExprAssoGenes	2	Epithelial cell	TRIP4	Immune (myeloid)	MSLN	0.5
+ExprAssoGenes	2	Epithelial cell	CBR1	Immune (myeloid)	SYT1	0.5
+ExprAssoGenes	2	Epithelial cell	EEF1G	Immune (myeloid)	ARID2	0.5
+ExprAssoGenes	2	Epithelial cell	FEM1A	Immune (myeloid)	PCMTD1	0.5
+ExprAssoGenes	2	Epithelial cell	TMC5	Immune (myeloid)	ZCRB1	0.5
+ExprAssoGenes	2	Epithelial cell	PSMD12	Immune (myeloid)	FAM228B	0.5
+ExprAssoGenes	2	Epithelial cell	CCR6	Immune (myeloid)	PUS7	0.5
+ExprAssoGenes	2	Epithelial cell	RAB3IL1	Immune (myeloid)	SHANK3	0.5
+ExprAssoGenes	2	Epithelial cell	MALRD1	Immune (myeloid)	GFOD1	0.5
+ExprAssoGenes	2	Epithelial cell	CCNO	Immune (myeloid)	TXN2	0.5
+ExprAssoGenes	2	Epithelial cell	COLQ	Immune (myeloid)	LPIN1	0.5
+ExprAssoGenes	2	Epithelial cell	PSMD5	Immune (myeloid)	CCDC112	0.5
+ExprAssoGenes	2	Epithelial cell	VARS2	Immune (myeloid)	GTF2IRD2	0.5
+ExprAssoGenes	2	Epithelial cell	DNAAF3	Immune (myeloid)	CCR10	0.5
+ExprAssoGenes	2	Epithelial cell	ARHGAP1	Immune (myeloid)	MYO1F	0.5
+ExprAssoGenes	2	Epithelial cell	KLHL5	Immune (myeloid)	KRT83	0.5
+ExprAssoGenes	2	Epithelial cell	C9orf72	Immune (myeloid)	NUP107	0.5
+ExprAssoGenes	2	Epithelial cell	DNAJC21	Immune (myeloid)	ECI1	0.5
+ExprAssoGenes	2	Epithelial cell	SLC35E2B	Immune (myeloid)	MTHFS	0.5
+ExprAssoGenes	2	Epithelial cell	KNOP1	Immune (myeloid)	SLC39A12	0.5
+ExprAssoGenes	2	Epithelial cell	ATF6	Immune (myeloid)	SETD9	0.5
+ExprAssoGenes	2	Epithelial cell	DCTN5	Immune (myeloid)	CCDC122	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM199	Immune (myeloid)	ACOT7	0.5
+ExprAssoGenes	2	Epithelial cell	SCRN2	Immune (myeloid)	ARHGAP28	0.5
+ExprAssoGenes	2	Epithelial cell	CCR7	Immune (myeloid)	CBWD5	0.5
+ExprAssoGenes	2	Epithelial cell	CLTCL1	Immune (myeloid)	MARK3	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF792	Immune (myeloid)	TMEM232	0.5
+ExprAssoGenes	2	Epithelial cell	LCA5	Immune (myeloid)	ZNF575	0.5
+ExprAssoGenes	2	Epithelial cell	LMNTD2	Immune (myeloid)	PPP1R1C	0.5
+ExprAssoGenes	2	Epithelial cell	SCAMP5	Immune (myeloid)	CDKL1	0.5
+ExprAssoGenes	2	Epithelial cell	ANXA8	Immune (myeloid)	AL023806.1	0.5
+ExprAssoGenes	2	Epithelial cell	PDCD11	Immune (myeloid)	BORCS7	0.5
+ExprAssoGenes	2	Epithelial cell	TCP10L	Immune (myeloid)	AKAP13	0.5
+ExprAssoGenes	2	Epithelial cell	ENTPD4	Immune (myeloid)	CEP192	0.5
+ExprAssoGenes	2	Epithelial cell	NPIPA5	Immune (myeloid)	PARP4	0.5
+ExprAssoGenes	2	Epithelial cell	NME6	Immune (myeloid)	SUN2	0.5
+ExprAssoGenes	2	Epithelial cell	ATOH7	Immune (myeloid)	IQCH	0.5
+ExprAssoGenes	2	Epithelial cell	ADAM11	Immune (myeloid)	EMX2	0.5
+ExprAssoGenes	2	Epithelial cell	MCM9	Immune (myeloid)	TMEM136	0.5
+ExprAssoGenes	2	Epithelial cell	ASNS	Immune (myeloid)	FGFR3	0.5
+ExprAssoGenes	2	Epithelial cell	PRKD3	Immune (myeloid)	CCDC81	0.5
+ExprAssoGenes	2	Epithelial cell	NIPSNAP1	Immune (myeloid)	TSPYL4	0.5
+ExprAssoGenes	2	Epithelial cell	AKIP1	Immune (myeloid)	RTEL1	0.5
+ExprAssoGenes	2	Epithelial cell	SOWAHC	Immune (myeloid)	GTF2H2	0.5
+ExprAssoGenes	2	Epithelial cell	EFHB	Immune (myeloid)	LIG3	0.5
+ExprAssoGenes	2	Epithelial cell	CREBBP	Immune (myeloid)	NOL6	0.5
+ExprAssoGenes	2	Epithelial cell	FBLL1	Immune (myeloid)	GNG10	0.5
+ExprAssoGenes	2	Epithelial cell	SNRPB2	Immune (myeloid)	TMED4	0.5
+ExprAssoGenes	2	Epithelial cell	PEX7	Immune (myeloid)	GLCCI1	0.5
+ExprAssoGenes	2	Epithelial cell	CUZD1	Immune (myeloid)	ZNF600	0.5
+ExprAssoGenes	2	Epithelial cell	POU5F1	Immune (myeloid)	CHCHD2	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF415	Immune (myeloid)	PSORS1C2	0.5
+ExprAssoGenes	2	Epithelial cell	NPTN	Immune (myeloid)	PLIN3	0.5
+ExprAssoGenes	2	Epithelial cell	TMCO6	Immune (myeloid)	NUDT13	0.5
+ExprAssoGenes	2	Epithelial cell	NSUN2	Immune (myeloid)	AP3S2	0.5
+ExprAssoGenes	2	Epithelial cell	PLA2R1	Immune (myeloid)	MLF1	0.5
+ExprAssoGenes	2	Epithelial cell	CHI3L1	Immune (myeloid)	C19orf24	0.5
+ExprAssoGenes	2	Epithelial cell	ADSS	Immune (myeloid)	SALL4	0.5
+ExprAssoGenes	2	Epithelial cell	TOR3A	Immune (myeloid)	CRYBB2	0.5
+ExprAssoGenes	2	Epithelial cell	FAM184A	Immune (myeloid)	NHLH1	0.5
+ExprAssoGenes	2	Epithelial cell	MBOAT7	Immune (myeloid)	CHMP7	0.5
+ExprAssoGenes	2	Epithelial cell	RSPH1	Immune (myeloid)	THAP3	0.5
+ExprAssoGenes	2	Epithelial cell	MYO5A	Immune (myeloid)	RBM44	0.5
+ExprAssoGenes	2	Epithelial cell	IQGAP1	Immune (myeloid)	ZNF408	0.5
+ExprAssoGenes	2	Epithelial cell	AFF4	Immune (myeloid)	TTC4	0.5
+ExprAssoGenes	2	Epithelial cell	RRN3	Immune (myeloid)	EIF5A	0.5
+ExprAssoGenes	2	Epithelial cell	IPO8	Immune (myeloid)	COMMD2	0.5
+ExprAssoGenes	2	Epithelial cell	CFAP43	Immune (myeloid)	TBCD	0.5
+ExprAssoGenes	2	Epithelial cell	POLL	Immune (myeloid)	TRIM66	0.5
+ExprAssoGenes	2	Epithelial cell	SMAD4	Immune (myeloid)	SLC25A12	0.5
+ExprAssoGenes	2	Epithelial cell	UTP14C	Immune (myeloid)	KCNE1	0.5
+ExprAssoGenes	2	Epithelial cell	GMPS	Immune (myeloid)	ACOT2	0.5
+ExprAssoGenes	2	Epithelial cell	PNMA2	Immune (myeloid)	INCENP	0.5
+ExprAssoGenes	2	Epithelial cell	SMARCA4	Immune (myeloid)	MGMT	0.5
+ExprAssoGenes	2	Epithelial cell	CTAGE15	Immune (myeloid)	CSNK1G3	0.5
+ExprAssoGenes	2	Epithelial cell	RANBP1	Immune (myeloid)	DCAF4	0.5
+ExprAssoGenes	2	Epithelial cell	DHX32	Immune (myeloid)	KCNMA1	0.5
+ExprAssoGenes	2	Epithelial cell	CSGALNACT2	Immune (myeloid)	NBPF10	0.5
+ExprAssoGenes	2	Epithelial cell	SUOX	Immune (myeloid)	FTCD	0.5
+ExprAssoGenes	2	Epithelial cell	HLCS	Immune (myeloid)	CLIC6	0.5
+ExprAssoGenes	2	Epithelial cell	UBE3B	Immune (myeloid)	ATL3	0.5
+ExprAssoGenes	2	Epithelial cell	TMOD2	Immune (myeloid)	LMF2	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM81	Immune (myeloid)	SPRN	0.5
+ExprAssoGenes	2	Epithelial cell	TACR1	Immune (myeloid)	PNPLA7	0.5
+ExprAssoGenes	2	Epithelial cell	MCC	Immune (myeloid)	IKBIP	0.5
+ExprAssoGenes	2	Epithelial cell	ANGEL2	Immune (myeloid)	NUDT18	0.5
+ExprAssoGenes	2	Epithelial cell	POLG	Immune (myeloid)	TP53BP1	0.5
+ExprAssoGenes	2	Epithelial cell	UBE2E3	Immune (myeloid)	RPRD1B	0.5
+ExprAssoGenes	2	Epithelial cell	ALAD	Immune (myeloid)	RAB38	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF528	Immune (myeloid)	ECI2	0.5
+ExprAssoGenes	2	Epithelial cell	DUSP23	Immune (myeloid)	CDHR2	0.5
+ExprAssoGenes	2	Epithelial cell	C19orf44	Immune (myeloid)	CDK5RAP3	0.5
+ExprAssoGenes	2	Epithelial cell	WDFY2	Immune (myeloid)	FAAP20	0.5
+ExprAssoGenes	2	Epithelial cell	SMPDL3A	Immune (myeloid)	DHCR24	0.5
+ExprAssoGenes	2	Epithelial cell	BORCS5	Immune (myeloid)	DNM2	0.5
+ExprAssoGenes	2	Epithelial cell	COL26A1	Immune (myeloid)	LAMB1	0.5
+ExprAssoGenes	2	Epithelial cell	SNAPC1	Immune (myeloid)	USP36	0.5
+ExprAssoGenes	2	Epithelial cell	IL17RD	Immune (myeloid)	C6orf141	0.5
+ExprAssoGenes	2	Epithelial cell	PPP2R3A	Immune (myeloid)	IFNAR1	0.5
+ExprAssoGenes	2	Epithelial cell	FPR1	Immune (myeloid)	NT5C	0.5
+ExprAssoGenes	2	Epithelial cell	ENGASE	Immune (myeloid)	OXNAD1	0.5
+ExprAssoGenes	2	Epithelial cell	GXYLT1	Immune (myeloid)	AGR3	0.5
+ExprAssoGenes	2	Epithelial cell	AGER	Immune (myeloid)	GSTM2	0.5
+ExprAssoGenes	2	Epithelial cell	THBS3	Immune (myeloid)	SAR1A	0.5
+ExprAssoGenes	2	Epithelial cell	SCFD1	Immune (myeloid)	PHLDB1	0.5
+ExprAssoGenes	2	Epithelial cell	GTPBP3	Immune (myeloid)	OXGR1	0.5
+ExprAssoGenes	2	Epithelial cell	DGCR2	Immune (myeloid)	SF3B3	0.5
+ExprAssoGenes	2	Epithelial cell	GRK4	Immune (myeloid)	GTF2F1	0.5
+ExprAssoGenes	2	Epithelial cell	LY6G5C	Immune (myeloid)	ADH4	0.5
+ExprAssoGenes	2	Epithelial cell	RNF150	Immune (myeloid)	CTDSPL	0.5
+ExprAssoGenes	2	Epithelial cell	ADAP1	Immune (myeloid)	SPPL2A	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF320	Immune (myeloid)	HCG27	0.5
+ExprAssoGenes	2	Epithelial cell	LRRC36	Immune (myeloid)	TRIP6	0.5
+ExprAssoGenes	2	Epithelial cell	LUZP1	Immune (myeloid)	SLC6A4	0.5
+ExprAssoGenes	2	Epithelial cell	SLC38A11	Immune (myeloid)	MAN2B2	0.5
+ExprAssoGenes	2	Epithelial cell	BEND7	Immune (myeloid)	ABT1	0.5
+ExprAssoGenes	2	Epithelial cell	NADSYN1	Immune (myeloid)	SELL	0.5
+ExprAssoGenes	2	Epithelial cell	AQP3	Immune (myeloid)	HAUS1	0.5
+ExprAssoGenes	2	Epithelial cell	RASA1	Immune (myeloid)	PRELID3A	0.5
+ExprAssoGenes	2	Epithelial cell	ENDOU	Immune (myeloid)	C12orf65	0.5
+ExprAssoGenes	2	Epithelial cell	EFCAB6	Immune (myeloid)	RPP25	0.5
+ExprAssoGenes	2	Epithelial cell	RBCK1	Immune (myeloid)	GALNT15	0.5
+ExprAssoGenes	2	Epithelial cell	CNTROB	Immune (myeloid)	GRIN3B	0.5
+ExprAssoGenes	2	Epithelial cell	PEAK1	Immune (myeloid)	KCNA2	0.5
+ExprAssoGenes	2	Epithelial cell	FAM177B	Immune (myeloid)	PPFIA1	0.5
+ExprAssoGenes	2	Epithelial cell	CERS4	Immune (myeloid)	ASTE1	0.5
+ExprAssoGenes	2	Epithelial cell	GOPC	Immune (myeloid)	SNRNP70	0.5
+ExprAssoGenes	2	Epithelial cell	YBX3	Immune (myeloid)	SPCS3	0.5
+ExprAssoGenes	2	Epithelial cell	ITGA1	Immune (myeloid)	AKR7A2	0.5
+ExprAssoGenes	2	Epithelial cell	STX19	Immune (myeloid)	PSCA	0.5
+ExprAssoGenes	2	Epithelial cell	CYP2D6	Immune (myeloid)	HYAL1	0.5
+ExprAssoGenes	2	Epithelial cell	DNAH5	Immune (myeloid)	COX4I2	0.5
+ExprAssoGenes	2	Epithelial cell	DSG2	Immune (myeloid)	ZNF555	0.5
+ExprAssoGenes	2	Epithelial cell	TADA2A	Immune (myeloid)	CATSPERG	0.5
+ExprAssoGenes	2	Epithelial cell	ABCF1	Immune (myeloid)	MICA	0.5
+ExprAssoGenes	2	Epithelial cell	NOTCH4	Immune (myeloid)	STX10	0.5
+ExprAssoGenes	2	Epithelial cell	VNN2	Immune (myeloid)	TSNAXIP1	0.5
+ExprAssoGenes	2	Epithelial cell	F7	Immune (myeloid)	EHBP1L1	0.5
+ExprAssoGenes	2	Epithelial cell	POT1	Immune (myeloid)	GRM2	0.5
+ExprAssoGenes	2	Epithelial cell	NUDT4	Immune (myeloid)	TSPAN4	0.5
+ExprAssoGenes	2	Epithelial cell	IL15RA	Immune (myeloid)	RBM8A	0.5
+ExprAssoGenes	2	Epithelial cell	DMRT2	Immune (myeloid)	PPFIBP1	0.5
+ExprAssoGenes	2	Epithelial cell	CYP4A22	Immune (myeloid)	GNPNAT1	0.5
+ExprAssoGenes	2	Epithelial cell	SGTA	Immune (myeloid)	CNDP1	0.5
+ExprAssoGenes	2	Epithelial cell	SOD1	Immune (myeloid)	MCMDC2	0.5
+ExprAssoGenes	2	Epithelial cell	FKRP	Immune (myeloid)	HAUS4	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF850	Immune (myeloid)	KCTD10	0.5
+ExprAssoGenes	2	Epithelial cell	FAM124B	Immune (myeloid)	ZNF333	0.5
+ExprAssoGenes	2	Epithelial cell	SNTG2	Immune (myeloid)	UPK3B	0.5
+ExprAssoGenes	2	Epithelial cell	NELFB	Immune (myeloid)	ZNF577	0.5
+ExprAssoGenes	2	Epithelial cell	G3BP2	Immune (myeloid)	POLR1B	0.5
+ExprAssoGenes	2	Epithelial cell	IWS1	Immune (myeloid)	ZNF155	0.5
+ExprAssoGenes	2	Epithelial cell	ANXA2R	Immune (myeloid)	LRRFIP2	0.5
+ExprAssoGenes	2	Epithelial cell	CCNC	Immune (myeloid)	ZNF24	0.5
+ExprAssoGenes	2	Epithelial cell	TTC39B	Immune (myeloid)	ADARB2	0.5
+ExprAssoGenes	2	Epithelial cell	A2M	Immune (myeloid)	LRRIQ3	0.5
+ExprAssoGenes	2	Epithelial cell	SNRNP27	Immune (myeloid)	B3GNT9	0.5
+ExprAssoGenes	2	Epithelial cell	HLA-C	Immune (myeloid)	KYNU	0.5
+ExprAssoGenes	2	Epithelial cell	FOXD4L1	Immune (myeloid)	TOX4	0.5
+ExprAssoGenes	2	Epithelial cell	SLC45A4	Immune (myeloid)	SLC10A1	0.5
+ExprAssoGenes	2	Epithelial cell	PSMB7	Immune (myeloid)	PPP1R3C	0.5
+ExprAssoGenes	2	Epithelial cell	BTBD9	Immune (myeloid)	CASQ1	0.5
+ExprAssoGenes	2	Epithelial cell	GAL3ST2	Immune (myeloid)	GATM	0.5
+ExprAssoGenes	2	Epithelial cell	SLC17A5	Immune (myeloid)	IL12RB1	0.5
+ExprAssoGenes	2	Epithelial cell	DPH1	Immune (myeloid)	ERICH4	0.5
+ExprAssoGenes	2	Epithelial cell	SDHC	Immune (myeloid)	DAGLA	0.5
+ExprAssoGenes	2	Epithelial cell	HSPBAP1	Immune (myeloid)	TXNL1	0.5
+ExprAssoGenes	2	Epithelial cell	FRRS1L	Immune (myeloid)	AEBP1	0.5
+ExprAssoGenes	2	Epithelial cell	CLDN14	Immune (myeloid)	INTS8	0.5
+ExprAssoGenes	2	Epithelial cell	STRC	Immune (myeloid)	BCHE	0.5
+ExprAssoGenes	2	Epithelial cell	SWAP70	Immune (myeloid)	CLSTN2	0.5
+ExprAssoGenes	2	Epithelial cell	MGA	Immune (myeloid)	CPSF2	0.5
+ExprAssoGenes	2	Epithelial cell	FAM221A	Immune (myeloid)	CCDC124	0.5
+ExprAssoGenes	2	Epithelial cell	CCL4	Immune (myeloid)	TIPARP	0.5
+ExprAssoGenes	2	Epithelial cell	PCIF1	Immune (myeloid)	NT5DC3	0.5
+ExprAssoGenes	2	Epithelial cell	RHPN1	Immune (myeloid)	SKIV2L	0.5
+ExprAssoGenes	2	Epithelial cell	USP45	Immune (myeloid)	NBPF11	0.5
+ExprAssoGenes	2	Epithelial cell	NT5C2	Immune (myeloid)	MAPK8IP2	0.5
+ExprAssoGenes	2	Epithelial cell	ARL6IP1	Immune (myeloid)	DDX59	0.5
+ExprAssoGenes	2	Epithelial cell	PSMB3	Immune (myeloid)	LRR1	0.5
+ExprAssoGenes	2	Epithelial cell	WFIKKN1	Immune (myeloid)	TFR2	0.5
+ExprAssoGenes	2	Epithelial cell	PITHD1	Immune (myeloid)	KCNIP4	0.5
+ExprAssoGenes	2	Epithelial cell	PBLD	Immune (myeloid)	ZFP14	0.5
+ExprAssoGenes	2	Epithelial cell	P2RX6	Immune (myeloid)	MYEOV	0.5
+ExprAssoGenes	2	Epithelial cell	ZIK1	Immune (myeloid)	AFAP1	0.5
+ExprAssoGenes	2	Epithelial cell	IQSEC3	Immune (myeloid)	LARS2	0.5
+ExprAssoGenes	2	Epithelial cell	MTX1	Immune (myeloid)	NCLN	0.5
+ExprAssoGenes	2	Epithelial cell	RUNX3	Immune (myeloid)	CHKB	0.5
+ExprAssoGenes	2	Epithelial cell	SYNM	Immune (myeloid)	SAMD12	0.5
+ExprAssoGenes	2	Epithelial cell	ATP1B2	Immune (myeloid)	CANT1	0.5
+ExprAssoGenes	2	Epithelial cell	PPIL2	Immune (myeloid)	ZMAT4	0.5
+ExprAssoGenes	2	Epithelial cell	SLC1A7	Immune (myeloid)	ALG1L	0.5
+ExprAssoGenes	2	Epithelial cell	GSTM3	Immune (myeloid)	VAT1	0.5
+ExprAssoGenes	2	Epithelial cell	LTBR	Immune (myeloid)	PLLP	0.5
+ExprAssoGenes	2	Epithelial cell	NEK11	Immune (myeloid)	MYRIP	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF839	Immune (myeloid)	HSD17B1	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM123	Immune (myeloid)	SLC25A41	0.5
+ExprAssoGenes	2	Epithelial cell	PRR18	Immune (myeloid)	ZDHHC7	0.5
+ExprAssoGenes	2	Epithelial cell	NMNAT2	Immune (myeloid)	ETFDH	0.5
+ExprAssoGenes	2	Epithelial cell	PPP1R18	Immune (myeloid)	SNX33	0.5
+ExprAssoGenes	2	Epithelial cell	IVNS1ABP	Immune (myeloid)	E2F4	0.5
+ExprAssoGenes	2	Epithelial cell	THRAP3	Immune (myeloid)	YPEL3	0.5
+ExprAssoGenes	2	Epithelial cell	KLHL17	Immune (myeloid)	IGFBP5	0.5
+ExprAssoGenes	2	Epithelial cell	MYOF	Immune (myeloid)	SLC13A4	0.5
+ExprAssoGenes	2	Epithelial cell	PLD6	Immune (myeloid)	ZFP1	0.5
+ExprAssoGenes	2	Epithelial cell	KIF3C	Immune (myeloid)	APOBEC3G	0.5
+ExprAssoGenes	2	Epithelial cell	CWC25	Immune (myeloid)	SERPINF1	0.5
+ExprAssoGenes	2	Epithelial cell	CYP7A1	Immune (myeloid)	MED20	0.5
+ExprAssoGenes	2	Epithelial cell	FMO4	Immune (myeloid)	TMEM260	0.5
+ExprAssoGenes	2	Epithelial cell	TDRD5	Immune (myeloid)	ZDHHC20	0.5
+ExprAssoGenes	2	Epithelial cell	CYP27C1	Immune (myeloid)	GOLGA8M	0.5
+ExprAssoGenes	2	Epithelial cell	NMT2	Immune (myeloid)	GPLD1	0.5
+ExprAssoGenes	2	Epithelial cell	FMO2	Immune (myeloid)	CBX6	0.5
+ExprAssoGenes	2	Epithelial cell	GP1BA	Immune (myeloid)	HHLA3	0.5
+ExprAssoGenes	2	Epithelial cell	UNC5C	Immune (myeloid)	LAMTOR4	0.5
+ExprAssoGenes	2	Epithelial cell	CFAP97	Immune (myeloid)	ANAPC4	0.5
+ExprAssoGenes	2	Epithelial cell	SPECC1L	Immune (myeloid)	B4GAT1	0.5
+ExprAssoGenes	2	Epithelial cell	ARHGEF25	Immune (myeloid)	FAM86C1	0.5
+ExprAssoGenes	2	Epithelial cell	KDELC2	Immune (myeloid)	WDR97	0.5
+ExprAssoGenes	2	Epithelial cell	MS4A4A	Immune (myeloid)	UBAP1	0.5
+ExprAssoGenes	2	Epithelial cell	LRRC46	Immune (myeloid)	ARMC10	0.5
+ExprAssoGenes	2	Epithelial cell	SCTR	Immune (myeloid)	TMEM68	0.5
+ExprAssoGenes	2	Epithelial cell	GOLGA5	Immune (myeloid)	IVD	0.5
+ExprAssoGenes	2	Epithelial cell	CDCA3	Immune (myeloid)	HES2	0.5
+ExprAssoGenes	2	Epithelial cell	RAB3C	Immune (myeloid)	ITM2B	0.5
+ExprAssoGenes	2	Epithelial cell	ZDHHC11	Immune (myeloid)	PLVAP	0.5
+ExprAssoGenes	2	Epithelial cell	SERPINH1	Immune (myeloid)	NRP2	0.5
+ExprAssoGenes	2	Epithelial cell	UBA3	Immune (myeloid)	MVB12A	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF221	Immune (myeloid)	TMEM69	0.5
+ExprAssoGenes	2	Epithelial cell	MAPKAPK5	Immune (myeloid)	AKAP3	0.5
+ExprAssoGenes	2	Epithelial cell	SPATC1L	Immune (myeloid)	RNF217	0.5
+ExprAssoGenes	2	Epithelial cell	DPT	Immune (myeloid)	RSAD1	0.5
+ExprAssoGenes	2	Epithelial cell	NDUFA3	Immune (myeloid)	DHRS7B	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM127	Immune (myeloid)	AP5Z1	0.5
+ExprAssoGenes	2	Epithelial cell	CD207	Immune (myeloid)	PDZRN4	0.5
+ExprAssoGenes	2	Epithelial cell	C7	Immune (myeloid)	BDH2	0.5
+ExprAssoGenes	2	Epithelial cell	REEP4	Immune (myeloid)	NUS1	0.5
+ExprAssoGenes	2	Epithelial cell	LARP4	Immune (myeloid)	SDCCAG8	0.5
+ExprAssoGenes	2	Epithelial cell	PRG2	Immune (myeloid)	FAM24B	0.5
+ExprAssoGenes	2	Epithelial cell	LSM2	Immune (myeloid)	BTN3A2	0.5
+ExprAssoGenes	2	Epithelial cell	NMRK1	Immune (myeloid)	ELAVL2	0.5
+ExprAssoGenes	2	Epithelial cell	LRRC34	Immune (myeloid)	CAPN15	0.5
+ExprAssoGenes	2	Epithelial cell	STON1	Immune (myeloid)	PQLC1	0.5
+ExprAssoGenes	2	Epithelial cell	LRGUK	Immune (myeloid)	CNOT3	0.5
+ExprAssoGenes	2	Epithelial cell	ACTR6	Immune (myeloid)	UBP1	0.5
+ExprAssoGenes	2	Epithelial cell	EIF4B	Immune (myeloid)	NAGPA	0.5
+ExprAssoGenes	2	Epithelial cell	NDUFAF6	Immune (myeloid)	RAB24	0.5
+ExprAssoGenes	2	Epithelial cell	IFT46	Immune (myeloid)	AMMECR1L	0.5
+ExprAssoGenes	2	Epithelial cell	VPS28	Immune (myeloid)	CLEC10A	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF211	Immune (myeloid)	FRS3	0.5
+ExprAssoGenes	2	Epithelial cell	SPATA32	Immune (myeloid)	CCZ1B	0.5
+ExprAssoGenes	2	Epithelial cell	CFAP52	Immune (myeloid)	TP53I3	0.5
+ExprAssoGenes	2	Epithelial cell	VNN1	Immune (myeloid)	KIF16B	0.5
+ExprAssoGenes	2	Epithelial cell	SLC35G1	Immune (myeloid)	EXOSC6	0.5
+ExprAssoGenes	2	Epithelial cell	NCAPG2	Immune (myeloid)	LEFTY1	0.5
+ExprAssoGenes	2	Epithelial cell	TMA16	Immune (myeloid)	EIF4EBP3	0.5
+ExprAssoGenes	2	Epithelial cell	TNFRSF10C	Immune (myeloid)	RIMKLB	0.5
+ExprAssoGenes	2	Epithelial cell	PARK7	Immune (myeloid)	PQLC2	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF483	Immune (myeloid)	YWHAE	0.5
+ExprAssoGenes	2	Epithelial cell	STMND1	Immune (myeloid)	NDUFA2	0.5
+ExprAssoGenes	2	Epithelial cell	GTPBP10	Immune (myeloid)	GPATCH2L	0.5
+ExprAssoGenes	2	Epithelial cell	PRSS57	Immune (myeloid)	PJA2	0.5
+ExprAssoGenes	2	Epithelial cell	ZFP57	Immune (myeloid)	RALGAPA1	0.5
+ExprAssoGenes	2	Epithelial cell	DOPEY2	Immune (myeloid)	C9orf85	0.5
+ExprAssoGenes	2	Epithelial cell	MRGPRX3	Immune (myeloid)	GHITM	0.5
+ExprAssoGenes	2	Epithelial cell	PRKD2	Immune (myeloid)	MRGPRX2	0.5
+ExprAssoGenes	2	Epithelial cell	TCF7L1	Immune (myeloid)	ZNF497	0.5
+ExprAssoGenes	2	Epithelial cell	FDX1	Immune (myeloid)	ZNF606	0.5
+ExprAssoGenes	2	Epithelial cell	FAM173B	Immune (myeloid)	TRIM22	0.5
+ExprAssoGenes	2	Epithelial cell	LRRC61	Immune (myeloid)	SUDS3	0.5
+ExprAssoGenes	2	Epithelial cell	FEZ1	Immune (myeloid)	RNF32	0.5
+ExprAssoGenes	2	Epithelial cell	E2F6	Immune (myeloid)	NAT8	0.5
+ExprAssoGenes	2	Epithelial cell	PLTP	Immune (myeloid)	HAX1	0.5
+ExprAssoGenes	2	Epithelial cell	KRCC1	Immune (myeloid)	GRIK2	0.5
+ExprAssoGenes	2	Epithelial cell	SGF29	Immune (myeloid)	RAP1A	0.5
+ExprAssoGenes	2	Epithelial cell	FFAR1	Immune (myeloid)	BORCS8	0.5
+ExprAssoGenes	2	Epithelial cell	ARL6IP5	Immune (myeloid)	OGFOD3	0.5
+ExprAssoGenes	2	Epithelial cell	NEK4	Immune (myeloid)	YTHDC2	0.5
+ExprAssoGenes	2	Epithelial cell	C11orf21	Immune (myeloid)	PPFIA2	0.5
+ExprAssoGenes	2	Epithelial cell	B3GNT5	Immune (myeloid)	ZNF79	0.5
+ExprAssoGenes	2	Epithelial cell	HTATIP2	Immune (myeloid)	EHD4	0.5
+ExprAssoGenes	2	Epithelial cell	GALNT3	Immune (myeloid)	HAUS6	0.5
+ExprAssoGenes	2	Epithelial cell	CNOT11	Immune (myeloid)	GARS	0.5
+ExprAssoGenes	2	Epithelial cell	ACCS	Immune (myeloid)	CAMKK2	0.5
+ExprAssoGenes	2	Epithelial cell	SSC5D	Immune (myeloid)	CATSPERB	0.5
+ExprAssoGenes	2	Epithelial cell	LYNX1	Immune (myeloid)	COA1	0.5
+ExprAssoGenes	2	Epithelial cell	LVRN	Immune (myeloid)	ZNF429	0.5
+ExprAssoGenes	2	Epithelial cell	SNRPD2	Immune (myeloid)	PPCDC	0.5
+ExprAssoGenes	2	Epithelial cell	BRD3	Immune (myeloid)	BTN2A2	0.5
+ExprAssoGenes	2	Epithelial cell	SAMM50	Immune (myeloid)	RHCE	0.5
+ExprAssoGenes	2	Epithelial cell	POC1B	Immune (myeloid)	RNASET2	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF506	Immune (myeloid)	SUCO	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF232	Immune (myeloid)	MATR3	0.5
+ExprAssoGenes	2	Epithelial cell	PPP5C	Immune (myeloid)	LY86	0.5
+ExprAssoGenes	2	Epithelial cell	TMEM128	Immune (myeloid)	BOLA2	0.5
+ExprAssoGenes	2	Epithelial cell	TLE1	Immune (myeloid)	ABCA12	0.5
+ExprAssoGenes	2	Epithelial cell	TPSB2	Immune (myeloid)	GLMP	0.5
+ExprAssoGenes	2	Epithelial cell	RNF123	Immune (myeloid)	NMNAT3	0.5
+ExprAssoGenes	2	Epithelial cell	MPHOSPH6	Immune (myeloid)	PAICS	0.5
+ExprAssoGenes	2	Epithelial cell	GANAB	Immune (myeloid)	SNX15	0.5
+ExprAssoGenes	2	Epithelial cell	MAP1LC3A	Immune (myeloid)	DSCC1	0.5
+ExprAssoGenes	2	Epithelial cell	NINL	Immune (myeloid)	TSEN15	0.5
+ExprAssoGenes	2	Epithelial cell	SNRPF	Immune (myeloid)	B3GALT4	0.5
+ExprAssoGenes	2	Epithelial cell	S100B	Immune (myeloid)	SSRP1	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF490	Immune (myeloid)	GALC	0.5
+ExprAssoGenes	2	Epithelial cell	HDDC3	Immune (myeloid)	FAHD2B	0.5
+ExprAssoGenes	2	Epithelial cell	XRCC2	Immune (myeloid)	TC2N	0.5
+ExprAssoGenes	2	Epithelial cell	WDSUB1	Immune (myeloid)	IL20RB	0.5
+ExprAssoGenes	2	Epithelial cell	HMBS	Immune (myeloid)	SOAT2	0.5
+ExprAssoGenes	2	Epithelial cell	FTSJ3	Immune (myeloid)	GAA	0.5
+ExprAssoGenes	2	Epithelial cell	APOL3	Immune (myeloid)	LMAN2	0.5
+ExprAssoGenes	2	Epithelial cell	ZNF467	Immune (myeloid)	RUVBL2	0.5
+ExprAssoGenes	2	Epithelial cell	TIMM10	Immune (myeloid)	GNB1L	0.5
+ExprAssoGenes	2	Epithelial cell	TIGD1	Immune (myeloid)	XPO6	0.5
+ExprAssoGenes	2	Epithelial cell	TSPO	Immune (myeloid)	ATE1	0.5
+ExprAssoGenes	2	Epithelial cell	WFS1	Immune (myeloid)	CDK7	0.5
+ExprAssoGenes	2	Epithelial cell	SNAP91	Immune (myeloid)	CYS1	0.5
+ExprAssoGenes	2	Epithelial cell	ECT2L	Immune (myeloid)	CNTN6	0.5
+ExprAssoGenes	2	Epithelial cell	NUP153	Immune (myeloid)	PIAS2	0.5
+ExprAssoGenes	2	Epithelial cell	SMG8	Immune (myeloid)	APIP	0.5
+ExprAssoGenes	2	Epithelial cell	DLG5	Immune (myeloid)	ST7L	0.5
+ExprAssoGenes	2	Epithelial cell	GAPT	Immune (myeloid)	UFSP1	0.5
+ExprAssoGenes	2	Epithelial cell	SLU7	Immune (myeloid)	SPDYE5	0.5
+ExprAssoGenes	2	Epithelial cell	HEATR3	Immune (myeloid)	SCAI	0.5
+ExprAssoGenes	2	Epithelial cell	GAK	Immune (myeloid)	SLC33A1	0.5
+ExprAssoGenes	2	Epithelial cell	CDK10	Immune (myeloid)	NKTR	0.5
+ExprAssoGenes	2	Epithelial cell	FAAP24	Immune (myeloid)	TPPP3	0.5
+ExprAssoGenes	2	Epithelial cell	SLC25A32	Immune (myeloid)	FBF1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PLGRKT	Epithelial cell	TOX	0.5
+ExprAssoGenes	2	Immune (myeloid)	SMIM1	Epithelial cell	MTERF4	0.5
+ExprAssoGenes	2	Immune (myeloid)	WDR11	Epithelial cell	NLK	0.5
+ExprAssoGenes	2	Immune (myeloid)	PROCA1	Epithelial cell	FZR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC37A2	Epithelial cell	ZNF749	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCHCR1	Epithelial cell	MFAP3	0.5
+ExprAssoGenes	2	Immune (myeloid)	CEACAM21	Epithelial cell	RABGAP1L	0.5
+ExprAssoGenes	2	Immune (myeloid)	HLA-DOB	Epithelial cell	MCUR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	WHAMM	Epithelial cell	COG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	SYS1	Epithelial cell	TMC6	0.5
+ExprAssoGenes	2	Immune (myeloid)	NT5DC2	Epithelial cell	POLE3	0.5
+ExprAssoGenes	2	Immune (myeloid)	CMTM3	Epithelial cell	SRP72	0.5
+ExprAssoGenes	2	Immune (myeloid)	TTC19	Epithelial cell	UST	0.5
+ExprAssoGenes	2	Immune (myeloid)	SENP5	Epithelial cell	SLC22A3	0.5
+ExprAssoGenes	2	Immune (myeloid)	GRK7	Epithelial cell	CLHC1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GDI2	Epithelial cell	CSRNP3	0.5
+ExprAssoGenes	2	Immune (myeloid)	ITGB6	Epithelial cell	TMEM65	0.5
+ExprAssoGenes	2	Immune (myeloid)	B3GAT2	Epithelial cell	C11orf53	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC24A4	Epithelial cell	UTS2B	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC36A4	Epithelial cell	DZANK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	HMGXB3	Epithelial cell	CX3CR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SERTAD3	Epithelial cell	BVES	0.5
+ExprAssoGenes	2	Immune (myeloid)	AP4B1	Epithelial cell	ANKRD61	0.5
+ExprAssoGenes	2	Immune (myeloid)	BIN3	Epithelial cell	NAAA	0.5
+ExprAssoGenes	2	Immune (myeloid)	KLHDC4	Epithelial cell	PIK3R4	0.5
+ExprAssoGenes	2	Immune (myeloid)	MTG1	Epithelial cell	TNNI3K	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZFYVE19	Epithelial cell	LYRM4	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYOC	Epithelial cell	INTS10	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAM117B	Epithelial cell	CYP21A2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ALDH8A1	Epithelial cell	ZNF213	0.5
+ExprAssoGenes	2	Immune (myeloid)	TWISTNB	Epithelial cell	MTAP	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZMYND12	Epithelial cell	TMC8	0.5
+ExprAssoGenes	2	Immune (myeloid)	HRCT1	Epithelial cell	PUS3	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZFP64	Epithelial cell	PTCHD3	0.5
+ExprAssoGenes	2	Immune (myeloid)	PEX11A	Epithelial cell	OOEP	0.5
+ExprAssoGenes	2	Immune (myeloid)	DLX6	Epithelial cell	FAM47E	0.5
+ExprAssoGenes	2	Immune (myeloid)	TOMM7	Epithelial cell	PICK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CAPN9	Epithelial cell	C2orf76	0.5
+ExprAssoGenes	2	Immune (myeloid)	EED	Epithelial cell	TBL3	0.5
+ExprAssoGenes	2	Immune (myeloid)	MICB	Epithelial cell	VPS13C	0.5
+ExprAssoGenes	2	Immune (myeloid)	DNAJC3	Epithelial cell	CEP164	0.5
+ExprAssoGenes	2	Immune (myeloid)	VANGL1	Epithelial cell	EMC1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ATG10	Epithelial cell	BTNL8	0.5
+ExprAssoGenes	2	Immune (myeloid)	DOK2	Epithelial cell	LRP5L	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF566	Epithelial cell	CCDC88C	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUP54	Epithelial cell	ENDOG	0.5
+ExprAssoGenes	2	Immune (myeloid)	HOXB2	Epithelial cell	CCDC171	0.5
+ExprAssoGenes	2	Immune (myeloid)	SFXN4	Epithelial cell	HLA-DPA1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CHORDC1	Epithelial cell	IGF2R	0.5
+ExprAssoGenes	2	Immune (myeloid)	ITGB3BP	Epithelial cell	CYBRD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUDT2	Epithelial cell	SH2B1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC22A18	Epithelial cell	FAM76B	0.5
+ExprAssoGenes	2	Immune (myeloid)	PXK	Epithelial cell	CASD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ATAD1	Epithelial cell	GSTA4	0.5
+ExprAssoGenes	2	Immune (myeloid)	TAGLN2	Epithelial cell	TRAPPC10	0.5
+ExprAssoGenes	2	Immune (myeloid)	SSC4D	Epithelial cell	PRRT2	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM170A	Epithelial cell	CCT6B	0.5
+ExprAssoGenes	2	Immune (myeloid)	FHL3	Epithelial cell	NSUN7	0.5
+ExprAssoGenes	2	Immune (myeloid)	RFX7	Epithelial cell	SLC5A11	0.5
+ExprAssoGenes	2	Immune (myeloid)	ODF2L	Epithelial cell	PIK3CB	0.5
+ExprAssoGenes	2	Immune (myeloid)	UBE2I	Epithelial cell	FAAH	0.5
+ExprAssoGenes	2	Immune (myeloid)	GPATCH4	Epithelial cell	DUSP11	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYO7B	Epithelial cell	DKKL1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CEP68	Epithelial cell	PITRM1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF607	Epithelial cell	SEPT1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ELAC2	Epithelial cell	FOXRED1	0.5
+ExprAssoGenes	2	Immune (myeloid)	LEMD2	Epithelial cell	TPD52L1	0.5
+ExprAssoGenes	2	Immune (myeloid)	OPN1SW	Epithelial cell	PRR13	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC25A38	Epithelial cell	ZNF554	0.5
+ExprAssoGenes	2	Immune (myeloid)	SKOR1	Epithelial cell	BRICD5	0.5
+ExprAssoGenes	2	Immune (myeloid)	MAGEF1	Epithelial cell	C12orf10	0.5
+ExprAssoGenes	2	Immune (myeloid)	RGS22	Epithelial cell	RBM18	0.5
+ExprAssoGenes	2	Immune (myeloid)	SERF1B	Epithelial cell	XRRA1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC34A3	Epithelial cell	GEM	0.5
+ExprAssoGenes	2	Immune (myeloid)	BTBD6	Epithelial cell	ZBTB7B	0.5
+ExprAssoGenes	2	Immune (myeloid)	GEMIN5	Epithelial cell	EML3	0.5
+ExprAssoGenes	2	Immune (myeloid)	UBXN6	Epithelial cell	LRRC19	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZADH2	Epithelial cell	NLRP2	0.5
+ExprAssoGenes	2	Immune (myeloid)	SPHK2	Epithelial cell	PIP5KL1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNAPC5	Epithelial cell	PSMG1	0.5
+ExprAssoGenes	2	Immune (myeloid)	KNSTRN	Epithelial cell	STEAP1B	0.5
+ExprAssoGenes	2	Immune (myeloid)	PIBF1	Epithelial cell	VSIG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	VSIG10	Epithelial cell	SCAPER	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF507	Epithelial cell	TBX6	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNX1	Epithelial cell	HMOX2	0.5
+ExprAssoGenes	2	Immune (myeloid)	IL11RA	Epithelial cell	DPM2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CLNS1A	Epithelial cell	GOLGA6L9	0.5
+ExprAssoGenes	2	Immune (myeloid)	GTF2H2C	Epithelial cell	FAM219B	0.5
+ExprAssoGenes	2	Immune (myeloid)	RBM23	Epithelial cell	IDO1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PTN	Epithelial cell	UGDH	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCDC97	Epithelial cell	ZNF28	0.5
+ExprAssoGenes	2	Immune (myeloid)	DHRS7	Epithelial cell	VPS37D	0.5
+ExprAssoGenes	2	Immune (myeloid)	CTPS1	Epithelial cell	CYP1A1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SMAD5	Epithelial cell	PRR25	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCL23	Epithelial cell	FAM155A	0.5
+ExprAssoGenes	2	Immune (myeloid)	RALGPS2	Epithelial cell	ANTXR2	0.5
+ExprAssoGenes	2	Immune (myeloid)	EML4	Epithelial cell	LIPI	0.5
+ExprAssoGenes	2	Immune (myeloid)	XPC	Epithelial cell	HINT1	0.5
+ExprAssoGenes	2	Immune (myeloid)	EPS15	Epithelial cell	FAH	0.5
+ExprAssoGenes	2	Immune (myeloid)	SOS2	Epithelial cell	C19orf54	0.5
+ExprAssoGenes	2	Immune (myeloid)	ARPC1B	Epithelial cell	HLA-B	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYCBPAP	Epithelial cell	CUL7	0.5
+ExprAssoGenes	2	Immune (myeloid)	RFX8	Epithelial cell	HLA-DQA1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CAPZA1	Epithelial cell	TBC1D4	0.5
+ExprAssoGenes	2	Immune (myeloid)	C2CD4C	Epithelial cell	CAPN3	0.5
+ExprAssoGenes	2	Immune (myeloid)	SEC31B	Epithelial cell	EYA3	0.5
+ExprAssoGenes	2	Immune (myeloid)	NDUFAF4	Epithelial cell	ELP4	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZSCAN31	Epithelial cell	APBB1IP	0.5
+ExprAssoGenes	2	Immune (myeloid)	TBC1D10B	Epithelial cell	CA13	0.5
+ExprAssoGenes	2	Immune (myeloid)	LRRC37A2	Epithelial cell	PMS2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CIAPIN1	Epithelial cell	VASH1	0.5
+ExprAssoGenes	2	Immune (myeloid)	FGD4	Epithelial cell	ZNF330	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF260	Epithelial cell	ITGAV	0.5
+ExprAssoGenes	2	Immune (myeloid)	FUT10	Epithelial cell	TDRD12	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAM166A	Epithelial cell	GADD45A	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF517	Epithelial cell	NNT	0.5
+ExprAssoGenes	2	Immune (myeloid)	NDUFA11	Epithelial cell	CDKN2D	0.5
+ExprAssoGenes	2	Immune (myeloid)	MAVS	Epithelial cell	PI4K2B	0.5
+ExprAssoGenes	2	Immune (myeloid)	MGRN1	Epithelial cell	DNALI1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ALKBH8	Epithelial cell	RNH1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PSORS1C1	Epithelial cell	CALML6	0.5
+ExprAssoGenes	2	Immune (myeloid)	MUL1	Epithelial cell	TACC2	0.5
+ExprAssoGenes	2	Immune (myeloid)	GNA12	Epithelial cell	TAC1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC5A9	Epithelial cell	CCDC66	0.5
+ExprAssoGenes	2	Immune (myeloid)	EFCAB2	Epithelial cell	DTYMK	0.5
+ExprAssoGenes	2	Immune (myeloid)	SMTNL1	Epithelial cell	FCER2	0.5
+ExprAssoGenes	2	Immune (myeloid)	PACRGL	Epithelial cell	ULK4	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCT8	Epithelial cell	DHX36	0.5
+ExprAssoGenes	2	Immune (myeloid)	UPB1	Epithelial cell	SRD5A3	0.5
+ExprAssoGenes	2	Immune (myeloid)	LACTB2	Epithelial cell	ETNK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SYNDIG1	Epithelial cell	MILR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	HBP1	Epithelial cell	CCDC174	0.5
+ExprAssoGenes	2	Immune (myeloid)	SF3B1	Epithelial cell	BIN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ALDH5A1	Epithelial cell	PRPF4	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNX16	Epithelial cell	CD274	0.5
+ExprAssoGenes	2	Immune (myeloid)	GPRIN1	Epithelial cell	SRRT	0.5
+ExprAssoGenes	2	Immune (myeloid)	AASS	Epithelial cell	AKR1E2	0.5
+ExprAssoGenes	2	Immune (myeloid)	MAP3K10	Epithelial cell	GPSM1	0.5
+ExprAssoGenes	2	Immune (myeloid)	NRBP1	Epithelial cell	PSG4	0.5
+ExprAssoGenes	2	Immune (myeloid)	HSPG2	Epithelial cell	TLN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PIGBOS1	Epithelial cell	ZNF596	0.5
+ExprAssoGenes	2	Immune (myeloid)	RTP4	Epithelial cell	FAM220A	0.5
+ExprAssoGenes	2	Immune (myeloid)	PARP1	Epithelial cell	IGSF9B	0.5
+ExprAssoGenes	2	Immune (myeloid)	GLYATL2	Epithelial cell	MLLT6	0.5
+ExprAssoGenes	2	Immune (myeloid)	PROX2	Epithelial cell	APTX	0.5
+ExprAssoGenes	2	Immune (myeloid)	PIGO	Epithelial cell	TRIM23	0.5
+ExprAssoGenes	2	Immune (myeloid)	FGGY	Epithelial cell	KHK	0.5
+ExprAssoGenes	2	Immune (myeloid)	MSLN	Epithelial cell	TRIP4	0.5
+ExprAssoGenes	2	Immune (myeloid)	SYT1	Epithelial cell	CBR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ARID2	Epithelial cell	EEF1G	0.5
+ExprAssoGenes	2	Immune (myeloid)	PCMTD1	Epithelial cell	FEM1A	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZCRB1	Epithelial cell	TMC5	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAM228B	Epithelial cell	PSMD12	0.5
+ExprAssoGenes	2	Immune (myeloid)	PUS7	Epithelial cell	CCR6	0.5
+ExprAssoGenes	2	Immune (myeloid)	SHANK3	Epithelial cell	RAB3IL1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GFOD1	Epithelial cell	MALRD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TXN2	Epithelial cell	CCNO	0.5
+ExprAssoGenes	2	Immune (myeloid)	LPIN1	Epithelial cell	COLQ	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCDC112	Epithelial cell	PSMD5	0.5
+ExprAssoGenes	2	Immune (myeloid)	GTF2IRD2	Epithelial cell	VARS2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCR10	Epithelial cell	DNAAF3	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYO1F	Epithelial cell	ARHGAP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	KRT83	Epithelial cell	KLHL5	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUP107	Epithelial cell	C9orf72	0.5
+ExprAssoGenes	2	Immune (myeloid)	ECI1	Epithelial cell	DNAJC21	0.5
+ExprAssoGenes	2	Immune (myeloid)	MTHFS	Epithelial cell	SLC35E2B	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC39A12	Epithelial cell	KNOP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SETD9	Epithelial cell	ATF6	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCDC122	Epithelial cell	DCTN5	0.5
+ExprAssoGenes	2	Immune (myeloid)	ACOT7	Epithelial cell	TMEM199	0.5
+ExprAssoGenes	2	Immune (myeloid)	ARHGAP28	Epithelial cell	SCRN2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CBWD5	Epithelial cell	CCR7	0.5
+ExprAssoGenes	2	Immune (myeloid)	MARK3	Epithelial cell	CLTCL1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM232	Epithelial cell	ZNF792	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF575	Epithelial cell	LCA5	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPP1R1C	Epithelial cell	LMNTD2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CDKL1	Epithelial cell	SCAMP5	0.5
+ExprAssoGenes	2	Immune (myeloid)	AL023806.1	Epithelial cell	ANXA8	0.5
+ExprAssoGenes	2	Immune (myeloid)	BORCS7	Epithelial cell	PDCD11	0.5
+ExprAssoGenes	2	Immune (myeloid)	AKAP13	Epithelial cell	TCP10L	0.5
+ExprAssoGenes	2	Immune (myeloid)	CEP192	Epithelial cell	ENTPD4	0.5
+ExprAssoGenes	2	Immune (myeloid)	PARP4	Epithelial cell	NPIPA5	0.5
+ExprAssoGenes	2	Immune (myeloid)	SUN2	Epithelial cell	NME6	0.5
+ExprAssoGenes	2	Immune (myeloid)	IQCH	Epithelial cell	ATOH7	0.5
+ExprAssoGenes	2	Immune (myeloid)	EMX2	Epithelial cell	ADAM11	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM136	Epithelial cell	MCM9	0.5
+ExprAssoGenes	2	Immune (myeloid)	FGFR3	Epithelial cell	ASNS	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCDC81	Epithelial cell	PRKD3	0.5
+ExprAssoGenes	2	Immune (myeloid)	TSPYL4	Epithelial cell	NIPSNAP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	RTEL1	Epithelial cell	AKIP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GTF2H2	Epithelial cell	SOWAHC	0.5
+ExprAssoGenes	2	Immune (myeloid)	LIG3	Epithelial cell	EFHB	0.5
+ExprAssoGenes	2	Immune (myeloid)	NOL6	Epithelial cell	CREBBP	0.5
+ExprAssoGenes	2	Immune (myeloid)	GNG10	Epithelial cell	FBLL1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMED4	Epithelial cell	SNRPB2	0.5
+ExprAssoGenes	2	Immune (myeloid)	GLCCI1	Epithelial cell	PEX7	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF600	Epithelial cell	CUZD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CHCHD2	Epithelial cell	POU5F1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PSORS1C2	Epithelial cell	ZNF415	0.5
+ExprAssoGenes	2	Immune (myeloid)	PLIN3	Epithelial cell	NPTN	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUDT13	Epithelial cell	TMCO6	0.5
+ExprAssoGenes	2	Immune (myeloid)	AP3S2	Epithelial cell	NSUN2	0.5
+ExprAssoGenes	2	Immune (myeloid)	MLF1	Epithelial cell	PLA2R1	0.5
+ExprAssoGenes	2	Immune (myeloid)	C19orf24	Epithelial cell	CHI3L1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SALL4	Epithelial cell	ADSS	0.5
+ExprAssoGenes	2	Immune (myeloid)	CRYBB2	Epithelial cell	TOR3A	0.5
+ExprAssoGenes	2	Immune (myeloid)	NHLH1	Epithelial cell	FAM184A	0.5
+ExprAssoGenes	2	Immune (myeloid)	CHMP7	Epithelial cell	MBOAT7	0.5
+ExprAssoGenes	2	Immune (myeloid)	THAP3	Epithelial cell	RSPH1	0.5
+ExprAssoGenes	2	Immune (myeloid)	RBM44	Epithelial cell	MYO5A	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF408	Epithelial cell	IQGAP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TTC4	Epithelial cell	AFF4	0.5
+ExprAssoGenes	2	Immune (myeloid)	EIF5A	Epithelial cell	RRN3	0.5
+ExprAssoGenes	2	Immune (myeloid)	COMMD2	Epithelial cell	IPO8	0.5
+ExprAssoGenes	2	Immune (myeloid)	TBCD	Epithelial cell	CFAP43	0.5
+ExprAssoGenes	2	Immune (myeloid)	TRIM66	Epithelial cell	POLL	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC25A12	Epithelial cell	SMAD4	0.5
+ExprAssoGenes	2	Immune (myeloid)	KCNE1	Epithelial cell	UTP14C	0.5
+ExprAssoGenes	2	Immune (myeloid)	ACOT2	Epithelial cell	GMPS	0.5
+ExprAssoGenes	2	Immune (myeloid)	INCENP	Epithelial cell	PNMA2	0.5
+ExprAssoGenes	2	Immune (myeloid)	MGMT	Epithelial cell	SMARCA4	0.5
+ExprAssoGenes	2	Immune (myeloid)	CSNK1G3	Epithelial cell	CTAGE15	0.5
+ExprAssoGenes	2	Immune (myeloid)	DCAF4	Epithelial cell	RANBP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	KCNMA1	Epithelial cell	DHX32	0.5
+ExprAssoGenes	2	Immune (myeloid)	NBPF10	Epithelial cell	CSGALNACT2	0.5
+ExprAssoGenes	2	Immune (myeloid)	FTCD	Epithelial cell	SUOX	0.5
+ExprAssoGenes	2	Immune (myeloid)	CLIC6	Epithelial cell	HLCS	0.5
+ExprAssoGenes	2	Immune (myeloid)	ATL3	Epithelial cell	UBE3B	0.5
+ExprAssoGenes	2	Immune (myeloid)	LMF2	Epithelial cell	TMOD2	0.5
+ExprAssoGenes	2	Immune (myeloid)	SPRN	Epithelial cell	TMEM81	0.5
+ExprAssoGenes	2	Immune (myeloid)	PNPLA7	Epithelial cell	TACR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	IKBIP	Epithelial cell	MCC	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUDT18	Epithelial cell	ANGEL2	0.5
+ExprAssoGenes	2	Immune (myeloid)	TP53BP1	Epithelial cell	POLG	0.5
+ExprAssoGenes	2	Immune (myeloid)	RPRD1B	Epithelial cell	UBE2E3	0.5
+ExprAssoGenes	2	Immune (myeloid)	RAB38	Epithelial cell	ALAD	0.5
+ExprAssoGenes	2	Immune (myeloid)	ECI2	Epithelial cell	ZNF528	0.5
+ExprAssoGenes	2	Immune (myeloid)	CDHR2	Epithelial cell	DUSP23	0.5
+ExprAssoGenes	2	Immune (myeloid)	CDK5RAP3	Epithelial cell	C19orf44	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAAP20	Epithelial cell	WDFY2	0.5
+ExprAssoGenes	2	Immune (myeloid)	DHCR24	Epithelial cell	SMPDL3A	0.5
+ExprAssoGenes	2	Immune (myeloid)	DNM2	Epithelial cell	BORCS5	0.5
+ExprAssoGenes	2	Immune (myeloid)	LAMB1	Epithelial cell	COL26A1	0.5
+ExprAssoGenes	2	Immune (myeloid)	USP36	Epithelial cell	SNAPC1	0.5
+ExprAssoGenes	2	Immune (myeloid)	C6orf141	Epithelial cell	IL17RD	0.5
+ExprAssoGenes	2	Immune (myeloid)	IFNAR1	Epithelial cell	PPP2R3A	0.5
+ExprAssoGenes	2	Immune (myeloid)	NT5C	Epithelial cell	FPR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	OXNAD1	Epithelial cell	ENGASE	0.5
+ExprAssoGenes	2	Immune (myeloid)	AGR3	Epithelial cell	GXYLT1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GSTM2	Epithelial cell	AGER	0.5
+ExprAssoGenes	2	Immune (myeloid)	SAR1A	Epithelial cell	THBS3	0.5
+ExprAssoGenes	2	Immune (myeloid)	PHLDB1	Epithelial cell	SCFD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	OXGR1	Epithelial cell	GTPBP3	0.5
+ExprAssoGenes	2	Immune (myeloid)	SF3B3	Epithelial cell	DGCR2	0.5
+ExprAssoGenes	2	Immune (myeloid)	GTF2F1	Epithelial cell	GRK4	0.5
+ExprAssoGenes	2	Immune (myeloid)	ADH4	Epithelial cell	LY6G5C	0.5
+ExprAssoGenes	2	Immune (myeloid)	CTDSPL	Epithelial cell	RNF150	0.5
+ExprAssoGenes	2	Immune (myeloid)	SPPL2A	Epithelial cell	ADAP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	HCG27	Epithelial cell	ZNF320	0.5
+ExprAssoGenes	2	Immune (myeloid)	TRIP6	Epithelial cell	LRRC36	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC6A4	Epithelial cell	LUZP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	MAN2B2	Epithelial cell	SLC38A11	0.5
+ExprAssoGenes	2	Immune (myeloid)	ABT1	Epithelial cell	BEND7	0.5
+ExprAssoGenes	2	Immune (myeloid)	SELL	Epithelial cell	NADSYN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	HAUS1	Epithelial cell	AQP3	0.5
+ExprAssoGenes	2	Immune (myeloid)	PRELID3A	Epithelial cell	RASA1	0.5
+ExprAssoGenes	2	Immune (myeloid)	C12orf65	Epithelial cell	ENDOU	0.5
+ExprAssoGenes	2	Immune (myeloid)	RPP25	Epithelial cell	EFCAB6	0.5
+ExprAssoGenes	2	Immune (myeloid)	GALNT15	Epithelial cell	RBCK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GRIN3B	Epithelial cell	CNTROB	0.5
+ExprAssoGenes	2	Immune (myeloid)	KCNA2	Epithelial cell	PEAK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPFIA1	Epithelial cell	FAM177B	0.5
+ExprAssoGenes	2	Immune (myeloid)	ASTE1	Epithelial cell	CERS4	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNRNP70	Epithelial cell	GOPC	0.5
+ExprAssoGenes	2	Immune (myeloid)	SPCS3	Epithelial cell	YBX3	0.5
+ExprAssoGenes	2	Immune (myeloid)	AKR7A2	Epithelial cell	ITGA1	0.5
+ExprAssoGenes	2	Immune (myeloid)	PSCA	Epithelial cell	STX19	0.5
+ExprAssoGenes	2	Immune (myeloid)	HYAL1	Epithelial cell	CYP2D6	0.5
+ExprAssoGenes	2	Immune (myeloid)	COX4I2	Epithelial cell	DNAH5	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF555	Epithelial cell	DSG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CATSPERG	Epithelial cell	TADA2A	0.5
+ExprAssoGenes	2	Immune (myeloid)	MICA	Epithelial cell	ABCF1	0.5
+ExprAssoGenes	2	Immune (myeloid)	STX10	Epithelial cell	NOTCH4	0.5
+ExprAssoGenes	2	Immune (myeloid)	TSNAXIP1	Epithelial cell	VNN2	0.5
+ExprAssoGenes	2	Immune (myeloid)	EHBP1L1	Epithelial cell	F7	0.5
+ExprAssoGenes	2	Immune (myeloid)	GRM2	Epithelial cell	POT1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TSPAN4	Epithelial cell	NUDT4	0.5
+ExprAssoGenes	2	Immune (myeloid)	RBM8A	Epithelial cell	IL15RA	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPFIBP1	Epithelial cell	DMRT2	0.5
+ExprAssoGenes	2	Immune (myeloid)	GNPNAT1	Epithelial cell	CYP4A22	0.5
+ExprAssoGenes	2	Immune (myeloid)	CNDP1	Epithelial cell	SGTA	0.5
+ExprAssoGenes	2	Immune (myeloid)	MCMDC2	Epithelial cell	SOD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	HAUS4	Epithelial cell	FKRP	0.5
+ExprAssoGenes	2	Immune (myeloid)	KCTD10	Epithelial cell	ZNF850	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF333	Epithelial cell	FAM124B	0.5
+ExprAssoGenes	2	Immune (myeloid)	UPK3B	Epithelial cell	SNTG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF577	Epithelial cell	NELFB	0.5
+ExprAssoGenes	2	Immune (myeloid)	POLR1B	Epithelial cell	G3BP2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF155	Epithelial cell	IWS1	0.5
+ExprAssoGenes	2	Immune (myeloid)	LRRFIP2	Epithelial cell	ANXA2R	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF24	Epithelial cell	CCNC	0.5
+ExprAssoGenes	2	Immune (myeloid)	ADARB2	Epithelial cell	TTC39B	0.5
+ExprAssoGenes	2	Immune (myeloid)	LRRIQ3	Epithelial cell	A2M	0.5
+ExprAssoGenes	2	Immune (myeloid)	B3GNT9	Epithelial cell	SNRNP27	0.5
+ExprAssoGenes	2	Immune (myeloid)	KYNU	Epithelial cell	HLA-C	0.5
+ExprAssoGenes	2	Immune (myeloid)	TOX4	Epithelial cell	FOXD4L1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC10A1	Epithelial cell	SLC45A4	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPP1R3C	Epithelial cell	PSMB7	0.5
+ExprAssoGenes	2	Immune (myeloid)	CASQ1	Epithelial cell	BTBD9	0.5
+ExprAssoGenes	2	Immune (myeloid)	GATM	Epithelial cell	GAL3ST2	0.5
+ExprAssoGenes	2	Immune (myeloid)	IL12RB1	Epithelial cell	SLC17A5	0.5
+ExprAssoGenes	2	Immune (myeloid)	ERICH4	Epithelial cell	DPH1	0.5
+ExprAssoGenes	2	Immune (myeloid)	DAGLA	Epithelial cell	SDHC	0.5
+ExprAssoGenes	2	Immune (myeloid)	TXNL1	Epithelial cell	HSPBAP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	AEBP1	Epithelial cell	FRRS1L	0.5
+ExprAssoGenes	2	Immune (myeloid)	INTS8	Epithelial cell	CLDN14	0.5
+ExprAssoGenes	2	Immune (myeloid)	BCHE	Epithelial cell	STRC	0.5
+ExprAssoGenes	2	Immune (myeloid)	CLSTN2	Epithelial cell	SWAP70	0.5
+ExprAssoGenes	2	Immune (myeloid)	CPSF2	Epithelial cell	MGA	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCDC124	Epithelial cell	FAM221A	0.5
+ExprAssoGenes	2	Immune (myeloid)	TIPARP	Epithelial cell	CCL4	0.5
+ExprAssoGenes	2	Immune (myeloid)	NT5DC3	Epithelial cell	PCIF1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SKIV2L	Epithelial cell	RHPN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	NBPF11	Epithelial cell	USP45	0.5
+ExprAssoGenes	2	Immune (myeloid)	MAPK8IP2	Epithelial cell	NT5C2	0.5
+ExprAssoGenes	2	Immune (myeloid)	DDX59	Epithelial cell	ARL6IP1	0.5
+ExprAssoGenes	2	Immune (myeloid)	LRR1	Epithelial cell	PSMB3	0.5
+ExprAssoGenes	2	Immune (myeloid)	TFR2	Epithelial cell	WFIKKN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	KCNIP4	Epithelial cell	PITHD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZFP14	Epithelial cell	PBLD	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYEOV	Epithelial cell	P2RX6	0.5
+ExprAssoGenes	2	Immune (myeloid)	AFAP1	Epithelial cell	ZIK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	LARS2	Epithelial cell	IQSEC3	0.5
+ExprAssoGenes	2	Immune (myeloid)	NCLN	Epithelial cell	MTX1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CHKB	Epithelial cell	RUNX3	0.5
+ExprAssoGenes	2	Immune (myeloid)	SAMD12	Epithelial cell	SYNM	0.5
+ExprAssoGenes	2	Immune (myeloid)	CANT1	Epithelial cell	ATP1B2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZMAT4	Epithelial cell	PPIL2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ALG1L	Epithelial cell	SLC1A7	0.5
+ExprAssoGenes	2	Immune (myeloid)	VAT1	Epithelial cell	GSTM3	0.5
+ExprAssoGenes	2	Immune (myeloid)	PLLP	Epithelial cell	LTBR	0.5
+ExprAssoGenes	2	Immune (myeloid)	MYRIP	Epithelial cell	NEK11	0.5
+ExprAssoGenes	2	Immune (myeloid)	HSD17B1	Epithelial cell	ZNF839	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC25A41	Epithelial cell	TMEM123	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZDHHC7	Epithelial cell	PRR18	0.5
+ExprAssoGenes	2	Immune (myeloid)	ETFDH	Epithelial cell	NMNAT2	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNX33	Epithelial cell	PPP1R18	0.5
+ExprAssoGenes	2	Immune (myeloid)	E2F4	Epithelial cell	IVNS1ABP	0.5
+ExprAssoGenes	2	Immune (myeloid)	YPEL3	Epithelial cell	THRAP3	0.5
+ExprAssoGenes	2	Immune (myeloid)	IGFBP5	Epithelial cell	KLHL17	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC13A4	Epithelial cell	MYOF	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZFP1	Epithelial cell	PLD6	0.5
+ExprAssoGenes	2	Immune (myeloid)	APOBEC3G	Epithelial cell	KIF3C	0.5
+ExprAssoGenes	2	Immune (myeloid)	SERPINF1	Epithelial cell	CWC25	0.5
+ExprAssoGenes	2	Immune (myeloid)	MED20	Epithelial cell	CYP7A1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM260	Epithelial cell	FMO4	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZDHHC20	Epithelial cell	TDRD5	0.5
+ExprAssoGenes	2	Immune (myeloid)	GOLGA8M	Epithelial cell	CYP27C1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GPLD1	Epithelial cell	NMT2	0.5
+ExprAssoGenes	2	Immune (myeloid)	CBX6	Epithelial cell	FMO2	0.5
+ExprAssoGenes	2	Immune (myeloid)	HHLA3	Epithelial cell	GP1BA	0.5
+ExprAssoGenes	2	Immune (myeloid)	LAMTOR4	Epithelial cell	UNC5C	0.5
+ExprAssoGenes	2	Immune (myeloid)	ANAPC4	Epithelial cell	CFAP97	0.5
+ExprAssoGenes	2	Immune (myeloid)	B4GAT1	Epithelial cell	SPECC1L	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAM86C1	Epithelial cell	ARHGEF25	0.5
+ExprAssoGenes	2	Immune (myeloid)	WDR97	Epithelial cell	KDELC2	0.5
+ExprAssoGenes	2	Immune (myeloid)	UBAP1	Epithelial cell	MS4A4A	0.5
+ExprAssoGenes	2	Immune (myeloid)	ARMC10	Epithelial cell	LRRC46	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM68	Epithelial cell	SCTR	0.5
+ExprAssoGenes	2	Immune (myeloid)	IVD	Epithelial cell	GOLGA5	0.5
+ExprAssoGenes	2	Immune (myeloid)	HES2	Epithelial cell	CDCA3	0.5
+ExprAssoGenes	2	Immune (myeloid)	ITM2B	Epithelial cell	RAB3C	0.5
+ExprAssoGenes	2	Immune (myeloid)	PLVAP	Epithelial cell	ZDHHC11	0.5
+ExprAssoGenes	2	Immune (myeloid)	NRP2	Epithelial cell	SERPINH1	0.5
+ExprAssoGenes	2	Immune (myeloid)	MVB12A	Epithelial cell	UBA3	0.5
+ExprAssoGenes	2	Immune (myeloid)	TMEM69	Epithelial cell	ZNF221	0.5
+ExprAssoGenes	2	Immune (myeloid)	AKAP3	Epithelial cell	MAPKAPK5	0.5
+ExprAssoGenes	2	Immune (myeloid)	RNF217	Epithelial cell	SPATC1L	0.5
+ExprAssoGenes	2	Immune (myeloid)	RSAD1	Epithelial cell	DPT	0.5
+ExprAssoGenes	2	Immune (myeloid)	DHRS7B	Epithelial cell	NDUFA3	0.5
+ExprAssoGenes	2	Immune (myeloid)	AP5Z1	Epithelial cell	TMEM127	0.5
+ExprAssoGenes	2	Immune (myeloid)	PDZRN4	Epithelial cell	CD207	0.5
+ExprAssoGenes	2	Immune (myeloid)	BDH2	Epithelial cell	C7	0.5
+ExprAssoGenes	2	Immune (myeloid)	NUS1	Epithelial cell	REEP4	0.5
+ExprAssoGenes	2	Immune (myeloid)	SDCCAG8	Epithelial cell	LARP4	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAM24B	Epithelial cell	PRG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	BTN3A2	Epithelial cell	LSM2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ELAVL2	Epithelial cell	NMRK1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CAPN15	Epithelial cell	LRRC34	0.5
+ExprAssoGenes	2	Immune (myeloid)	PQLC1	Epithelial cell	STON1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CNOT3	Epithelial cell	LRGUK	0.5
+ExprAssoGenes	2	Immune (myeloid)	UBP1	Epithelial cell	ACTR6	0.5
+ExprAssoGenes	2	Immune (myeloid)	NAGPA	Epithelial cell	EIF4B	0.5
+ExprAssoGenes	2	Immune (myeloid)	RAB24	Epithelial cell	NDUFAF6	0.5
+ExprAssoGenes	2	Immune (myeloid)	AMMECR1L	Epithelial cell	IFT46	0.5
+ExprAssoGenes	2	Immune (myeloid)	CLEC10A	Epithelial cell	VPS28	0.5
+ExprAssoGenes	2	Immune (myeloid)	FRS3	Epithelial cell	ZNF211	0.5
+ExprAssoGenes	2	Immune (myeloid)	CCZ1B	Epithelial cell	SPATA32	0.5
+ExprAssoGenes	2	Immune (myeloid)	TP53I3	Epithelial cell	CFAP52	0.5
+ExprAssoGenes	2	Immune (myeloid)	KIF16B	Epithelial cell	VNN1	0.5
+ExprAssoGenes	2	Immune (myeloid)	EXOSC6	Epithelial cell	SLC35G1	0.5
+ExprAssoGenes	2	Immune (myeloid)	LEFTY1	Epithelial cell	NCAPG2	0.5
+ExprAssoGenes	2	Immune (myeloid)	EIF4EBP3	Epithelial cell	TMA16	0.5
+ExprAssoGenes	2	Immune (myeloid)	RIMKLB	Epithelial cell	TNFRSF10C	0.5
+ExprAssoGenes	2	Immune (myeloid)	PQLC2	Epithelial cell	PARK7	0.5
+ExprAssoGenes	2	Immune (myeloid)	YWHAE	Epithelial cell	ZNF483	0.5
+ExprAssoGenes	2	Immune (myeloid)	NDUFA2	Epithelial cell	STMND1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GPATCH2L	Epithelial cell	GTPBP10	0.5
+ExprAssoGenes	2	Immune (myeloid)	PJA2	Epithelial cell	PRSS57	0.5
+ExprAssoGenes	2	Immune (myeloid)	RALGAPA1	Epithelial cell	ZFP57	0.5
+ExprAssoGenes	2	Immune (myeloid)	C9orf85	Epithelial cell	DOPEY2	0.5
+ExprAssoGenes	2	Immune (myeloid)	GHITM	Epithelial cell	MRGPRX3	0.5
+ExprAssoGenes	2	Immune (myeloid)	MRGPRX2	Epithelial cell	PRKD2	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF497	Epithelial cell	TCF7L1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF606	Epithelial cell	FDX1	0.5
+ExprAssoGenes	2	Immune (myeloid)	TRIM22	Epithelial cell	FAM173B	0.5
+ExprAssoGenes	2	Immune (myeloid)	SUDS3	Epithelial cell	LRRC61	0.5
+ExprAssoGenes	2	Immune (myeloid)	RNF32	Epithelial cell	FEZ1	0.5
+ExprAssoGenes	2	Immune (myeloid)	NAT8	Epithelial cell	E2F6	0.5
+ExprAssoGenes	2	Immune (myeloid)	HAX1	Epithelial cell	PLTP	0.5
+ExprAssoGenes	2	Immune (myeloid)	GRIK2	Epithelial cell	KRCC1	0.5
+ExprAssoGenes	2	Immune (myeloid)	RAP1A	Epithelial cell	SGF29	0.5
+ExprAssoGenes	2	Immune (myeloid)	BORCS8	Epithelial cell	FFAR1	0.5
+ExprAssoGenes	2	Immune (myeloid)	OGFOD3	Epithelial cell	ARL6IP5	0.5
+ExprAssoGenes	2	Immune (myeloid)	YTHDC2	Epithelial cell	NEK4	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPFIA2	Epithelial cell	C11orf21	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF79	Epithelial cell	B3GNT5	0.5
+ExprAssoGenes	2	Immune (myeloid)	EHD4	Epithelial cell	HTATIP2	0.5
+ExprAssoGenes	2	Immune (myeloid)	HAUS6	Epithelial cell	GALNT3	0.5
+ExprAssoGenes	2	Immune (myeloid)	GARS	Epithelial cell	CNOT11	0.5
+ExprAssoGenes	2	Immune (myeloid)	CAMKK2	Epithelial cell	ACCS	0.5
+ExprAssoGenes	2	Immune (myeloid)	CATSPERB	Epithelial cell	SSC5D	0.5
+ExprAssoGenes	2	Immune (myeloid)	COA1	Epithelial cell	LYNX1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ZNF429	Epithelial cell	LVRN	0.5
+ExprAssoGenes	2	Immune (myeloid)	PPCDC	Epithelial cell	SNRPD2	0.5
+ExprAssoGenes	2	Immune (myeloid)	BTN2A2	Epithelial cell	BRD3	0.5
+ExprAssoGenes	2	Immune (myeloid)	RHCE	Epithelial cell	SAMM50	0.5
+ExprAssoGenes	2	Immune (myeloid)	RNASET2	Epithelial cell	POC1B	0.5
+ExprAssoGenes	2	Immune (myeloid)	SUCO	Epithelial cell	ZNF506	0.5
+ExprAssoGenes	2	Immune (myeloid)	MATR3	Epithelial cell	ZNF232	0.5
+ExprAssoGenes	2	Immune (myeloid)	LY86	Epithelial cell	PPP5C	0.5
+ExprAssoGenes	2	Immune (myeloid)	BOLA2	Epithelial cell	TMEM128	0.5
+ExprAssoGenes	2	Immune (myeloid)	ABCA12	Epithelial cell	TLE1	0.5
+ExprAssoGenes	2	Immune (myeloid)	GLMP	Epithelial cell	TPSB2	0.5
+ExprAssoGenes	2	Immune (myeloid)	NMNAT3	Epithelial cell	RNF123	0.5
+ExprAssoGenes	2	Immune (myeloid)	PAICS	Epithelial cell	MPHOSPH6	0.5
+ExprAssoGenes	2	Immune (myeloid)	SNX15	Epithelial cell	GANAB	0.5
+ExprAssoGenes	2	Immune (myeloid)	DSCC1	Epithelial cell	MAP1LC3A	0.5
+ExprAssoGenes	2	Immune (myeloid)	TSEN15	Epithelial cell	NINL	0.5
+ExprAssoGenes	2	Immune (myeloid)	B3GALT4	Epithelial cell	SNRPF	0.5
+ExprAssoGenes	2	Immune (myeloid)	SSRP1	Epithelial cell	S100B	0.5
+ExprAssoGenes	2	Immune (myeloid)	GALC	Epithelial cell	ZNF490	0.5
+ExprAssoGenes	2	Immune (myeloid)	FAHD2B	Epithelial cell	HDDC3	0.5
+ExprAssoGenes	2	Immune (myeloid)	TC2N	Epithelial cell	XRCC2	0.5
+ExprAssoGenes	2	Immune (myeloid)	IL20RB	Epithelial cell	WDSUB1	0.5
+ExprAssoGenes	2	Immune (myeloid)	SOAT2	Epithelial cell	HMBS	0.5
+ExprAssoGenes	2	Immune (myeloid)	GAA	Epithelial cell	FTSJ3	0.5
+ExprAssoGenes	2	Immune (myeloid)	LMAN2	Epithelial cell	APOL3	0.5
+ExprAssoGenes	2	Immune (myeloid)	RUVBL2	Epithelial cell	ZNF467	0.5
+ExprAssoGenes	2	Immune (myeloid)	GNB1L	Epithelial cell	TIMM10	0.5
+ExprAssoGenes	2	Immune (myeloid)	XPO6	Epithelial cell	TIGD1	0.5
+ExprAssoGenes	2	Immune (myeloid)	ATE1	Epithelial cell	TSPO	0.5
+ExprAssoGenes	2	Immune (myeloid)	CDK7	Epithelial cell	WFS1	0.5
+ExprAssoGenes	2	Immune (myeloid)	CYS1	Epithelial cell	SNAP91	0.5
+ExprAssoGenes	2	Immune (myeloid)	CNTN6	Epithelial cell	ECT2L	0.5
+ExprAssoGenes	2	Immune (myeloid)	PIAS2	Epithelial cell	NUP153	0.5
+ExprAssoGenes	2	Immune (myeloid)	APIP	Epithelial cell	SMG8	0.5
+ExprAssoGenes	2	Immune (myeloid)	ST7L	Epithelial cell	DLG5	0.5
+ExprAssoGenes	2	Immune (myeloid)	UFSP1	Epithelial cell	GAPT	0.5
+ExprAssoGenes	2	Immune (myeloid)	SPDYE5	Epithelial cell	SLU7	0.5
+ExprAssoGenes	2	Immune (myeloid)	SCAI	Epithelial cell	HEATR3	0.5
+ExprAssoGenes	2	Immune (myeloid)	SLC33A1	Epithelial cell	GAK	0.5
+ExprAssoGenes	2	Immune (myeloid)	NKTR	Epithelial cell	CDK10	0.5
+ExprAssoGenes	2	Immune (myeloid)	TPPP3	Epithelial cell	FAAP24	0.5
+ExprAssoGenes	2	Immune (myeloid)	FBF1	Epithelial cell	SLC25A32	0.5

@@ -432,8 +432,11 @@ ParaSimulation=function(input) {
 
   # Trim  data (no. of cells) in expr to make the expr estimation faster
   ctype=table(feature[,1])
-  idxc=foreach (i = which(ctype>2000), .combine = "c") %dopar% {
-    sample(which(feature[,1]==names(ctype)[i]), 2000)
+  idxc=foreach (i = 1:length(ctype), .combine = "c") %dopar% {
+    if (ctype[i]>2500) {
+      sample(which(feature[,1]==names(ctype)[i]), 2500)
+    } else {which(feature[,1]==names(ctype)[i])
+    }
   }
   expr2=expr[,idxc]
 
@@ -451,6 +454,12 @@ ParaSimulation=function(input) {
   print("Finished the simulation")
 
 }
+
+
+
+
+
+
 
 
 

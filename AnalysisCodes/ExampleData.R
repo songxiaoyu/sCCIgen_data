@@ -6,6 +6,7 @@ library(raster)
 library(spatstat)
 library(rlist)
 library(parallel)
+library(doParallel)
 
 setwd("/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github")
 source("RPackage/R/PointSimulator_NoData.R")
