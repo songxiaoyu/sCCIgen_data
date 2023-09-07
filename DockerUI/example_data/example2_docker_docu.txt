@@ -1,203 +1,3 @@
- Available tasks 
-        -----------------------------------
-
-
-        1) I want to download a pre-simulated spatial transcriptomics dataset.
-        2) I want to generate a parameter file using command line prompts.
-        3) I have a parameter file and want to run a simulation.
-
-
-        Select your task (1/2/3):       2
-
-
-        What data do you want to use for simulation?
-        -----------------------------------
-
-
-        1) Decoy data 1
-        Details: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type.
-        2) Decoy data 2
-        Details: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type and spatial coordinate.
-        3) Decoy data 3
-        Details: It includes (1) count matrix for 10 genes by 1000 cells of 2 cell types, and (2) cell feature matrix for annotated cell type, spatial coordinate, and region.
-        4) Normal human breast snRNAseq data
-        It includes (1) count matrix for 4751 genes by 5990 cells of 6 cell types (epithelial cell, adipocyte, fibroblast, endothelial cell, immune (myeloid) and muscle), and (2) cell feature matrix for annotated cell type. PMID: 35549429
-        5) Normal mouse brain SeqFISH+ data
-        Details: It includes (1) count matrix for 10,000 genes by 511 cells of 6 cell types (excitatory neuron, interneuron, astrocyte, microglia, oligodendrocyte and endothelial cells), and (2)cell feature matrix including cell type annotation and spatial coordinate on 2D (x, y). PMID: 35549429
-        6) Ovarian cancer MERFISH data
-        Details: It includes (1) count matrix for 550 genes by 355,633 cells of 6 cell types (tumor, adipose, endo-immune, macro-immune, macrophage, and others), and (2) cell feature matrix including cell type annotation and spatial coordinate on 2D. Data source: vizgen
-        7) User input
-
-
-        What data do you want to use for simulation? 4
-
-
-        Would you like to download this data table locally (y/n)? [default: n]
-        Using default: n
-
-
-        Unique cell types detected in expression data: 6
-
-
-        Number of simulated cells [default =10,000]: 
-        Using default: 10000
-
-
-        Number of regions [default = 2; suggested: 1-10]:       2
-
-
-        Input custom cell-type proportions in each region (y/n)? [default: all regions equal to cell-type proportions of the input expression data] 
-        Using default cell-type proportions.
-
-
-        Specify cell-cell location interaction (inhibition/attraction) (y/n)? [default = n]
-Instruction: Users can select cell type pairs and determine the strength. Strength <0 indicates cell-cell inhibition; and strength > 0 indicates cell-cell attraction.      y
-
-
-        Cell type 1: Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Select cell type:       1
-        Cell type 2: Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Select cell type:       3
-        Value of strength:      0
-        Do you want to continue specifying other pairs of cell-cell location interaction (y/n) [default = n]
-        Using defulat n.
-
-
-        This parameter adjusts cells to be evenly distributed on a slide (range: 0-1). [default = 0]
-        Using default 0.
-
-
-        Cells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:       0
-
-
-        **** Provide simulation parameters for expression profiles ****
-
-
-        Sequencing depth ratio between simulated and reference data [default = 1]? 
-
-        Using default: 1
-
-
-        Do you want to mimic gene-gene correlation of the reference data (y/n)? [default: n, simulates independent genes]
-Note: Select “y” only if the gene-gene correlation is pre-estimated for each cell type. STsimulator provides functions/pipelines for estimating and saving gene-gene correlation, which can be served as input here.   n
-
-
-        Add spatial patterns? (y/n) [default: n]        y
-
-
-        Prompts for adding spatial pattern: 
-        Which region? [1-2]     1
-
-
-        Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Select cell type:       3
-        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]        n
-        Gene proportion (default = 0.1):
-        Using default 0.1.
-        Mean effect at log(count) scale (default = 0.5):
-        Using default 0.5.
-        SD of effect at log(count) scale (default = 0):
-        Using default 0.
-
-
-        Specify another spatial pattern? (y/n) [default: n]     n
-
-
-        Add cell-cell interactions - expression associated with cell-cell distance? (y/n) [default: n]  y
-
-
-        Prompts for adding cell-cell interaction: 
-        Which region? [1-2]     2
-
-
-        Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Peturbed cell type:     3
-        Adjacent cell type:     1
-        Interaction distance threshold (default = 0.1):
-        Using default 0.1.
-        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]
-        Using default: n.
-        Gene proportion (default = 0.1):
-        Using default 0.1.
-        Mean effect at log(count) scale (default = 0.5):
-        Using default 0.5.
-        SD of effect at log(count) scale (default = 0):
-        Using default 0.
-
-
-        Specify another cell-cell interaction - expression associated with cell-cell distance? (y/n) [default: n]   y
-
-
-        Prompts for adding cell-cell interaction: 
-        Which region? [1-2]     1
-
-
-        Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Peturbed cell type:     2
-        Adjacent cell type:     4
-        Interaction distance threshold (default = 0.1):
-        Using default 0.1.
-        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]
-        Using default: n.
-        Gene proportion (default = 0.1):
-        Using default 0.1.
-        Mean effect at log(count) scale (default = 0.5):
-        Using default 0.5.
-        SD of effect at log(count) scale (default = 0):
-        Using default 0.
-
-
-        Specify another cell-cell interaction - expression associated with cell-cell distance? (y/n) [default: n]   n
-
-
-        Add cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n] 2
-
-
-        If multi-cell resolution data should be simulated, specify the No. of spots [default: NULL = single-cell resolution data is simulated]      425413245
-
-
-        Number of simulated data sets [default = 1]:    23`423`5
-Traceback (most recent call last):
-  File "//docker_prompts.py", line 882, in <module>
-    raise ValueError(f'Please enter an integer for the number of simulated data sets. You entered {question2_7}')
-ValueError: Please enter an integer for the number of simulated data sets. You entered 23`423`5
-Xiaoyus-MacBook-Pro:DockerUI songxiaoyu152$ docker run --mount type=bind,source=/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/UseDocker,target=/working_directory -it songxiaoyu152/st_simulator_test
-
 
         Available tasks 
         -----------------------------------
@@ -230,7 +30,7 @@ Xiaoyus-MacBook-Pro:DockerUI songxiaoyu152$ docker run --mount type=bind,source=
         7) User input
 
 
-        What data do you want to use for simulation? 4
+        What data do you want to use for simulation? 5
 
 
         Would you like to download this data table locally (y/n)? [default: n]
@@ -240,28 +40,29 @@ Xiaoyus-MacBook-Pro:DockerUI songxiaoyu152$ docker run --mount type=bind,source=
         Unique cell types detected in expression data: 6
 
 
-        Number of simulated cells [default =10,000]: 
-        Using default: 10000
+        Do you want to simulate new cells (y/n)? [default: n. The alternative is to simulate new expression data for existing cells].    y
 
 
-        Number of regions [default = 2; suggested: 1-10]: 
-        Using default: 2
+        Number of simulated cells [default = 10,000]:   5000
 
 
-        Input custom cell-type proportions in each region (y/n)? [default: all regions equal to cell-type proportions of the input expression data] 
-        Using default cell-type proportions.
+        Cells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:     0
 
 
-        Specify cell-cell location interaction (inhibition/attraction) (y/n)? [default = n]
-Instruction: Users can select cell type pairs and determine the strength. Strength <0 indicates cell-cell inhibition; and strength > 0 indicates cell-cell attraction.
-        Using default n.
+        Available methods for determining window on existing ST data
+        -----------------------------------
 
 
-        This parameter adjusts cells to be evenly distributed on a slide (range: 0-1). [default = 0]
-        Using default 0.
+        1) rectangle
+        2) convex
+        3) convex2
+        4) convex3
+        5) convex5
+        6) network
 
 
-        Cells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:       0
+        Method for determining window on existing ST data [default = convex5]: 
+        Using default: convex5
 
 
         **** Provide simulation parameters for expression profiles ****
@@ -278,103 +79,41 @@ Note: Select “y” only if the gene-gene correlation is pre-estimated for each
         Using default:  n
 
 
-        Add spatial patterns? (y/n) [default: n]        y
-
-
-        Prompts for adding spatial pattern: 
-        Which region? [1-2]     1
-
-
-        Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Select cell type:       4
-        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]
-        Using default: n.
-        Gene proportion (default = 0.1):
-        Using default 0.1.
-        Mean effect at log(count) scale (default = 0.5):
-        Using default 0.5.
-        SD of effect at log(count) scale (default = 0):
-        Using default 0.
-
-
-        Specify another spatial pattern? (y/n) [default: n]     n
-
-
-        Add cell-cell interactions - expression associated with cell-cell distance? (y/n) [default: n]  y
+        Add cell-cell interactions - expression associated with cell-cell distance? (y/n) [default: n]       y
 
 
         Prompts for adding cell-cell interaction: 
-        Which region? [1-2]     2
 
 
         Choose from cell types
         --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
-        Peturbed cell type:     1
-        Adjacent cell type:     5
-        Interaction distance threshold (default = 0.1):
-        Using default 0.1.
-        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]
-        Using default: n.
-        Gene proportion (default = 0.1):
-        Using default 0.1.
-        Mean effect at log(count) scale (default = 0.5):
-        Using default 0.5.
-        SD of effect at log(count) scale (default = 0):
-        Using default 0.
-
-
-        Specify another cell-cell interaction - expression associated with cell-cell distance? (y/n) [default: n]   n
-
-
-        Add cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n] y
-
-
-        Prompts for adding cell-cell interaction: 
-        Which region? [1-2]     2
-
-
-        Choose from cell types
-        --------------
-        1: Adipocyte
-        2: Endothelial cell
-        3: Epithelial cell
-        4: Fibroblast
-        5: Immune (myeloid)
-        6: Muscle
+        1: Astrocyte
+        2: Endothelial
+        3: ExcitatoryNeuron
+        4: Interneuron
+        5: Microglia
+        6: Oligodendrocyte
         Peturbed cell type:     3
         Adjacent cell type:     5
         Interaction distance threshold (default = 0.1):
         Using default 0.1.
-        Do you want to upload gene pair ID (y/n)
-Instruction: Should be K by 2 gene-pair matrix, where K is the number of gene pairs, and column 2 gives the gene ID in perturbed and adjacent cell types. If no, the proportion of genes with this pattern should be specified, and gene pairs will be randomly generated.      n
+        Do you want to upload gene ID (y/n) [default: n. The proportion of genes with the pattern should be specified, and genes will be randomly selected.]
+        Using default: n.
         Gene proportion (default = 0.1):
         Using default 0.1.
-        Is the association bidirectional (y/n): [default = y]
-        Using default TRUE
         Mean effect at log(count) scale (default = 0.5):
         Using default 0.5.
         SD of effect at log(count) scale (default = 0):
         Using default 0.
 
 
-        Specify another cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n]     n
+        Specify another cell-cell interaction - expression associated with cell-cell distance? (y/n) [default: n]
 
 
-        If multi-cell resolution data should be simulated, specify the No. of spots [default: NULL = single-cell resolution data is simulated]
-        Using default: NULL
+        Add cell-cell interactions - expression associated with expression of neighboring cells? (y/n) [default: n]
+
+
+        If multi-cell resolution data should be simulated, specify the No. of spots [default: NULL = single-cell resolution data is simulated]    500
 
 
         Number of simulated data sets [default = 1]: 
@@ -388,11 +127,10 @@ Instruction: Should be K by 2 gene-pair matrix, where K is the number of gene pa
         Path to save output: [default = working_directory/output_files]
 
 
-        Name of the output: [default = myfile]  example1
+        Name of the output: [default = myfile]  example2
 
-        Name this parameter file [default='parameter_file']: example1
+        Name this parameter file [default='parameter_file']: example2
 
-        Saved parameter file for future use in your working directory: parameter_files/example1.tsv
-
+        Saved parameter file for future use in your working directory: parameter_files/example2.tsv
 
         Finished

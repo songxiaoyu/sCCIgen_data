@@ -4,12 +4,15 @@
 \alias{simu.window}
 \title{Simulate the window of spatial data}
 \usage{
-simu.window(PointLoc = NULL, method = "network")
+simu.window(
+  PointLoc,
+  method = c("convex", "convex2", "convex3", "convex5", "rectangle", "network")
+)
 }
 \arguments{
 \item{PointLoc}{PointLoc}
 
-\item{method}{method=c("convex", "rectangle", "network")}
+\item{method}{method=c("convex", "convex2", "convex3", "convex5", "rectangle", "network")}
 }
 \description{
 This function esimates window using spatial location data of existing cells.

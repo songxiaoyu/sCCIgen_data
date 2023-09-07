@@ -6,12 +6,12 @@
 \usage{
 Use_scDesign2(
   ppp.obj,
+  model_params,
   expr,
   feature,
-  Copula = NULL,
   depth_simu_ref_ratio = 1,
   sim_method = c("copula", "ind"),
-  region_specific_model = F,
+  region_specific_model,
   seed
 )
 }
@@ -22,13 +22,13 @@ Use_scDesign2(
 
 \item{feature}{Cell features (e.g. cell type, spatial coordinates, regions) of reference data.}
 
-\item{Copula}{Default is NULL. If 'copula' method is used, a estimated gene-gene correlation copula should be provided.}
-
 \item{depth_simu_ref_ratio}{Relative sequencing depth in comparison of reference data.}
 
 \item{sim_method}{Simulate independent genes using'ind' or correlated genes using 'copula'.}
 
 \item{seed}{Seed}
+
+\item{Copula}{Default is NULL. If 'copula' method is used, a estimated gene-gene correlation copula should be provided.}
 }
 \value{
 Simulated expression count data for all regions.
