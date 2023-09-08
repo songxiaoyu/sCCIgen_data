@@ -1,8 +1,14 @@
-# FileName="fig2a2"
-# i=1
-# expr=fread(paste0("OutputData/", FileName, "_count_", i, ".tsv"))
-# cell_feature=as.data.frame(fread(paste0("OutputData/", FileName, "_meta_",i,".tsv")))
-#
+#' multicell
+#'
+#' This function assigns cells into spatial spots. Each spot may contain zero, one, or
+#' multiple cells. Spots with zero cells won't be in the output.
+#' @param expr: expression profile of the cells
+#' @param cell_feature: cell features like their spatial coordinates.
+#' @param NoSpot: Number of targeted spots.
+#' @return
+#' \item{count:}{Expression profile of the spots.}
+#' \item{spot_feature:}{Spot feature such as spot center coordinates and cell allocations
+#' within the spots .}
 
 multicell=function(expr, cell_feature, NoSpot=500) {
   cell_loc=cell_feature[,c("x.loc", "y.loc")]

@@ -5,7 +5,7 @@ cell_feature_data_file	InputData/cell_feature_data/snRNAseq_breast_cellfeature_0
 expression_data_file_type	Rdata
 expression_data_cell_types	"Adipocyte,Endothelial cell,Epithelial cell,Fibroblast,Immune (myeloid),Muscle"
 simulate_spatial_data	TRUE
-num_simulated_cells	10000
+num_simulated_cells	4000
 num_regions	2
 custom_cell_type_proportions	FALSE
 cell_type_proportion_1	"1,Adipocyte,0.29"

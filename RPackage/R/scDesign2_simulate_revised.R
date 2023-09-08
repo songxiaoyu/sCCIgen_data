@@ -203,7 +203,7 @@ scDesign2.revised <- function(model_params,
       params_new$marginal_param1[, 3] <- params_new$marginal_param1[, 3] * r[iter]
       params_new$marginal_param2[, 3] <- params_new$marginal_param2[, 3] * r[iter]
       if(sim_method == 'copula'){
-        new_count[, llim:ulim] <- simulate_count_copula(model_params=params_new,
+        new_count[, llim:ulim] <- simulate_count_copula(copula_result=params_new,
                                                         n = n_cell_each[iter],
                                                         marginal = 'nb')
       }else if(sim_method == 'ind'){
