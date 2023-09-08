@@ -7,6 +7,8 @@ library(spatstat)
 library(rlist)
 library(parallel)
 library(doParallel)
+library(proxy)
+
 
 setwd("/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github")
 source("RPackage/R/PointSimulator_NoData.R")
@@ -20,6 +22,18 @@ source("RPackage/R/MultiCell.R")
 # detach(para)
 input="ParameterFile/example1.tsv"
 ParaSimulation(input=input)
+
+input="ParameterFile/example2.tsv"
+ParaSimulation(input=input)
+
+
+input="ParameterFile/example3.tsv"
+ParaSimulation(input=input)
+
+
+
+
+
 
 
 

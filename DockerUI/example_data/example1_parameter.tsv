@@ -3,23 +3,23 @@ path_to_input_dir	working_directory/
 expression_data_file	InputData/expression_data/snRNAseq_breast_expr_033023.RData
 cell_feature_data_file	InputData/cell_feature_data/snRNAseq_breast_cellfeature_033023.RData
 expression_data_file_type	Rdata
-expression_data_cell_types	Adipocyte,Endothelial cell,Epithelial cell,Fibroblast,Immune (myeloid),Muscle
+expression_data_cell_types	"Adipocyte,Endothelial cell,Epithelial cell,Fibroblast,Immune (myeloid),Muscle"
 simulate_spatial_data	TRUE
-num_simulated_cells	10000
+num_simulated_cells	4000
 num_regions	2
 custom_cell_type_proportions	FALSE
-cell_type_proportion_1	1,Adipocyte,0.29
-cell_type_proportion_2	1,Endothelial cell,0.12
-cell_type_proportion_3	1,Epithelial cell,0.38
-cell_type_proportion_4	1,Fibroblast,0.13
-cell_type_proportion_5	1,Immune (myeloid),0.05
-cell_type_proportion_6	1,Muscle,0.02
-cell_type_proportion_7	2,Adipocyte,0.29
-cell_type_proportion_8	2,Endothelial cell,0.12
-cell_type_proportion_9	2,Epithelial cell,0.38
-cell_type_proportion_10	2,Fibroblast,0.13
-cell_type_proportion_11	2,Immune (myeloid),0.05
-cell_type_proportion_12	2,Muscle,0.02
+cell_type_proportion_1	"1,Adipocyte,0.29"
+cell_type_proportion_2	"1,Endothelial cell,0.12"
+cell_type_proportion_3	"1,Epithelial cell,0.38"
+cell_type_proportion_4	"1,Fibroblast,0.13"
+cell_type_proportion_5	"1,Immune (myeloid),0.05"
+cell_type_proportion_6	"1,Muscle,0.02"
+cell_type_proportion_7	"2,Adipocyte,0.29"
+cell_type_proportion_8	"2,Endothelial cell,0.12"
+cell_type_proportion_9	"2,Epithelial cell,0.38"
+cell_type_proportion_10	"2,Fibroblast,0.13"
+cell_type_proportion_11	"2,Immune (myeloid),0.05"
+cell_type_proportion_12	"2,Muscle,0.02"
 custom_cell_location_interactions	FALSE
 cell_even_distribution	0
 cell_overlap_cutoff	0

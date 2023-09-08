@@ -260,6 +260,7 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
       #para[grep("spatial_int_expr_", colnames(para))]
       r=eval(parse(text=paste0("spatial_int_expr_",
                                tt1, "_region")))
+      if (r=="NULL") {r=1}
       perturbed.cell.type=eval(parse(text=paste0("spatial_int_expr_",
                                                  tt1, "_cell_type_perturbed")))
       adjacent.cell.type=eval(parse(text=paste0("spatial_int_expr_",
@@ -269,31 +270,25 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
 
       GeneID1=eval(parse(text=paste0("spatial_int_expr_",
                                      tt1, "_gene_id1")))
-      if (GeneID1=="NULL") {
-        GeneID=eval(parse(text=GeneID1))
+      if (GeneID1=="NULL") {GeneID=eval(parse(text=GeneID1))
       } else {GeneID=unlist(strsplit(GeneID1, ","))}
-      GeneID2=eval(parse(text=paste0("spatial_int_expr_",
-                                     tt1, "_gene_id2")))
-      if (GeneID2=="NULL") {
-        GeneIDp=eval(parse(text=GeneID2))
+
+      GeneID2=eval(parse(text=paste0("spatial_int_expr_", tt1, "_gene_id2")))
+      if (GeneID2=="NULL") {GeneIDp=eval(parse(text=GeneID2))
       } else {GeneIDp=unlist(strsplit(GeneID2, ","))}
 
       if (is.null(GeneID)) {
         GenePairIDMatrix=NULL
       } else {GenePairIDMatrix=cbind(GeneID, GeneIDp)}
 
-      PropOfGenes=eval(parse(text=paste0("spatial_int_expr_",
-                                         tt1, "_gene_prop")))
+      PropOfGenes=eval(parse(text=paste0("spatial_int_expr_", tt1, "_gene_prop")))
       if (PropOfGenes=="NULL") {PropOfGenes=eval(parse(text=PropOfGenes))}
 
-      Bidirectional1=eval(parse(text=paste0("spatial_int_expr_",
-                                            tt1, "_bidirectional")))
+      Bidirectional1=eval(parse(text=paste0("spatial_int_expr_",tt1, "_bidirectional")))
       Bidirectional=eval(parse(text=Bidirectional1))
 
-      delta.mean=eval(parse(text=paste0("spatial_int_expr_",
-                                        tt1, "_mean")))
-      delta.sd=eval(parse(text=paste0("spatial_int_expr_",
-                                      tt1, "_sd")))
+      delta.mean=eval(parse(text=paste0("spatial_int_expr_", tt1, "_mean")))
+      delta.sd=eval(parse(text=paste0("spatial_int_expr_",tt1, "_sd")))
 
       beta.all[[i]][[(t1+t2+tt1)]]=Add.Expr.Asso.Pattern(ppp.obj=cell_loc_list_i,
                                                     sim.count=sim_count,

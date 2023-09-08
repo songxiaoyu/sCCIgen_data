@@ -40,7 +40,7 @@
 
 
         Number of simulated cells [default =10,000]: 
-        Using default: 10000
+        Using default: 4000
 
 
         Number of regions [default = 2; suggested: 1-10]:       2

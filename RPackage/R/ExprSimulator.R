@@ -206,8 +206,6 @@ Add.Spatial.Expr.Pattern= function(sim.count,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-
-
 #' Find.Neighbor.Pairs
 #'
 #' Find.Neighbor.Pairs
@@ -215,15 +213,15 @@ Find.Neighbor.Pairs=function(ppp.obj,
                              interacting.cell.type.pair,
                              int.dist.threshold) {
   cell.loc=cbind(ppp.obj$x, ppp.obj$y)
-
-  d=pairdist(cell.loc)
   cell1.idx=which(ppp.obj$marks==interacting.cell.type.pair[1])
   cell2.idx=which(ppp.obj$marks==interacting.cell.type.pair[2])
-  m=d[cell1.idx, cell2.idx]
+  m=dist(cell.loc[cell1.idx,], cell.loc[cell2.idx,], method="euclidean")
+  # d=pairdist(cell.loc)
+  # m=d[cell1.idx, cell2.idx]
   # in neighbor or not?
   dmax=max( max(ppp.obj$x)-min(ppp.obj$x), max(ppp.obj$y)-min(ppp.obj$y))
-  m2=m< (int.dist.threshold*dmax)
-  neighbo.loc.idx=which(m2 == T, arr.ind = TRUE)
+
+  neighbo.loc.idx=which(m< (int.dist.threshold*dmax), arr.ind = TRUE)
 
   # index in original data
   nbr.idx=cbind(cell1.idx[neighbo.loc.idx[,1]],   cell2.idx[neighbo.loc.idx[,2]])
