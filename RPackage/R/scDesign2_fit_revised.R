@@ -30,6 +30,7 @@
 #'  \item{u}{NULL or a matrix of the same shape as x, which records the transformed quantiles,
 #'  by DT.}
 #'}
+#'
 fit_marginals <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'),
                           pval_cutoff = 0.05, epsilon = 1e-5,
                           jitter = TRUE, DT = TRUE){
@@ -188,7 +189,7 @@ fit_marginals <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'
 #' (w/o copula) model.}
 #' }
 #'
-# @export
+
 fit_Gaussian_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'),
                                 jitter = TRUE, zp_cutoff = 0.8,
                                 min_nonzero_num = 2){
@@ -250,12 +251,6 @@ fit_Gaussian_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'po
 #' distinguished with the copula model.}
 #' }
 #'
-# @export
-
-# fit_wo_copula(x=data_mat[, colnames(data_mat) == cell_type_sel[iter]],
-#               marginal=marginal,
-#               jitter = jitter,
-#               min_nonzero_num = min_nonzero_num)
 
 
 fit_wo_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'),
@@ -301,7 +296,7 @@ fit_wo_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'
 #' @return A list with the same length as \code{cell_type_sel} that contains the fitted model
 #' as each of its element.
 #'
-#' @export
+
 fit_model_scDesign2 <- function(data_mat, cell_type_sel,
                                 sim_method = c('copula', 'ind'),
                                 marginal = c('auto_choose', 'zinb', 'nb', 'poisson'),
@@ -334,6 +329,15 @@ fit_model_scDesign2 <- function(data_mat, cell_type_sel,
   names(param) <- cell_type_sel
   param
 }
+
+#' Estimate Gaussian Copula for Gene Expression Matrix
+#' @param expr expr
+#' @param anno description
+#' @param zp_cutoff description
+#' @param min_nonzero_num description
+#' @param ncores description
+#' @return Estimated Gaussian Copula
+#' @export
 
 Est_GeneCopula <- function(expr, anno,  zp_cutoff = 0.8, min_nonzero_num =
                              3, ncores = 1) {

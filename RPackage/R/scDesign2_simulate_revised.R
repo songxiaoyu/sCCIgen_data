@@ -13,7 +13,7 @@
 #' @return A matrix of shape p by n that contains the simulated count values. p is derived from
 #' \code{copula_result}
 #'
-# @export
+
 simulate_count_copula <- function(copula_result, n = 100,
                                   marginal = c('nb', 'Gamma')){
   marginal <- match.arg(marginal)
@@ -77,7 +77,7 @@ simulate_count_copula <- function(copula_result, n = 100,
 #' @return A matrix of shape p by n that contains the simulated count values. p is derived from
 #' \code{model_params}.
 #'
-# @export
+
 simulate_count_ind <- function(model_params, n = 100,
                                marginal = c('nb', 'Gamma')){
   marginal <- match.arg(marginal)
@@ -161,7 +161,6 @@ simulate_count_ind <- function(model_params, n = 100,
 #' @return A matrix of shape p by n that contains the simulated count values. p is derived from
 #' \code{model_params}.
 #'
-#' @export
 
 scDesign2.revised <- function(model_params,
                               n_cell_new,

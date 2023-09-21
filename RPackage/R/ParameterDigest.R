@@ -1,6 +1,8 @@
-# Take input
-
 # ----------------- ParaDigest ---------------
+#' ParaDigest
+#'
+#' ParaDigest
+
 ParaDigest=function(input) {
   # digest parameters
   para1=para=read_tsv(input) %>% column_to_rownames("parameters") %>%
@@ -31,17 +33,19 @@ ParaDigest=function(input) {
 }
 
 # ----------- expr load ---------------
-#' Load RData regardless of the name
+#' Load RData regardless of the file name
 #'
 #' @param fileName  File name
 #' @return Data
-#' @export
 #'
+
 loadRData <- function(fileName){
   #loads an RData file, and returns it
   load(fileName)
   get(ls()[ls() != "fileName"])
 }
+
+# Load expression data
 ExprLoad=function(para){
   if(expression_data_file_type=="Rdata" | expression_data_file_type=="RData") {
     expr=as.data.frame(loadRData(paste0(path_to_input_dir, expression_data_file)))
@@ -52,6 +56,8 @@ ExprLoad=function(para){
   expr=as.matrix(expr)
   return(expr)
 }
+
+# Load cell feature data
 CellFeatureLoad=function(para){
   type=tail(unlist(strsplit(cell_feature_data_file, "[.]")), 1)
   if(type=="Rdata" | type=="RData" ) {
@@ -311,6 +317,10 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
 
 
 # ----------------- ParaExpr ---------------
+#' ParaExpr
+#'
+#' ParaExpr
+
 ParaFitExpr=function(para, expr, feature, CopulaEst, ncores){
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
   # fit by input data
@@ -395,7 +405,20 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
 
 # ----------------- ParaSimulation ---------------
-ParaSimulation=function(input) {
+#' ParaSimulation
+#'
+#' This function simulate spatially resolved transcriptomics data from parameter file. The
+#' parameter file can be generated with an user inferface on Docker.
+#' @param input  The pathway to parameter file.
+#' @return Simulated data (e.g. count, spatial feature, expression pattern) will be directly
+#' saved on your computer or cloud based on the path provided by the parameter file. There is
+#' no output in R from this function as simulated data is usually large. One can load simulated
+#' data into R after the simulation.
+#' @export
+
+
+
+ParaSimulation <- function(input) {
 
   # parallel
   ncores=detectCores()-2; registerDoParallel(ncores)

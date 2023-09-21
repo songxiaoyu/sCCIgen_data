@@ -1,16 +1,4 @@
 
-#' Use_scDesign2_1region
-#'
-#' This function uses input parameters to simulate expression for one region.
-#' @param ppp.obj1 Cells as points on a spatial map.
-#' @param Genes Gene names of input expression data
-#' @param model_params Estimated model parameters from reference data.
-#' @param depth_simu_ref_ratio Relative sequencing depth in comparison of reference data.
-#' @param cell_type_sel Cell types in reference data.
-#' @param seed Seed
-#' @param sim_method Simulate independent genes using 'ind' or correlated genes using 'copula'.
-#' @return Simulated count data for a region.
-#'
 
 Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
                        depth_simu_ref_ratio=1, cell_type_sel, seed,
@@ -39,8 +27,6 @@ Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
 }
 
 
-#' Use_scDesign2_model_params
-#'
 
 
 Use_scDesign2_model_params=function(expr,
@@ -94,9 +80,9 @@ Use_scDesign2_model_params=function(expr,
 }
 
 
-#' Use_scDesign2
+#' Simulate expression under no spatial patterns using revised scDesign2 functions
 #'
-#' This function uses input parameters to simulate expression for all region.
+#' This function uses input parameters to simulate expression for all regions.
 #' @param ppp.obj Cells as points on a spatial map for all regions.
 #' @param expr Gene expression (count) in reference data.
 #' @param feature Cell features (e.g. cell type, spatial coordinates, regions) of reference data.
@@ -159,9 +145,9 @@ Use_scDesign2=function(ppp.obj,
 # Spatial patterns -----------------------------------------------
 
 
-#' Add.Spatial.Expr.Pattern
+#' adds spatial differential expressed pattern for one cell type
 #'
-#' This function adds spatial differential expressed patterns for one cell type in one region.
+#' This function adds spatial differential expressed patterns for one cell type.
 #' @param sim.count Cells as points on a spatial map.
 #' @param r Region index.
 #' @param CellType Cell type index.
@@ -230,10 +216,9 @@ Find.Neighbor.Pairs=function(ppp.obj,
   return(neighbor.idx=nbr.idx)
 }
 
-#' Add.Distance.Asso.Pattern
+#' Add a type of cell-cell interaction pattern (expr-distance) to a pair of cell types
 #'
-#' This function add a type of cell-cell interactions to a pair of cell types in
-#' a region. The expression in a cell type associated with the proximity of
+#' This function add a type of cell-cell interactions to a pair of cell types. The expression in a cell type associated with the proximity of
 #' the other cell type. One can repeat this function for multiple times to
 #' add cell-cell interactions for many cell type pairs and regions.
 #' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
@@ -299,10 +284,10 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-#' Add.Expr.Asso.Pattern
+#' Add a type of cell-cell interaction pattern (expr-expr) to a pair of cell types
 #'
 #' This function add cell-cell interactions to a pair of cell types (e.g.
-#' neuron-microglia) for  expression in a cell type associated with expression of
+#' neuron-microglia) for expression in a cell type associated with expression of
 #' the neighboring other cell type.
 #' One can repeat this function for multiple times to add cell-cell interactions for many cell types.
 #' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
@@ -392,17 +377,8 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
 }
 
 
+# Pattern.adj.1region
 
-#' Pattern.adj.1region
-#'
-#' Adjust the count data for one region based on all input spatial patterns
-#' @param sim.count1 Spatial info for cell type 1 (e.g. neuron)
-#' @param combined.beta.matrix Spatial info for cell type 2 (e.g. microglia)
-#' @param bond.extreme Expression info for cell type 1 (e.g. neuron)
-#' @param keep.total.count Expression info for cell type 1 (e.g. microglia)
-#' @param integer Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
-#' @return sim.count.update
-#' @export
 Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
                     bond.extreme=T, keep.total.count=T,
                     integer=T) {
@@ -439,9 +415,9 @@ Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
 }
 
 
-#' Pattern.Adj
+#' Adjust the count data for all regions based on the input spatial patterns
 #'
-#' Adjust the count data for all regions based on all input spatial patterns
+#' Adjust the count data for all regions based on the input spatial patterns
 #' @param sim.count Spatial info for cell type 1 (e.g. neuron)
 #' @param pattern.list Spatial info for cell type 2 (e.g. microglia)
 #' @param bond.extreme Expression info for cell type 1 (e.g. neuron)
@@ -488,9 +464,9 @@ ExprPattern=function(pattern.list.i){
 
 
 
-#' MergeRegion
+#' Merge spatial and expression data from multiple regions
 #'
-# Merge multi region point and expression data
+#' Merge spatial and expression data from multiple regions
 #' @import spatstat
 #' @param points.list: points.list a list of points from multiple regions
 #' @param expr.list: points.list a list of expressions from multiple regions

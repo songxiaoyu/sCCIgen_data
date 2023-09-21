@@ -2,7 +2,7 @@
 % Please edit documentation in R/ExprSimulator.R
 \name{Use_scDesign2}
 \alias{Use_scDesign2}
-\title{Use_scDesign2}
+\title{Use Revised scDesign2 Functions to Simulate Expression Under the Null.}
 \usage{
 Use_scDesign2(
   ppp.obj,
@@ -34,5 +34,5 @@ Use_scDesign2(
 Simulated expression count data for all regions.
 }
 \description{
-This function uses input parameters to simulate expression for all region.
+This function uses input parameters to simulate expression for all regions.
 }

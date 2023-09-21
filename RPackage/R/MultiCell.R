@@ -9,6 +9,7 @@
 #' \item{count:}{Expression profile of the spots.}
 #' \item{spot_feature:}{Spot feature such as spot center coordinates and cell allocations
 #' within the spots .}
+#' @export
 
 multicell=function(expr, cell_feature, NoSpot=500) {
   cell_loc=cell_feature[,c("x.loc", "y.loc")]

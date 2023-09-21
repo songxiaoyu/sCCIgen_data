@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{loadRData}
 \alias{loadRData}
-\title{Load RData regardless of the name}
+\title{Load RData regardless of the file name}
 \usage{
 loadRData(fileName)
 }
@@ -13,5 +13,5 @@ loadRData(fileName)
 Data
 }
 \description{
-Load RData regardless of the name
+Load RData regardless of the file name
 }
