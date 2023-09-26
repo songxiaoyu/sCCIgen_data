@@ -1,8 +1,0 @@
-Type	Region	CellType	GeneID	AdjCellType	AdjGene	beta
-DistanceAssoGenes	1	CellType1	Gene3	CellType2	NA	0.8933871926947516
-ExprAssoGenes	1	CellType1	Gene4	CellType2	Gene7	2.040470184038412
-ExprAssoGenes	1	CellType1	Gene5	CellType2	Gene8	1.8630919186975279
-ExprAssoGenes	1	CellType1	Gene6	CellType2	Gene9	1.9516482256104635
-ExprAssoGenes	1	CellType2	Gene7	CellType1	Gene4	2.040470184038412
-ExprAssoGenes	1	CellType2	Gene8	CellType1	Gene5	1.8630919186975279
-ExprAssoGenes	1	CellType2	Gene9	CellType1	Gene6	1.9516482256104635
