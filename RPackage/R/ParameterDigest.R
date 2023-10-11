@@ -59,7 +59,7 @@ ExprLoad=function(para){
 
 # Load cell feature data
 CellFeatureLoad=function(para){
-  type=tail(unlist(strsplit(cell_feature_data_file, "[.]")), 1)
+  type=tail(unlist(strsplit(cell_feature_data_file, ".", fixed=TRUE)), 1)
   if(type=="Rdata" | type=="RData" ) {
     feature=as.data.frame(loadRData(paste0(path_to_input_dir, cell_feature_data_file)))
   }
