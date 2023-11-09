@@ -9,7 +9,7 @@
 
 connectUp <- function(poly, nPoly, seed=NULL){
   if (is.null(seed)==F) {set.seed(seed)}
-  nb = spdep::poly2nb(poly, queen=F) # find neighbors
+  nb = poly2nb(poly, queen=F) # find neighbors
   nb2=nb[which(sapply(nb, function(f) min(f))!=0)] # list neighbors for each spot
   g = igraph::graph.adjlist(nb2) # change to network
   nb.length=sapply(nb2, length)
