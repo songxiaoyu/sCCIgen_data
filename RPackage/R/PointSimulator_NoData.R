@@ -2,24 +2,24 @@
 #' connectUp
 #'
 #' This function assigns random connected regions on a square. Used within function `RandomRegionWindow`.
-#' @param nPoly: nPoly is the No. of regions (e.g. nPoly=3)
-#' @param poly: poly is a SpatialPolygonsDataFrame (e.g. 20 by 20 square).
+#' @param nRegion: nRegion is the No. of regions (e.g. nRegion=3)
+#' @param r: poly is a RasterLayer  (e.g. 20 by 20 square).
 #' @return
 #' \item{selected.unique:}{A list of the selected polygons for each region.}
 
-connectUp <- function(poly, nPoly, seed=NULL){
+connectUp <- function(r, nRegion, seed=NULL){
   if (is.null(seed)==F) {set.seed(seed)}
-  nb = poly2nb(poly, queen=F) # find neighbors
-  nb2=nb[which(sapply(nb, function(f) min(f))!=0)] # list neighbors for each spot
-  g = igraph::graph.adjlist(nb2) # change to network
-  nb.length=sapply(nb2, length)
-  n=nrow(poly)
-  selected = as.list(sample(which(nb.length<4),nPoly))
+  
+  n=length(r)
+  nb = lapply(1:n, function(f) raster::adjacent(r, cells=f)[,2]) # find neighbors
+  g = igraph::graph.adjlist(nb) # change to network
+  nb.length=sapply(nb, length)
+  selected = as.list(sample(which(nb.length<4),nRegion))
   selected.sum=unlist(selected)
   n0=length(selected.sum)
 
   while(n0 < n){
-    for (p in 1:nPoly) {
+    for (p in 1:nRegion) {
       nbrs = unlist(igraph::ego(g, 1, selected[[p]], mindist=1)) # find neighbors
       selected.sum=unlist(selected)
       newnbrs = nbrs[!nbrs %in% selected.sum]
@@ -59,9 +59,10 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
   } else {
     # generate polygon
     r <- raster(ncols=nGrid, nrows=nGrid,xmn=0, xmx=1, ymn=0, ymx=1)
-    poly <- rasterToPolygons(r)
+    
     # connect
-    connected = connectUp(poly=poly, nPoly=nRegion, seed=seed)
+    connected = connectUp(r=r, nRegion=nRegion, seed=seed)
+    poly <- rasterToPolygons(r)
 
     region=lapply(1:nRegion, function(f) rgeos::gUnaryUnion(poly[connected[[f]],]))
     coords=lapply(region, function(f) data.frame(f@polygons[[1]]@Polygons[[1]]@coords))
