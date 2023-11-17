@@ -1,0 +1,19 @@
+Package: STsimulator
+Title: STsimulator for ‘de novo’ spatial patterns
+Version: 1.0
+Authors@R: 
+    person("Xiaoyu", "Song", , "songxiaoyu152@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+        license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: tidyverse, raster, spatstat, rlist, doParallel, data.table,
+        parallel, doParallel, proxy
+NeedsCompilation: no
+Packaged: 2023-11-17 22:55:43 UTC; songxiaoyu152
+Author: Xiaoyu Song [aut, cre] (YOUR-ORCID-ID)
+Maintainer: Xiaoyu Song <songxiaoyu152@gmail.com>
+Built: R 4.2.3; ; 2023-11-17 22:55:54 UTC; unix
