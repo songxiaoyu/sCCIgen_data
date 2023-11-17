@@ -40,9 +40,9 @@ A package should be listed in only one of these fields.
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking dependencies in R code ... WARNING
 '::' or ':::' imports not declared from:
-  ‘MASS’ ‘dplyr’ ‘geometry’ ‘igraph’ ‘sf’
+  ‘MASS’ ‘geometry’ ‘igraph’ ‘sf’
 Namespaces in Imports field not imported from:
-  ‘data.table’ ‘doParallel’ ‘proxy’ ‘rlist’ ‘tidyverse’
+  ‘data.table’ ‘doParallel’ ‘proxy’ ‘rlist’
   All declared Imports should be used.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
