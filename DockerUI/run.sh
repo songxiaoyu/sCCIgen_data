@@ -12,5 +12,7 @@ then
 fi
 
 docker run --mount type=bind,source="${WORKDIR}",target=/working_directory -it "${BASE_DOCKER_IMAGE}"
-
 # from within docker image, write prompts
+#docker run --mount type=bind,source="${WORKDIR}",target=/working_directory -ti "${BASE_DOCKER_IMAGE}" /bin/bash
+#docker run -ti "songxiaoyu152/st_simulator_test" /bin/bash
+#docker run --mount type=bind,source="${WORKDIR}",target=/working_directory -it --entrypoint bash "${BASE_DOCKER_IMAGE}"

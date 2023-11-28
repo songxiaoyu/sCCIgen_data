@@ -81,7 +81,7 @@ print("\tAvailable tasks ")
 print("\t-----------------------------------")
 print("\n")
 print("\t1) I want to download a pre-simulated spatial transcriptomics dataset.")
-print("\t2) I want to generate a parameter file using command line prompts.")
+print("\t2) I want to generate a parameter file using the interactive interface.")
 print("\t3) I have a parameter file and want to run a simulation.")
 print('\n')
 
@@ -109,24 +109,54 @@ if question0_1 == '3':
 
 
 if question0_1 == '1':
-    question1_1_filepaths = {
-        '1': 'sim_fake3.tsv',
-        '2': 'sim_fake1.tsv',
-        '3': 'sim_fake2.tsv'
+    question1_1_filepaths_count = {
+        '1': 'example1_count.tsv',
+        '2': 'example2_count.tsv',
+        '3': 'example3_count.tsv'
     }
+
+    question1_1_filepaths_meta = {
+        '1': 'example1_meta.tsv',
+        '2': 'example2_meta.tsv',
+        '3': 'example3_meta.tsv'
+    }
+
+    question1_1_filepaths_expr_pattern = {
+        '1': 'example1_expr_pattern.tsv',
+        '2': 'example2_expr_pattern.tsv',
+        '3': 'example3_expr_pattern.tsv'
+    }
+
+    question1_1_filepaths_docker_docu = {
+        '1': 'example1_docker_docu.txt',
+        '2': 'example2_docker_docu.txt',
+        '3': 'example3_docker_docu.txt'
+    }
+
+    question1_1_filepaths_parameter = {
+        '1': 'example1_parameter.tsv',
+        '2': 'example2_parameter.tsv',
+        '3': 'example3_parameter.tsv'
+    }
+
+
     print("\tAvailable data sets ")
     print("\t-----------------------------------")
     print("\n")
-    print("\t1) Simulated data for 4,751 genes in 10,000 cells of 6 cell types on a unit square, using normal breast data profiled by snRNAseq as reference.")
-    print("\t2) Simulated data for 10,000 genes in 10,000 cells of 6 cell types, using mouse brain data profiled by SeqFISH+ as reference.")
+    print("\t1) Simulated data for 4,751 genes in 4,000 cells of 6 cell types in two regions on a unit square, using normal breast data profiled by snRNAseq as reference.")
+    print("\t2) Simulated data for 10,000 genes in 500 spots of 6 cell types, using mouse brain data profiled by SeqFISH+ as reference.")
     print("\t3) Simulated data for 550 genes in 10,000 cells of 6 cell types, using human ovarian cancer data profiled by MERFISH as reference.")
     print('\n')
     question1_1 = input("\tWhich dataset do you want to download (1/2/3)?  \t").lower()
-    if question1_1 not in question1_1_filepaths:
+    if question1_1 not in question1_1_filepaths_count:
         raise ValueError(f'Please enter 1, 2, or 3 to select a dataset. You entered {question1_1}') 
     print("\n")
-    shutil.copyfile(f'simulated_data/{question1_1_filepaths[question1_1]}', f'/working_directory/{question1_1_filepaths[question1_1]}')
-    print(f'\n\tSaved simulated data: {question1_1_filepaths[question1_1]} to your working directory.')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_count[question1_1]}', f'working_directory/{question1_1_filepaths_count[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_meta[question1_1]}', f'working_directory/{question1_1_filepaths_meta[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_expr_pattern[question1_1]}', f'working_directory/{question1_1_filepaths_expr_pattern[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_docker_docu[question1_1]}', f'working_directory/{question1_1_filepaths_docker_docu[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_parameter[question1_1]}', f'working_directory/{question1_1_filepaths_parameter[question1_1]}')
+    print(f'\n\tSaved simulated data: {question1_1_filepaths_count[question1_1]}, {question1_1_filepaths_meta[question1_1]}, {question1_1_filepaths_expr_pattern[question1_1]}, {question1_1_filepaths_meta[question1_1]} and {question1_1_filepaths_parameter[question1_1]} to your working directory.')
 
     sys.exit()
 
@@ -200,10 +230,15 @@ if question2_1_filepaths_expression[question2_1] != 'user_input':
         if question2_1_download == 'y':
             #TODO: update with real data
             expression_filepath_slim = question2_1_filepaths_expression[question2_1].split('/')[-1]
-            shutil.copyfile(f'{question2_1_filepaths_expression[question2_1]}', f'working_directory/{expression_filepath_slim}')
+            os.makedirs(f'working_directory/InputData', exist_ok=True)
+            os.makedirs(f'working_directory/InputData/expression_data', exist_ok=True)
+            shutil.copyfile(f'{question2_1_filepaths_expression[question2_1]}', f'working_directory/{question2_1_filepaths_expression[question2_1]}')
+            #parameters['expression_data_file'] = expression_filepath_slim
             print(f'\n\tSaved expression data: {expression_filepath_slim} to your working directory.')
             cellfeature_filepath_slim = question2_1_filepaths_cellfeature[question2_1].split('/')[-1]
-            shutil.copyfile(f'{question2_1_filepaths_cellfeature[question2_1]}', f'working_directory/{cellfeature_filepath_slim}')
+            os.makedirs(f'working_directory/InputData/cell_feature_data', exist_ok=True)
+            shutil.copyfile(f'{question2_1_filepaths_cellfeature[question2_1]}', f'working_directory/{question2_1_filepaths_cellfeature[question2_1]}')
+            #parameters['cell_feature_data_file'] = cellfeature_filepath_slim
             print(f'\n\tSaved cell feature data: {cellfeature_filepath_slim} to your working directory.')
             
 else:
@@ -213,7 +248,7 @@ else:
     question2_1_filepaths_expression['7'] = workdir_files[int(question2_1_userinput_expression)-1]
     question2_1_userinput_cellfeature = input(f"\tUpload a N by K matrix for cell feature data. Instruction: Column and row names are not expected. Cells should be in the same order as the uploaded expression count data. The first column is required, which should be cell type annotation. Other columns are optional.  If spatial coordinates on x, y axes are provided, they should be the 2-3 columns of the input cell feature data. If a spatial region variable is provided, it should be the 4th column of the data. (1-{len(workdir_files)}): ")
     question2_1_filepaths_cellfeature['7'] = workdir_files[int(question2_1_userinput_cellfeature)-1]
-
+    
 parameters['expression_data_file'] = question2_1_filepaths_expression[question2_1]
 parameters['cell_feature_data_file'] = question2_1_filepaths_cellfeature[question2_1]
 
@@ -295,7 +330,7 @@ if len(cellfeature_data_r.columns) == 1:
     parameters['num_regions'] = question2_4_2
 
     print("\n")
-    question2_4_3a = input("\tInput custom cell-type proportions in each region (y/n)? [default: all regions equal to cell-type proportions of the input expression data] \t").lower()
+    question2_4_3a = input("\tInput custom cell-type proportions in each region (y/n)? [default: n = all equals to cell-type proportions of the input expression data] \t").lower()
     
     if question2_4_3a == 'n' or question2_4_3a == '':
         print('\tUsing default cell-type proportions.')
@@ -373,7 +408,7 @@ if len(cellfeature_data_r.columns) == 1:
             for i, cell_type in enumerate(cellfeature_data_cell_types):
                 print(f'\t{i+1}: {cell_type}')
             question2_4_4_cell2 = int(input(f"\tSelect cell type:\t"))
-            question2_4_4_strength = input("\tValue of strength:\t")
+            question2_4_4_strength = input("\tValue of strength: (suggested value -2 to 2)\t")
             question2_4_4 = f'{question2_4_4}{cellfeature_data_cell_types[question2_4_4_cell1 -1]},{cellfeature_data_cell_types[question2_4_4_cell2 - 1]},{question2_4_4_strength};'
             question2_4_4_continue = input("\tDo you want to continue specifying other pairs of cell-cell location interaction (y/n) [default = n]").lower()
             if question2_4_4_continue == '':
@@ -401,12 +436,12 @@ if len(cellfeature_data_r.columns) == 1:
 
     parameters['cell_even_distribution'] = question2_4_5
 
-    question2_4_6 = input("\tCells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:\t")
+    question2_4_6 = input("\tCells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.02 of the slide length/width) [default = 0]:\t")
     
     if question2_4_6 == '':
-        print('\tUsing default 0.02.')
+        print('\tUsing default 0.')
         print('\n')
-        question2_4_6 = '0.02'
+        question2_4_6 = '0'
 
     if not isfloat(question2_4_6):
         raise ValueError(f'Please enter a numeric value.')
@@ -424,7 +459,7 @@ if len(cellfeature_data_r.columns) == 1:
 
 if len(cellfeature_data_r.columns) > 1:
     print('\n')
-    question2_5 = input("\tDo you want to simulate new cells (y/n)? [default: n. The alternative is to simulate new expression data for existing cells].\t").lower()
+    question2_5 = input("\tDo you want to simulate new cells (y/n)? [default: n = do not simulate new cells but simulate new expression data for existing cells].\t").lower()
 
     if question2_5 == '':
         question2_5 = 'n'
@@ -451,12 +486,12 @@ if len(cellfeature_data_r.columns) > 1:
         parameters['num_simulated_cells'] = question2_5_1
 
         print('\n')
-        question2_5_3 = input("\tCells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.1 of the slide length/width) [default = 0.02]:\t")
+        question2_5_3 = input("\tCells closer than this cutoff will be considered overlapping to each other and all but one will be removed (range: 0-0.02 of the slide length/width) [default = 0]:\t")
     
         if question2_5_3 == '':
-            print('\tUsing default 0.02')
+            print('\tUsing default 0')
             print('\n')
-            question2_5_3 = '0.02'
+            question2_5_3 = '0'
 
         if not isfloat(question2_5_3):
             raise ValueError('Please enter a value between 0 and 0.1')
@@ -693,6 +728,9 @@ if question2_6_5 == 'y':
         question2_6_5b = int(input(f"\tPeturbed cell type:\t"))
         cell_cell_interaction['cell_type_perturbed'] = cell_types[question2_6_5b - 1]
         question2_6_5c = int(input(f"\tAdjacent cell type:\t"))
+        while question2_6_5c == question2_6_5b:
+            print(f'\tAdjacent cell type cannot be the same as peturbed cell type. Please specify another cell type:\t')
+            question2_6_5c = int(input(f"\tAdjacent cell type:\t"))
         cell_cell_interaction['cell_type_adj'] = cell_types[question2_6_5c - 1]
 
         question2_6_5d = input(f"\tInteraction distance threshold (default = 0.1):\t")
@@ -787,6 +825,9 @@ if question2_6_6 == 'y':
         question2_6_6b = int(input(f"\tPeturbed cell type:\t"))
         cell_cell_interaction['cell_type_perturbed'] = cell_types[question2_6_6b - 1]
         question2_6_6c = int(input(f"\tAdjacent cell type:\t"))
+        while question2_6_6c == question2_6_6b:
+            print(f'\tAdjacent cell type cannot be the same as peturbed cell type. Please specify another cell type:\t')
+            question2_6_5c = int(input(f"\tAdjacent cell type:\t"))
         cell_cell_interaction['cell_type_adj'] = cell_types[question2_6_6c - 1]
 
         question2_6_6d = input(f"\tInteraction distance threshold (default = 0.1):\t")
@@ -795,7 +836,7 @@ if question2_6_6 == 'y':
             print('\tUsing default 0.1.')
         cell_cell_interaction['dist_cutoff'] = question2_6_6d
 
-        question2_6_6e = input(f"\tDo you want to upload gene pair ID (y/n)\nInstruction: Should be K by 2 gene-pair matrix, where K is the number of gene pairs, and column 2 gives the gene ID in perturbed and adjacent cell types. If no, the proportion of genes with this pattern should be specified, and gene pairs will be randomly generated.\t").lower()
+        question2_6_6e = input(f"\tDo you want to upload gene pair ID (y/n)\nInstruction: Should be K by 2 gene-pair matrix, where K is the number of gene pairs, and column 2 gives the gene ID in perturbed and adjacent cell types. If no, the proportion of genes with this pattern should be specified, and gene pairs will be randomly generated. [Default: n. The proportion of genes with this pattern should be specified and genes will be randomly selected.]\t").lower()
         if question2_6_6e == '':
             question2_6_6e = 'n'
             print('\tUsing default: n.')
@@ -914,12 +955,19 @@ parameters['simulation_seed_for_each_dataset'] = ','.join(simulation_seeds)
 
 
 print('\n')
-path_to_output_dir = input("\tPath and name to save output: [default = working_directory/output_files/myfile]\t")
+path_to_output_dir = input("\tPath to save output: [default = working_directory/output_files/]\t")
 if path_to_output_dir == '':
-    path_to_output_dir = 'working_directory/output_files/myfile'
+    path_to_output_dir = 'working_directory/output_files/'
     print('\tUsing default: ', path_to_output_dir)
     os.makedirs(f'working_directory/output_files', exist_ok=True)
 parameters['path_to_output_dir'] = path_to_output_dir
+
+print('\n')
+output_name = input("\tName to save output: [default = myfile]\t")
+if output_name == '':
+    output_name = 'myfile'
+    print('\tUsing default: ', output_name)
+parameters['output_name'] = output_name
 
 
 # ### Save parameter file
@@ -946,7 +994,14 @@ print(f'\n\tSaved parameter file for future use in your working directory: param
 # # Run ST pipeline with parameter file
 # - TODO: use os.system to kick off R code with parameter file
 
-# In[2]:
+# In[ ]:
+
+
+os.system(f'Rscript ./scripts/ExampleData.R working_directory/parameter_files/{parameter_file_name}.tsv')
+sys.exit()
+
+
+# In[5]:
 
 
 try:
