@@ -202,9 +202,8 @@ Find.Neighbor.Pairs=function(ppp.obj,
   cell.loc=cbind(ppp.obj$x, ppp.obj$y)
   cell1.idx=which(ppp.obj$marks==interacting.cell.type.pair[1])
   cell2.idx=which(ppp.obj$marks==interacting.cell.type.pair[2])
-  m=dist(cell.loc[cell1.idx,], cell.loc[cell2.idx,], method="euclidean")
-  # d=pairdist(cell.loc)
-  # m=d[cell1.idx, cell2.idx]
+  m=spatstat.geom::crossdist(cell.loc[cell1.idx,1], cell.loc[cell1.idx,2],
+            cell.loc[cell2.idx,1],cell.loc[cell2.idx,2])
   # in neighbor or not?
   dmax=max( max(ppp.obj$x)-min(ppp.obj$x), max(ppp.obj$y)-min(ppp.obj$y))
 

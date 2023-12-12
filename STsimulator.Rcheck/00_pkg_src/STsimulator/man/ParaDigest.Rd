@@ -6,6 +6,9 @@
 \usage{
 ParaDigest(input)
 }
+\arguments{
+\item{input}{name for the input parameter file}
+}
 \description{
 ParaDigest
 }
