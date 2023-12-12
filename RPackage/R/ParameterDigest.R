@@ -1,8 +1,9 @@
 # ----------------- ParaDigest ---------------
 #' ParaDigest
 #'
-#' ParaDigest
+#' Digest and clean the parameter file. 
 #' @param input name for the input parameter file
+#' @return Updated parameters
 #' @export
 
 
