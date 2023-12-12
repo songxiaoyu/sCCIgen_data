@@ -35,13 +35,13 @@ RUN R -e "devtools::install_github(\"songxiaoyu/STsimulator/RPackage\")"
 
 # copy local files to image
 RUN mkdir /working_directory
-RUN mkdir /Rlib
 COPY docker_prompts.py docker_prompts.py
 COPY scripts scripts
 COPY requirements.txt requirements.txt
 COPY InputData InputData
 COPY RPackage RPackage
 COPY ParameterFile ParameterFile
+COPY example_data example_data
 RUN pip install -r requirements.txt
 
 # ENTRYPOINT 
