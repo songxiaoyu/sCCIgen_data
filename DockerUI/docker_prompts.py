@@ -98,7 +98,13 @@ print("\n")
 
 if question0_1 == '3':
     #TODO: ask for existing parameter file
-    os.system('Rscript ./scripts/FakeR.R')
+    print_workdir_files()
+    print('\n')
+    workflow3_userinput = input(f"\tWhich file are you using as parameter file (1-{len(workdir_files)}): ")
+    simulation_file_name = workdir_files[int(workflow3_userinput)-1]
+    print(f'\n\tStart simulation...\n')
+    os.system(f'Rscript ./scripts/ExampleData.R {simulation_file_name}')
+    print(f'\n\tSaved output file in your working directory/output_files')
     sys.exit()
 
 
@@ -220,10 +226,10 @@ if question2_1 not in question2_1_filepaths_expression:
     raise ValueError(f'Please enter 1, 2, 3, 4, 5, 6 or 7 to select an expression data set. You entered {question2_1}') 
 
 if question2_1_filepaths_expression[question2_1] != 'user_input':
-    question2_1_download = input("\tWould you like to download this data table locally (y/n)? [default: n]").lower()
+    question2_1_download = input("\tWould you like to download this data table locally (y/n)? [default = y; select n if data is already downloaded for simulation]").lower()
     
     if question2_1_download == '':
-        question2_1_download = 'n'
+        question2_1_download = 'y'
         print(f"\tUsing default: {question2_1_download}")
     
     if question2_1_download in valid_yes_no:
@@ -997,11 +1003,13 @@ print(f'\n\tSaved parameter file for future use in your working directory: param
 # In[ ]:
 
 
-os.system(f'Rscript ./scripts/ExampleData.R working_directory/parameter_files/{parameter_file_name}.tsv')
-sys.exit()
+#os.system(f'Rscript ./scripts/ExampleData.R working_directory/parameter_files/{parameter_file_name}.tsv')
+#sys.exit()
 
 
-# In[5]:
+# # Generate python script
+
+# In[4]:
 
 
 try:
