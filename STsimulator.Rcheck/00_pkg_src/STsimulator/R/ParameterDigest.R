@@ -1,8 +1,9 @@
 # ----------------- ParaDigest ---------------
 #' ParaDigest
 #'
-#' ParaDigest
+#' Digest and clean the parameter file.
 #' @param input name for the input parameter file
+#' @return Updated parameters
 #' @export
 
 
@@ -36,8 +37,9 @@ ParaDigest=function(input) {
 }
 
 # ----------- expr load ---------------
-#' Load RData regardless of the file name
+#' loadRData
 #'
+#' Load RData with new assigned file name
 #' @param fileName  File name
 #' @return Data
 #'
@@ -73,6 +75,15 @@ CellFeatureLoad=function(para){
 }
 
 # ----------- copula load/create ---------------
+#' ParameterCopula
+#'
+#' Use parameters to determine the Gaussian Copula values.
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param expr Gene expression data
+#' @param feature Cell feature data
+#' @param ncores No. of cores
+#'
 ParameterCopula=function(para, expr, feature, ncores=1){
   # Copula -- add region info
   if (gene_cor=="FALSE") {copula_input="NULL"; CopulaEst=NULL}
@@ -106,7 +117,16 @@ ParameterCopula=function(para, expr, feature, ncores=1){
   return(CopulaEst)
 }
 
+
+
 # ----------------- ParaNoSTCells ---------------
+#' ParaNoSTCells
+#'
+#' Use parameters to simulate cell location. No spatial information is provided from real data.
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param all_seeds Seeds for all simulated data
+#'
 ParaCellsNoST=function(para, all_seeds){
 
   # determine cell type proportion in each region
@@ -151,6 +171,14 @@ ParaCellsNoST=function(para, all_seeds){
    return(cell_loc)
 }
 # ----------------- ParaSTNewCells ---------------
+#' ParaSTNewCells
+#'
+#' Use parameters to simulate cell location. Here fit models on existing SRT data for simulation.
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param feature Cell feature data
+#' @param all_seeds Seeds for all simulated data
+#'
 ParaCellsST=function(para, feature, all_seeds) {
 
   if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
@@ -166,17 +194,26 @@ ParaCellsST=function(para, feature, all_seeds) {
   return(cell_loc)
 }
 # ----------------- ParaSTExistingCells ---------------
+#' ParaSTExistingCells
+#'
+#' Use parameters to simulate cell location. Here directly use existing SRT data.
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param m No. of simulated data
+#' @param feature Cell feature data
+#'
 ParaExistingCellsST=function(m, feature) {
   if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
   cell_loc1=cell.region.loc.existing.fc(PointLoc=feature[,c(2:3)],
                                        PointAnno=feature[,1],
                                        PointRegion=R,
                                        window_method="rectangle")
-  cell_loc=rep(list(cell_loc1), times=num_simulated_datasets)
+  cell_loc=rep(list(cell_loc1), times=m)
   return(cell_loc)
 }
 
 # ----------------- ParaPattern ---------------
+# Internal function
 ParaPattern=function(para, sim_count, cell_loc_list_i,
                      seed=NULL){
 
@@ -185,13 +222,14 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
   t2=length(grep("spatial_int_dist_", colnames(para)))/8
   t3=length(grep("spatial_int_expr_", colnames(para)))/10
   t0=sum(t1, t2, t3)
-  beta.all=vector("list", num_simulated_datasets)
-  for (i in 1:num_simulated_datasets) {
+  # beta.all=vector("list", num_simulated_datasets)
+  # for (i in 1:num_simulated_datasets) {
 
     # add spatial
     if (t0>0) {
-      beta.all[[i]]=vector("list", t0)
-    }
+      # beta.all[[i]]=vector("list", t0)
+      beta.all=vector("list", t0)
+    } else{ beta.all=NULL }
     for (tt1 in t1:1) {
       if (tt1==0) {break}
       #para[grep("spatial_pattern_", colnames(para))]
@@ -213,7 +251,7 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
                                         tt1, "_mean")))
       delta.sd=eval(parse(text=paste0("spatial_pattern_",
                                       tt1, "_sd")))
-      beta.all[[i]][[tt1]]=Add.Spatial.Expr.Pattern(sim.count = sim_count,
+      beta.all[[tt1]]=Add.Spatial.Expr.Pattern(sim.count = sim_count,
                                     r=r,
                                     CellType=CellType,
                                     GeneID=GeneID,
@@ -251,7 +289,7 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
       delta.sd=eval(parse(text=paste0("spatial_int_dist_",
                                       tt1, "_sd")))
 
-      beta.all[[i]][[(t1+tt1)]]=Add.Distance.Asso.Pattern(ppp.obj=cell_loc_list_i,
+      beta.all[[(t1+tt1)]]=Add.Distance.Asso.Pattern(ppp.obj=cell_loc_list_i,
                                        sim.count=sim_count,
                                        r=r,
                                        perturbed.cell.type=perturbed.cell.type,
@@ -299,7 +337,7 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
       delta.mean=eval(parse(text=paste0("spatial_int_expr_", tt1, "_mean")))
       delta.sd=eval(parse(text=paste0("spatial_int_expr_",tt1, "_sd")))
 
-      beta.all[[i]][[(t1+t2+tt1)]]=Add.Expr.Asso.Pattern(ppp.obj=cell_loc_list_i,
+      beta.all[[(t1+t2+tt1)]]=Add.Expr.Asso.Pattern(ppp.obj=cell_loc_list_i,
                                                     sim.count=sim_count,
                                                     r=r,
                                                     perturbed.cell.type=perturbed.cell.type,
@@ -313,18 +351,29 @@ ParaPattern=function(para, sim_count, cell_loc_list_i,
                                                     seed=seed)
 
     }
-  }
+
     return(beta.all)
 
 }
 
 
-# ----------------- ParaExpr ---------------
-#' ParaExpr
+# ----------------- ParaFitExpr ---------------
+#' ParaFitExpr
 #'
-#' ParaExpr
-
-ParaFitExpr=function(para, expr, feature, CopulaEst, ncores){
+#' Fit models for gene expression based on input parameters.
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param expr Expression data
+#' @param feature Cell feature data
+#' @param CopulaEst Estimated Gaussian Copula function for gene-gene correlation
+#' @param ncores No. of cores for estimation
+#' @param save Whether to save the fitted model or not
+#' @param save_name Provide the path and name for saving the fitted model
+#' @return A list of fitted models for genes in each cell type.
+#' @export
+#'
+ParaFitExpr=function(para, expr, feature,
+                     CopulaEst, ncores=1, save=F, save_name=NULL){
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
   # fit by input data
 
@@ -334,19 +383,43 @@ ParaFitExpr=function(para, expr, feature, CopulaEst, ncores){
                                       sim_method = sim_method,
                                       region_specific_model=region_specific_model,
                                       ncores=ncores)
+   if (save==T) {
+     if (is.null(save_name)) {
+       save_name=paste0(path_to_output_dir, output_name)
+     }
+
+     save(model_params,
+               file=paste0(save_name, "_FitExpr.Rdata"))
+   }
     return(model_params)
 }
 
 
-
+# ----------------- ParaExpr ---------------
+#' ParaExpr
+#'
+#' Simualte gene expression data based on parameters
+#' @param para Parameters loaded and cleaned from the parameter file using function
+#' `ParaDigest`.
+#' @param cell_loc_list Simulated cell location data
+#' @param expr Expression data
+#' @param feature Cell feature data
+#' @param CopulaEst Estimated Gaussian Copula function for gene-gene correlation. Default=NULL.
+#' @param all_seeds Seeds for all simulated data
+#' @param ncores No. of cores for simulation
+#' @param model_params The fitted models of genes, often from `ParaFitExpr` function.
+#' @return Simulated gene expression data for each cell.
+#' @export
+#'
 
 ParaExpr=function(para, cell_loc_list, expr, feature,
-                  CopulaEst, all_seeds, ncores=1){
+                  CopulaEst=NULL, all_seeds, model_params=NULL, ncores=1){
 
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
   # fit by input data
-  model_params=ParaFitExpr(para, expr, feature, CopulaEst, ncores=ncores)
-
+  if (is.null(model_params)) {
+    model_params=ParaFitExpr(para, expr, feature, CopulaEst, ncores=ncores, save=F)
+  }
   # simulate
 
   for (i in 1:num_simulated_datasets) {
@@ -367,14 +440,14 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
 
     sim_count_update=Pattern.Adj(sim.count=sim_count,
-                                 pattern.list=pattern_list[[i]],
+                                 pattern.list=pattern_list,
                                  bond.extreme=T, keep.total.count=T,
                                  integer=T)
 
     output=MergeRegion(points.list=cell_loc_list[[i]],
                        expr.list=sim_count_update)
 
-    expr_pattern=ExprPattern(pattern.list.i=pattern_list[[i]]) %>% as.data.frame()
+    expr_pattern=ExprPattern(pattern.list.i=pattern_list) %>% as.data.frame()
 
     print(paste("Finished simulating data", i))
     # save
@@ -407,21 +480,23 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 }
 
 
+
+
+
+
 # ----------------- ParaSimulation ---------------
 #' ParaSimulation
 #'
-#' This function simulate spatially resolved transcriptomics data from parameter file. The
-#' parameter file can be generated with an user inferface on Docker.
-#' @param input  The pathway to parameter file.
+#' This function simulate spatially resolved transcriptomics data from a parameter file. The
+#' parameter file can be generated with an user interface on Docker.
+#' @param input  The path and name of the parameter file.
 #' @return Simulated data (e.g. count, spatial feature, expression pattern) will be directly
-#' saved on your computer or cloud based on the path provided by the parameter file. There is
-#' no output in R from this function as simulated data is usually large. One can load simulated
-#' data into R after the simulation.
+#' saved on your computer or cloud based on the path provided by the parameter file.
 #' @export
 
 
 
-ParaSimulation <- function(input) {
+ParaSimulation <- function(input, ModelFitFile=NULL) {
 
   # parallel
   ncores=detectCores()-2; registerDoParallel(ncores)
@@ -463,13 +538,21 @@ ParaSimulation <- function(input) {
 
   # Copula
   CopulaEst=ParameterCopula(para=para, expr=expr2, feature=feature, ncores=ncores)
+  # ModelFitFile=ParaFitExpr(para=para, expr=expr2, feature=feature,
+  #                          CopulaEst=CopulaEst, ncores=ncores, save=T)
+
 
   # Simulate Expr for these cells
+  #
+  if( is.null(ModelFitFile)==F) {
+    load(ModelFitFile)
+  } else {model_params=NULL}
+
   ParaExpr(para=para,
            cell_loc_list=cell_loc_list,
            expr=expr2, feature=feature,
            CopulaEst=CopulaEst, all_seeds=all_seeds,
-           ncores=ncores)
+           ncores=ncores, model_params=model_params)
   print("Finished simulating the expression of cells")
   detach(para)
   print("Finished the simulation")

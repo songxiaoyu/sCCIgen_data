@@ -9,6 +9,9 @@ ParaDigest(input)
 \arguments{
 \item{input}{name for the input parameter file}
 }
+\value{
+Updated parameters
+}
 \description{
-ParaDigest
+Digest and clean the parameter file.
 }

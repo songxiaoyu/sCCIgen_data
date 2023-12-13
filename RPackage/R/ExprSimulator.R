@@ -8,6 +8,7 @@ Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
   exist.cell.type=names(n.ordered)
   cell_type_prop=n.ordered/ppp.obj1$n
   model_params_exist=model_params[exist.cell.type]
+  set.seed(seed)
   sim_count <- scDesign2.revised(model_params=model_params_exist,
                                  n_cell_new=ppp.obj1$n,
                                  cell_type_prop = cell_type_prop,

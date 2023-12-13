@@ -4,18 +4,16 @@
 \alias{ParaSimulation}
 \title{ParaSimulation}
 \usage{
-ParaSimulation(input)
+ParaSimulation(input, ModelFitFile = NULL)
 }
 \arguments{
-\item{input}{The pathway to parameter file.}
+\item{input}{The path and name of the parameter file.}
 }
 \value{
 Simulated data (e.g. count, spatial feature, expression pattern) will be directly
-saved on your computer or cloud based on the path provided by the parameter file. There is
-no output in R from this function as simulated data is usually large. One can load simulated
-data into R after the simulation.
+saved on your computer or cloud based on the path provided by the parameter file.
 }
 \description{
-This function simulate spatially resolved transcriptomics data from parameter file. The
-parameter file can be generated with an user inferface on Docker.
+This function simulate spatially resolved transcriptomics data from a parameter file. The
+parameter file can be generated with an user interface on Docker.
 }

@@ -7,4 +7,350 @@
 * this is package ‘STsimulator’ version ‘1.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ...
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking serialization versions ... OK
+* checking whether package ‘STsimulator’ can be installed ... [11s/11s] OK
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking for future file timestamps ... OK
+* checking DESCRIPTION meta-information ... WARNING
+Non-standard license specification:
+  `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+  license
+Standardizable: FALSE
+Package listed in more than one of Depends, Imports, Suggests, Enhances:
+  ‘doParallel’
+A package should be listed in only one of these fields.
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... OK
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... WARNING
+'::' or ':::' imports not declared from:
+  ‘MASS’ ‘geometry’ ‘igraph’ ‘spatstat.geom’
+Namespaces in Imports field not imported from:
+  ‘data.table’ ‘doParallel’ ‘proxy’ ‘rlist’
+  All declared Imports should be used.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... [15s/15s] NOTE
+Add.Distance.Asso.Pattern: no visible global function definition for
+  ‘rnorm’
+Add.Expr.Asso.Pattern: no visible global function definition for
+  ‘rnorm’
+Add.Spatial.Expr.Pattern: no visible global function definition for
+  ‘rnorm’
+CellFeatureLoad: no visible global function definition for ‘tail’
+CellFeatureLoad: no visible binding for global variable
+  ‘cell_feature_data_file’
+CellFeatureLoad: no visible binding for global variable
+  ‘path_to_input_dir’
+CellFeatureLoad: no visible global function definition for ‘fread’
+ExprLoad: no visible binding for global variable
+  ‘expression_data_file_type’
+ExprLoad: no visible binding for global variable ‘path_to_input_dir’
+ExprLoad: no visible binding for global variable ‘expression_data_file’
+ExprLoad: no visible global function definition for ‘fread’
+ParaCellsNoST: no visible binding for global variable ‘num_regions’
+ParaCellsNoST: no visible global function definition for ‘%>%’
+ParaCellsNoST: no visible global function definition for ‘filter’
+ParaCellsNoST: no visible binding for global variable ‘X1’
+ParaCellsNoST: no visible binding for global variable ‘X3’
+ParaCellsNoST: no visible global function definition for
+  ‘column_to_rownames’
+ParaCellsNoST: no visible binding for global variable
+  ‘custom_cell_location_interactions’
+ParaCellsNoST: no visible global function definition for ‘%dopar%’
+ParaCellsNoST: no visible global function definition for ‘foreach’
+ParaCellsNoST: no visible binding for global variable
+  ‘num_simulated_datasets’
+ParaCellsNoST: no visible binding for global variable ‘m’
+ParaCellsNoST: no visible binding for global variable
+  ‘num_simulated_cells’
+ParaCellsNoST: no visible binding for global variable
+  ‘cell_overlap_cutoff’
+ParaCellsNoST: no visible binding for global variable
+  ‘cell_even_distribution’
+ParaCellsST: no visible global function definition for ‘%dopar%’
+ParaCellsST: no visible global function definition for ‘foreach’
+ParaCellsST: no visible binding for global variable
+  ‘num_simulated_datasets’
+ParaCellsST: no visible binding for global variable
+  ‘num_simulated_cells’
+ParaCellsST: no visible binding for global variable ‘window_method’
+ParaCellsST: no visible binding for global variable ‘i’
+ParaDigest: no visible global function definition for ‘%>%’
+ParaDigest: no visible global function definition for ‘read_tsv’
+ParaDigest: no visible global function definition for
+  ‘column_to_rownames’
+ParaDigest: no visible binding for global variable
+  ‘num_simulated_datasets’
+ParaDigest: no visible binding for global variable
+  ‘simulation_seed_for_each_dataset’
+ParaDigest: no visible binding for global variable
+  ‘simulate_spatial_data’
+ParaExpr: no visible binding for global variable ‘gene_cor’
+ParaExpr: no visible binding for global variable
+  ‘num_simulated_datasets’
+ParaExpr: no visible binding for global variable ‘expr_depth_ratio’
+ParaExpr: no visible binding for global variable
+  ‘region_specific_model’
+ParaExpr: no visible global function definition for ‘%>%’
+ParaExpr: no visible binding for global variable ‘path_to_output_dir’
+ParaExpr: no visible binding for global variable ‘output_name’
+ParaExpr: no visible global function definition for ‘write_tsv’
+ParaExpr: no visible binding for global variable ‘num_spots’
+ParaExpr: no visible global function definition for
+  ‘rownames_to_column’
+ParaFitExpr: no visible binding for global variable ‘gene_cor’
+ParaFitExpr: no visible binding for global variable
+  ‘region_specific_model’
+ParaFitExpr: no visible binding for global variable
+  ‘path_to_output_dir’
+ParaFitExpr: no visible binding for global variable ‘output_name’
+ParaSimulation: no visible global function definition for ‘detectCores’
+ParaSimulation: no visible global function definition for
+  ‘registerDoParallel’
+ParaSimulation: no visible binding for global variable ‘path’
+ParaSimulation: no visible binding for global variable ‘all_seeds’
+ParaSimulation: no visible binding for global variable
+  ‘num_simulated_datasets’
+ParaSimulation: no visible global function definition for ‘%dopar%’
+ParaSimulation: no visible global function definition for ‘foreach’
+ParaSimulation: no visible binding for global variable ‘i’
+ParameterCopula: no visible binding for global variable ‘gene_cor’
+ParameterCopula: no visible binding for global variable
+  ‘region_specific_model’
+ParameterCopula: no visible binding for global variable
+  ‘path_to_output_dir’
+RandomRegionWindow: no visible global function definition for
+  ‘unit.square’
+RandomRegionWindow: no visible global function definition for ‘raster’
+RandomRegionWindow: no visible global function definition for
+  ‘rasterToPolygons’
+RandomRegionWindow : <anonymous>: no visible global function definition
+  for ‘aggregate’
+RandomRegionWindow : <anonymous>: no visible global function definition
+  for ‘owin’
+RandomRegionWindow: no visible binding for global variable ‘area.owin’
+Use_scDesign2: no visible global function definition for ‘%dopar%’
+Use_scDesign2: no visible global function definition for ‘foreach’
+Use_scDesign2: no visible binding for global variable ‘r’
+Use_scDesign2_model_params: no visible global function definition for
+  ‘%dopar%’
+Use_scDesign2_model_params: no visible global function definition for
+  ‘foreach’
+Use_scDesign2_model_params: no visible binding for global variable ‘r’
+cell.loc.1region.fc: no visible global function definition for
+  ‘rmpoint’
+cell.loc.1region.fc: no visible global function definition for
+  ‘pairdist’
+cell.loc.1region.fc: no visible global function definition for
+  ‘area.owin’
+cell.loc.1region.fc: no visible global function definition for ‘rbinom’
+cell.loc.1region.fc: no visible global function definition for ‘raster’
+cell.loc.1region.fc: no visible global function definition for
+  ‘rasterize’
+cell.loc.1region.fc: no visible global function definition for
+  ‘cellFromXY’
+cell.loc.1region.fc : <anonymous>: no visible global function
+  definition for ‘rasterize’
+cell.loc.existing.fc: no visible global function definition for
+  ‘as.ppp’
+cell.loc.existing.fc: no visible global function definition for
+  ‘marks<-’
+cell.loc.model.fc: no visible global function definition for ‘as.ppp’
+cell.loc.model.fc: no visible global function definition for ‘marks<-’
+cell.loc.model.fc: no visible global function definition for ‘rbinom’
+cell.loc.model.fc: no visible global function definition for ‘ppm’
+cell.loc.model.fc: no visible global function definition for ‘Poisson’
+cell.loc.model.fc: no visible global function definition for ‘rmh’
+cell.loc.model.fc: no visible global function definition for
+  ‘superimpose’
+cell.loc.model.fc: no visible global function definition for ‘marks’
+cell.loc.model.fc: no visible global function definition for ‘pairdist’
+cell.loc.model.fc: no visible global function definition for ‘quantile’
+fit_Gaussian_copula: no visible global function definition for ‘qnorm’
+fit_Gaussian_copula: no visible global function definition for ‘cor’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘var’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘glm’
+fit_marginals : <anonymous>: no visible binding for global variable
+  ‘poisson’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘zeroinfl’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘logLik’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘pchisq’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘plogis’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘pnbinom’
+fit_marginals : <anonymous>: no visible global function definition for
+  ‘runif’
+fit_model_scDesign2: no visible global function definition for
+  ‘mclapply’
+multicell: no visible global function definition for ‘raster’
+multicell: no visible global function definition for ‘cellFromXY’
+multicell: no visible global function definition for ‘colFromCell’
+multicell: no visible global function definition for ‘rowFromCell’
+multicell: no visible global function definition for ‘xyFromCell’
+multicell: no visible global function definition for ‘runif’
+multicell: no visible global function definition for ‘%>%’
+multicell: no visible global function definition for ‘group_by’
+multicell: no visible binding for global variable ‘region’
+multicell: no visible global function definition for ‘mutate’
+multicell: no visible global function definition for ‘summarise’
+multicell: no visible binding for global variable ‘count’
+multicell: no visible global function definition for ‘pivot_wider’
+multicell: no visible binding for global variable ‘abundance’
+multicell: no visible global function definition for ‘ungroup’
+multicell: no visible global function definition for ‘rowwise’
+multicell: no visible binding for global variable ‘.’
+multicell: no visible global function definition for ‘c_across’
+multicell: no visible global function definition for ‘everything’
+multicell: no visible binding for global variable ‘annotation’
+simu.window: no visible global function definition for ‘ripras’
+simu.window: no visible global function definition for ‘union.owin’
+simu.window : <anonymous>: no visible global function definition for
+  ‘dist’
+simu.window: no visible global function definition for ‘sd’
+simu.window: no visible global function definition for ‘owin’
+simulate_count_copula: no visible binding for global variable ‘pnorm’
+simulate_count_copula : <anonymous>: no visible global function
+  definition for ‘qnbinom’
+simulate_count_copula : <anonymous>: no visible global function
+  definition for ‘rbinom’
+simulate_count_copula : <anonymous>: no visible global function
+  definition for ‘rnbinom’
+simulate_count_copula : <anonymous>: no visible global function
+  definition for ‘qgamma’
+simulate_count_copula : <anonymous>: no visible global function
+  definition for ‘rgamma’
+simulate_count_ind : <anonymous>: no visible global function definition
+  for ‘rbinom’
+simulate_count_ind : <anonymous>: no visible global function definition
+  for ‘rnbinom’
+simulate_count_ind : <anonymous>: no visible global function definition
+  for ‘rgamma’
+Undefined global functions or variables:
+  %>% %dopar% . Poisson X1 X3 abundance aggregate all_seeds annotation
+  area.owin as.ppp c_across cellFromXY cell_even_distribution
+  cell_feature_data_file cell_overlap_cutoff colFromCell
+  column_to_rownames cor count custom_cell_location_interactions
+  detectCores dist everything expr_depth_ratio expression_data_file
+  expression_data_file_type filter foreach fread gene_cor glm group_by
+  i logLik m marks marks<- mclapply mutate num_regions
+  num_simulated_cells num_simulated_datasets num_spots output_name owin
+  pairdist path path_to_input_dir path_to_output_dir pchisq pivot_wider
+  plogis pnbinom pnorm poisson ppm qgamma qnbinom qnorm quantile r
+  raster rasterToPolygons rasterize rbinom read_tsv region
+  region_specific_model registerDoParallel rgamma ripras rmh rmpoint
+  rnbinom rnorm rowFromCell rownames_to_column rowwise runif sd
+  simulate_spatial_data simulation_seed_for_each_dataset summarise
+  superimpose tail ungroup union.owin unit.square var window_method
+  write_tsv xyFromCell zeroinfl
+Consider adding
+  importFrom("stats", "aggregate", "cor", "dist", "filter", "glm",
+             "logLik", "pchisq", "plogis", "pnbinom", "pnorm", "poisson",
+             "qgamma", "qnbinom", "qnorm", "quantile", "rbinom",
+             "rgamma", "rnbinom", "rnorm", "runif", "sd", "var")
+  importFrom("utils", "tail")
+to your NAMESPACE file.
+
+Found the following calls to attach():
+File ‘STsimulator/R/ParameterDigest.R’:
+  attach(para)
+  attach(para)
+See section ‘Good practice’ in ‘?attach’.
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... WARNING
+Undocumented arguments in documentation object 'Find.Neighbor.Pairs'
+  ‘ppp.obj’ ‘interacting.cell.type.pair’ ‘int.dist.threshold’
+
+Documented arguments not in \usage in documentation object 'ParaExistingCellsST':
+  ‘para’
+
+Undocumented arguments in documentation object 'ParaSimulation'
+  ‘ModelFitFile’
+
+Undocumented arguments in documentation object 'RandomRegionWindow'
+  ‘seed’
+
+Undocumented arguments in documentation object 'cell.loc.1region.fc'
+  ‘n1’ ‘window1’ ‘cell.prop1’ ‘cell.inh.attr.input1’
+  ‘even.distribution.coef’ ‘grid.size.small’ ‘grid.size.large’ ‘seed’
+Documented arguments not in \usage in documentation object 'cell.loc.1region.fc':
+  ‘n.vec.raw’ ‘cell.inh.attr.input’
+
+Undocumented arguments in documentation object 'cell.loc.existing.fc'
+  ‘PointLoc’ ‘PointAnno’ ‘window_method’
+
+Undocumented arguments in documentation object 'cell.loc.fc'
+  ‘N’ ‘win’ ‘cell.prop’ ‘even.distribution.coef’ ‘grid.size.small’
+  ‘grid.size.large’ ‘seed’
+Documented arguments not in \usage in documentation object 'cell.loc.fc':
+  ‘n.vec.raw’
+
+Undocumented arguments in documentation object 'cell.loc.model.fc'
+  ‘n’ ‘PointLoc’ ‘PointAnno’ ‘window_method’ ‘seed’
+
+Undocumented arguments in documentation object 'cell.region.loc.existing.fc'
+  ‘PointLoc’ ‘PointAnno’ ‘PointRegion’ ‘window_method’
+
+Undocumented arguments in documentation object 'cell.region.loc.model.fc'
+  ‘n’ ‘PointLoc’ ‘PointAnno’ ‘PointRegion’ ‘window_method’ ‘seed’
+
+Undocumented arguments in documentation object 'connectUp'
+  ‘seed’
+
+Undocumented arguments in documentation object 'fit_Gaussian_copula'
+  ‘min_nonzero_num’
+Documented arguments not in \usage in documentation object 'fit_Gaussian_copula':
+  ‘min_non_zero_num’
+
+Undocumented arguments in documentation object 'fit_model_scDesign2'
+  ‘min_nonzero_num’
+
+Undocumented arguments in documentation object 'fit_wo_copula'
+  ‘min_nonzero_num’
+
+Undocumented arguments in documentation object 'get.n.vec.raw'
+  ‘n’ ‘cell.prop’ ‘cell.inh.attr.input’ ‘same.dis.cutoff’
+
+Undocumented arguments in documentation object 'scDesign2.revised'
+  ‘sim_method’
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... NONE
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 3 WARNINGs, 1 NOTE
