@@ -2,7 +2,7 @@
 % Please edit documentation in R/MultiCell.R
 \name{multicell}
 \alias{multicell}
-\title{multicell}
+\title{Assigns cells into spatial spots for multi-cell resolution data}
 \usage{
 multicell(expr, cell_feature, NoSpot = 500)
 }

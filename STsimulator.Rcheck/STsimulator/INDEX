@@ -21,13 +21,13 @@ ParaSimulation          ParaSimulation
 ParameterCopula         ParameterCopula
 Pattern.Adj             Adjust the count data for all regions based on
                         the input spatial patterns
-RandomRegionWindow      RandomRegionWindow
+RandomRegionWindow      Generate random connected region in a window
 Use_scDesign2           Simulate expression under no spatial patterns
                         using revised scDesign2 functions
-cell.loc.1region.fc     cell.loc.fc
+cell.loc.1region.fc     cell.loc.1region.fc (internal function)
 cell.loc.existing.fc    simulate ST data location based on parametric
                         model
-cell.loc.fc             cell.loc.fc
+cell.loc.fc             cell.loc.fc (internal function)
 cell.loc.model.fc       simulate ST data location based on parametric
                         model
 cell.region.loc.existing.fc
@@ -36,13 +36,12 @@ cell.region.loc.existing.fc
 cell.region.loc.model.fc
                         simulate ST data location based on parametric
                         model
-connectUp               connectUp
+connectUp               Assign connected regions in a window
 fit_Gaussian_copula     Fit a Gaussian copula model for a count matrix
                         of a single cell type
 fit_model_scDesign2     Fit models for a count matrix
 fit_wo_copula           Fit a (w/o copula) model for a count matrix of
                         a single cell type
-get.n.vec.raw           get.n.vec.raw
 loadRData               loadRData
 multicell               multicell
 package                 STsimulator Package

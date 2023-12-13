@@ -194,9 +194,8 @@ Add.Spatial.Expr.Pattern= function(sim.count,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-#' Find.Neighbor.Pairs
-#'
-#' Find.Neighbor.Pairs
+# Find.Neighbor.Pairs
+
 Find.Neighbor.Pairs=function(ppp.obj,
                              interacting.cell.type.pair,
                              int.dist.threshold) {

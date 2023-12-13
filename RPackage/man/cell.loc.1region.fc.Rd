@@ -2,7 +2,7 @@
 % Please edit documentation in R/PointSimulator_NoData.R
 \name{cell.loc.1region.fc}
 \alias{cell.loc.1region.fc}
-\title{cell.loc.fc}
+\title{Generate cell location in one region}
 \usage{
 cell.loc.1region.fc(
   n1,

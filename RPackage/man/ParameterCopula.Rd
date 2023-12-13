@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParameterCopula}
 \alias{ParameterCopula}
-\title{ParameterCopula}
+\title{Use parameters to estimate Gaussian Copula}
 \usage{
 ParameterCopula(para, expr, feature, ncores = 1)
 }

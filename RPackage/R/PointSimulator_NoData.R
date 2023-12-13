@@ -1,11 +1,12 @@
 
-#' connectUp
+#' Assign connected regions in a window
 #'
 #' This function assigns random connected regions on a square. Used within function `RandomRegionWindow`.
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param r poly is a RasterLayer  (e.g. 20 by 20 square).
 #' @return
 #' \item{selected.unique:}{A list of the selected polygons for each region.}
+
 
 connectUp <- function(r, nRegion, seed=NULL){
   if (is.null(seed)==F) {set.seed(seed)}
@@ -43,7 +44,7 @@ connectUp <- function(r, nRegion, seed=NULL){
 }
 
 
-#' RandomRegionWindow
+#' Generate random connected region in a window
 #'
 #' This function generates random regions on a unit square.
 #' @export
@@ -51,7 +52,8 @@ connectUp <- function(r, nRegion, seed=NULL){
 #' @param nGrid nGrid is the No. of spots on x and y.
 #' @return
 #' \item{selected.unique:}{A list of the selected polygons for each region.}
-
+#' @export
+#'
 RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
   if (nRegion==1) {
     win=vector(mode = "list", length = 1); win[[1]] = unit.square()
@@ -77,11 +79,10 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
 }
 
 
-#' get.n.vec.raw
-#'
-#' This function generates cell pools allowing selection due
-#' to cell overlaps, inhibitions and attractions.
-#'
+# Generate cell location in one region
+# This function generates cell pools allowing selection due
+# to cell overlaps, inhibitions and attractions.
+
 get.n.vec.raw=function(n, cell.prop,
                        cell.inh.attr.input=NULL,
                        same.dis.cutoff=0.05) {
@@ -109,7 +110,7 @@ get.n.vec.raw=function(n, cell.prop,
   return(list(n.vec.target=n.vec.target, n.vec.raw=n.vec.use.adj))
 }
 
-#' cell.loc.fc
+#' Generate cell location in one region
 #'
 #' This function generates cell locations for each region
 #' @import spatstat
@@ -275,10 +276,9 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
 }
 
 
-#' cell.loc.fc
+#' Generate cell location for all regions
 #'
 #' This function generates cell locations for each region
-#' @import spatstat
 #' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.
 #' @param cell.inh.attr.input cell.inh.attr.input
 #' @param same.dis.cutoff The averaged cell-cell distance is defined as r (e.g. on the unit

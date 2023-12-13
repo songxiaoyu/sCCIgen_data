@@ -1,5 +1,5 @@
 # ----------------- ParaDigest ---------------
-#' ParaDigest
+#' Digest the parameter file.
 #'
 #' Digest and clean the parameter file.
 #' @param input name for the input parameter file
@@ -37,7 +37,7 @@ ParaDigest=function(input) {
 }
 
 # ----------- expr load ---------------
-#' loadRData
+#' load RData  with new assigned file name
 #'
 #' Load RData with new assigned file name
 #' @param fileName  File name
@@ -75,7 +75,7 @@ CellFeatureLoad=function(para){
 }
 
 # ----------- copula load/create ---------------
-#' ParameterCopula
+#' Use parameters to estimate Gaussian Copula
 #'
 #' Use parameters to determine the Gaussian Copula values.
 #' @param para Parameters loaded and cleaned from the parameter file using function
@@ -120,7 +120,7 @@ ParameterCopula=function(para, expr, feature, ncores=1){
 
 
 # ----------------- ParaNoSTCells ---------------
-#' ParaNoSTCells
+#' Use parameters to simulate cell location (no existing spatial info)
 #'
 #' Use parameters to simulate cell location. No spatial information is provided from real data.
 #' @param para Parameters loaded and cleaned from the parameter file using function
@@ -171,7 +171,7 @@ ParaCellsNoST=function(para, all_seeds){
    return(cell_loc)
 }
 # ----------------- ParaSTNewCells ---------------
-#' ParaSTNewCells
+#' Use parameters to simulate cell location based on modeling of existing SRT
 #'
 #' Use parameters to simulate cell location. Here fit models on existing SRT data for simulation.
 #' @param para Parameters loaded and cleaned from the parameter file using function
@@ -194,7 +194,7 @@ ParaCellsST=function(para, feature, all_seeds) {
   return(cell_loc)
 }
 # ----------------- ParaSTExistingCells ---------------
-#' ParaSTExistingCells
+#' Use parameters to simulate cell location (direct output from existing spatial data)
 #'
 #' Use parameters to simulate cell location. Here directly use existing SRT data.
 #' @param para Parameters loaded and cleaned from the parameter file using function
@@ -396,7 +396,7 @@ ParaFitExpr=function(para, expr, feature,
 
 
 # ----------------- ParaExpr ---------------
-#' ParaExpr
+#' Simualte gene expression data based on parameters
 #'
 #' Simualte gene expression data based on parameters
 #' @param para Parameters loaded and cleaned from the parameter file using function
@@ -485,7 +485,7 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 
 
 # ----------------- ParaSimulation ---------------
-#' ParaSimulation
+#' (Main Function) Simulate spatially resolved transcriptomics data from a parameter file.
 #'
 #' This function simulate spatially resolved transcriptomics data from a parameter file. The
 #' parameter file can be generated with an user interface on Docker.

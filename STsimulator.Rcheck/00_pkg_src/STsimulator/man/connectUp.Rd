@@ -2,7 +2,7 @@
 % Please edit documentation in R/PointSimulator_NoData.R
 \name{connectUp}
 \alias{connectUp}
-\title{connectUp}
+\title{Assign connected regions in a window}
 \usage{
 connectUp(r, nRegion, seed = NULL)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaDigest}
 \alias{ParaDigest}
-\title{ParaDigest}
+\title{Digest the parameter file.}
 \usage{
 ParaDigest(input)
 }

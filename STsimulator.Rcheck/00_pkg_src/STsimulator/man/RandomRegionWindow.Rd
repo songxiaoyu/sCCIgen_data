@@ -2,7 +2,7 @@
 % Please edit documentation in R/PointSimulator_NoData.R
 \name{RandomRegionWindow}
 \alias{RandomRegionWindow}
-\title{RandomRegionWindow}
+\title{Generate random connected region in a window}
 \usage{
 RandomRegionWindow(nRegion = 3, nGrid = 20, seed = 123)
 }

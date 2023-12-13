@@ -2,10 +2,10 @@
 % Please edit documentation in R/PointSimulator_STData.R
 \name{cell.loc.model.fc}
 \alias{cell.loc.model.fc}
-\title{simulate ST data location based on parametric model}
+\title{simulate ST data for one region location based on parametric model}
 \usage{
 cell.loc.model.fc(n, PointLoc, PointAnno, window_method, seed = NULL)
 }
 \description{
-simulate ST data location based on parametric model
+simulate ST data for one region location based on parametric model
 }

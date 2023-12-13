@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{loadRData}
 \alias{loadRData}
-\title{loadRData}
+\title{load RData  with new assigned file name}
 \usage{
 loadRData(fileName)
 }

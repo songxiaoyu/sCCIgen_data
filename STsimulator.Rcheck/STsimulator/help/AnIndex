@@ -14,7 +14,6 @@ fit_Gaussian_copula	fit_Gaussian_copula
 fit_marginals	fit_marginals
 fit_model_scDesign2	fit_model_scDesign2
 fit_wo_copula	fit_wo_copula
-get.n.vec.raw	get.n.vec.raw
 loadRData	loadRData
 MergeRegion	MergeRegion
 multicell	multicell
