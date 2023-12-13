@@ -103,8 +103,9 @@ if question0_1 == '3':
     workflow3_userinput = input(f"\tWhich file are you using as parameter file (1-{len(workdir_files)}): ")
     simulation_file_name = workdir_files[int(workflow3_userinput)-1]
     print(f'\n\tStart simulation...\n')
+    os.makedirs(f'working_directory/output_files', exist_ok=True)
     os.system(f'Rscript ./scripts/ExampleData.R {simulation_file_name}')
-    print(f'\n\tSaved output file in your working directory/output_files')
+    print(f'\n\tSaved output file to your working directory/output_files')
     sys.exit()
 
 
@@ -157,12 +158,13 @@ if question0_1 == '1':
     if question1_1 not in question1_1_filepaths_count:
         raise ValueError(f'Please enter 1, 2, or 3 to select a dataset. You entered {question1_1}') 
     print("\n")
-    shutil.copyfile(f'example_data/{question1_1_filepaths_count[question1_1]}', f'working_directory/{question1_1_filepaths_count[question1_1]}')
-    shutil.copyfile(f'example_data/{question1_1_filepaths_meta[question1_1]}', f'working_directory/{question1_1_filepaths_meta[question1_1]}')
-    shutil.copyfile(f'example_data/{question1_1_filepaths_expr_pattern[question1_1]}', f'working_directory/{question1_1_filepaths_expr_pattern[question1_1]}')
-    shutil.copyfile(f'example_data/{question1_1_filepaths_docker_docu[question1_1]}', f'working_directory/{question1_1_filepaths_docker_docu[question1_1]}')
-    shutil.copyfile(f'example_data/{question1_1_filepaths_parameter[question1_1]}', f'working_directory/{question1_1_filepaths_parameter[question1_1]}')
-    print(f'\n\tSaved simulated data: {question1_1_filepaths_count[question1_1]}, {question1_1_filepaths_meta[question1_1]}, {question1_1_filepaths_expr_pattern[question1_1]}, {question1_1_filepaths_meta[question1_1]} and {question1_1_filepaths_parameter[question1_1]} to your working directory.')
+    os.makedirs(f'working_directory/example_data', exist_ok=True)
+    shutil.copyfile(f'example_data/{question1_1_filepaths_count[question1_1]}', f'working_directory/example_data/{question1_1_filepaths_count[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_meta[question1_1]}', f'working_directory/example_data/{question1_1_filepaths_meta[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_expr_pattern[question1_1]}', f'working_directory/example_data/{question1_1_filepaths_expr_pattern[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_docker_docu[question1_1]}', f'working_directory/example_data/{question1_1_filepaths_docker_docu[question1_1]}')
+    shutil.copyfile(f'example_data/{question1_1_filepaths_parameter[question1_1]}', f'working_directory/example_data/{question1_1_filepaths_parameter[question1_1]}')
+    print(f'\n\tSaved simulated data: {question1_1_filepaths_count[question1_1]}, {question1_1_filepaths_meta[question1_1]}, {question1_1_filepaths_expr_pattern[question1_1]}, {question1_1_filepaths_docker_docu[question1_1]} and {question1_1_filepaths_parameter[question1_1]} to working_directory/example_data.')
 
     sys.exit()
 
@@ -965,7 +967,6 @@ path_to_output_dir = input("\tPath to save output: [default = working_directory/
 if path_to_output_dir == '':
     path_to_output_dir = 'working_directory/output_files/'
     print('\tUsing default: ', path_to_output_dir)
-    os.makedirs(f'working_directory/output_files', exist_ok=True)
 parameters['path_to_output_dir'] = path_to_output_dir
 
 print('\n')
@@ -985,31 +986,20 @@ parameter_series = pd.Series(parameters, name='value')
 parameter_series.index.name = 'parameters'
 parameter_series.reset_index()
 
-os.makedirs(f'working_directory/parameter_files', exist_ok=True) 
 parameter_file_name = input("\n\tName this parameter file [default='parameter_file']: ").lower()
 
 if parameter_file_name == '':
     parameter_file_name = 'parameter_file'
     print('\tUsing default: ', parameter_file_name)
 
-pd.DataFrame(parameter_series).to_csv(f'working_directory/parameter_files/{parameter_file_name}.tsv', sep='\t')
+pd.DataFrame(parameter_series).to_csv(f'working_directory/{parameter_file_name}.tsv', sep='\t')
 
-print(f'\n\tSaved parameter file for future use in your working directory: parameter_files/{parameter_file_name}.tsv')
-
-
-# # Run ST pipeline with parameter file
-# - TODO: use os.system to kick off R code with parameter file
-
-# In[ ]:
-
-
-#os.system(f'Rscript ./scripts/ExampleData.R working_directory/parameter_files/{parameter_file_name}.tsv')
-#sys.exit()
+print(f'\n\tSaved parameter file {parameter_file_name}.tsv for future use to your working directory')
 
 
 # # Generate python script
 
-# In[4]:
+# In[6]:
 
 
 try:
