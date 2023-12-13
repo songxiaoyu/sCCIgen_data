@@ -2,6 +2,9 @@
 #' ParaDigest
 #'
 #' ParaDigest
+#' @param input name for the input parameter file
+#' @export
+
 
 ParaDigest=function(input) {
   # digest parameters
