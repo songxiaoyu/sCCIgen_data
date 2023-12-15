@@ -93,7 +93,7 @@ print("\n")
 
 # # Workflow3
 
-# In[ ]:
+# In[3]:
 
 
 if question0_1 == '3':
@@ -102,10 +102,12 @@ if question0_1 == '3':
     print('\n')
     workflow3_userinput = input(f"\tWhich file are you using as parameter file (1-{len(workdir_files)}): ")
     simulation_file_name = workdir_files[int(workflow3_userinput)-1]
+    df_sim = pd.read_csv(simulation_file_name, sep='\t', header=0)
+    output_dir = df_sim[df_sim['parameters'] == 'path_to_output_dir']['value']
     print(f'\n\tStart simulation...\n')
-    os.makedirs(f'working_directory/output_files', exist_ok=True)
-    os.system(f'Rscript ./scripts/ExampleData.R {simulation_file_name}')
-    print(f'\n\tSaved output file to your working directory/output_files')
+    os.makedirs(output_dir.to_string(index=False), exist_ok=True)
+    os.system(f'Rscript py_run_r.R {simulation_file_name}')
+    print(f'\n\tSaved output file to {output_dir.to_string(index=False)}')
     sys.exit()
 
 
@@ -518,7 +520,7 @@ if len(cellfeature_data_r.columns) > 1:
         print("\t6) network")
         print('\n')
 
-        question2_5_2 = input("\tMethod for determining window on existing ST data [default = convex5]: \t").lower()
+        question2_5_2 = input("\tMethod for determining window on existing ST data [default = network]: \t").lower()
         valid_question2_5_2 = {
             "1": "rectangle", 
             "2": "convex", 
@@ -529,7 +531,7 @@ if len(cellfeature_data_r.columns) > 1:
         }
         
         if question2_5_2 == '':
-            question2_5_2 = '5'
+            question2_5_2 = '6'
             print(f"\tUsing default: {valid_question2_5_2[question2_5_2]}")
 
         if not question2_5_2.isnumeric():
@@ -963,14 +965,14 @@ parameters['simulation_seed_for_each_dataset'] = ','.join(simulation_seeds)
 
 
 print('\n')
-path_to_output_dir = input("\tPath to save output: [default = working_directory/output_files/]\t")
+path_to_output_dir = input("\tFolder name to save output: [default = output_files]\t")
 if path_to_output_dir == '':
     path_to_output_dir = 'working_directory/output_files/'
-    print('\tUsing default: ', path_to_output_dir)
-parameters['path_to_output_dir'] = path_to_output_dir
+    print('\tUsing default: output_files')
+parameters['path_to_output_dir'] = (f'working_directory/{path_to_output_dir}/')
 
 print('\n')
-output_name = input("\tName to save output: [default = myfile]\t")
+output_name = input("\tFile name to save output: [default = myfile]\t")
 if output_name == '':
     output_name = 'myfile'
     print('\tUsing default: ', output_name)
@@ -999,7 +1001,7 @@ print(f'\n\tSaved parameter file {parameter_file_name}.tsv for future use to you
 
 # # Generate python script
 
-# In[6]:
+# In[9]:
 
 
 try:
