@@ -518,7 +518,7 @@ if len(cellfeature_data_r.columns) > 1:
         print("\t6) network")
         print('\n')
 
-        question2_5_2 = input("\tMethod for determining window on existing ST data [default = convex5]: \t").lower()
+        question2_5_2 = input("\tMethod for determining window on existing ST data [default = network]: \t").lower()
         valid_question2_5_2 = {
             "1": "rectangle", 
             "2": "convex", 
@@ -529,7 +529,7 @@ if len(cellfeature_data_r.columns) > 1:
         }
         
         if question2_5_2 == '':
-            question2_5_2 = '5'
+            question2_5_2 = '6'
             print(f"\tUsing default: {valid_question2_5_2[question2_5_2]}")
 
         if not question2_5_2.isnumeric():
@@ -592,11 +592,9 @@ else:
     parameters['gene_cor'] = 'TRUE'
     print('\n')
     print_workdir_files()
-    question2_6_3 = input("\tProvide a path for uploading a pre-estimated gene-gene correlation file (default = NULL)\t").lower()
+    question2_6_3 = input("\tProvide a path for uploading a pre-estimated gene-gene correlation file\t").lower()
     if question2_6_3 == '':
-        question2_6_3 = 'NULL'
-        print('\n\tUsing default: ', question2_6_3)
-        parameters['copula_input'] = question2_6_3
+        raise ValueError('Please select a file.') 
     elif not question2_6_3.isnumeric():
         raise ValueError('Please select a file.')
     else:
@@ -999,7 +997,7 @@ print(f'\n\tSaved parameter file {parameter_file_name}.tsv for future use to you
 
 # # Generate python script
 
-# In[6]:
+# In[1]:
 
 
 try:
