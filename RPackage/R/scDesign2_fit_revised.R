@@ -1,3 +1,6 @@
+
+
+# fit_marginals ---------------
 #' Fit the marginal distributions for each row of a count matrix
 #'
 #' @keywords internal
@@ -157,6 +160,8 @@ fit_marginals <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'
 
 
 
+
+# fit_Gaussian_copula ---------------
 #' Fit a Gaussian copula model for a count matrix of a single cell type
 #'
 #' @inheritParams fit_marginals
@@ -229,6 +234,7 @@ fit_Gaussian_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'po
 
 
 
+# fit_wo_copula ---------------
 #' Fit a (w/o copula) model for a count matrix of a single cell type
 #'
 #' This function only fits the marginal distribution for each gene.
@@ -280,6 +286,7 @@ fit_wo_copula <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'
 
 
 
+# fit_model_scDesign2 ---------------
 #' Fit models for a count matrix
 #'
 #' @param data_mat      A matrix of shape p by n that contains count values. Each of its
@@ -330,6 +337,7 @@ fit_model_scDesign2 <- function(data_mat, cell_type_sel,
   param
 }
 
+# Est_GeneCopula ---------------
 #' Estimate Gaussian Copula for Gene Expression Matrix
 #' @param expr expr
 #' @param anno description

@@ -2,10 +2,10 @@
 % Please edit documentation in R/PointSimulator_STData.R
 \name{cell.loc.existing.fc}
 \alias{cell.loc.existing.fc}
-\title{simulate ST data location based on parametric model}
+\title{simulate ST data location for one region using existing cell location}
 \usage{
 cell.loc.existing.fc(PointLoc, PointAnno, window_method = "rectangle")
 }
 \description{
-simulate ST data location based on parametric model
+simulate ST data location for one region using existing cell location
 }

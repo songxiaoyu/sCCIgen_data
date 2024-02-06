@@ -36,7 +36,6 @@ connectUp <- function(r, nRegion, seed=NULL){
         n0=sum(sapply(selected, length))
       }
     }
-    # print(selected)
   }
   length(unlist(selected))
   length(unique(unlist(selected)))
@@ -47,7 +46,6 @@ connectUp <- function(r, nRegion, seed=NULL){
 #' Generate random connected region in a window
 #'
 #' This function generates random regions on a unit square.
-#' @export
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param nGrid nGrid is the No. of spots on x and y.
 #' @return
@@ -59,22 +57,23 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
     win=vector(mode = "list", length = 1); win[[1]] = unit.square()
   } else {
     # generate polygon
-    r <- raster(ncols=nGrid, nrows=nGrid,xmn=0, xmx=1, ymn=0, ymx=1)
+    r <- raster::raster(ncols=nGrid, nrows=nGrid,xmn=0, xmx=1, ymn=0, ymx=1)
 
     # connect
     connected = connectUp(r=r, nRegion=nRegion, seed=seed)
-    poly <- rasterToPolygons(r)
+    poly <- raster::rasterToPolygons(r)
 
-    region=lapply(1:nRegion, function(f) aggregate(poly[connected[[f]],]))
+    region=lapply(1:nRegion, function(f) terra::aggregate(poly[connected[[f]],]))
     coords=lapply(region, function(f) data.frame(f@polygons[[1]]@Polygons[[1]]@coords))
     win=lapply(1:length(coords), function(f)
-      owin(poly=list(x=rev(coords[[f]])[,1], y=rev(coords[[f]])[,2])))
+      spatstat.geom::owin(poly=list(x=rev(coords[[f]])[,1],
+                               y=rev(coords[[f]])[,2])))
     }
 
   # plot(win[[1]], xlim=c(0, 1), ylim=c(0,1), col=1)
   # plot(win[[2]], add=T, col=2)
   # plot(win[[3]], add=T, col=3)
-  area=sapply(win, area.owin)
+  area=sapply(win, spatstat.geom::area.owin)
   return(list(window=win, area=area))
 }
 
@@ -141,12 +140,12 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   KP=colnames(n.vec.target)
 
 
-  gen1=rmpoint(n.vec.raw, win=window1, types=KP)
+  gen1=spatstat.random::rmpoint(n.vec.raw, win=window1, types=KP)
 
   # calculate cell-cell distance for deletion of same loc
-  dis=pairdist(gen1)
+  dis=spatstat.geom::pairdist(gen1)
   dis[lower.tri(dis, diag=T)]=1
-  ratio= sqrt(area.owin(window1)/sum(n.vec.target))
+  ratio= sqrt(spatstat.geom::area.owin(window1)/sum(n.vec.target))
   dis2=dis<same.dis.cutoff * ratio
   same.loc.idx=which(dis2 == T, arr.ind = TRUE)
   same.loc.delete.no=nrow(same.loc.idx)
@@ -157,7 +156,8 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   delete.prop2=mean.delete.prop[cell.mark[same.loc.idx[,2]]]
   delete.fraction=delete.prop1/(delete.prop1+delete.prop2)
   delete.cell1=rbinom(same.loc.delete.no, 1, delete.fraction)
-  delete.idx=c(same.loc.idx[delete.cell1==1,1], same.loc.idx[delete.cell1==0,2])
+  delete.idx=c(same.loc.idx[delete.cell1==1,1],
+               same.loc.idx[delete.cell1==0,2])
 
   gen2=gen1[setdiff(1:gen1$n, delete.idx), ]
   n2.vec=summary(gen2)$marks$frequency
@@ -170,16 +170,16 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   mean.delete.prop=(n2.vec-n.vec.target)/n2.vec # average deletion prop.
   mean.delete.logit=mean.delete.prop/(1-mean.delete.prop) # logit
   # two resolutions
-  r1 <- raster(ncols=grid.size.small, nrows=grid.size.small,
+  r1 <- raster::raster(ncols=grid.size.small, nrows=grid.size.small,
                xmn=0, xmx=1, ymn=0, ymx=1)
-  r2 <- raster(ncols=grid.size.large, nrows=grid.size.large,
+  r2 <- raster::raster(ncols=grid.size.large, nrows=grid.size.large,
                xmn=0, xmx=1, ymn=0, ymx=1)
   # in total - for even distribution
-  pt.den=rasterize(cbind(gen2$x, gen2$y), r2, fun=function(x,...)length(x))
+  pt.den=raster::rasterize(cbind(gen2$x, gen2$y), r2, fun=function(x,...)length(x))
   value=raster::values(pt.den)
   value[is.na(value)]=0
   pixel.density=value/mean(value)
-  pixel.idx=cellFromXY(pt.den, cbind(gen2$x, gen2$y))
+  pixel.idx=raster::cellFromXY(pt.den, cbind(gen2$x, gen2$y))
   den.total=pixel.density[pixel.idx]
   mu1=den.total*even.distribution.coef
 
@@ -190,7 +190,7 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     }
   # local density by cell type 1
   pt.cell.den1=lapply(KP, function(k)
-    rasterize(cbind(gen2[which(gen2$marks==k),]$x,
+    raster::rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                     gen2[which(gen2$marks==k),]$y),
               r1, fun=function(x,...) length(x)))
 
@@ -200,7 +200,7 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     value.cell.r1[[f]]/mean(value.cell.r1[[f]]))
 
   # local density by cell type 2
-  pt.cell.den2=lapply(KP, function(k) rasterize(cbind(gen2[which(gen2$marks==k),]$x,
+  pt.cell.den2=lapply(KP, function(k) raster::rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                       gen2[which(gen2$marks==k),]$y), r2, fun=function(x,...)length(x)))
   value.cell.r2=lapply(1:K, function(f) raster::values(pt.cell.den2[[f]]))
 
@@ -224,10 +224,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     row.diff.idx= row.idx ==T &  row.same.idx ==F
     # calculate mu2 the contribution of same cell inhibition/attraction
     if (sum(row.same.idx)==0) {mu2=matrix(rep(0, n0.k))} else {
-       pixel.idx.cell1=cellFromXY(pt.cell.den1[[k]], gen2.cell.loc)
+       pixel.idx.cell1=raster::cellFromXY(pt.cell.den1[[k]], gen2.cell.loc)
        den.same1=pixel.density.cell1[[k]][pixel.idx.cell1]
 
-       pixel.idx.cell2=cellFromXY(pt.cell.den2[[k]], gen2.cell.loc)
+       pixel.idx.cell2=raster::cellFromXY(pt.cell.den2[[k]], gen2.cell.loc)
        den.same2=pixel.density.cell2[[k]][pixel.idx.cell2]
 
        den.same=(den.same1+den.same2)/2
@@ -240,10 +240,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
        pair.idx=unlist(apply(as.matrix(cell.inh.attr.input1[row.diff.idx, 1:2]),1,
                              function(f) setdiff(f, KP[k])))
        for (pk in pair.idx) {
-          pixel.idx.cell1=cellFromXY(pt.cell.den1[[pk]], gen2.cell.loc)
+          pixel.idx.cell1=raster::cellFromXY(pt.cell.den1[[pk]], gen2.cell.loc)
           den.diff1=pixel.density.cell1[[pk]][pixel.idx.cell1]
 
-          pixel.idx.cell2=cellFromXY(pt.cell.den2[[pk]], gen2.cell.loc)
+          pixel.idx.cell2=raster::cellFromXY(pt.cell.den2[[pk]], gen2.cell.loc)
           den.diff2=pixel.density.cell2[[pk]][pixel.idx.cell2]
 
           diff.cell.density=cbind(diff.cell.density,(den.diff1+den.diff2)/2)

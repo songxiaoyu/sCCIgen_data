@@ -11,12 +11,14 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    data.table,
     dplyr,
+    tidyr,
     raster,
     spatstat,
     rlist,
-    doParallel,
-    data.table,
     parallel,
+    foreach,
     doParallel,
     proxy
+

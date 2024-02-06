@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaCellsNoST}
 \alias{ParaCellsNoST}
-\title{ParaNoSTCells}
+\title{Use parameters to simulate cell location (no existing spatial info)}
 \usage{
 ParaCellsNoST(para, all_seeds)
 }

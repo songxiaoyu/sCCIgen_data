@@ -79,7 +79,7 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
 }
 
 
-
+# Generate cell location in one region
 # This function generates cell pools allowing selection due
 # to cell overlaps, inhibitions and attractions.
 
@@ -110,7 +110,7 @@ get.n.vec.raw=function(n, cell.prop,
   return(list(n.vec.target=n.vec.target, n.vec.raw=n.vec.use.adj))
 }
 
-#' cell.loc.1region.fc (internal function)
+#' Generate cell location in one region
 #'
 #' This function generates cell locations for each region
 #' @import spatstat
@@ -276,7 +276,7 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
 }
 
 
-#' cell.loc.fc (internal function)
+#' Generate cell location for all regions
 #'
 #' This function generates cell locations for each region
 #' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.

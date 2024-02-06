@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaSimulation}
 \alias{ParaSimulation}
-\title{ParaSimulation}
+\title{(Main Function) Simulate spatially resolved transcriptomics data from a parameter file.}
 \usage{
 ParaSimulation(input, ModelFitFile = NULL)
 }
