@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaExistingCellsST}
 \alias{ParaExistingCellsST}
-\title{ParaSTExistingCells}
+\title{Use parameters to simulate cell location (direct output from existing spatial data)}
 \usage{
 ParaExistingCellsST(m, feature)
 }

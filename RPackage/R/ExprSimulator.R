@@ -1,5 +1,5 @@
 
-
+# Use_scDesign2_1region ------
 Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
                        depth_simu_ref_ratio=1, cell_type_sel, seed,
                        sim_method = c('copula', 'ind')) {
@@ -30,6 +30,7 @@ Use_scDesign2_1region=function(ppp.obj1, Genes, model_params,
 
 
 
+# Use_scDesign2_model_params ------
 Use_scDesign2_model_params=function(expr,
                        feature,
                        Copula=NULL,
@@ -80,7 +81,7 @@ Use_scDesign2_model_params=function(expr,
   return(model_params)
 }
 
-
+# Use_scDesign2 ------
 #' Simulate expression under no spatial patterns using revised scDesign2 functions
 #'
 #' This function uses input parameters to simulate expression for all regions.
@@ -105,7 +106,7 @@ Use_scDesign2=function(ppp.obj,
                        seed) {
 
   expr=as.matrix(expr)
-  R=length(ppp.obj)
+  R=length(ppp.obj) # simulated regions
   cell_type_sel=names(table(colnames(expr)))
   Genes=rownames(expr)
 
@@ -125,10 +126,10 @@ Use_scDesign2=function(ppp.obj,
   #  region specific model
   if (region_specific_model=="TRUE") { #  region specific
 
-    Region=feature[,4]
+    Region=feature[,4] # imput region
     Runiq=unique(Region)
 
-    sim.count= foreach (r = 1:R) %in% {
+    sim.count= foreach (r = 1:R) %dopar% {
 
       Use_scDesign2_1region(ppp.obj1=ppp.obj[[r]],
                                            Genes=Genes,
@@ -144,9 +145,7 @@ Use_scDesign2=function(ppp.obj,
   return(sim.count)
 }
 
-# Spatial patterns -----------------------------------------------
-
-
+# Add.Spatial.Expr.Pattern -----------------------------------------------
 #' adds spatial differential expressed pattern for one cell type
 #'
 #' This function adds spatial differential expressed patterns for one cell type.
@@ -194,7 +193,7 @@ Add.Spatial.Expr.Pattern= function(sim.count,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-# Find.Neighbor.Pairs
+# Find.Neighbor.Pairs ----------
 
 Find.Neighbor.Pairs=function(ppp.obj,
                              interacting.cell.type.pair,
@@ -216,6 +215,7 @@ Find.Neighbor.Pairs=function(ppp.obj,
   return(neighbor.idx=nbr.idx)
 }
 
+# Add.Distance.Asso.Pattern -----------------------------------------------
 #' Add a type of cell-cell interaction pattern (expr-distance) to a pair of cell types
 #'
 #' This function add a type of cell-cell interactions to a pair of cell types. The expression in a cell type associated with the proximity of
@@ -284,6 +284,7 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
+# Add.Expr.Asso.Pattern --------
 #' Add a type of cell-cell interaction pattern (expr-expr) to a pair of cell types
 #'
 #' This function add cell-cell interactions to a pair of cell types (e.g.
@@ -377,7 +378,7 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
 }
 
 
-# Pattern.adj.1region
+# Pattern.adj.1region --------
 
 Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
                     bond.extreme=T, keep.total.count=T,
@@ -415,6 +416,7 @@ Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
 }
 
 
+# Pattern.Adj --------
 #' Adjust the count data for all regions based on the input spatial patterns
 #'
 #' Adjust the count data for all regions based on the input spatial patterns
@@ -452,7 +454,7 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 }
 
 
-
+# ExprPattern --------
 ExprPattern=function(pattern.list.i){
   L=length(pattern.list.i)
   res=NULL
@@ -463,7 +465,7 @@ ExprPattern=function(pattern.list.i){
 }
 
 
-
+# MergeRegion --------
 #' Merge spatial and expression data from multiple regions
 #'
 #' Merge spatial and expression data from multiple regions

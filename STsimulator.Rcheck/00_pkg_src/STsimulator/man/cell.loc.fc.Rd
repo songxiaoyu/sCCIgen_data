@@ -2,7 +2,7 @@
 % Please edit documentation in R/PointSimulator_NoData.R
 \name{cell.loc.fc}
 \alias{cell.loc.fc}
-\title{cell.loc.fc (internal function)}
+\title{Generate cell location for all regions}
 \usage{
 cell.loc.fc(
   N,

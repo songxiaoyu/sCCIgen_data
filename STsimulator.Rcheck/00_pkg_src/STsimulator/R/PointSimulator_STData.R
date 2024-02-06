@@ -98,7 +98,7 @@ simu.window=function(PointLoc,
 
 
 
-#' simulate ST data location based on parametric model
+#' simulate ST data for one region location based on parametric model
 #' @import spatstat
 #' @export
 cell.loc.model.fc=function(n,
@@ -146,7 +146,7 @@ cell.loc.model.fc=function(n,
 
 
 
-#' simulate ST data location based on parametric model
+#' simulate ST data location for all regions based on a parametric model
 #' @import spatstat
 #' @export
 cell.region.loc.model.fc=function(n,
@@ -171,7 +171,7 @@ cell.region.loc.model.fc=function(n,
 
 
 
-#' simulate ST data location based on parametric model
+#' simulate ST data location for one region using existing cell location
 #' @import spatstat
 #' @export
 cell.loc.existing.fc=function(PointLoc,
@@ -186,7 +186,7 @@ cell.loc.existing.fc=function(PointLoc,
   return(p)
 }
 
-#' simulate ST data location based on parametric model
+#' simulate ST data location for all regions using existing cell location
 #' @import spatstat
 #' @export
 cell.region.loc.existing.fc=function(PointLoc,

@@ -13,6 +13,6 @@ RoxygenNote: 7.2.3
 Imports: dplyr, raster, spatstat, rlist, doParallel, data.table,
         parallel, doParallel, proxy
 NeedsCompilation: no
-Packaged: 2023-12-13 18:40:39 UTC; songxiaoyu152
+Packaged: 2024-02-01 20:08:57 UTC; songxiaoyu152
 Author: Xiaoyu Song [aut, cre] (YOUR-ORCID-ID)
 Maintainer: Xiaoyu Song <songxiaoyu152@gmail.com>

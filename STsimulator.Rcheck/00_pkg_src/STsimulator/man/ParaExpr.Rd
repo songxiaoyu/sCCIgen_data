@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaExpr}
 \alias{ParaExpr}
-\title{ParaExpr}
+\title{Simualte gene expression data based on parameters}
 \usage{
 ParaExpr(
   para,

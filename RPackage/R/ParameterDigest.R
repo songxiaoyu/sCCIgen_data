@@ -3,6 +3,7 @@
 #'
 #' Digest and clean the parameter file.
 #' @param input name for the input parameter file
+#' @import dplyr tibble readr
 #' @return Updated parameters
 #' @export
 
@@ -19,8 +20,9 @@ ParaDigest=function(input) {
 
   # clean seeds
   if (num_simulated_datasets>1) {
-    para$all_seeds=as.numeric(unlist(strsplit(simulation_seed_for_each_dataset, ",")))
-  } else{para$all_seeds=simulation_seed_for_each_dataset}
+    para$all_seeds=strsplit(simulation_seed_for_each_dataset, ",")%>%
+      unlist%>% as.numeric()%>% list()
+  } else{para$all_seeds=list(simulation_seed_for_each_dataset)}
 
 
   # Path1: No ST data;
@@ -37,7 +39,7 @@ ParaDigest=function(input) {
 }
 
 # ----------- expr load ---------------
-#' load RData  with new assigned file name
+#' load RData with new assigned file name
 #'
 #' Load RData with new assigned file name
 #' @param fileName  File name
@@ -56,7 +58,7 @@ ExprLoad=function(para){
     expr=as.data.frame(loadRData(paste0(path_to_input_dir, expression_data_file)))
   }
   if (expression_data_file_type=="tsv") {
-    expr=as.data.frame(fread(paste0(path_to_input_dir, expression_data_file)))
+    expr=as.data.frame(data.table::fread(paste0(path_to_input_dir, expression_data_file)))
   }
   expr=as.matrix(expr)
   return(expr)
@@ -69,7 +71,8 @@ CellFeatureLoad=function(para){
     feature=as.data.frame(loadRData(paste0(path_to_input_dir, cell_feature_data_file)))
   }
   if (type=="tsv") {
-    feature=as.data.frame(fread(paste0(path_to_input_dir, cell_feature_data_file)))
+    feature=as.data.frame(data.table::fread(paste0(path_to_input_dir,
+                                                   cell_feature_data_file)))
   }
   return(feature)
 }
@@ -94,7 +97,7 @@ ParameterCopula=function(para, expr, feature, ncores=1){
     anno=feature[,1]
     colnames(expr)=anno
     #L=length(unique(anno))
-    if (region_specific_model=="FALSE") {
+    if (region_specific_model!="TRUE") {
       CopulaEst=list(Est_GeneCopula(expr=expr,
                                     anno=anno, zp_cutoff=0.8, ncores=ncores))
     }
@@ -110,7 +113,7 @@ ParameterCopula=function(para, expr, feature, ncores=1){
       names(CopulaEst)=Ridx
     }
    # save
-   out_path_name=paste0(path_to_output_dir, "_Copula.RData")
+   out_path_name=paste0(path_to_output_dir, output_name, "_Copula.RData")
    save(CopulaEst, file=out_path_name)
    print("Finish estimating gene-gene correlation in expression data")
   }
@@ -126,6 +129,7 @@ ParameterCopula=function(para, expr, feature, ncores=1){
 #' @param para Parameters loaded and cleaned from the parameter file using function
 #' `ParaDigest`.
 #' @param all_seeds Seeds for all simulated data
+#' @import parallel foreach
 #'
 ParaCellsNoST=function(para, all_seeds){
 
@@ -170,19 +174,20 @@ ParaCellsNoST=function(para, all_seeds){
    }
    return(cell_loc)
 }
-# ----------------- ParaSTNewCells ---------------
+# ----------------- ParaCellsST ---------------
 #' Use parameters to simulate cell location based on modeling of existing SRT
 #'
 #' Use parameters to simulate cell location. Here fit models on existing SRT data for simulation.
+
 #' @param para Parameters loaded and cleaned from the parameter file using function
 #' `ParaDigest`.
 #' @param feature Cell feature data
 #' @param all_seeds Seeds for all simulated data
-#'
+#' @import parallel foreach
+
 ParaCellsST=function(para, feature, all_seeds) {
 
   if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
-
   cell_loc=foreach (i = 1:num_simulated_datasets) %dopar% {
     cell.region.loc.model.fc(n=num_simulated_cells,
                                     PointLoc=feature[,c(2:3)],
@@ -418,7 +423,8 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
   sim_method=ifelse(gene_cor=="TRUE", "copula", "ind")
   # fit by input data
   if (is.null(model_params)) {
-    model_params=ParaFitExpr(para, expr, feature, CopulaEst, ncores=ncores, save=F)
+    model_params=ParaFitExpr(para, expr, feature,
+                             CopulaEst, ncores=ncores, save=F)
   }
   # simulate
 
@@ -453,8 +459,9 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
     # save
 
     save_name=paste0(path_to_output_dir, output_name)
-    if (is.null(expr_pattern)==F) {
-      write_tsv(expr_pattern, file=paste0(save_name, "_expr_pattern_", i, ".tsv"))
+    if (nrow(expr_pattern)!=0) {
+      write_tsv(expr_pattern,
+                file=paste0(save_name, "_expr_pattern_", i, ".tsv"))
     }
 
     # multicell?
@@ -492,6 +499,7 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 #' @param input  The path and name of the parameter file.
 #' @return Simulated data (e.g. count, spatial feature, expression pattern) will be directly
 #' saved on your computer or cloud based on the path provided by the parameter file.
+#' @import parallel foreach doParallel
 #' @export
 
 
@@ -515,13 +523,16 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
 
   # Simulate cells
   if (path==1) {
-    cell_loc_list=ParaCellsNoST(para=para, all_seeds=all_seeds)
+    cell_loc_list=ParaCellsNoST(para=para,
+                                all_seeds=all_seeds[[1]])
   }
   if (path==2) {
-    cell_loc_list=ParaCellsST(para=para, feature=feature, all_seeds=all_seeds)
+    cell_loc_list=ParaCellsST(para=para, feature=feature,
+                              all_seeds=all_seeds[[1]])
   }
   if (path==3) {
-    cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets, feature=feature)
+    cell_loc_list=ParaExistingCellsST(m=num_simulated_datasets,
+                                      feature=feature)
   }
   print("Finished simulating the cell spatial maps")
 
@@ -536,14 +547,12 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
   }
   expr2=expr[,idxc]
 
-  # Copula
-  CopulaEst=ParameterCopula(para=para, expr=expr2, feature=feature, ncores=ncores)
+  # Copula - from parameter file
+  CopulaEst=ParameterCopula(para=para, expr=expr2,
+                            feature=feature, ncores=ncores)
   # ModelFitFile=ParaFitExpr(para=para, expr=expr2, feature=feature,
   #                          CopulaEst=CopulaEst, ncores=ncores, save=T)
-
-
   # Simulate Expr for these cells
-  #
   if( is.null(ModelFitFile)==F) {
     load(ModelFitFile)
   } else {model_params=NULL}
@@ -551,7 +560,7 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
   ParaExpr(para=para,
            cell_loc_list=cell_loc_list,
            expr=expr2, feature=feature,
-           CopulaEst=CopulaEst, all_seeds=all_seeds,
+           CopulaEst=CopulaEst, all_seeds=all_seeds[[1]],
            ncores=ncores, model_params=model_params)
   print("Finished simulating the expression of cells")
   detach(para)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ParameterDigest.R
 \name{ParaCellsST}
 \alias{ParaCellsST}
-\title{ParaSTNewCells}
+\title{Use parameters to simulate cell location based on modeling of existing SRT}
 \usage{
 ParaCellsST(para, feature, all_seeds)
 }

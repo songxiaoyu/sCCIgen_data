@@ -9,7 +9,6 @@ cell.region.loc.existing.fc	cell.region.loc.existing.fc
 cell.region.loc.model.fc	cell.region.loc.model.fc
 connectUp	connectUp
 Est_GeneCopula	Est_GeneCopula
-Find.Neighbor.Pairs	Find.Neighbor.Pairs
 fit_Gaussian_copula	fit_Gaussian_copula
 fit_marginals	fit_marginals
 fit_model_scDesign2	fit_model_scDesign2

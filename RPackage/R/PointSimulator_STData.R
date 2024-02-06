@@ -17,7 +17,7 @@ simu.window=function(PointLoc,
   n=nrow(PointLoc)
 
   if (is.null(PointLoc)==F &(method=="convex" | method=="rectangle")) {
-    res=ripras(x0, y0, shape=method)
+    res=spatstat.geom::ripras(x0, y0, shape=method)
   }
 
 
@@ -34,7 +34,7 @@ simu.window=function(PointLoc,
         idy= which(y0>=(ymin+ dy/K*(j-1)) & y0< (ymin + dy/K*j*1.05))
         id=intersect(idx, idy)
         res1=ripras(x0[id], y0[id], shape="convex")
-        res=suppressWarnings(union.owin(res, res1))
+        res=suppressWarnings(spatstat.geom::union.owin(res, res1))
       }
     }
   }
@@ -84,11 +84,11 @@ simu.window=function(PointLoc,
       #print(points_ordered)
     }
 
-    a <- try(owin(poly=list(x=PointLoc_noise[points_ordered,1],
+    a <- try(spatstat.geom::owin(poly=list(x=PointLoc_noise[points_ordered,1],
                             y=PointLoc_noise[points_ordered,2])), silent =T)
     if (inherits(a, "try-error")) {
       points_ordered2=rev(points_ordered)
-      res=owin(poly=list(x=PointLoc_noise[points_ordered2,1],
+      res=spatstat.geom::owin(poly=list(x=PointLoc_noise[points_ordered2,1],
                          y=PointLoc_noise[points_ordered2,2]))
     } else {res=a}
 
@@ -99,7 +99,7 @@ simu.window=function(PointLoc,
 
 
 #' simulate ST data for one region location based on parametric model
-#' @import spatstat
+#' @import spatstat.geom
 #' @export
 cell.loc.model.fc=function(n,
                            PointLoc,
@@ -110,8 +110,8 @@ cell.loc.model.fc=function(n,
   #
   if(is.null(seed)==F) {set.seed(seed)}
   cell_win=simu.window(PointLoc=PointLoc, method=window_method)
-  p=as.ppp(PointLoc, W=cell_win)
-  marks(p)=as.factor(PointAnno)
+  p=spatstat.geom::as.ppp(PointLoc, W=cell_win)
+  spatstat.geom::marks(p)=as.factor(PointAnno)
   # if too many cells
   if (p$n>10000) {
     idx=rbinom(p$n, 1, prob=10000/p$n)
@@ -121,18 +121,19 @@ cell.loc.model.fc=function(n,
 
   x=p$x
   y=p$y
-  fit=ppm(p, ~marks+ marks:polynom(x,y,2),Poisson())
+  fit=spatstat.model::ppm(p, ~marks+ marks:polynom(x,y,2),
+                          spatstat.model::Poisson())
   nsim=ceiling(n/p$n)
   if (nsim>1) {
-    a=rmh(model=fit, nsim=nsim)
-    b=superimpose(a)
-    marks(b)=marks(b)[,1]
-  } else{b=rmh(model=fit, nsim=nsim)}
+    a=spatstat.random::rmh(model=fit, nsim=nsim)
+    b=spatstat.geom::superimpose(a)
+    spatstat.geom::marks(b)=spatstat.geom::marks(b)[,1]
+  } else{b=spatstat.random::rmh(model=fit, nsim=nsim)}
 
   # get rid of cells on the same location
   while(b$n-n>10) {
     delete.n=(b$n-n)
-    dis=pairdist(b)
+    dis=spatstat.geom::pairdist(b)
     dis[lower.tri(dis, diag=T)]=NA
     r= quantile(dis, probs=delete.n*2/b$n/(b$n-1), na.rm=T)
     dis2=dis< r
@@ -180,8 +181,8 @@ cell.loc.existing.fc=function(PointLoc,
 
 
   cell_win=simu.window(PointLoc=PointLoc, method=window_method)
-  p=as.ppp(PointLoc, W=cell_win)
-  marks(p)=as.factor(PointAnno)
+  p=spatstat.geom::as.ppp(PointLoc, W=cell_win)
+  spatstat.geom::marks(p)=as.factor(PointAnno)
 
   return(p)
 }

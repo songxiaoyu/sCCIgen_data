@@ -1,4 +1,4 @@
-#' multicell
+#' Assigns cells into spatial spots for multi-cell resolution data
 #'
 #' This function assigns cells into spatial spots. Each spot may contain zero, one, or
 #' multiple cells. Spots with zero cells won't be in the output.
