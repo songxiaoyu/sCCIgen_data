@@ -2,10 +2,30 @@
 % Please edit documentation in R/PointSimulator_STData.R
 \name{cell.loc.model.fc}
 \alias{cell.loc.model.fc}
-\title{simulate ST data for one region location based on parametric model}
+\title{Generate cell location data by modeling the spatial information of existing data.}
 \usage{
-cell.loc.model.fc(n, PointLoc, PointAnno, window_method, seed = NULL)
+cell.loc.model.fc(
+  n,
+  PointLoc,
+  PointAnno,
+  PointRegion = 1,
+  window_method,
+  seed = NULL
+)
+}
+\arguments{
+\item{n}{No. of cells}
+
+\item{PointLoc}{The location of input cells on x, y axis.}
+
+\item{PointAnno}{The cell type annotation of input cells.}
+
+\item{PointRegion}{The spatial regions of input cells.}
+
+\item{window_method}{Method for estimating window of cells.}
+
+\item{seed}{Random seed.}
 }
 \description{
-simulate ST data for one region location based on parametric model
+Generate cell location data by modeling the spatial information of existing data.
 }

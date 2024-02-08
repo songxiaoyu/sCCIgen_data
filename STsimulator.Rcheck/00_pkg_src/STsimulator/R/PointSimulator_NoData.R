@@ -1,11 +1,11 @@
-
+# connectUp ------------
 #' Assign connected regions in a window
 #'
 #' This function assigns random connected regions on a square. Used within function `RandomRegionWindow`.
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param r poly is a RasterLayer  (e.g. 20 by 20 square).
-#' @return
-#' \item{selected.unique:}{A list of the selected polygons for each region.}
+#' @param seed Random seed.
+#' @return A list of the selected polygons for each region.
 
 
 connectUp <- function(r, nRegion, seed=NULL){
@@ -36,49 +36,50 @@ connectUp <- function(r, nRegion, seed=NULL){
         n0=sum(sapply(selected, length))
       }
     }
-    # print(selected)
   }
   length(unlist(selected))
   length(unique(unlist(selected)))
   return(selected)
 }
 
-
+# RandomRegionWindow ------------
 #' Generate random connected region in a window
 #'
 #' This function generates random regions on a unit square.
-#' @export
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param nGrid nGrid is the No. of spots on x and y.
+#' @param seed Random seed.
 #' @return
-#' \item{selected.unique:}{A list of the selected polygons for each region.}
+#' \item{window:}{The window of each region.}
+#' \item{area:}{Area proportion of the region in the window.}
 #' @export
 #'
-RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
+RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=NULL){
   if (nRegion==1) {
     win=vector(mode = "list", length = 1); win[[1]] = unit.square()
   } else {
     # generate polygon
-    r <- raster(ncols=nGrid, nrows=nGrid,xmn=0, xmx=1, ymn=0, ymx=1)
+    r <- raster::raster(ncols=nGrid, nrows=nGrid,xmn=0, xmx=1, ymn=0, ymx=1)
 
     # connect
     connected = connectUp(r=r, nRegion=nRegion, seed=seed)
-    poly <- rasterToPolygons(r)
+    poly <- raster::rasterToPolygons(r)
 
-    region=lapply(1:nRegion, function(f) aggregate(poly[connected[[f]],]))
+    region=lapply(1:nRegion, function(f) terra::aggregate(poly[connected[[f]],]))
     coords=lapply(region, function(f) data.frame(f@polygons[[1]]@Polygons[[1]]@coords))
     win=lapply(1:length(coords), function(f)
-      owin(poly=list(x=rev(coords[[f]])[,1], y=rev(coords[[f]])[,2])))
+      spatstat.geom::owin(poly=list(x=rev(coords[[f]])[,1],
+                               y=rev(coords[[f]])[,2])))
     }
 
   # plot(win[[1]], xlim=c(0, 1), ylim=c(0,1), col=1)
   # plot(win[[2]], add=T, col=2)
   # plot(win[[3]], add=T, col=3)
-  area=sapply(win, area.owin)
+  area=sapply(win, spatstat.geom::area.owin)
   return(list(window=win, area=area))
 }
 
-
+# get.n.vec.raw ------------
 # Generate cell location in one region
 # This function generates cell pools allowing selection due
 # to cell overlaps, inhibitions and attractions.
@@ -110,17 +111,8 @@ get.n.vec.raw=function(n, cell.prop,
   return(list(n.vec.target=n.vec.target, n.vec.raw=n.vec.use.adj))
 }
 
-#' Generate cell location in one region
-#'
-#' This function generates cell locations for each region
-#' @import spatstat
-#' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.
-#' @param cell.inh.attr.input cell.inh.attr.input
-#' @param same.dis.cutoff The averaged cell-cell distance is defined as r (e.g. on the unit
-#' square r =1/sqrt(N)). Same cell location is defined as the ratio to r. Default at 0.2.
-#' cell.inh.attr.input=cbind(Cell1=c(1, 3, 4), Cell2=c(2,3,5), Strength= c(2, 0, -2))
-#' @param same.dis.cutoff same.dis.cutoff =0.05
-
+# cell.loc.1region.fc ------------
+# Generate cell location in one region
 
 cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
                      same.dis.cutoff =0.05,
@@ -141,12 +133,12 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   KP=colnames(n.vec.target)
 
 
-  gen1=rmpoint(n.vec.raw, win=window1, types=KP)
+  gen1=spatstat.random::rmpoint(n.vec.raw, win=window1, types=KP)
 
   # calculate cell-cell distance for deletion of same loc
-  dis=pairdist(gen1)
+  dis=spatstat.geom::pairdist(gen1)
   dis[lower.tri(dis, diag=T)]=1
-  ratio= sqrt(area.owin(window1)/sum(n.vec.target))
+  ratio= sqrt(spatstat.geom::area.owin(window1)/sum(n.vec.target))
   dis2=dis<same.dis.cutoff * ratio
   same.loc.idx=which(dis2 == T, arr.ind = TRUE)
   same.loc.delete.no=nrow(same.loc.idx)
@@ -157,7 +149,8 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   delete.prop2=mean.delete.prop[cell.mark[same.loc.idx[,2]]]
   delete.fraction=delete.prop1/(delete.prop1+delete.prop2)
   delete.cell1=rbinom(same.loc.delete.no, 1, delete.fraction)
-  delete.idx=c(same.loc.idx[delete.cell1==1,1], same.loc.idx[delete.cell1==0,2])
+  delete.idx=c(same.loc.idx[delete.cell1==1,1],
+               same.loc.idx[delete.cell1==0,2])
 
   gen2=gen1[setdiff(1:gen1$n, delete.idx), ]
   n2.vec=summary(gen2)$marks$frequency
@@ -170,16 +163,16 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   mean.delete.prop=(n2.vec-n.vec.target)/n2.vec # average deletion prop.
   mean.delete.logit=mean.delete.prop/(1-mean.delete.prop) # logit
   # two resolutions
-  r1 <- raster(ncols=grid.size.small, nrows=grid.size.small,
+  r1 <- raster::raster(ncols=grid.size.small, nrows=grid.size.small,
                xmn=0, xmx=1, ymn=0, ymx=1)
-  r2 <- raster(ncols=grid.size.large, nrows=grid.size.large,
+  r2 <- raster::raster(ncols=grid.size.large, nrows=grid.size.large,
                xmn=0, xmx=1, ymn=0, ymx=1)
   # in total - for even distribution
-  pt.den=rasterize(cbind(gen2$x, gen2$y), r2, fun=function(x,...)length(x))
+  pt.den=raster::rasterize(cbind(gen2$x, gen2$y), r2, fun=function(x,...)length(x))
   value=raster::values(pt.den)
   value[is.na(value)]=0
   pixel.density=value/mean(value)
-  pixel.idx=cellFromXY(pt.den, cbind(gen2$x, gen2$y))
+  pixel.idx=raster::cellFromXY(pt.den, cbind(gen2$x, gen2$y))
   den.total=pixel.density[pixel.idx]
   mu1=den.total*even.distribution.coef
 
@@ -190,7 +183,7 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     }
   # local density by cell type 1
   pt.cell.den1=lapply(KP, function(k)
-    rasterize(cbind(gen2[which(gen2$marks==k),]$x,
+    raster::rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                     gen2[which(gen2$marks==k),]$y),
               r1, fun=function(x,...) length(x)))
 
@@ -200,7 +193,7 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     value.cell.r1[[f]]/mean(value.cell.r1[[f]]))
 
   # local density by cell type 2
-  pt.cell.den2=lapply(KP, function(k) rasterize(cbind(gen2[which(gen2$marks==k),]$x,
+  pt.cell.den2=lapply(KP, function(k) raster::rasterize(cbind(gen2[which(gen2$marks==k),]$x,
                       gen2[which(gen2$marks==k),]$y), r2, fun=function(x,...)length(x)))
   value.cell.r2=lapply(1:K, function(f) raster::values(pt.cell.den2[[f]]))
 
@@ -224,10 +217,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
     row.diff.idx= row.idx ==T &  row.same.idx ==F
     # calculate mu2 the contribution of same cell inhibition/attraction
     if (sum(row.same.idx)==0) {mu2=matrix(rep(0, n0.k))} else {
-       pixel.idx.cell1=cellFromXY(pt.cell.den1[[k]], gen2.cell.loc)
+       pixel.idx.cell1=raster::cellFromXY(pt.cell.den1[[k]], gen2.cell.loc)
        den.same1=pixel.density.cell1[[k]][pixel.idx.cell1]
 
-       pixel.idx.cell2=cellFromXY(pt.cell.den2[[k]], gen2.cell.loc)
+       pixel.idx.cell2=raster::cellFromXY(pt.cell.den2[[k]], gen2.cell.loc)
        den.same2=pixel.density.cell2[[k]][pixel.idx.cell2]
 
        den.same=(den.same1+den.same2)/2
@@ -240,10 +233,10 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
        pair.idx=unlist(apply(as.matrix(cell.inh.attr.input1[row.diff.idx, 1:2]),1,
                              function(f) setdiff(f, KP[k])))
        for (pk in pair.idx) {
-          pixel.idx.cell1=cellFromXY(pt.cell.den1[[pk]], gen2.cell.loc)
+          pixel.idx.cell1=raster::cellFromXY(pt.cell.den1[[pk]], gen2.cell.loc)
           den.diff1=pixel.density.cell1[[pk]][pixel.idx.cell1]
 
-          pixel.idx.cell2=cellFromXY(pt.cell.den2[[pk]], gen2.cell.loc)
+          pixel.idx.cell2=raster::cellFromXY(pt.cell.den2[[pk]], gen2.cell.loc)
           den.diff2=pixel.density.cell2[[pk]][pixel.idx.cell2]
 
           diff.cell.density=cbind(diff.cell.density,(den.diff1+den.diff2)/2)
@@ -275,21 +268,36 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   return(final.ppp=gen3)
 }
 
-
-#' Generate cell location for all regions
+# cell.loc.fc ------------
+#' Generate cell location data from parameters.
 #'
-#' This function generates cell locations for each region
-#' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.
-#' @param cell.inh.attr.input cell.inh.attr.input
-#' @param same.dis.cutoff The averaged cell-cell distance is defined as r (e.g. on the unit
-#' square r =1/sqrt(N)). Same cell location is defined as the ratio to r. Default at 0.2.
-#' cell.inh.attr.input=cbind(Cell1=c(1, 3, 4), Cell2=c(2,3,5), Strength= c(2, 0, -2))
-#' @param same.dis.cutoff same.dis.cutoff =0.05
+#' This function generates cell locations for all regions.
+#' @param N No. of cells to generate.
+#' @param win Spatial window within which cells will be generated.
+#' @param cell.prop Proportion of cell in each cell type to generated for each region.
+#' @param cell.inh.attr.input (Default=NULL). A matrix providing cell-cell location
+#' attraction and inhibition parameters. Example input is like: cell.inh.attr.input=
+#' cbind(Cell1=c("A", "B", "C"), Cell2=c("B","D","E), Strength= c(2, 0, -2)).
+#' @param same.dis.cutoff (Default = 0) Cells with distance less than this cutoff
+#' will be considered as overlapping cells non-realistic in real ST data,
+#'  and only one will be kept.
+#' @param even.distribution.coef (Default =0). The higher the value, the more we
+#' require evenly distributed locations of cells, as opposed to randomly generated
+#' locations (Poisson process).
+#' @param grid.size.small (Default =19). If some levels of even distributions of cells are imposed,
+#' this parameter is needed to cut the simulation window into grids of different
+#' sizes to smooth cell densities.
+#' @param grid.size.large (Default =45). If some levels of even distributions of cells are imposed,
+#' this parameter is needed to cut the simulation window into grids of different
+#' sizes to smooth cell densities.
+#' @param seed Random seed
+#' @return Cell location
+#' @export
 
 
-cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
-                     same.dis.cutoff =0.05,
-                     even.distribution.coef=0.1,
+cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input=NULL,
+                     same.dis.cutoff =0,
+                     even.distribution.coef=0,
                      grid.size.small=19, grid.size.large=45,
                      seed) {
 
@@ -306,14 +314,6 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
                                      even.distribution.coef=even.distribution.coef,
                                      grid.size.small=grid.size.small, grid.size.large=grid.size.large,
                                      seed=seed*11+r*141)
-
-   #  debug
-    # n1=round(win$area[r]*N)
-    # window1=win$window[[r]]
-    # cell.prop1=cell.prop[[r]]
-    # cell.inh.attr.input1=cell.inh.attr.input[[r]]
-    # grid.size.small=19; grid.size.large=45;
-
 
   }
   names(cell.loc)=paste0("Region", 1:R)

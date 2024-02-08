@@ -167,13 +167,13 @@ fit_marginals <- function(x, marginal = c('auto_choose', 'zinb', 'nb', 'poisson'
 #' @inheritParams fit_marginals
 #' @param zp_cutoff            The maximum propotion of zero allowed for a gene to be included
 #'                             in the joint copula model.
-#' @param min_non_zero_num     The minimum number of non-zero values required for a gene to be
+#' @param min_nonzero_num     The minimum number of non-zero values required for a gene to be
 #'                             fitted a marginal model.
 #'
 #' @return The genes of \code{x} will be partitioned into three groups. The first group contains
 #' genes whose zero proportion is less than \code{zp_cutoff}. The second group contains genes
 #' whose zero proportion is greater than \code{zp_cutoff} but still contains at least
-#' \code{min_non_zero_num} non-zero values. The third and last group contains the rest of the
+#' \code{min_nonzero_num} non-zero values. The third and last group contains the rest of the
 #' genes. For the first group, a joint Gaussian copula model will be fitted. For the second group,
 #' only the marginal distribution of each gene will be fitted. For the last group, no model will
 #' be fitted and only the index of these genes will be recorded. A list that contains the above
@@ -339,11 +339,12 @@ fit_model_scDesign2 <- function(data_mat, cell_type_sel,
 
 # Est_GeneCopula ---------------
 #' Estimate Gaussian Copula for Gene Expression Matrix
-#' @param expr expr
-#' @param anno description
-#' @param zp_cutoff description
-#' @param min_nonzero_num description
-#' @param ncores description
+#' @param expr Expression levels of input data
+#' @param anno Cell type annotation of input data
+#' @param zp_cutoff Cutoff for fitting zero-inflated models.
+#' @param min_nonzero_num The minimum number of required non-zero values for a gene to be
+#'                        fitted a marginal model.
+#' @param ncores No of cores for parallel computing.
 #' @return Estimated Gaussian Copula
 #' @export
 

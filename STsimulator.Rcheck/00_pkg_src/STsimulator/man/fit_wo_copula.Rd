@@ -28,6 +28,9 @@ on whether there is underdispersion.
 
 \item{jitter}{Logical, whether a random projection should be performed in the
 distributional transform.}
+
+\item{min_nonzero_num}{The minimum number of non-zero values required for a gene to be
+fitted a marginal model.}
 }
 \value{
 The genes of \code{x} will be partitioned into two groups. The first group contains

@@ -45,6 +45,9 @@ distributional transform.}
 \item{zp_cutoff}{The maximum propotion of zero allowed for a gene to be included
 in the joint copula model.}
 
+\item{min_nonzero_num}{The minimum number of non-zero values required for a gene to be
+fitted a marginal model.}
+
 \item{ncores}{A numeric value that indicates the number of parallel cores for model
 fitting. One core for each cell type.}
 }

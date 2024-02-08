@@ -10,9 +10,6 @@ ParaExistingCellsST(m, feature)
 \item{m}{No. of simulated data}
 
 \item{feature}{Cell feature data}
-
-\item{para}{Parameters loaded and cleaned from the parameter file using function
-\code{ParaDigest}.}
 }
 \description{
 Use parameters to simulate cell location. Here directly use existing SRT data.

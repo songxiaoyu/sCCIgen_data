@@ -9,6 +9,7 @@
 #' \item{count:}{Expression profile of the spots.}
 #' \item{spot_feature:}{Spot feature such as spot center coordinates and cell allocations
 #' within the spots .}
+#' @import dplyr
 #' @export
 
 multicell=function(expr, cell_feature, NoSpot=500) {
@@ -18,8 +19,9 @@ multicell=function(expr, cell_feature, NoSpot=500) {
   rmax=max(xrange, yrange)
   m=round(sqrt(NoSpot))
 
-  r <- raster(ncols=m, nrows=m,xmn=xrange[1], xmx=xrange[2], ymn=yrange[1], ymx=yrange[2])
-  spot.idx=cellFromXY(r, cbind(cell_loc[,1], cell_loc[,2]))
+  r <- raster::raster(ncols=m, nrows=m,xmn=xrange[1],
+                      xmx=xrange[2], ymn=yrange[1], ymx=yrange[2])
+  spot.idx=raster::cellFromXY(r, cbind(cell_loc[,1], cell_loc[,2]))
   #
   expr2=sapply(1:nrow(expr), function(f) tapply(as.numeric(expr[f,]), spot.idx, sum))
   expr3=t(expr2)
@@ -27,11 +29,12 @@ multicell=function(expr, cell_feature, NoSpot=500) {
   colnames(expr3)=paste0("Spot", 1:ncol(expr3))
 
   # Spot Coordinates
-  spot_col=colFromCell(r, 1:nrow(expr2))
-  spot_row=rowFromCell(r, 1:nrow(expr2))
-  spot_coordinates=xyFromCell(r, 1:nrow(expr2))+
+  spot_col=raster::colFromCell(r, 1:nrow(expr2))
+  spot_row=raster::rowFromCell(r, 1:nrow(expr2))
+  spot_coordinates=raster::xyFromCell(r, 1:nrow(expr2))+
     matrix(runif(2*nrow(expr2), -rmax/NoSpot/100, rmax/NoSpot/100), ncol=2)
-  spot_loc=data.frame(Spot=colnames(expr3), col=spot_col, row=spot_row, spot_coordinates)
+  spot_loc=data.frame(Spot=colnames(expr3), col=spot_col,
+                      row=spot_row, spot_coordinates)
 
 
   # Spot Region
@@ -40,7 +43,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
       group_by(spot.idx, region) %>%
       mutate(count=1) %>%
       summarise(abundance = sum(count)) %>%
-      pivot_wider(names_from = region, values_from = abundance, values_fill = 0) %>%
+      tidyr::pivot_wider(names_from = region, values_from = abundance,
+                         values_fill = 0) %>%
       ungroup() %>%
       dplyr::select(-spot.idx) %>%
       rowwise() %>%
@@ -56,7 +60,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
       group_by(spot.idx, annotation) %>%
       mutate(count=1) %>%
       summarise(abundance = sum(count)) %>%
-      pivot_wider(names_from = annotation, values_from = abundance, values_fill = 0)
+      tidyr::pivot_wider(names_from = annotation, values_from = abundance,
+                         values_fill = 0)
     spot_loc=data.frame(spot_loc, dat1[,-1])
   }
 

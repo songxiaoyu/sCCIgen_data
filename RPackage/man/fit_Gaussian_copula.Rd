@@ -33,14 +33,14 @@ distributional transform.}
 \item{zp_cutoff}{The maximum propotion of zero allowed for a gene to be included
 in the joint copula model.}
 
-\item{min_non_zero_num}{The minimum number of non-zero values required for a gene to be
+\item{min_nonzero_num}{The minimum number of non-zero values required for a gene to be
 fitted a marginal model.}
 }
 \value{
 The genes of \code{x} will be partitioned into three groups. The first group contains
 genes whose zero proportion is less than \code{zp_cutoff}. The second group contains genes
 whose zero proportion is greater than \code{zp_cutoff} but still contains at least
-\code{min_non_zero_num} non-zero values. The third and last group contains the rest of the
+\code{min_nonzero_num} non-zero values. The third and last group contains the rest of the
 genes. For the first group, a joint Gaussian copula model will be fitted. For the second group,
 only the marginal distribution of each gene will be fitted. For the last group, no model will
 be fitted and only the index of these genes will be recorded. A list that contains the above

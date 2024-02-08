@@ -2,10 +2,24 @@
 % Please edit documentation in R/PointSimulator_STData.R
 \name{cell.loc.existing.fc}
 \alias{cell.loc.existing.fc}
-\title{simulate ST data location for one region using existing cell location}
+\title{Generate cell location data by using existing SRT data directly.}
 \usage{
-cell.loc.existing.fc(PointLoc, PointAnno, window_method = "rectangle")
+cell.loc.existing.fc(
+  PointLoc,
+  PointAnno,
+  PointRegion,
+  window_method = "rectangle"
+)
+}
+\arguments{
+\item{PointLoc}{The location of input cells on x, y axis.}
+
+\item{PointAnno}{The cell type annotation of input cells.}
+
+\item{PointRegion}{The spatial regions of input cells.}
+
+\item{window_method}{Method for estimating window of cells.}
 }
 \description{
-simulate ST data location for one region using existing cell location
+Generate cell location data by using existing SRT data directly.
 }

@@ -10,9 +10,11 @@ connectUp(r, nRegion, seed = NULL)
 \item{r}{poly is a RasterLayer  (e.g. 20 by 20 square).}
 
 \item{nRegion}{nRegion is the No. of regions (e.g. nRegion=3)}
+
+\item{seed}{Random seed.}
 }
 \value{
-\item{selected.unique:}{A list of the selected polygons for each region.}
+A list of the selected polygons for each region.
 }
 \description{
 This function assigns random connected regions on a square. Used within function \code{RandomRegionWindow}.

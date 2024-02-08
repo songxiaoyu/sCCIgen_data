@@ -1,11 +1,11 @@
 Add.Distance.Asso.Pattern
-                        Add a type of cell-cell interaction pattern
-                        (expr-distance) to a pair of cell types
-Add.Expr.Asso.Pattern   Add a type of cell-cell interaction pattern
-                        (expr-expr) to a pair of cell types
+                        Add cell-cell expr-distance interaction to a
+                        pair of cell types
+Add.Expr.Asso.Pattern   Add cell-cell expr-expr interaction pattern to
+                        a pair of cell types
 Add.Spatial.Expr.Pattern
-                        adds spatial differential expressed pattern for
-                        one cell type
+                        Adds spatial differential expressed pattern
+                        (region-specific effects) to a cell type.
 Est_GeneCopula          Estimate Gaussian Copula for Gene Expression
                         Matrix
 MergeRegion             Merge spatial and expression data from multiple
@@ -14,6 +14,7 @@ ParaCellsNoST           Use parameters to simulate cell location (no
                         existing spatial info)
 ParaCellsST             Use parameters to simulate cell location based
                         on modeling of existing SRT
+ParaCopula              Use parameters to estimate Gaussian Copula
 ParaDigest              Digest the parameter file.
 ParaExistingCellsST     Use parameters to simulate cell location
                         (direct output from existing spatial data)
@@ -22,24 +23,16 @@ ParaExpr                Simualte gene expression data based on
 ParaFitExpr             ParaFitExpr
 ParaSimulation          (Main Function) Simulate spatially resolved
                         transcriptomics data from a parameter file.
-ParameterCopula         Use parameters to estimate Gaussian Copula
-Pattern.Adj             Adjust the count data for all regions based on
-                        the input spatial patterns
+Pattern.Adj             Adjust the count data for all cells in all
+                        regions based on the input spatial patterns
 RandomRegionWindow      Generate random connected region in a window
-Use_scDesign2           Simulate expression under no spatial patterns
-                        using revised scDesign2 functions
-cell.loc.1region.fc     Generate cell location in one region
-cell.loc.existing.fc    simulate ST data location for one region using
-                        existing cell location
-cell.loc.fc             Generate cell location for all regions
-cell.loc.model.fc       simulate ST data for one region location based
-                        on parametric model
-cell.region.loc.existing.fc
-                        simulate ST data location for all regions using
-                        existing cell location
-cell.region.loc.model.fc
-                        simulate ST data location for all regions based
-                        on a parametric model
+Use_scDesign2           Generate expression profile under no spatial
+                        patterns.
+cell.loc.existing.fc    Generate cell location data by using existing
+                        SRT data directly.
+cell.loc.fc             Generate cell location data from parameters.
+cell.loc.model.fc       Generate cell location data by modeling the
+                        spatial information of existing data.
 connectUp               Assign connected regions in a window
 fit_Gaussian_copula     Fit a Gaussian copula model for a count matrix
                         of a single cell type
@@ -49,7 +42,6 @@ fit_wo_copula           Fit a (w/o copula) model for a count matrix of
 loadRData               load RData with new assigned file name
 multicell               Assigns cells into spatial spots for multi-cell
                         resolution data
-package                 STsimulator Package
 scDesign2.revised       Simulate a count matrix for a single cell type
 simu.window             Simulate the window of spatial data
 simulate_count_copula   Simulate a count matrix for a single cell type

@@ -7,15 +7,16 @@
 Est_GeneCopula(expr, anno, zp_cutoff = 0.8, min_nonzero_num = 3, ncores = 1)
 }
 \arguments{
-\item{expr}{expr}
+\item{expr}{Expression levels of input data}
 
-\item{anno}{description}
+\item{anno}{Cell type annotation of input data}
 
-\item{zp_cutoff}{description}
+\item{zp_cutoff}{Cutoff for fitting zero-inflated models.}
 
-\item{min_nonzero_num}{description}
+\item{min_nonzero_num}{The minimum number of required non-zero values for a gene to be
+fitted a marginal model.}
 
-\item{ncores}{description}
+\item{ncores}{No of cores for parallel computing.}
 }
 \value{
 Estimated Gaussian Copula

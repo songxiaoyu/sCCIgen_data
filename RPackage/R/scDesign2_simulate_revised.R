@@ -158,6 +158,8 @@ simulate_count_ind <- function(model_params, n = 100,
 #' @param depth_simu_ref_ratio The (expected) sequencing depth ratio between simulated and refernece data.
 #' @param n_cell_new      The total number of cells in the simulated count matrix.
 #' @param cell_type_prop  The cell type proportion in the simulated count matrix.
+#' @param sim_method Simulation method. Simulate genes independently 'ind' or considering
+#'                    their correlations ('copula').
 #' @return A matrix of shape p by n that contains the simulated count values. p is derived from
 #' \code{model_params}.
 #'

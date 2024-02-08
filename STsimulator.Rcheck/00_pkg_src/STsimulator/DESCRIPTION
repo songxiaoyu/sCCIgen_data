@@ -5,14 +5,15 @@ Authors@R:
     person("Xiaoyu", "Song", , "songxiaoyu152@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-        license
+License: use_mit_license()
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Imports: dplyr, raster, spatstat, rlist, doParallel, data.table,
-        parallel, doParallel, proxy
+Imports: data.table, readr, tibble, dplyr, tidyr, terra, parallel,
+        foreach, doParallel, raster, spatstat, spatstat.geom,
+        spatstat.model, spatstat.random, igraph, geometry, MASS, utils,
+        stats
 NeedsCompilation: no
-Packaged: 2024-02-01 20:08:57 UTC; songxiaoyu152
+Packaged: 2024-02-08 21:14:15 UTC; songxiaoyu152
 Author: Xiaoyu Song [aut, cre] (YOUR-ORCID-ID)
 Maintainer: Xiaoyu Song <songxiaoyu152@gmail.com>

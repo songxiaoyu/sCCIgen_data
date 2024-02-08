@@ -2,7 +2,8 @@
 % Please edit documentation in R/ExprSimulator.R
 \name{Add.Spatial.Expr.Pattern}
 \alias{Add.Spatial.Expr.Pattern}
-\title{adds spatial differential expressed pattern for one cell type}
+\title{Adds spatial differential expressed pattern (region-specific effects) to
+a cell type.}
 \usage{
 Add.Spatial.Expr.Pattern(
   sim.count,
@@ -22,19 +23,25 @@ Add.Spatial.Expr.Pattern(
 
 \item{CellType}{Cell type index.}
 
-\item{GeneID}{Gene(s) index.}
+\item{GeneID}{Gene(s) index. Default = NULL, and then a random subset
+of genes will be perturbed based on the defined spatial patterns.}
 
-\item{PropOfGenes}{Proportion of genes with this pattern if GeneID is not provided.}
+\item{PropOfGenes}{Proportion of genes with this pattern if GeneID is not
+provided.}
 
-\item{delta.mean}{Mean effect}
+\item{delta.mean}{Mean effect (on the log count scale).}
 
 \item{delta.sd}{SD of effect.}
 
 \item{seed}{Seed}
 }
 \value{
-Adding spatial differential expressed patterns for one cell type in one region.
+\item{SignalSummary:}{Summary of this spatial pattern, including the type
+of spatial patterns, impacted cell types, perturbed genes, and effect sizes.}
+\item{beta.matrix:}{Effect size on each gene in each cell. }
 }
 \description{
-This function adds spatial differential expressed patterns for one cell type.
+This function adds one type of spatial differential expressed patterns. This
+function can be repeated used to add region-specific effects  in different
+regions for different cell types.
 }
