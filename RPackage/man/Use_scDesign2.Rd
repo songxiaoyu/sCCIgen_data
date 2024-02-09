@@ -2,7 +2,7 @@
 % Please edit documentation in R/ExprSimulator.R
 \name{Use_scDesign2}
 \alias{Use_scDesign2}
-\title{Simulate expression under no spatial patterns using revised scDesign2 functions}
+\title{Generate expression profile under no spatial patterns.}
 \usage{
 Use_scDesign2(
   ppp.obj,
@@ -33,7 +33,7 @@ Use_scDesign2(
 \item{seed}{Seed}
 }
 \value{
-Simulated expression count data for all regions.
+Simulated expression count data for all cells in all regions.
 }
 \description{
 This function uses input parameters to simulate expression for all regions.

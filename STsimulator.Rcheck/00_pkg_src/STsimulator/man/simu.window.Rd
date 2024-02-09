@@ -6,13 +6,17 @@
 \usage{
 simu.window(
   PointLoc,
-  method = c("convex", "convex2", "convex3", "convex5", "rectangle", "network")
+  method = c("network", "convex", "convex2", "convex3", "convex5", "rectangle")
 )
 }
 \arguments{
-\item{PointLoc}{PointLoc}
+\item{PointLoc}{The location of input cells on x, y axis.}
 
-\item{method}{method=c("convex", "convex2", "convex3", "convex5", "rectangle", "network")}
+\item{method}{Options include method=c("network", "convex", "convex2", "convex3",
+"convex5", "rectangle"). Network is preferred unless the input data is very large.}
+}
+\value{
+The spatial window of input cells.
 }
 \description{
 This function esimates window using spatial location data of existing cells.

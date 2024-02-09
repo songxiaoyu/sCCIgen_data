@@ -82,7 +82,7 @@ Use_scDesign2_model_params=function(expr,
 }
 
 # Use_scDesign2 ------
-#' Simulate expression under no spatial patterns using revised scDesign2 functions
+#' Generate expression profile under no spatial patterns.
 #'
 #' This function uses input parameters to simulate expression for all regions.
 #' @param ppp.obj Cells as points on a spatial map for all regions.
@@ -93,7 +93,7 @@ Use_scDesign2_model_params=function(expr,
 #' @param sim_method Simulate independent genes using'ind' or correlated genes using 'copula'.
 #' @param region_specific_model Whether estimation model differ in different regions.
 #' @param seed Seed
-#' @return Simulated expression count data for all regions.
+#' @return Simulated expression count data for all cells in all regions.
 #' @export
 
 Use_scDesign2=function(ppp.obj,
@@ -145,19 +145,50 @@ Use_scDesign2=function(ppp.obj,
   return(sim.count)
 }
 
+# Find.Neighbor.Pairs ----------
+
+Find.Neighbor.Pairs=function(ppp.obj,
+                             interacting.cell.type.pair,
+                             int.dist.threshold) {
+  cell.loc=cbind(ppp.obj$x, ppp.obj$y)
+  cell1.idx=which(ppp.obj$marks==interacting.cell.type.pair[1])
+  cell2.idx=which(ppp.obj$marks==interacting.cell.type.pair[2])
+  m=spatstat.geom::crossdist(cell.loc[cell1.idx,1], cell.loc[cell1.idx,2],
+                             cell.loc[cell2.idx,1],cell.loc[cell2.idx,2])
+  # in neighbor or not?
+  dmax=max( max(ppp.obj$x)-min(ppp.obj$x), max(ppp.obj$y)-min(ppp.obj$y))
+
+  neighbo.loc.idx=which(m< (int.dist.threshold*dmax), arr.ind = TRUE)
+
+  # index in original data
+  nbr.idx=cbind(cell1.idx[neighbo.loc.idx[,1]],   cell2.idx[neighbo.loc.idx[,2]])
+
+  colnames(nbr.idx)=interacting.cell.type.pair
+  return(neighbor.idx=nbr.idx)
+}
+
 # Add.Spatial.Expr.Pattern -----------------------------------------------
-#' adds spatial differential expressed pattern for one cell type
+#' Adds spatial differential expressed pattern (region-specific effects) to
+#' a cell type.
 #'
-#' This function adds spatial differential expressed patterns for one cell type.
+#' This function adds one type of spatial differential expressed patterns. This
+#' function can be repeated used to add region-specific effects  in different
+#' regions for different cell types.
 #' @param sim.count Cells as points on a spatial map.
 #' @param r Region index.
 #' @param CellType Cell type index.
-#' @param GeneID Gene(s) index.
-#' @param PropOfGenes Proportion of genes with this pattern if GeneID is not provided.
-#' @param delta.mean Mean effect
+#' @param GeneID Gene(s) index. Default = NULL, and then a random subset
+#' of genes will be perturbed based on the defined spatial patterns.
+#' @param PropOfGenes Proportion of genes with this pattern if GeneID is not
+#' provided.
+#' @param delta.mean Mean effect (on the log count scale).
 #' @param delta.sd SD of effect.
 #' @param seed Seed
-#' @return Adding spatial differential expressed patterns for one cell type in one region.
+#' @return
+#' \item{SignalSummary:}{Summary of this spatial pattern, including the type
+#' of spatial patterns, impacted cell types, perturbed genes, and effect sizes.}
+#' \item{beta.matrix:}{Effect size on each gene in each cell. }
+
 #' @export
 #'
 Add.Spatial.Expr.Pattern= function(sim.count,
@@ -184,7 +215,7 @@ Add.Spatial.Expr.Pattern= function(sim.count,
   if (is.null(GeneID)) {GeneID=sample(GeneAll, round(PropOfGenes * G))}
 
   CellID=which(colnames(beta.matrix[[r]])== CellType )
-  beta=rnorm(length(GeneID), delta.mean, delta.sd)
+  beta=stats::rnorm(length(GeneID), delta.mean, delta.sd)
   SignalSummary=data.frame(Type="SpatialChange", Region=r, CellType, GeneID,
                            AdjCellType="NA",
                            AdjGene="NA", beta)
@@ -193,48 +224,34 @@ Add.Spatial.Expr.Pattern= function(sim.count,
   return(list(SignalSummary=SignalSummary, beta.matrix=beta.matrix))
 }
 
-# Find.Neighbor.Pairs ----------
-
-Find.Neighbor.Pairs=function(ppp.obj,
-                             interacting.cell.type.pair,
-                             int.dist.threshold) {
-  cell.loc=cbind(ppp.obj$x, ppp.obj$y)
-  cell1.idx=which(ppp.obj$marks==interacting.cell.type.pair[1])
-  cell2.idx=which(ppp.obj$marks==interacting.cell.type.pair[2])
-  m=spatstat.geom::crossdist(cell.loc[cell1.idx,1], cell.loc[cell1.idx,2],
-            cell.loc[cell2.idx,1],cell.loc[cell2.idx,2])
-  # in neighbor or not?
-  dmax=max( max(ppp.obj$x)-min(ppp.obj$x), max(ppp.obj$y)-min(ppp.obj$y))
-
-  neighbo.loc.idx=which(m< (int.dist.threshold*dmax), arr.ind = TRUE)
-
-  # index in original data
-  nbr.idx=cbind(cell1.idx[neighbo.loc.idx[,1]],   cell2.idx[neighbo.loc.idx[,2]])
-
-  colnames(nbr.idx)=interacting.cell.type.pair
-  return(neighbor.idx=nbr.idx)
-}
-
 # Add.Distance.Asso.Pattern -----------------------------------------------
-#' Add a type of cell-cell interaction pattern (expr-distance) to a pair of cell types
+#' Add cell-cell expr-distance interaction to a pair of cell types
 #'
-#' This function add a type of cell-cell interactions to a pair of cell types. The expression in a cell type associated with the proximity of
+#' This function add a type of cell-cell interactions to a pair of cell types:
+#' the expression in a cell type associated with the proximity of
 #' the other cell type. One can repeat this function for multiple times to
 #' add cell-cell interactions for many cell type pairs and regions.
-#' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
-#' @param sim.count Spatial info for cell type 2 (e.g. microglia)
-#' @param r Expression info for cell type 1 (e.g. neuron)
-#' @param perturbed.cell.type Expression info for cell type 1 (e.g. microglia)
-#' @param adjacent.cell.type Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
-#' @param int.dist.threshold effect.size
-#' @param delta.mean effect.size
-#' @param delta.sd effect.size
-#' @param GeneID effect.size
-#' @param PropOfGenes effect.size
-#' @param seed effect.size
+#' @param ppp.obj An object of class "ppp" representing simulated cell locations
+#' @param sim.count Simulated expression counts from single-cell expression
+#' data, before adding in additional spatial patterns.
+#' @param r Which region to add in the spatial pattern. If simulated data do
+#' not have multiple regions, r=1.
+#' @param perturbed.cell.type Which cell type is perturbed from this cell-cell
+#' interaction (e.g. microglia).
+#' @param adjacent.cell.type Which cell type in the neighbor perturbs from
+#' the cell-cell interaction (e.g. neuron).
+#' @param int.dist.threshold The minimal cell-cell distance for the interaction.
+#' @param delta.mean Expected effect.size (at the log scale of the counts).
+#' @param delta.sd Standard deviation of the effect.size
+#' @param GeneID Affected genes.
+#' @param PropOfGenes Proportion of genes impacted by the cell-cell interaction.
+#' It is used if GenePairIDMatrix is NULL, and a random subset of genes with
+#' specified proportion will be perturbed.
+#' @param seed Seed
 #' @return
-#' \item{SignalSummary:}{SignalSummary}
-#' \item{beta.matrix:}{beta.matrix}
+#' \item{SignalSummary:}{Summary of this spatial pattern, including the type
+#' of spatial patterns, impacted cell types, perturbed genes, and effect sizes.}
+#' \item{beta.matrix:}{Effect size on each gene in each cell. }
 #' @export
 
 Add.Distance.Asso.Pattern = function(ppp.obj,
@@ -273,7 +290,7 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
   # GeneID
   if (is.null(GeneID)) {GeneID=sample(GeneAll, round(PropOfGenes * G))}
 
-  beta=rnorm(length(GeneID), delta.mean, delta.sd)
+  beta=stats::rnorm(length(GeneID), delta.mean, delta.sd)
   beta.matrix[[r]][GeneID, nbr.idx[,1]] = beta +  beta.matrix[[r]][GeneID, nbr.idx[,1]]
 
   SignalSummary=data.frame(Type="DistanceAssoGenes", Region=r, CellType=perturbed.cell.type,
@@ -285,37 +302,44 @@ Add.Distance.Asso.Pattern = function(ppp.obj,
 }
 
 # Add.Expr.Asso.Pattern --------
-#' Add a type of cell-cell interaction pattern (expr-expr) to a pair of cell types
+#' Add cell-cell expr-expr interaction pattern to a pair of cell types
 #'
 #' This function add cell-cell interactions to a pair of cell types (e.g.
 #' neuron-microglia) for expression in a cell type associated with expression of
-#' the neighboring other cell type.
-#' One can repeat this function for multiple times to add cell-cell interactions for many cell types.
-#' @param ppp.obj Spatial info for cell type 1 (e.g. neuron)
-#' @param sim.count Spatial info for cell type 2 (e.g. microglia)
-#' @param r Expression info for cell type 1 (e.g. neuron)
-#' @param perturbed.cell.type Expression info for cell type 1 (e.g. microglia)
-#' @param adjacent.cell.type Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
-#' @param int.dist.threshold effect.size
-#' @param delta.mean effect.size
-#' @param delta.sd effect.size
-#' @param GenePairIDMatrix effect.size
-#' @param PropOfGenes effect.size
-#' @param Bidirectional effect.size
-#' @param seed effect.size
+#' the neighboring other cell type. One can repeat this function for
+#' multiple times to add cell-cell interactions for many cell types.
+#' @param ppp.obj An object of class "ppp" representing simulated cell locations
+#' @param sim.count Simulated expression counts from single-cell expression
+#' data, before adding in additional spatial patterns.
+#' @param r Which region to add in the spatial pattern. If simulated data do
+#' not have multiple regions, r=1.
+#' @param perturbed.cell.type Which cell type is perturbed from this cell-cell
+#' interaction (e.g. microglia).
+#' @param adjacent.cell.type Which cell type in the neighbor perturbs from
+#' the cell-cell interaction (e.g. neuron).
+#' @param Bidirectional Whether the perturbation is both directional.
+#' @param int.dist.threshold The minimal cell-cell distance for the interaction.
+#' @param delta.mean Expected effect.size (at the log scale of the counts).
+#' @param delta.sd Standard deviation of the effect.size
+#' @param GenePairIDMatrix Affected gene pairs.
+#' @param PropOfGenes Proportion of genes impacted by the cell-cell interaction.
+#' It is used if GenePairIDMatrix is NULL, and a random subset of genes with
+#' specified proportion will be perturbed.
+#' @param seed Seed
 #' @return
-#' \item{SignalSummary:}{SignalSummary}
-#' \item{beta.matrix:}{beta.matrix}
+#' \item{SignalSummary:}{Summary of this spatial pattern, including the type
+#' of spatial patterns, impacted cell types, perturbed genes, and effect sizes.}
+#' \item{beta.matrix:}{Effect size on each gene in each cell. }
 
 Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
                            perturbed.cell.type,
                            adjacent.cell.type,
+                           Bidirectional=T,
                            int.dist.threshold=0.1,
                            delta.mean=1,
                            delta.sd=0.001,
                            GenePairIDMatrix=NULL,
                            PropOfGenes=NULL,
-                           Bidirectional=T,
                            seed=NULL) {
 
 
@@ -343,7 +367,7 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
   if (is.null(GenePairIDMatrix)) {GenePairIDMatrix=matrix(sample(GeneAll, 2*round(PropOfGenes * G)),
                                                           ncol=2)}
 
-  beta=rnorm(nrow(GenePairIDMatrix), delta.mean, delta.sd)
+  beta=stats::rnorm(nrow(GenePairIDMatrix), delta.mean, delta.sd)
 
   # 1 --> 2
   count2=sim.count1[GenePairIDMatrix[,2], nbr.idx[,2]]
@@ -378,6 +402,15 @@ Add.Expr.Asso.Pattern = function(ppp.obj, sim.count, r,
 }
 
 
+# ExprPattern --------
+ExprPattern=function(pattern.list.i){
+  L=length(pattern.list.i)
+  res=NULL
+  for (l in 1:L) {
+    res=rbind(res, pattern.list.i[[l]]$SignalSummary)
+  }
+  return(res)
+}
 # Pattern.adj.1region --------
 
 Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
@@ -417,15 +450,22 @@ Pattern.adj.1region= function(sim.count1, combined.beta.matrix,
 
 
 # Pattern.Adj --------
-#' Adjust the count data for all regions based on the input spatial patterns
+#' Adjust the count data for all cells in all regions based on the
+#' input spatial patterns
 #'
 #' Adjust the count data for all regions based on the input spatial patterns
 #' @param sim.count Spatial info for cell type 1 (e.g. neuron)
-#' @param pattern.list Spatial info for cell type 2 (e.g. microglia)
-#' @param bond.extreme Expression info for cell type 1 (e.g. neuron)
-#' @param keep.total.count Expression info for cell type 1 (e.g. microglia)
-#' @param integer Int.Cell.Pair.Idx estimated from function `Find.Neighbor.Pairs`
-#' @return sim.count.update
+#' @param pattern.list A list of spatial patterns, which can be generated
+#' from `Add.Spatial.Expr.Pattern`, `Add.Distance.Asso.Pattern`, or `Add.Expr.Asso.Pattern`.
+#' @param bond.extreme Whether to bond extreme high values generated from
+#' large effect sizes of spatial patterns (default = TRUE). If TRUE, no
+#' gene can have more than 10% of the total counts across all genes.
+#' @param keep.total.count If additional spatial patterns are added, whether
+#' to rescale expression levels of all genes to keep the sequencing depth
+#' (default = TRUE).
+#' @param integer Whether to keep counts as integer (default=TRUE).
+#' @return Updated simulated gene expression counts by taking into consideration
+#' of spatial patterns.
 #' @export
 
 Pattern.Adj= function(sim.count, pattern.list=NULL,
@@ -439,7 +479,8 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
        combined.beta.matrix=NULL
      } else {
        K=length(pattern.list)
-       beta.matrix.list=lapply(1:K, function(k) pattern.list[[k]]$beta.matrix[[i]])
+       beta.matrix.list=lapply(1:K, function(k)
+         pattern.list[[k]]$beta.matrix[[i]])
        combined.beta.matrix=Reduce("+", beta.matrix.list)
      }
 
@@ -454,29 +495,18 @@ Pattern.Adj= function(sim.count, pattern.list=NULL,
 }
 
 
-# ExprPattern --------
-ExprPattern=function(pattern.list.i){
-  L=length(pattern.list.i)
-  res=NULL
-  for (l in 1:L) {
-    res=rbind(res, pattern.list.i[[l]]$SignalSummary)
-  }
-  return(res)
-}
-
 
 # MergeRegion --------
 #' Merge spatial and expression data from multiple regions
 #'
 #' Merge spatial and expression data from multiple regions
-#' @import spatstat
 #' @param points.list points.list is a list of points from multiple regions
 #' @param expr.list expr.list is a list of expressions from multiple regions
-#' @export
 #' @return
 #' \item{meta:}{meta}
 #' \item{count:}{count}
-
+#' @import spatstat
+#' @export
 MergeRegion=function(points.list, expr.list) {
   K=length(points.list)
   # points

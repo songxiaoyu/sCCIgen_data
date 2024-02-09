@@ -2,7 +2,7 @@
 % Please edit documentation in R/ExprSimulator.R
 \name{Add.Expr.Asso.Pattern}
 \alias{Add.Expr.Asso.Pattern}
-\title{Add a type of cell-cell interaction pattern (expr-expr) to a pair of cell types}
+\title{Add cell-cell expr-expr interaction pattern to a pair of cell types}
 \usage{
 Add.Expr.Asso.Pattern(
   ppp.obj,
@@ -10,47 +10,54 @@ Add.Expr.Asso.Pattern(
   r,
   perturbed.cell.type,
   adjacent.cell.type,
+  Bidirectional = T,
   int.dist.threshold = 0.1,
   delta.mean = 1,
   delta.sd = 0.001,
   GenePairIDMatrix = NULL,
   PropOfGenes = NULL,
-  Bidirectional = T,
   seed = NULL
 )
 }
 \arguments{
-\item{ppp.obj}{Spatial info for cell type 1 (e.g. neuron)}
+\item{ppp.obj}{An object of class "ppp" representing simulated cell locations}
 
-\item{sim.count}{Spatial info for cell type 2 (e.g. microglia)}
+\item{sim.count}{Simulated expression counts from single-cell expression
+data, before adding in additional spatial patterns.}
 
-\item{r}{Expression info for cell type 1 (e.g. neuron)}
+\item{r}{Which region to add in the spatial pattern. If simulated data do
+not have multiple regions, r=1.}
 
-\item{perturbed.cell.type}{Expression info for cell type 1 (e.g. microglia)}
+\item{perturbed.cell.type}{Which cell type is perturbed from this cell-cell
+interaction (e.g. microglia).}
 
-\item{adjacent.cell.type}{Int.Cell.Pair.Idx estimated from function \code{Find.Neighbor.Pairs}}
+\item{adjacent.cell.type}{Which cell type in the neighbor perturbs from
+the cell-cell interaction (e.g. neuron).}
 
-\item{int.dist.threshold}{effect.size}
+\item{Bidirectional}{Whether the perturbation is both directional.}
 
-\item{delta.mean}{effect.size}
+\item{int.dist.threshold}{The minimal cell-cell distance for the interaction.}
 
-\item{delta.sd}{effect.size}
+\item{delta.mean}{Expected effect.size (at the log scale of the counts).}
 
-\item{GenePairIDMatrix}{effect.size}
+\item{delta.sd}{Standard deviation of the effect.size}
 
-\item{PropOfGenes}{effect.size}
+\item{GenePairIDMatrix}{Affected gene pairs.}
 
-\item{Bidirectional}{effect.size}
+\item{PropOfGenes}{Proportion of genes impacted by the cell-cell interaction.
+It is used if GenePairIDMatrix is NULL, and a random subset of genes with
+specified proportion will be perturbed.}
 
-\item{seed}{effect.size}
+\item{seed}{Seed}
 }
 \value{
-\item{SignalSummary:}{SignalSummary}
-\item{beta.matrix:}{beta.matrix}
+\item{SignalSummary:}{Summary of this spatial pattern, including the type
+of spatial patterns, impacted cell types, perturbed genes, and effect sizes.}
+\item{beta.matrix:}{Effect size on each gene in each cell. }
 }
 \description{
 This function add cell-cell interactions to a pair of cell types (e.g.
 neuron-microglia) for expression in a cell type associated with expression of
-the neighboring other cell type.
-One can repeat this function for multiple times to add cell-cell interactions for many cell types.
+the neighboring other cell type. One can repeat this function for
+multiple times to add cell-cell interactions for many cell types.
 }

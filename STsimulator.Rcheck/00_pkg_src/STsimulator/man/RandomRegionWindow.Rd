@@ -4,15 +4,18 @@
 \alias{RandomRegionWindow}
 \title{Generate random connected region in a window}
 \usage{
-RandomRegionWindow(nRegion = 3, nGrid = 20, seed = 123)
+RandomRegionWindow(nRegion = 3, nGrid = 20, seed = NULL)
 }
 \arguments{
 \item{nRegion}{nRegion is the No. of regions (e.g. nRegion=3)}
 
 \item{nGrid}{nGrid is the No. of spots on x and y.}
+
+\item{seed}{Random seed.}
 }
 \value{
-\item{selected.unique:}{A list of the selected polygons for each region.}
+\item{window:}{The window of each region.}
+\item{area:}{Area proportion of the region in the window.}
 }
 \description{
 This function generates random regions on a unit square.

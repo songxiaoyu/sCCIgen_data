@@ -22,23 +22,17 @@
 
 <table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Add.Distance.Asso.Pattern.html">Add.Distance.Asso.Pattern</a></td>
-<td>Add a type of cell-cell interaction pattern (expr-distance) to a pair of cell types</td></tr>
+<td>Add cell-cell expr-distance interaction to a pair of cell types</td></tr>
 <tr><td style="width: 25%;"><a href="Add.Expr.Asso.Pattern.html">Add.Expr.Asso.Pattern</a></td>
-<td>Add a type of cell-cell interaction pattern (expr-expr) to a pair of cell types</td></tr>
+<td>Add cell-cell expr-expr interaction pattern to a pair of cell types</td></tr>
 <tr><td style="width: 25%;"><a href="Add.Spatial.Expr.Pattern.html">Add.Spatial.Expr.Pattern</a></td>
-<td>adds spatial differential expressed pattern for one cell type</td></tr>
-<tr><td style="width: 25%;"><a href="cell.loc.1region.fc.html">cell.loc.1region.fc</a></td>
-<td>Generate cell location in one region</td></tr>
+<td>Adds spatial differential expressed pattern (region-specific effects) to a cell type.</td></tr>
 <tr><td style="width: 25%;"><a href="cell.loc.existing.fc.html">cell.loc.existing.fc</a></td>
-<td>simulate ST data location for one region using existing cell location</td></tr>
+<td>Generate cell location data by using existing SRT data directly.</td></tr>
 <tr><td style="width: 25%;"><a href="cell.loc.fc.html">cell.loc.fc</a></td>
-<td>Generate cell location for all regions</td></tr>
+<td>Generate cell location data from parameters.</td></tr>
 <tr><td style="width: 25%;"><a href="cell.loc.model.fc.html">cell.loc.model.fc</a></td>
-<td>simulate ST data for one region location based on parametric model</td></tr>
-<tr><td style="width: 25%;"><a href="cell.region.loc.existing.fc.html">cell.region.loc.existing.fc</a></td>
-<td>simulate ST data location for all regions using existing cell location</td></tr>
-<tr><td style="width: 25%;"><a href="cell.region.loc.model.fc.html">cell.region.loc.model.fc</a></td>
-<td>simulate ST data location for all regions based on a parametric model</td></tr>
+<td>Generate cell location data by modeling the spatial information of existing data.</td></tr>
 <tr><td style="width: 25%;"><a href="connectUp.html">connectUp</a></td>
 <td>Assign connected regions in a window</td></tr>
 <tr><td style="width: 25%;"><a href="Est_GeneCopula.html">Est_GeneCopula</a></td>
@@ -55,12 +49,12 @@
 <td>Merge spatial and expression data from multiple regions</td></tr>
 <tr><td style="width: 25%;"><a href="multicell.html">multicell</a></td>
 <td>Assigns cells into spatial spots for multi-cell resolution data</td></tr>
-<tr><td style="width: 25%;"><a href="package.html">package</a></td>
-<td>STsimulator Package</td></tr>
 <tr><td style="width: 25%;"><a href="ParaCellsNoST.html">ParaCellsNoST</a></td>
 <td>Use parameters to simulate cell location (no existing spatial info)</td></tr>
 <tr><td style="width: 25%;"><a href="ParaCellsST.html">ParaCellsST</a></td>
 <td>Use parameters to simulate cell location based on modeling of existing SRT</td></tr>
+<tr><td style="width: 25%;"><a href="ParaCopula.html">ParaCopula</a></td>
+<td>Use parameters to estimate Gaussian Copula</td></tr>
 <tr><td style="width: 25%;"><a href="ParaDigest.html">ParaDigest</a></td>
 <td>Digest the parameter file.</td></tr>
 <tr><td style="width: 25%;"><a href="ParaExistingCellsST.html">ParaExistingCellsST</a></td>
@@ -69,12 +63,10 @@
 <td>Simualte gene expression data based on parameters</td></tr>
 <tr><td style="width: 25%;"><a href="ParaFitExpr.html">ParaFitExpr</a></td>
 <td>ParaFitExpr</td></tr>
-<tr><td style="width: 25%;"><a href="ParameterCopula.html">ParameterCopula</a></td>
-<td>Use parameters to estimate Gaussian Copula</td></tr>
 <tr><td style="width: 25%;"><a href="ParaSimulation.html">ParaSimulation</a></td>
 <td>(Main Function) Simulate spatially resolved transcriptomics data from a parameter file.</td></tr>
 <tr><td style="width: 25%;"><a href="Pattern.Adj.html">Pattern.Adj</a></td>
-<td>Adjust the count data for all regions based on the input spatial patterns</td></tr>
+<td>Adjust the count data for all cells in all regions based on the input spatial patterns</td></tr>
 <tr><td style="width: 25%;"><a href="RandomRegionWindow.html">RandomRegionWindow</a></td>
 <td>Generate random connected region in a window</td></tr>
 <tr><td style="width: 25%;"><a href="scDesign2.revised.html">scDesign2.revised</a></td>
@@ -86,6 +78,6 @@
 <tr><td style="width: 25%;"><a href="simulate_count_ind.html">simulate_count_ind</a></td>
 <td>Simulate a count matrix for a single cell type based on a (w/o copula model)</td></tr>
 <tr><td style="width: 25%;"><a href="Use_scDesign2.html">Use_scDesign2</a></td>
-<td>Simulate expression under no spatial patterns using revised scDesign2 functions</td></tr>
+<td>Generate expression profile under no spatial patterns.</td></tr>
 </table>
 </div></body></html>

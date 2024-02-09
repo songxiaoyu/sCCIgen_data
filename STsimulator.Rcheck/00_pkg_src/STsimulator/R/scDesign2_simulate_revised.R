@@ -1,5 +1,5 @@
 
-
+# simulate_count_copula ---------------
 #' Simulate a count matrix for a single cell type based on a copula model
 #'
 #' @param copula_result A list that contains the parameters of a copula model.
@@ -68,7 +68,7 @@ simulate_count_copula <- function(copula_result, n = 100,
 }
 
 
-
+# simulate_count_ind ---------------
 #' Simulate a count matrix for a single cell type based on a (w/o copula model)
 #'
 #' @param model_params A list that contains the model parameters (can be either the copula
@@ -147,7 +147,7 @@ simulate_count_ind <- function(model_params, n = 100,
 
 
 
-
+# scDesign2.revised ---------------
 #' Simulate a count matrix for a single cell type
 #'
 #' Revise the initial scDesign2 functions to allow different sequencing depth
@@ -158,6 +158,8 @@ simulate_count_ind <- function(model_params, n = 100,
 #' @param depth_simu_ref_ratio The (expected) sequencing depth ratio between simulated and refernece data.
 #' @param n_cell_new      The total number of cells in the simulated count matrix.
 #' @param cell_type_prop  The cell type proportion in the simulated count matrix.
+#' @param sim_method Simulation method. Simulate genes independently 'ind' or considering
+#'                    their correlations ('copula').
 #' @return A matrix of shape p by n that contains the simulated count values. p is derived from
 #' \code{model_params}.
 #'
