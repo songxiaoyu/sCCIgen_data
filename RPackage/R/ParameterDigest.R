@@ -514,6 +514,9 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
 
   # Digest parameters
   para=ParaDigest(input)
+
+
+
   attach(para)
 
   # Load  data
