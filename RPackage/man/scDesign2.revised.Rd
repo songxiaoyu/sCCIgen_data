@@ -22,6 +22,9 @@ model or the (w/o copula) model).}
 \item{cell_type_prop}{The cell type proportion in the simulated count matrix.}
 
 \item{depth_simu_ref_ratio}{The (expected) sequencing depth ratio between simulated and refernece data.}
+
+\item{sim_method}{Simulation method. Simulate genes independently 'ind' or considering
+their correlations ('copula').}
 }
 \value{
 A matrix of shape p by n that contains the simulated count values. p is derived from

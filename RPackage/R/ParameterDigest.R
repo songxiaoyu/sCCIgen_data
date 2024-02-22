@@ -66,7 +66,7 @@ ExprLoad=function(para){
 
 # Load cell feature data
 CellFeatureLoad=function(para){
-  type=tail(unlist(strsplit(cell_feature_data_file, ".", fixed=TRUE)), 1)
+  type=utils::tail(unlist(strsplit(cell_feature_data_file, ".", fixed=TRUE)), 1)
   if(type=="Rdata" | type=="RData" ) {
     feature=as.data.frame(loadRData(paste0(path_to_input_dir, cell_feature_data_file)))
   }
@@ -77,7 +77,7 @@ CellFeatureLoad=function(para){
   return(feature)
 }
 
-# ----------- copula load/create ---------------
+# ----------- ParaCopula ---------------
 #' Use parameters to estimate Gaussian Copula
 #'
 #' Use parameters to determine the Gaussian Copula values.
@@ -87,7 +87,7 @@ CellFeatureLoad=function(para){
 #' @param feature Cell feature data
 #' @param ncores No. of cores
 #'
-ParameterCopula=function(para, expr, feature, ncores=1){
+ParaCopula=function(para, expr, feature, ncores=1){
   # Copula -- add region info
   if (gene_cor=="FALSE") {copula_input="NULL"; CopulaEst=NULL}
   if (gene_cor=="TRUE" & copula_input!="NULL") {CopulaEst=loadRData(copula_input)}
@@ -129,7 +129,7 @@ ParameterCopula=function(para, expr, feature, ncores=1){
 #' @param para Parameters loaded and cleaned from the parameter file using function
 #' `ParaDigest`.
 #' @param all_seeds Seeds for all simulated data
-#' @import parallel foreach
+#' @import parallel foreach doParallel
 #'
 ParaCellsNoST=function(para, all_seeds){
 
@@ -183,7 +183,7 @@ ParaCellsNoST=function(para, all_seeds){
 #' `ParaDigest`.
 #' @param feature Cell feature data
 #' @param all_seeds Seeds for all simulated data
-#' @import parallel foreach
+#' @import parallel foreach doParallel
 
 ParaCellsST=function(para, feature, all_seeds) {
 
@@ -202,8 +202,6 @@ ParaCellsST=function(para, feature, all_seeds) {
 #' Use parameters to simulate cell location (direct output from existing spatial data)
 #'
 #' Use parameters to simulate cell location. Here directly use existing SRT data.
-#' @param para Parameters loaded and cleaned from the parameter file using function
-#' `ParaDigest`.
 #' @param m No. of simulated data
 #' @param feature Cell feature data
 #'
@@ -497,6 +495,9 @@ ParaExpr=function(para, cell_loc_list, expr, feature,
 #' This function simulate spatially resolved transcriptomics data from a parameter file. The
 #' parameter file can be generated with an user interface on Docker.
 #' @param input  The path and name of the parameter file.
+#' @param ModelFitFile Default = NULL, no existing models that fit in the distributions
+#' of input single-cell expression data. Alternatively, if models are provided,
+#' the algorithm will no longer need to fit the input data and be faster.
 #' @return Simulated data (e.g. count, spatial feature, expression pattern) will be directly
 #' saved on your computer or cloud based on the path provided by the parameter file.
 #' @import parallel foreach doParallel
@@ -513,6 +514,9 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
 
   # Digest parameters
   para=ParaDigest(input)
+
+
+
   attach(para)
 
   # Load  data
@@ -548,7 +552,7 @@ ParaSimulation <- function(input, ModelFitFile=NULL) {
   expr2=expr[,idxc]
 
   # Copula - from parameter file
-  CopulaEst=ParameterCopula(para=para, expr=expr2,
+  CopulaEst=ParaCopula(para=para, expr=expr2,
                             feature=feature, ncores=ncores)
   # ModelFitFile=ParaFitExpr(para=para, expr=expr2, feature=feature,
   #                          CopulaEst=CopulaEst, ncores=ncores, save=T)

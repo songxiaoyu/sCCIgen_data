@@ -8,6 +8,10 @@ ParaSimulation(input, ModelFitFile = NULL)
 }
 \arguments{
 \item{input}{The path and name of the parameter file.}
+
+\item{ModelFitFile}{Default = NULL, no existing models that fit in the distributions
+of input single-cell expression data. Alternatively, if models are provided,
+the algorithm will no longer need to fit the input data and be faster.}
 }
 \value{
 Simulated data (e.g. count, spatial feature, expression pattern) will be directly

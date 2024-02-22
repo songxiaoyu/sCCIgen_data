@@ -5,20 +5,27 @@ Authors@R:
     person("Xiaoyu", "Song", , "songxiaoyu152@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     data.table,
+    readr,
+    tibble,
     dplyr,
     tidyr,
-    raster,
-    spatstat,
-    rlist,
+    terra,
     parallel,
     foreach,
     doParallel,
-    proxy
-
+    raster,
+    spatstat,
+    spatstat.geom,
+    spatstat.model,
+    spatstat.random,
+    igraph,
+    geometry,
+    MASS,
+    utils,
+    stats

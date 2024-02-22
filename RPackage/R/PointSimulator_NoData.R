@@ -1,11 +1,11 @@
-
+# connectUp ------------
 #' Assign connected regions in a window
 #'
 #' This function assigns random connected regions on a square. Used within function `RandomRegionWindow`.
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param r poly is a RasterLayer  (e.g. 20 by 20 square).
-#' @return
-#' \item{selected.unique:}{A list of the selected polygons for each region.}
+#' @param seed Random seed.
+#' @return A list of the selected polygons for each region.
 
 
 connectUp <- function(r, nRegion, seed=NULL){
@@ -42,17 +42,19 @@ connectUp <- function(r, nRegion, seed=NULL){
   return(selected)
 }
 
-
+# RandomRegionWindow ------------
 #' Generate random connected region in a window
 #'
 #' This function generates random regions on a unit square.
 #' @param nRegion nRegion is the No. of regions (e.g. nRegion=3)
 #' @param nGrid nGrid is the No. of spots on x and y.
+#' @param seed Random seed.
 #' @return
-#' \item{selected.unique:}{A list of the selected polygons for each region.}
+#' \item{window:}{The window of each region.}
+#' \item{area:}{Area proportion of the region in the window.}
 #' @export
 #'
-RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
+RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=NULL){
   if (nRegion==1) {
     win=vector(mode = "list", length = 1); win[[1]] = unit.square()
   } else {
@@ -77,7 +79,7 @@ RandomRegionWindow <- function(nRegion=3, nGrid=20, seed=123){
   return(list(window=win, area=area))
 }
 
-
+# get.n.vec.raw ------------
 # Generate cell location in one region
 # This function generates cell pools allowing selection due
 # to cell overlaps, inhibitions and attractions.
@@ -109,17 +111,8 @@ get.n.vec.raw=function(n, cell.prop,
   return(list(n.vec.target=n.vec.target, n.vec.raw=n.vec.use.adj))
 }
 
-#' Generate cell location in one region
-#'
-#' This function generates cell locations for each region
-#' @import spatstat
-#' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.
-#' @param cell.inh.attr.input cell.inh.attr.input
-#' @param same.dis.cutoff The averaged cell-cell distance is defined as r (e.g. on the unit
-#' square r =1/sqrt(N)). Same cell location is defined as the ratio to r. Default at 0.2.
-#' cell.inh.attr.input=cbind(Cell1=c(1, 3, 4), Cell2=c(2,3,5), Strength= c(2, 0, -2))
-#' @param same.dis.cutoff same.dis.cutoff =0.05
-
+# cell.loc.1region.fc ------------
+# Generate cell location in one region
 
 cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
                      same.dis.cutoff =0.05,
@@ -275,21 +268,36 @@ cell.loc.1region.fc=function(n1, window1, cell.prop1, cell.inh.attr.input1,
   return(final.ppp=gen3)
 }
 
-
-#' Generate cell location for all regions
+# cell.loc.fc ------------
+#' Generate cell location data from parameters.
 #'
-#' This function generates cell locations for each region
-#' @param n.vec.raw n.vec.raw from `get.n.vec.raw`.
-#' @param cell.inh.attr.input cell.inh.attr.input
-#' @param same.dis.cutoff The averaged cell-cell distance is defined as r (e.g. on the unit
-#' square r =1/sqrt(N)). Same cell location is defined as the ratio to r. Default at 0.2.
-#' cell.inh.attr.input=cbind(Cell1=c(1, 3, 4), Cell2=c(2,3,5), Strength= c(2, 0, -2))
-#' @param same.dis.cutoff same.dis.cutoff =0.05
+#' This function generates cell locations for all regions.
+#' @param N No. of cells to generate.
+#' @param win Spatial window within which cells will be generated.
+#' @param cell.prop Proportion of cell in each cell type to generated for each region.
+#' @param cell.inh.attr.input (Default=NULL). A matrix providing cell-cell location
+#' attraction and inhibition parameters. Example input is like: cell.inh.attr.input=
+#' cbind(Cell1=c("A", "B", "C"), Cell2=c("B","D","E), Strength= c(2, 0, -2)).
+#' @param same.dis.cutoff (Default = 0) Cells with distance less than this cutoff
+#' will be considered as overlapping cells non-realistic in real ST data,
+#'  and only one will be kept.
+#' @param even.distribution.coef (Default =0). The higher the value, the more we
+#' require evenly distributed locations of cells, as opposed to randomly generated
+#' locations (Poisson process).
+#' @param grid.size.small (Default =19). If some levels of even distributions of cells are imposed,
+#' this parameter is needed to cut the simulation window into grids of different
+#' sizes to smooth cell densities.
+#' @param grid.size.large (Default =45). If some levels of even distributions of cells are imposed,
+#' this parameter is needed to cut the simulation window into grids of different
+#' sizes to smooth cell densities.
+#' @param seed Random seed
+#' @return Cell location
+#' @export
 
 
-cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
-                     same.dis.cutoff =0.05,
-                     even.distribution.coef=0.1,
+cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input=NULL,
+                     same.dis.cutoff =0,
+                     even.distribution.coef=0,
                      grid.size.small=19, grid.size.large=45,
                      seed) {
 
@@ -306,14 +314,6 @@ cell.loc.fc=function(N, win, cell.prop, cell.inh.attr.input,
                                      even.distribution.coef=even.distribution.coef,
                                      grid.size.small=grid.size.small, grid.size.large=grid.size.large,
                                      seed=seed*11+r*141)
-
-   #  debug
-    # n1=round(win$area[r]*N)
-    # window1=win$window[[r]]
-    # cell.prop1=cell.prop[[r]]
-    # cell.inh.attr.input1=cell.inh.attr.input[[r]]
-    # grid.size.small=19; grid.size.large=45;
-
 
   }
   names(cell.loc)=paste0("Region", 1:R)

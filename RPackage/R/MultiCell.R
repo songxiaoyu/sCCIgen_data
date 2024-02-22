@@ -19,7 +19,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
   rmax=max(xrange, yrange)
   m=round(sqrt(NoSpot))
 
-  r <- raster::raster(ncols=m, nrows=m,xmn=xrange[1], xmx=xrange[2], ymn=yrange[1], ymx=yrange[2])
+  r <- raster::raster(ncols=m, nrows=m,xmn=xrange[1],
+                      xmx=xrange[2], ymn=yrange[1], ymx=yrange[2])
   spot.idx=raster::cellFromXY(r, cbind(cell_loc[,1], cell_loc[,2]))
   #
   expr2=sapply(1:nrow(expr), function(f) tapply(as.numeric(expr[f,]), spot.idx, sum))
@@ -32,7 +33,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
   spot_row=raster::rowFromCell(r, 1:nrow(expr2))
   spot_coordinates=raster::xyFromCell(r, 1:nrow(expr2))+
     matrix(runif(2*nrow(expr2), -rmax/NoSpot/100, rmax/NoSpot/100), ncol=2)
-  spot_loc=data.frame(Spot=colnames(expr3), col=spot_col, row=spot_row, spot_coordinates)
+  spot_loc=data.frame(Spot=colnames(expr3), col=spot_col,
+                      row=spot_row, spot_coordinates)
 
 
   # Spot Region
@@ -41,7 +43,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
       group_by(spot.idx, region) %>%
       mutate(count=1) %>%
       summarise(abundance = sum(count)) %>%
-      tidyr::pivot_wider(names_from = region, values_from = abundance, values_fill = 0) %>%
+      tidyr::pivot_wider(names_from = region, values_from = abundance,
+                         values_fill = 0) %>%
       ungroup() %>%
       dplyr::select(-spot.idx) %>%
       rowwise() %>%
@@ -57,7 +60,8 @@ multicell=function(expr, cell_feature, NoSpot=500) {
       group_by(spot.idx, annotation) %>%
       mutate(count=1) %>%
       summarise(abundance = sum(count)) %>%
-      tidyr::pivot_wider(names_from = annotation, values_from = abundance, values_fill = 0)
+      tidyr::pivot_wider(names_from = annotation, values_from = abundance,
+                         values_fill = 0)
     spot_loc=data.frame(spot_loc, dat1[,-1])
   }
 
