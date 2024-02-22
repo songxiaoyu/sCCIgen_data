@@ -589,7 +589,7 @@ run_interactive_STsimulator <- function() {
             n_total = n_regions*length(x$proportions2)
 
             cell_type_proportions(data.frame(parameters = paste0("cell_type_proportion_", 1:n_total),
-                                             value = base::sort(paste0(1:n_regions, ",", x$proportions2)) ))
+                                             value = paste0(base::sort(rep(1:n_regions),length(x$proportions2)), ",", x$proportions2)) )
           }
 
         })
