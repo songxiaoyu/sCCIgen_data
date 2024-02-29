@@ -42,9 +42,9 @@ run_interactive_STsimulator <- function() {
                           type = "tabs",
                           shiny::tabPanel("Step 1: Select your dataset",
                                           shiny::radioButtons(inputId = "inputdata",
-                                                       label = "What data do you want to use for simulation? If the data
+                                                              label = "What data do you want to use for simulation? If the data
                                                        is not yet in your working directory, use the Download buttons
-                                                       to get the files in your computer. Hit the confirmation button at the end.",
+                                                       to get the files in your computer.",
                                                        choices = c("Decoy data 1: It includes (1) count matrix for 10 genes by
                                                                    1000 cells of 2 cell types, and (2) cell feature matrix for
                                                                    annotated cell type." = "fake1",
@@ -85,8 +85,7 @@ run_interactive_STsimulator <- function() {
 
                                           shiny::HTML(strrep(htmltools::br(), 1)),
 
-                                          shiny::actionButton(inputId = "use_inputdata",
-                                                              label = "Use this data"),
+
 
                           ), # ends Step 1: Select your dataset
 
@@ -98,6 +97,9 @@ run_interactive_STsimulator <- function() {
                                                            a diferent folder, type the path here. Note that the folder
                                                            must be under your working directory.",
                                                            width = "100%"),
+
+                                          shiny::actionButton(inputId = "use_inputdata",
+                                                              label = "Use this directory and read my data"),
 
                                           shiny::uiOutput("ask_simulate_cells"),
 
@@ -750,7 +752,7 @@ run_interactive_STsimulator <- function() {
 
           shiny::observeEvent(input$inputspatialpatterns, {
             x_vector = unlist(stringr::str_split(input$inputspatialpatterns,
-                                                              pattern = " "))
+                                                 pattern = " "))
 
             x_df <- data.frame(parameters = character(),
                                value = character())
@@ -1033,22 +1035,22 @@ run_interactive_STsimulator <- function() {
                                               "expression_data_file_type",
                                               "expression_data_cell_types",
                                               "simulate_spatial_data"
-                                              ),
-                               value = c(path_to_input_dir(),
-                                         expression_data_file(),
-                                         cell_feature_data_file(),
-                                         expression_data_file_type(),
-                                         expression_data_cell_types(),
-                                         simulate_spatial_data()
-                                         )
-                               )
+        ),
+        value = c(path_to_input_dir(),
+                  expression_data_file(),
+                  cell_feature_data_file(),
+                  expression_data_file_type(),
+                  expression_data_cell_types(),
+                  simulate_spatial_data()
+        )
+        )
 
         if(simulate_spatial_data() == TRUE) {
           df = data.frame(parameters = c("num_simulated_cells",
                                          "cell_overlap_cutoff"),
                           value = c(num_simulated_cells(),
                                     cell_overlap_cutoff()
-                                    )
+                          )
           )
 
           param_df = rbind(param_df, df)
@@ -1101,8 +1103,8 @@ run_interactive_STsimulator <- function() {
 
 
         if(!is.null(spatialpatterns_df())) {
-            param_df = rbind(param_df, spatialpatterns_df())
-          }
+          param_df = rbind(param_df, spatialpatterns_df())
+        }
 
         if(!is.null(cellcellinteractions_df())) {
           param_df = rbind(param_df, cellcellinteractions_df())
@@ -1170,39 +1172,39 @@ run_interactive_STsimulator <- function() {
       }
 
 
-    shiny::observeEvent(input$runsimulation, {
+      shiny::observeEvent(input$runsimulation, {
 
-      ParaSimulation(input = parameter_file())
+        ParaSimulation(input = parameter_file())
 
-      if(create_Giotto()) {
+        if(create_Giotto()) {
 
-        x_param = ParaDigest(parameter_file())
+          x_param = ParaDigest(parameter_file())
 
-        x_expression = read.delim(paste0(x_param$path_to_output_dir,
-                                         x_param$output_name,
-                                         "_count_1.tsv"),
-                                  row.names = 1)
+          x_expression = read.delim(paste0(x_param$path_to_output_dir,
+                                           x_param$output_name,
+                                           "_count_1.tsv"),
+                                    row.names = 1)
 
-        x_meta = read.delim(paste0(x_param$path_to_output_dir,
-                                   x_param$output_name,
-                                   "_meta_1.tsv"))
+          x_meta = read.delim(paste0(x_param$path_to_output_dir,
+                                     x_param$output_name,
+                                     "_meta_1.tsv"))
 
-        x_spatlocs = x_meta[,c("Cell", "x.loc", "y.loc")]
-        colnames(x_spatlocs) = c("cell_ID", "sdimx", "sdimy")
+          x_spatlocs = x_meta[,c("Cell", "x.loc", "y.loc")]
+          colnames(x_spatlocs) = c("cell_ID", "sdimx", "sdimy")
 
-        x_meta = x_meta[,c("Cell", "annotation", "region")]
-        colnames(x_meta)[1] = "cell_ID"
+          x_meta = x_meta[,c("Cell", "annotation", "region")]
+          colnames(x_meta)[1] = "cell_ID"
 
-        x = Giotto::createGiottoObject(expression = x_expression,
-                                       spatial_locs = x_spatlocs)
+          x = Giotto::createGiottoObject(expression = x_expression,
+                                         spatial_locs = x_spatlocs)
 
-        x = Giotto::addCellMetadata(x,
-                                    new_metadata = x_meta)
+          x = Giotto::addCellMetadata(x,
+                                      new_metadata = x_meta)
 
-        Giotto::saveGiotto(x, foldername = giotto_folder(), overwrite = TRUE)
-      }
+          Giotto::saveGiotto(x, foldername = giotto_folder(), overwrite = TRUE)
+        }
 
-      shiny::stopApp()
+        shiny::stopApp()
       })
 
     }) # ends run simulation
