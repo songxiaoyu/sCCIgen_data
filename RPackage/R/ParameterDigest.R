@@ -207,7 +207,7 @@ ParaCellsST=function(para, feature, all_seeds) {
 #'
 ParaExistingCellsST=function(m, feature) {
   if (ncol(feature)==4) {R=feature[,4]} else {R=rep(1, nrow(feature))}
-  cell_loc1=cell.region.loc.existing.fc(PointLoc=feature[,c(2:3)],
+  cell_loc1=cell.loc.existing.fc(PointLoc=feature[,c(2:3)],
                                        PointAnno=feature[,1],
                                        PointRegion=R,
                                        window_method="rectangle")

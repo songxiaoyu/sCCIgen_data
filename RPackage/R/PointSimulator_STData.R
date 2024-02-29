@@ -180,9 +180,9 @@ cell.loc.model.fc=function(n,
 
 
 
-# cell.loc.region1.existing.fc ---------------
+# cell.loc.1region.existing.fc ---------------
 # simulate ST data location for one region using existing cell location
-cell.loc.region1.existing.fc=function(PointLoc,
+cell.loc.1region.existing.fc=function(PointLoc,
                            PointAnno,
                            window_method="rectangle") {
 
@@ -196,6 +196,7 @@ cell.loc.region1.existing.fc=function(PointLoc,
 
 
 # cell.loc.existing.fc ---------------
+
 #' Generate cell location data by using existing SRT data directly.
 #' @param PointLoc The location of input cells on x, y axis.
 #' @param PointAnno The cell type annotation of input cells.
@@ -211,7 +212,7 @@ cell.loc.existing.fc=function(PointLoc,
   pp=vector("list", length=length(Rcat))
   for (i in 1:length(Rcat)) {
     idx= which(PointRegion %in% Rcat[i])
-    pp[[i]]=cell.loc.region1.existing.fc(PointLoc=PointLoc[idx,],
+    pp[[i]]=cell.loc.1region.existing.fc(PointLoc=PointLoc[idx,],
                          PointAnno=PointAnno[idx],
                          window_method=window_method)
   }
