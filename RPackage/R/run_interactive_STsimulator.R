@@ -182,6 +182,8 @@ run_interactive_STsimulator <- function() {
                                                               value = 1,
                                                               width = "100%"),
                                           
+                                          shiny::uiOutput("ask_seed_options"),
+                                          
                                           shiny::uiOutput("ask_single_seed"),
                                           
                                           shiny::uiOutput("ask_multiple_seeds"),
@@ -603,8 +605,8 @@ run_interactive_STsimulator <- function() {
               shiny::textInput(inputId = "locationinteraction",
                                label = "To specify cell-cell location interaction, enter the cell type pairs 
                                followed by the interaction level (suggested value -2 to 2) in a format 
-                               <cell_type_A>-<cell_type_B>,<value>. Separate the entries by blank space 
-                               (e.g. 'cell_type_A-cell_type_B,1.2 cell_type_B-cell_type_C,-0.8')",
+                               <cell_type_A>,<cell_type_B>,<value>. Separate the entries by blank space 
+                               (e.g. 'cell_type_A,cell_type_B,1.2 cell_type_B,cell_type_C,-0.8')",
                                width = "100%")
             })
             
@@ -995,17 +997,52 @@ run_interactive_STsimulator <- function() {
       num_simulated_datasets(input$ndatasets)
       
       if(input$ndatasets > 1) {
-        output$ask_single_seed <- NULL
         
-        output$ask_multiple_seeds <- renderUI({
-          shiny::textInput(inputId = "multipleseed",
-                           label = "Specify an umbrella seed for each dataset for reproducible simulation. Separate the seeds by comma (e.g. 1234,2942,1029)",
-                           value = character(0),
-                           width = "100%")
+        output$ask_seed_options <- renderUI({
+          shiny::radioButtons(inputId = "seed_options",
+                              label = "An umbrella seed is required for reproducible simulation. Would you like to provide a different seed per dataset, or use a parent seed to all of them?",
+                              choices = c("I want to provide an individual seed per dataset" = TRUE,
+                                          "I want to use a parent seed for all of them" = FALSE),
+                              width = "100%")
         })
         
-        shiny::observeEvent(input$multipleseed, {
-          simulation_seed_for_each_dataset(input$multipleseed)
+        shiny::observeEvent(input$seed_options, {
+          if(input$seed_options == TRUE) {
+            
+            output$ask_single_seed <- NULL
+            
+            output$ask_multiple_seeds <- renderUI({
+              shiny::textInput(inputId = "multipleseed",
+                               label = "Specify an umbrella seed for each dataset. Separate the seeds by comma (e.g. 1234,2942,1029)",
+                               value = character(0),
+                               width = "100%")
+            })
+            
+            shiny::observeEvent(input$multipleseed, {
+              simulation_seed_for_each_dataset(input$multipleseed)
+              parent_simulation_seed(NULL)
+            })
+            
+            
+          } else {
+            
+            output$ask_multiple_seeds <- NULL
+            
+            output$ask_single_seed <- renderUI({
+              shiny::numericInput(inputId = "seed",
+                                  label = "Specify an umbrella seed for reproducible simulation.",
+                                  value = 1234,
+                                  width = "100%")
+            })
+            
+            shiny::observeEvent(input$seed, {
+              parent_simulation_seed(input$seed)
+              
+              x <- rep(input$seed, num_simulated_datasets())
+              x <- paste(x, collapse = ',')
+              simulation_seed_for_each_dataset(x)
+            })
+          }
         })
         
       } else {
@@ -1143,13 +1180,15 @@ run_interactive_STsimulator <- function() {
 
         param_df = rbind(param_df, c("num_simulated_datasets",
                                      num_simulated_datasets()))
-
-        if(num_simulated_datasets() > 1) {
+        
+        if(!is.null(parent_simulation_seed())) {
+          param_df = rbind(param_df, c("parent_simulation_seed",
+                                       parent_simulation_seed()))
+        }
+        
+        if(!is.null(simulation_seed_for_each_dataset())) {
           param_df = rbind(param_df, c("simulation_seed_for_each_dataset",
                                        simulation_seed_for_each_dataset()))
-        } else {
-          param_df = rbind(param_df, c("simulation_seed_for_each_dataset",
-                                       parent_simulation_seed()))
         }
         
         param_df = rbind(param_df, c("path_to_output_dir",
