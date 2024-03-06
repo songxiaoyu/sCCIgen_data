@@ -443,6 +443,7 @@ run_interactive_STsimulator <- function() {
     cell_location_interactions_df <- shiny::reactiveVal()
     cell_even_distribution <- shiny::reactiveVal()
     region_specific_model <- shiny::reactiveVal()
+    region_specific_model("NULL")
     
     shiny::observeEvent(ncol_feature_data(), {
       
@@ -618,7 +619,7 @@ run_interactive_STsimulator <- function() {
         output$ask_custom_interaction <- shiny::renderUI({
           shiny::radioButtons(inputId = "custominteraction",
                               label = "Users can select cell type pairs and determine the strength. Strength < 0 indicates cell-cell inhibition; and strength > 0 indicates cell-cell attraction. Would you like to specify the cell-cell location interaction (inhibition/attraction)?",
-                              choices = c("Use the default cell-cell location interaction (inhibition/attraction)" = FALSE,
+                              choices = c("No cell-cell location interaction" = FALSE,
                                           "Specify cell-cell location interaction (inhibition/attraction)" = TRUE),
                               width = "100%")
         })
@@ -1217,12 +1218,10 @@ run_interactive_STsimulator <- function() {
         
         if(!is.null(num_regions())) {
           param_df = rbind(param_df, c("num_regions", num_regions()))
-          
-          if(num_regions() > 1) {
-            param_df = rbind(param_df, c("region_specific_model",
-                                         region_specific_model()))
-          }
         }
+        
+        param_df = rbind(param_df, c("region_specific_model",
+                                     region_specific_model()))
         
         if(ncol_feature_data() == 1) {
 
