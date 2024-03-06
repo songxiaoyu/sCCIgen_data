@@ -605,8 +605,8 @@ run_interactive_STsimulator <- function() {
               shiny::textInput(inputId = "locationinteraction",
                                label = "To specify cell-cell location interaction, enter the cell type pairs 
                                followed by the interaction level (suggested value -2 to 2) in a format 
-                               <cell_type_A>-<cell_type_B>,<value>. Separate the entries by blank space 
-                               (e.g. 'cell_type_A-cell_type_B,1.2 cell_type_B-cell_type_C,-0.8')",
+                               <cell_type_A>,<cell_type_B>,<value>. Separate the entries by blank space 
+                               (e.g. 'cell_type_A,cell_type_B,1.2 cell_type_B,cell_type_C,-0.8')",
                                width = "100%")
             })
             
