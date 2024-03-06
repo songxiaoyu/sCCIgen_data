@@ -415,6 +415,18 @@ run_interactive_STsimulator <- function() {
         
         ncol_feature_data(ncol(cellfeature_data()))
         
+        shiny::showModal(shiny::modalDialog(
+          title = "Successful reading of input files",
+          "Your input files were successfully loaded."
+        ))
+        
+      } else {
+        
+        shiny::showModal(shiny::modalDialog(
+          title = "Error reading input files",
+          "At least one of your input files were not found in your input directory. 
+          Verify that the expression and cellfeature files are in the right directory."
+        ))
       }
     
     })
@@ -561,11 +573,27 @@ run_interactive_STsimulator <- function() {
                 x = unlist(stringr::str_split(string = input$cellproportions, 
                                               pattern = " "))
                 
+                for(i in x) {
+                  y = unlist(stringr::str_split(string = i, pattern = ","))
+                  if(length(y) != 3) {
+                    shiny::showModal(shiny::modalDialog(
+                      title = "Error",
+                      paste("Your custom cell proportions don't have
+                      the right format. Each entry must have 3 elements separated 
+                      by comma. One of your entries have",length(y),"elements.")
+                    ))
+                  }
+                }
+                
                 n_total = length(x)
                 cell_type_proportions(data.frame(parameters = paste0("cell_type_proportion_", 1:n_total),
                                                  value = x))
               })
               
+              shiny::showModal(shiny::modalDialog(
+                title = "Success!",
+                "Your custom cell type proportions were saved."
+              ))
             })
             
           } else {
@@ -620,10 +648,27 @@ run_interactive_STsimulator <- function() {
                 x = unlist(stringr::str_split(input$locationinteraction,
                                               pattern = " "))
                 
+                for (i in x) {
+                  y = unlist(stringr::str_split(i,pattern = ","))
+                  if(length(y) != 3) {
+                    shiny::showModal(shiny::modalDialog(
+                      title = "Error",
+                      paste("Your custom cell-cell location interactions don't have
+                      the right format. Each entry must have 3 elements separated 
+                      by comma. One of your entries have",length(y),"elements.")
+                    ))
+                  }
+                }
+                
                 cell_location_interactions_df(data.frame(parameters = paste0("cell_interaction_",
                                                                              1:length(x)),
                                                          value = x))
               })
+              
+              shiny::showModal(shiny::modalDialog(
+                title = "Success!",
+                "Your custom cell-cell location interactions were saved."
+              ))
               
             })
             
@@ -759,22 +804,35 @@ run_interactive_STsimulator <- function() {
                                value = character())
             
             for (i in 1:length(x_vector)) {
-              x = data.frame(parameters = c(paste0("spatial_pattern_",i,"_region"),
-                                            paste0("spatial_pattern_",i,"_cell_type"),
-                                            paste0("spatial_pattern_",i,"_gene_id"),
-                                            paste0("spatial_pattern_",i,"_gene_prop"),
-                                            paste0("spatial_pattern_",i,"_mean"),
-                                            paste0("spatial_pattern_",i,"_sd")),
-                             value = unlist(stringr::str_split(x_vector[i],
-                                                               pattern = ",")) )
+              split_elements <- unlist(stringr::str_split(x_vector[i],
+                                                          pattern = ","))
+              if (length(split_elements) == 6) {
+                x = data.frame(parameters = c(paste0("spatial_pattern_",i,"_region"),
+                                              paste0("spatial_pattern_",i,"_cell_type"),
+                                              paste0("spatial_pattern_",i,"_gene_id"),
+                                              paste0("spatial_pattern_",i,"_gene_prop"),
+                                              paste0("spatial_pattern_",i,"_mean"),
+                                              paste0("spatial_pattern_",i,"_sd")),
+                               value =  split_elements)
+                
+                x_df = rbind(x_df, x)
+              } else {
+                shiny::showModal(shiny::modalDialog(
+                  title = "Error",
+                  "Your custom spatial patterns don't have the right format.
+                  Each entry must have 6 elements separated by comma."
+                ))
+              }
               
-              x_df = rbind(x_df, x)
             }
             
             spatialpatterns_df(x_df)
-            
           })
           
+          shiny::showModal(shiny::modalDialog(
+            title = "Success!",
+            "Your custom spatial patterns were saved."
+          ))
         })
 
       } else {
@@ -846,22 +904,40 @@ run_interactive_STsimulator <- function() {
                 x_vector[i] = paste0("NULL,", x_vector[i])
               }
               
-              x = data.frame(parameters = c(paste0("spatial_int_dist_",i,"_region"),
-                                            paste0("spatial_int_dist_",i,"_cell_type_perturbed"),
-                                            paste0("spatial_int_dist_",i,"_cell_type_adj"),
-                                            paste0("spatial_int_dist_",i,"_dist_cutoff"),
-                                            paste0("spatial_int_dist_",i,"_gene_id1"),
-                                            paste0("spatial_int_dist_",i,"_gene_prop"),
-                                            paste0("spatial_int_dist_",i,"_mean"),
-                                            paste0("spatial_int_dist_",i,"_sd")),
-                             value = unlist(stringr::str_split(x_vector[i],
-                                                               pattern = ",")) )
+              y = unlist(stringr::str_split(x_vector[i],
+                                            pattern = ","))
+              if(length(y) == 8) {
+                x = data.frame(parameters = c(paste0("spatial_int_dist_",i,"_region"),
+                                              paste0("spatial_int_dist_",i,"_cell_type_perturbed"),
+                                              paste0("spatial_int_dist_",i,"_cell_type_adj"),
+                                              paste0("spatial_int_dist_",i,"_dist_cutoff"),
+                                              paste0("spatial_int_dist_",i,"_gene_id1"),
+                                              paste0("spatial_int_dist_",i,"_gene_prop"),
+                                              paste0("spatial_int_dist_",i,"_mean"),
+                                              paste0("spatial_int_dist_",i,"_sd")),
+                               value =  y)
+                
+                x_df = rbind(x_df, x)
+                
+              } else {
+                shiny::showModal(shiny::modalDialog(
+                  title = "Error",
+                  paste("Your custom cell-cell interactions don't have the right format.
+                  Each entry must have 7 elements separated by comma if you are
+                  not providing the region, or 8 elements if you are providing the region.
+                  One of your entries have", length(y),"elements")
+                ))
+              }
               
-              x_df = rbind(x_df, x)
             }
             
             cellcellinteractions_df(x_df)
           })
+          
+          shiny::showModal(shiny::modalDialog(
+            title = "Success!",
+            "Your custom cell-cell interactions were saved."
+          ))
         })
         
       } else {
@@ -940,24 +1016,42 @@ run_interactive_STsimulator <- function() {
                 x_vector[i] = paste0("NULL,", x_vector[i])
               }
               
-              x = data.frame(parameters = c(paste0("spatial_int_expr_",i,"_region"),
-                                            paste0("spatial_int_expr_",i,"_cell_type_perturbed"),
-                                            paste0("spatial_int_expr_",i,"_cell_type_adj"),
-                                            paste0("spatial_int_expr_",i,"_dist_cutoff"),
-                                            paste0("spatial_int_expr_",i,"_gene_id1"),
-                                            paste0("spatial_int_expr_",i,"_gene_id2"),
-                                            paste0("spatial_int_expr_",i,"_gene_prop"),
-                                            paste0("spatial_int_expr_",i,"_bidirectional"),
-                                            paste0("spatial_int_expr_",i,"_mean"),
-                                            paste0("spatial_int_expr_",i,"_sd")),
-                             value = unlist(stringr::str_split(x_vector[i],
-                                                               pattern = ",")) )
+              y = unlist(stringr::str_split(x_vector[i],
+                                            pattern = ","))
               
-              x_df = rbind(x_df, x)
+              if(length(y) == 10) {
+                x = data.frame(parameters = c(paste0("spatial_int_expr_",i,"_region"),
+                                              paste0("spatial_int_expr_",i,"_cell_type_perturbed"),
+                                              paste0("spatial_int_expr_",i,"_cell_type_adj"),
+                                              paste0("spatial_int_expr_",i,"_dist_cutoff"),
+                                              paste0("spatial_int_expr_",i,"_gene_id1"),
+                                              paste0("spatial_int_expr_",i,"_gene_id2"),
+                                              paste0("spatial_int_expr_",i,"_gene_prop"),
+                                              paste0("spatial_int_expr_",i,"_bidirectional"),
+                                              paste0("spatial_int_expr_",i,"_mean"),
+                                              paste0("spatial_int_expr_",i,"_sd")),
+                               value =  y)
+                
+                x_df = rbind(x_df, x)
+              } else {
+                shiny::showModal(shiny::modalDialog(
+                  title = "Error",
+                  paste("Your custom cell-cell interactions don't have the right format.
+                  Each entry must have 9 elements separated by comma if you are 
+                  not providing the region, or 10 elements if you are providing 
+                  the region. One of your entries have", length(y), "elements.")
+                ))
+              }
+              
             }
             
             cellcellinteractionsexpression_df(x_df)
           })
+          
+          shiny::showModal(shiny::modalDialog(
+            title = "Success!",
+            "Your custom cell-cell interactions were saved."
+          ))
         })
         
       } else {
