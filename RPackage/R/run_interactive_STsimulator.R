@@ -618,7 +618,7 @@ run_interactive_STsimulator <- function() {
         output$ask_custom_interaction <- shiny::renderUI({
           shiny::radioButtons(inputId = "custominteraction",
                               label = "Users can select cell type pairs and determine the strength. Strength < 0 indicates cell-cell inhibition; and strength > 0 indicates cell-cell attraction. Would you like to specify the cell-cell location interaction (inhibition/attraction)?",
-                              choices = c("Use the default cell-cell location interaction (inhibition/attraction)" = FALSE,
+                              choices = c("No cell-cell location interaction" = FALSE,
                                           "Specify cell-cell location interaction (inhibition/attraction)" = TRUE),
                               width = "100%")
         })
