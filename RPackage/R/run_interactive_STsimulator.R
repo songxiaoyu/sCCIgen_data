@@ -503,8 +503,24 @@ run_interactive_STsimulator <- function() {
           
         } 
         
+        if(length(unique_regions) > 1) {
+          output$ask_model_per_region <- shiny::renderUI({
+            shiny::radioButtons(inputId = "model_per_region",
+                                label = "Do you want to model the input expression data
+                                  separately for each region?",
+                                choices = c("No" = FALSE,
+                                            "Yes" = TRUE),
+                                width = "100%")
+          })
+          
+          shiny::observeEvent(input$model_per_region, {
+            region_specific_model(input$model_per_region)
+          })
+        } else {
+          output$ask_model_per_region <- NULL
+          }
+        
         output$ask_numberregions <- NULL
-        output$ask_model_per_region <- NULL
         output$ask_custom_cell_type_prop <- NULL
         
       } else { # when ncol == 1
