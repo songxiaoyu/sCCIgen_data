@@ -522,25 +522,28 @@ run_interactive_STsimulator <- function() {
         })
         
         shiny::observeEvent(input$numberregions, {
-          num_regions(input$numberregions)
           
-          if(input$numberregions > 1) {
+          if(!is.null(input$numberregions)) {
+            num_regions(input$numberregions)
             
-            output$ask_model_per_region <- shiny::renderUI({
-              shiny::radioButtons(inputId = "model_per_region",
-                                  label = "Do you want to model the input expression data
+            if(input$numberregions > 1) {
+              
+              output$ask_model_per_region <- shiny::renderUI({
+                shiny::radioButtons(inputId = "model_per_region",
+                                    label = "Do you want to model the input expression data
                                   separately for each region?",
                                   choices = c("No" = FALSE,
                                               "Yes" = TRUE),
                                   width = "100%")
-            })
-            
-            shiny::observeEvent(input$model_per_region, {
-              region_specific_model(input$model_per_region)
-            })
-          } else {
-            output$ask_model_per_region <- NULL
-          }
+              })
+              
+              shiny::observeEvent(input$model_per_region, {
+                region_specific_model(input$model_per_region)
+              })
+            } else {
+              output$ask_model_per_region <- NULL
+            }
+          } else {num_regions("NULL")}
         })
         
         output$ask_custom_cell_type_prop <- shiny::renderUI({
@@ -607,11 +610,19 @@ run_interactive_STsimulator <- function() {
               mutate(proportions = round(n/sum(n),3),
                      proportions2 = paste0(cell_type,",",proportions))
             
-            n_regions = input$numberregions
-            n_total = n_regions*length(x$proportions2)
             
-            cell_type_proportions(data.frame(parameters = paste0("cell_type_proportion_", 1:n_total),
-                                             value = paste0(base::sort(rep(1:n_regions, length(x$proportions2))), ",", x$proportions2)) )
+            shiny::observeEvent(input$numberregions, {
+              
+              if(!is.null(input$numberregions)) {
+                n_total = input$numberregions*length(x$proportions2)
+                
+                cell_type_proportions(data.frame(parameters = paste0("cell_type_proportion_", 1:n_total),
+                                                 value = paste0(base::sort(rep(seq_len(input$numberregions), 
+                                                                               length(x$proportions2))), 
+                                                                ",", x$proportions2)) )
+              }
+            })
+            
           }
           
         })
