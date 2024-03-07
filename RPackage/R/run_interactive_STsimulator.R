@@ -523,10 +523,11 @@ run_interactive_STsimulator <- function() {
         output$ask_custom_cell_type_prop <- NULL
         output$ask_even_distribution <- NULL
       } else { # when ncol == 1
-        
+        output$ask_model_per_region <- NULL
         output$ask_simulate_cells <- NULL
         output$ask_windowmethod <- NULL
         
+        region_specific_model("NULL")
         simulate_spatial_data(TRUE)
         
         output$ask_numberregions <- shiny::renderUI({
@@ -540,25 +541,7 @@ run_interactive_STsimulator <- function() {
           
           if(!is.null(input$numberregions)) {
             num_regions(input$numberregions)
-            
-            if(input$numberregions > 1) {
-              
-              output$ask_model_per_region <- shiny::renderUI({
-                shiny::radioButtons(inputId = "model_per_region",
-                                    label = "Do you want to model the input expression data
-                                  separately for each region?",
-                                  choices = c("No" = FALSE,
-                                              "Yes" = TRUE),
-                                  width = "100%")
-              })
-              
-              shiny::observeEvent(input$model_per_region, {
-                region_specific_model(input$model_per_region)
-              })
-            } else {
-              output$ask_model_per_region <- NULL
-            }
-          } else {num_regions("NULL")}
+            } else {num_regions("NULL")}
         })
         
         output$ask_custom_cell_type_prop <- shiny::renderUI({
