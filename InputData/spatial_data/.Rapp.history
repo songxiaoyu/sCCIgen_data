@@ -1,0 +1,2 @@
+load("/Users/songxiaoyu152/Dropbox/SpatialTranscriptomics/Paper_Simulator/Github/InputData/cell_feature_data/MERFISH_OV_small_cellfeature.RData")
+objects()
