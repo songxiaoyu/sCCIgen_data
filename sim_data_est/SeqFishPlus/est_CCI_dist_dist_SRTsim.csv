@@ -1,0 +1,8 @@
+Oligodendrocyte,Oligodendrocyte,2.47
+Astrocyte,Astrocyte,2.26
+Microglia,Microglia,2.14
+Endothelial,Endothelial,1.9
+Interneuron,Interneuron,1.4
+ExcitatoryNeuron,Oligodendrocyte,-0.5
+Endothelial,ExcitatoryNeuron,-0.54
+Astrocyte,ExcitatoryNeuron,-0.64
