@@ -6,12 +6,7 @@ default:
     expression_data_file_type: Rdata
     spatial_data_file_type: Rdata
     expression_data_cell_types: Astrocyte,Endothelial,ExcitatoryNeuron,Interneuron,Microglia,Oligodendrocyte
-    simulate_spatial_data: TRUE
-    num_simulated_cells: 511
-    cell_overlap_cutoff: 0
-    cell_even_distribution: 0
-    custom_cell_location_interactions: FALSE
-    window_method: network
+    simulate_spatial_data: FALSE
     num_regions: NULL
     region_specific_model: NULL
     expr_depth_ratio: 1
@@ -21,4 +16,4 @@ default:
     num_simulated_datasets: 1
     parent_simulation_seed: 1234
     path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
-    output_name: SeqFishPlus_n511
+    output_name: SeqFishPlus_default

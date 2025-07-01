@@ -350,7 +350,7 @@ default:
     spatial_int_expr_9_mean: -1.36541748123094
     spatial_int_expr_9_sd: 0
     num_spots: NULL
-    num_simulated_datasets: 1
-    parent_simulation_seed: 1234
+    num_simulated_datasets: 10
+    parent_simulation_seed: 456
     path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
-    output_name: SeqFishPlus_n511_cor_CCIs
+    output_name: SeqFishPlus_n511_m10_cor_CCIs

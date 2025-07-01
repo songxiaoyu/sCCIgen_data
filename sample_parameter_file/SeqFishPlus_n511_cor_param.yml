@@ -8,8 +8,11 @@ default:
     expression_data_cell_types: Astrocyte,Endothelial,ExcitatoryNeuron,Interneuron,Microglia,Oligodendrocyte
     simulate_spatial_data: TRUE
     num_simulated_cells: 511
-    cell_overlap_cutoff: 0.1
-    custom_cell_location_interactions: FALSE
+    cell_overlap_cutoff: 0
+    cell_even_distribution: 0
+    custom_cell_location_interactions: TRUE
+    cell_interaction_1: Oligodendrocyte,Oligodendrocyte,2.3
+    cell_interaction_2: ExcitatoryNeuron,Oligodendrocyte,-0.49
     window_method: network
     num_regions: NULL
     region_specific_model: NULL

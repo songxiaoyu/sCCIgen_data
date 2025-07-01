@@ -2,23 +2,23 @@ default:
     path_to_input_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/Github/sCCIgen_data/input_data
     paired: TRUE
     expression_data_file: SeqFishPlusCortex_2025_expr.Rdata
-    spatial_data_file: SeqFishPlusCortex_2025_spatial.Rdata
+    spatial_data_file: SeqFishPlusCortex_2025_region_spatial.Rdata
     expression_data_file_type: Rdata
     spatial_data_file_type: Rdata
     expression_data_cell_types: Astrocyte,Endothelial,ExcitatoryNeuron,Interneuron,Microglia,Oligodendrocyte
     simulate_spatial_data: TRUE
-    num_simulated_cells: 511
+    num_simulated_cells: 10000
     cell_overlap_cutoff: 0
     cell_even_distribution: 0
     custom_cell_location_interactions: FALSE
     window_method: network
-    num_regions: NULL
-    region_specific_model: NULL
+    num_regions: 5
+    region_specific_model: TRUE
     expr_depth_ratio: 1
     gene_cor: FALSE
-    copula_input: NULL
-    num_spots: NULL
+    copula_input: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/Github/sCCIgen_data/real_data_est/SeqFishPlus/SeqFishPlusCortex_fit_wo_cor_region.RDS
+    num_spots: 400
     num_simulated_datasets: 1
     parent_simulation_seed: 1234
     path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
-    output_name: SeqFishPlus_n511
+    output_name: SeqFishPlus_Region_n10000_ind_multi400

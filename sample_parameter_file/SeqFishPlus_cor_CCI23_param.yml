@@ -6,14 +6,7 @@ default:
     expression_data_file_type: Rdata
     spatial_data_file_type: Rdata
     expression_data_cell_types: Astrocyte,Endothelial,ExcitatoryNeuron,Interneuron,Microglia,Oligodendrocyte
-    simulate_spatial_data: TRUE
-    num_simulated_cells: 511
-    cell_overlap_cutoff: 0
-    cell_even_distribution: 0
-    custom_cell_location_interactions: TRUE
-    cell_interaction_1: Oligodendrocyte,Oligodendrocyte,2.3
-    cell_interaction_2: ExcitatoryNeuron,Oligodendrocyte,-0.49
-    window_method: network
+    simulate_spatial_data: FALSE
     num_regions: NULL
     region_specific_model: NULL
     expr_depth_ratio: 1
@@ -260,97 +253,227 @@ default:
     spatial_int_dist_30_mean: 2.06227856648057
     spatial_int_dist_30_sd: 0
     spatial_int_expr_1_region: NULL
-    spatial_int_expr_1_cell_type_perturbed: Endothelial
-    spatial_int_expr_1_cell_type_adj: ExcitatoryNeuron
-    spatial_int_expr_1_dist_cutoff: 195.949314673768
-    spatial_int_expr_1_gene_id1: Efnb2
-    spatial_int_expr_1_gene_id2: Ephb1
+    spatial_int_expr_1_cell_type_perturbed: Astrocyte
+    spatial_int_expr_1_cell_type_adj: Oligodendrocyte
+    spatial_int_expr_1_dist_cutoff: 179.83528769495
+    spatial_int_expr_1_gene_id1: Ctsd
+    spatial_int_expr_1_gene_id2: Lrp1
     spatial_int_expr_1_gene_prop: NULL
     spatial_int_expr_1_bidirectional: TRUE
-    spatial_int_expr_1_mean: 0.235727650445658
+    spatial_int_expr_1_mean: 0.546405026874315
     spatial_int_expr_1_sd: 0
     spatial_int_expr_2_region: NULL
-    spatial_int_expr_2_cell_type_perturbed: Astrocyte
+    spatial_int_expr_2_cell_type_perturbed: Endothelial
     spatial_int_expr_2_cell_type_adj: ExcitatoryNeuron
-    spatial_int_expr_2_dist_cutoff: 195.089562823481
-    spatial_int_expr_2_gene_id1: Gas6
-    spatial_int_expr_2_gene_id2: Axl
+    spatial_int_expr_2_dist_cutoff: 195.949314673768
+    spatial_int_expr_2_gene_id1: Efnb2
+    spatial_int_expr_2_gene_id2: Ephb1
     spatial_int_expr_2_gene_prop: NULL
     spatial_int_expr_2_bidirectional: TRUE
-    spatial_int_expr_2_mean: -0.239034220269648
+    spatial_int_expr_2_mean: 0.230475445466165
     spatial_int_expr_2_sd: 0
     spatial_int_expr_3_region: NULL
-    spatial_int_expr_3_cell_type_perturbed: Interneuron
+    spatial_int_expr_3_cell_type_perturbed: Endothelial
     spatial_int_expr_3_cell_type_adj: ExcitatoryNeuron
-    spatial_int_expr_3_dist_cutoff: 196.858449758922
-    spatial_int_expr_3_gene_id1: Nptx1
-    spatial_int_expr_3_gene_id2: Nptxr
+    spatial_int_expr_3_dist_cutoff: 195.949314673768
+    spatial_int_expr_3_gene_id1: Efnb3
+    spatial_int_expr_3_gene_id2: Ephb1
     spatial_int_expr_3_gene_prop: NULL
     spatial_int_expr_3_bidirectional: TRUE
-    spatial_int_expr_3_mean: 0.229585277840548
+    spatial_int_expr_3_mean: 0.316442950706938
     spatial_int_expr_3_sd: 0
     spatial_int_expr_4_region: NULL
     spatial_int_expr_4_cell_type_perturbed: Oligodendrocyte
     spatial_int_expr_4_cell_type_adj: ExcitatoryNeuron
     spatial_int_expr_4_dist_cutoff: 195.671851115106
-    spatial_int_expr_4_gene_id1: Nptx1
-    spatial_int_expr_4_gene_id2: Nptxr
+    spatial_int_expr_4_gene_id1: Efnb3
+    spatial_int_expr_4_gene_id2: Ephb6
     spatial_int_expr_4_gene_prop: NULL
     spatial_int_expr_4_bidirectional: TRUE
-    spatial_int_expr_4_mean: -0.255731287733799
+    spatial_int_expr_4_mean: 0.131016709327789
     spatial_int_expr_4_sd: 0
     spatial_int_expr_5_region: NULL
-    spatial_int_expr_5_cell_type_perturbed: ExcitatoryNeuron
-    spatial_int_expr_5_cell_type_adj: Interneuron
-    spatial_int_expr_5_dist_cutoff: 195.824114193354
-    spatial_int_expr_5_gene_id1: Nptx1
-    spatial_int_expr_5_gene_id2: Nptxr
+    spatial_int_expr_5_cell_type_perturbed: Interneuron
+    spatial_int_expr_5_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_5_dist_cutoff: 196.858449758922
+    spatial_int_expr_5_gene_id1: Efnb3
+    spatial_int_expr_5_gene_id2: Ephb6
     spatial_int_expr_5_gene_prop: NULL
     spatial_int_expr_5_bidirectional: TRUE
-    spatial_int_expr_5_mean: -0.20142394078729
+    spatial_int_expr_5_mean: 0.13475603875752
     spatial_int_expr_5_sd: 0
     spatial_int_expr_6_region: NULL
-    spatial_int_expr_6_cell_type_perturbed: ExcitatoryNeuron
-    spatial_int_expr_6_cell_type_adj: Microglia
-    spatial_int_expr_6_dist_cutoff: 191.134978773434
-    spatial_int_expr_6_gene_id1: Sema4d
-    spatial_int_expr_6_gene_id2: Plxnb1
+    spatial_int_expr_6_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_6_cell_type_adj: Astrocyte
+    spatial_int_expr_6_dist_cutoff: 183.03389293428
+    spatial_int_expr_6_gene_id1: Efnb3
+    spatial_int_expr_6_gene_id2: Ephb6
     spatial_int_expr_6_gene_prop: NULL
     spatial_int_expr_6_bidirectional: TRUE
-    spatial_int_expr_6_mean: -0.78332048653844
+    spatial_int_expr_6_mean: -0.563803035770515
     spatial_int_expr_6_sd: 0
     spatial_int_expr_7_region: NULL
-    spatial_int_expr_7_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_7_cell_type_perturbed: Astrocyte
     spatial_int_expr_7_cell_type_adj: ExcitatoryNeuron
-    spatial_int_expr_7_dist_cutoff: 195.671851115106
-    spatial_int_expr_7_gene_id1: Sema5a
-    spatial_int_expr_7_gene_id2: Plxna1
+    spatial_int_expr_7_dist_cutoff: 195.089562823481
+    spatial_int_expr_7_gene_id1: Fn1
+    spatial_int_expr_7_gene_id2: Itga2b
     spatial_int_expr_7_gene_prop: NULL
     spatial_int_expr_7_bidirectional: TRUE
-    spatial_int_expr_7_mean: -0.216359604025172
+    spatial_int_expr_7_mean: 0.212606742876368
     spatial_int_expr_7_sd: 0
     spatial_int_expr_8_region: NULL
-    spatial_int_expr_8_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_8_cell_type_perturbed: Astrocyte
     spatial_int_expr_8_cell_type_adj: ExcitatoryNeuron
-    spatial_int_expr_8_dist_cutoff: 195.671851115106
-    spatial_int_expr_8_gene_id1: Sema6d
-    spatial_int_expr_8_gene_id2: Plxna1
+    spatial_int_expr_8_dist_cutoff: 195.089562823481
+    spatial_int_expr_8_gene_id1: Gas6
+    spatial_int_expr_8_gene_id2: Axl
     spatial_int_expr_8_gene_prop: NULL
     spatial_int_expr_8_bidirectional: TRUE
-    spatial_int_expr_8_mean: -0.315068378674005
+    spatial_int_expr_8_mean: -0.807117628606408
     spatial_int_expr_8_sd: 0
     spatial_int_expr_9_region: NULL
-    spatial_int_expr_9_cell_type_perturbed: Oligodendrocyte
-    spatial_int_expr_9_cell_type_adj: Astrocyte
-    spatial_int_expr_9_dist_cutoff: 183.03389293428
-    spatial_int_expr_9_gene_id1: Slit3
-    spatial_int_expr_9_gene_id2: Plxna1
+    spatial_int_expr_9_cell_type_perturbed: Interneuron
+    spatial_int_expr_9_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_9_dist_cutoff: 196.858449758922
+    spatial_int_expr_9_gene_id1: Nptx1
+    spatial_int_expr_9_gene_id2: Nptxr
     spatial_int_expr_9_gene_prop: NULL
     spatial_int_expr_9_bidirectional: TRUE
-    spatial_int_expr_9_mean: -1.36541748123094
+    spatial_int_expr_9_mean: 0.315166481735759
     spatial_int_expr_9_sd: 0
+    spatial_int_expr_10_region: NULL
+    spatial_int_expr_10_cell_type_perturbed: ExcitatoryNeuron
+    spatial_int_expr_10_cell_type_adj: Interneuron
+    spatial_int_expr_10_dist_cutoff: 195.824114193354
+    spatial_int_expr_10_gene_id1: Nptx1
+    spatial_int_expr_10_gene_id2: Nptxr
+    spatial_int_expr_10_gene_prop: NULL
+    spatial_int_expr_10_bidirectional: TRUE
+    spatial_int_expr_10_mean: -0.776697797450676
+    spatial_int_expr_10_sd: 0
+    spatial_int_expr_11_region: NULL
+    spatial_int_expr_11_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_11_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_11_dist_cutoff: 195.671851115106
+    spatial_int_expr_11_gene_id1: Nptx1
+    spatial_int_expr_11_gene_id2: Nptxr
+    spatial_int_expr_11_gene_prop: NULL
+    spatial_int_expr_11_bidirectional: TRUE
+    spatial_int_expr_11_mean: -1.57581177128589
+    spatial_int_expr_11_sd: 0
+    spatial_int_expr_12_region: NULL
+    spatial_int_expr_12_cell_type_perturbed: Interneuron
+    spatial_int_expr_12_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_12_dist_cutoff: 196.858449758922
+    spatial_int_expr_12_gene_id1: Nptx2
+    spatial_int_expr_12_gene_id2: Nptxr
+    spatial_int_expr_12_gene_prop: NULL
+    spatial_int_expr_12_bidirectional: TRUE
+    spatial_int_expr_12_mean: 0.365255764979543
+    spatial_int_expr_12_sd: 0
+    spatial_int_expr_13_region: NULL
+    spatial_int_expr_13_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_13_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_13_dist_cutoff: 195.671851115106
+    spatial_int_expr_13_gene_id1: Nptx2
+    spatial_int_expr_13_gene_id2: Nptxr
+    spatial_int_expr_13_gene_prop: NULL
+    spatial_int_expr_13_bidirectional: TRUE
+    spatial_int_expr_13_mean: -1.11770162850772
+    spatial_int_expr_13_sd: 0
+    spatial_int_expr_14_region: NULL
+    spatial_int_expr_14_cell_type_perturbed: ExcitatoryNeuron
+    spatial_int_expr_14_cell_type_adj: Microglia
+    spatial_int_expr_14_dist_cutoff: 191.134978773434
+    spatial_int_expr_14_gene_id1: Sema4d
+    spatial_int_expr_14_gene_id2: Plxna2
+    spatial_int_expr_14_gene_prop: NULL
+    spatial_int_expr_14_bidirectional: TRUE
+    spatial_int_expr_14_mean: -0.741296848771408
+    spatial_int_expr_14_sd: 0
+    spatial_int_expr_15_region: NULL
+    spatial_int_expr_15_cell_type_perturbed: ExcitatoryNeuron
+    spatial_int_expr_15_cell_type_adj: Microglia
+    spatial_int_expr_15_dist_cutoff: 191.134978773434
+    spatial_int_expr_15_gene_id1: Sema4d
+    spatial_int_expr_15_gene_id2: Plxnb1
+    spatial_int_expr_15_gene_prop: NULL
+    spatial_int_expr_15_bidirectional: TRUE
+    spatial_int_expr_15_mean: -1.38022956949053
+    spatial_int_expr_15_sd: 0
+    spatial_int_expr_16_region: NULL
+    spatial_int_expr_16_cell_type_perturbed: ExcitatoryNeuron
+    spatial_int_expr_16_cell_type_adj: Microglia
+    spatial_int_expr_16_dist_cutoff: 191.134978773434
+    spatial_int_expr_16_gene_id1: Sema4d
+    spatial_int_expr_16_gene_id2: Plxnb2
+    spatial_int_expr_16_gene_prop: NULL
+    spatial_int_expr_16_bidirectional: TRUE
+    spatial_int_expr_16_mean: -0.712742920082853
+    spatial_int_expr_16_sd: 0
+    spatial_int_expr_17_region: NULL
+    spatial_int_expr_17_cell_type_perturbed: Endothelial
+    spatial_int_expr_17_cell_type_adj: Interneuron
+    spatial_int_expr_17_dist_cutoff: 191.08681343203
+    spatial_int_expr_17_gene_id1: Sema4d
+    spatial_int_expr_17_gene_id2: Plxnb2
+    spatial_int_expr_17_gene_prop: NULL
+    spatial_int_expr_17_bidirectional: TRUE
+    spatial_int_expr_17_mean: -3.37584163736601
+    spatial_int_expr_17_sd: 0
+    spatial_int_expr_18_region: NULL
+    spatial_int_expr_18_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_18_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_18_dist_cutoff: 195.671851115106
+    spatial_int_expr_18_gene_id1: Sema5a
+    spatial_int_expr_18_gene_id2: Plxna1
+    spatial_int_expr_18_gene_prop: NULL
+    spatial_int_expr_18_bidirectional: TRUE
+    spatial_int_expr_18_mean: -1.36606902054146
+    spatial_int_expr_18_sd: 0
+    spatial_int_expr_19_region: NULL
+    spatial_int_expr_19_cell_type_perturbed: Astrocyte
+    spatial_int_expr_19_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_19_dist_cutoff: 195.089562823481
+    spatial_int_expr_19_gene_id1: Sema6b
+    spatial_int_expr_19_gene_id2: Plxna4
+    spatial_int_expr_19_gene_prop: NULL
+    spatial_int_expr_19_bidirectional: TRUE
+    spatial_int_expr_19_mean: -0.211839643208027
+    spatial_int_expr_19_sd: 0
+    spatial_int_expr_20_region: NULL
+    spatial_int_expr_20_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_20_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_20_dist_cutoff: 195.671851115106
+    spatial_int_expr_20_gene_id1: Sema6d
+    spatial_int_expr_20_gene_id2: Plxna1
+    spatial_int_expr_20_gene_prop: NULL
+    spatial_int_expr_20_bidirectional: TRUE
+    spatial_int_expr_20_mean: -1.65623496387984
+    spatial_int_expr_20_sd: 0
+    spatial_int_expr_21_region: NULL
+    spatial_int_expr_21_cell_type_perturbed: Oligodendrocyte
+    spatial_int_expr_21_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_21_dist_cutoff: 195.671851115106
+    spatial_int_expr_21_gene_id1: Slit3
+    spatial_int_expr_21_gene_id2: Plxna1
+    spatial_int_expr_21_gene_prop: NULL
+    spatial_int_expr_21_bidirectional: TRUE
+    spatial_int_expr_21_mean: -1.14018440319752
+    spatial_int_expr_21_sd: 0
+    spatial_int_expr_22_region: NULL
+    spatial_int_expr_22_cell_type_perturbed: Astrocyte
+    spatial_int_expr_22_cell_type_adj: ExcitatoryNeuron
+    spatial_int_expr_22_dist_cutoff: 195.089562823481
+    spatial_int_expr_22_gene_id1: Vegfa
+    spatial_int_expr_22_gene_id2: Axl
+    spatial_int_expr_22_gene_prop: NULL
+    spatial_int_expr_22_bidirectional: TRUE
+    spatial_int_expr_22_mean: -0.28213207904488
+    spatial_int_expr_22_sd: 0
     num_spots: NULL
     num_simulated_datasets: 1
     parent_simulation_seed: 1234
     path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
-    output_name: SeqFishPlus_n511_cor_CCIs
+    output_name: SeqFishPlus_cor_CCI23
