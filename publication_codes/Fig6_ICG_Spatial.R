@@ -87,7 +87,7 @@ meta2_sub=meta2[which(meta2$annotation=="Immune" | meta2$annotation=="Epithelial
 
 p3=template+
   geom_point(data=meta2_sub, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+ 
-  geom_line(data=pair2, colour="gray30", aes(x=x.loc, y=y.loc, group=idx), linewidth=0.3)+
+  geom_line(data=pair2, colour="blue", aes(x=x.loc, y=y.loc, group=idx), linewidth=0.3)+
   theme(legend.position="none")
 p3
 

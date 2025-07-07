@@ -18,10 +18,10 @@ setwd("/Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper
 ######################## 
 # run_interactive_sCCIgen()
 # With CCI2
-input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_DisExpr_FigS1_param.yml"
+input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_DisExpr_Fig7_param.yml"
 ParaSimulation(input=input)
 # Without CCI2
-input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_FigS1_param.yml"
+input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_Fig7_param.yml"
 ParaSimulation(input=input)
 
 ########################
@@ -30,9 +30,9 @@ ParaSimulation(input=input)
 load("Github/sCCIgen_data/input_data/snRNAseq_breast_2025_expr.Rdata")
 anno=colnames(expr)
 
-expr2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_FigS1_count_1.tsv")  %>% column_to_rownames("GeneName")
-pattern2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_FigS1_expr_pattern_1.tsv")
-meta2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_FigS1_meta_1.tsv")
+expr2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_Fig7_count_1.tsv")  %>% column_to_rownames("GeneName")
+pattern2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_Fig7_expr_pattern_1.tsv")
+meta2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_Fig7_meta_1.tsv")
 
 
 #####################################
@@ -40,7 +40,7 @@ meta2=fread("R1_outputs/snRNAseq_Region3_RVG_DisExpr_FigS1_meta_1.tsv")
 #####################################
 
 # template ------------
-input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_DisExpr_FigS1_param.yml"
+input="Github/sCCIgen_data/sample_parameter_file/snRNAseq_Region3_RVG_DisExpr_Fig7_param.yml"
 para=ParaDigest(input)
 win=RandomRegionWindow(nRegion=para$num_regions, seed=para$all_seed[[1]])
 # win=RandomRegionWindow(nRegion=3, seed=1111)
@@ -69,7 +69,7 @@ template=ggplot() +coord_fixed() +
   geom_path(aes(x = x, y = y), data = line2, color="gray30", linewidth=0.5)+ 
   geom_path(aes(x = x, y = y), data = line3, color="gray30", linewidth=0.5) 
 
-# Figure 6a: Plot cell type by region --------------------
+# Figure 7a: Plot cell type by region --------------------
 p1=template + 
   geom_point(data=meta2, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+
   theme(legend.position="none")
@@ -77,7 +77,7 @@ p1=template +
 p1
 
 
-# Figure 6b: plot interaction pairs -----------------
+# Figure 7b: plot interaction pairs -----------------
 d1=meta2 %>%filter(annotation=="Epithelial")
 d2=meta2 %>% filter(annotation=="Immune")
 cutoff=para$spatial_int_dist_1_dist_cutoff
@@ -89,7 +89,7 @@ meta2_sub=meta2[which(meta2$annotation=="Immune" | meta2$annotation=="Epithelial
 
 p3=template+
   geom_point(data=meta2_sub, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+ 
-  geom_line(data=pair2, colour="gray30", aes(x=x.loc, y=y.loc, group=idx), linewidth=0.3)+
+  geom_line(data=pair2, colour="blue", aes(x=x.loc, y=y.loc, group=idx), linewidth=0.3)+
   theme(legend.position="none")
 p3
 
@@ -263,4 +263,4 @@ ggdraw() +
   draw_plot_label(label = c("a", "b", "e", "c", "d"), 
                   size = 18, x = c(0, 0.35, 0.7, 0, 0), y = c(1, 1, 1,  0.7, 0.25))
 
-ggsave("R1/Figures/figS1.pdf", width=9, height=12)
+ggsave("R1/Figures/fig7.pdf", width=9, height=12)

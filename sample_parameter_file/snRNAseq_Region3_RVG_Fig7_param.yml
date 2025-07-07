@@ -41,16 +41,8 @@ default:
     spatial_pattern_1_gene_prop: 0.2
     spatial_pattern_1_mean: 0.6
     spatial_pattern_1_sd: 0.01
-    spatial_int_dist_1_region: NULL
-    spatial_int_dist_1_cell_type_perturbed: Epithelial
-    spatial_int_dist_1_cell_type_adj: Immune
-    spatial_int_dist_1_dist_cutoff: 0.1
-    spatial_int_dist_1_gene_id1: NULL
-    spatial_int_dist_1_gene_prop: 0.2
-    spatial_int_dist_1_mean: 0.2
-    spatial_int_dist_1_sd: 0.01
     num_spots: NULL
     num_simulated_datasets: 1
     parent_simulation_seed: 111
     path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
-    output_name: snRNAseq_Region3_RVG_DisExpr_FigS1
+    output_name: snRNAseq_Region3_RVG_Fig7
