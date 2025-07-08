@@ -1,0 +1,55 @@
+default:
+    path_to_input_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/Github/sCCIgen_data/input_data
+    paired: NULL
+    expression_data_file: snRNAseq_breast_2025_expr.Rdata
+    spatial_data_file: snRNAseq_breast_2025_spatial.Rdata
+    expression_data_file_type: Rdata
+    spatial_data_file_type: Rdata
+    expression_data_cell_types: Adipocyte,Endothelial,Epithelial,Fibroblast,Immune,Muscle
+    simulate_spatial_data: TRUE
+    num_simulated_cells: 4000
+    cell_overlap_cutoff: 0
+    cell_even_distribution: 0
+    custom_cell_location_interactions: TRUE
+    cell_interaction_1: Endothelial,Epithelial,2
+    num_regions: 2
+    region_specific_model: NULL
+    custom_cell_type_proportions: FALSE
+    cell_type_proportion_1: 1,Adipocyte,0.287
+    cell_type_proportion_2: 1,Endothelial,0.123
+    cell_type_proportion_3: 1,Epithelial,0.383
+    cell_type_proportion_4: 1,Fibroblast,0.134
+    cell_type_proportion_5: 1,Immune,0.05
+    cell_type_proportion_6: 1,Muscle,0.023
+    cell_type_proportion_7: 2,Adipocyte,0.287
+    cell_type_proportion_8: 2,Endothelial,0.123
+    cell_type_proportion_9: 2,Epithelial,0.383
+    cell_type_proportion_10: 2,Fibroblast,0.134
+    cell_type_proportion_11: 2,Immune,0.05
+    cell_type_proportion_12: 2,Muscle,0.023
+    expr_depth_ratio: 1
+    gene_cor: TRUE
+    copula_input: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/Github/sCCIgen_data/real_data_est/snRNAseq/snRNAseq_breast_2025_fit_w_cor.RDS
+    spatial_int_dist_1_region: 1
+    spatial_int_dist_1_cell_type_perturbed: Epithelial
+    spatial_int_dist_1_cell_type_adj: Adipocyte
+    spatial_int_dist_1_dist_cutoff: 0.06
+    spatial_int_dist_1_gene_id1: NULL
+    spatial_int_dist_1_gene_prop: 0.05
+    spatial_int_dist_1_mean: 0.2
+    spatial_int_dist_1_sd: 0.02
+    spatial_int_expr_1_region: 2
+    spatial_int_expr_1_cell_type_perturbed: Epithelial
+    spatial_int_expr_1_cell_type_adj: Adipocyte
+    spatial_int_expr_1_dist_cutoff: 0.06
+    spatial_int_expr_1_gene_id1: NULL
+    spatial_int_expr_1_gene_id2: NULL
+    spatial_int_expr_1_gene_prop: 0.05
+    spatial_int_expr_1_bidirectional: TRUE
+    spatial_int_expr_1_mean: 0.2
+    spatial_int_expr_1_sd: 0.02
+    num_spots: NULL
+    num_simulated_datasets: 1
+    parent_simulation_seed: 1234
+    path_to_output_dir: /Users/songxiaoyu152/NUS Dropbox/Xiaoyu Song/SpatialTranscriptomics/Paper_sCCIgen/R1_outputs
+    output_name: example1
