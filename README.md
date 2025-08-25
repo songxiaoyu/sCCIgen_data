@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-## `sCCIgen`: A high-fidelity spatially resolved transcriptomics data simulator for cell-cell interaction studies.
+## `sCCIgen`: a high-fidelity spatially resolved transcriptomics data simulator for cell-cell interaction studies.
 
 This folder contains the analysis codes for sCCIgen (Figures 2–8), along
 with its reference data (e.g., cleaned datasets and estimated model
