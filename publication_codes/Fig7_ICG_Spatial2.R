@@ -81,7 +81,7 @@ p1_legend=template +
   geom_point(data=meta2, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+
   scale_color_manual(values = brewer.pal(6, "Set2")) +
   theme(legend.position="bottom")
-
+p1_legend
 
 # Figure 7b: plot interaction pairs -----------------
 d1=meta2 %>%filter(annotation=="Epithelial")
@@ -265,7 +265,6 @@ ggdraw() +
   draw_plot(p5, x = .7, y = .7, width = .3, height = .3) +
   draw_plot(p2, x = 0, y = 0.45, width = 1, height = 0.2) +
   draw_plot(p2non, x = 0, y = 0.25, width = 1, height = 0.2) +
-  draw_plot(p4, x = 0, y = 0, width = 1, height = 0.25) + 
-  draw_plot_label(label = c("a", "b", "e", "c", "d"))
+  draw_plot(p4, x = 0, y = 0, width = 1, height = 0.25) 
 
 ggsave("R2/fig7.pdf", width=9, height=12)
