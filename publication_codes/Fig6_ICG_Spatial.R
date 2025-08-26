@@ -68,11 +68,17 @@ template=ggplot() +coord_fixed() +
   geom_path(aes(x = x, y = y), data = line3, color="gray30", linewidth=0.5) 
 
 # Figure 6a: Plot cell type by region --------------------
+library(RColorBrewer)
 p1=template + 
   geom_point(data=meta2, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+
+  scale_color_manual(values = brewer.pal(6, "Set2")) +
   theme(legend.position="none")
   
 p1
+p1_legend=template + 
+  geom_point(data=meta2, aes(x=x.loc, y=y.loc, color=annotation, shape=annotation))+
+  scale_color_manual(values = brewer.pal(6, "Set2")) +
+  theme(legend.position="bottom")
 
 
 # Figure 6b: plot interaction pairs -----------------
@@ -269,8 +275,6 @@ ggdraw() +
   draw_plot(p5, x = .7, y = .7, width = .3, height = .3) +
   draw_plot(p2, x = 0, y = 0.45, width = 1, height = 0.2) +
   draw_plot(p2non, x = 0, y = 0.25, width = 1, height = 0.2) +
-  draw_plot(p4, x = 0, y = 0, width = 1, height = 0.25) + 
-  draw_plot_label(label = c("a", "b", "e", "c", "d"), 
-                   size = 18, x = c(0, 0.35, 0.7, 0, 0), y = c(1, 1, 1,  0.7, 0.25))
+  draw_plot(p4, x = 0, y = 0, width = 1, height = 0.25) 
  
-ggsave("R1/Figures/fig6.pdf", width=9, height=12)
+ggsave("R2/fig6.pdf", width=9, height=12)
